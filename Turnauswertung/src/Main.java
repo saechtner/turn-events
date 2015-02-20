@@ -5,7 +5,7 @@ public class Main {
 
     public static void main(String[] args) {
 
-
+        // test
         NA_DB_Connector con = new NA_DB_Connector("","","");
 
         NA_MainView window = new NA_MainView();
