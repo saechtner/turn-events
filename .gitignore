@@ -1,0 +1,32 @@
+# ignore all bin directories
+# matches "bin" in any subfolder
+bin/
+
+# ignore all target directories
+target/
+
+# ignore all files ending with ~
+*~ 
+
+# ignore DS_Store
+.DS_Store
+
+# ignore all class files
+*.class
+
+
+# tex to pdf files
+*.aux
+*.log
+*.synctex.gz
+*.fdb_latexmk
+*.out
+exercise2/aufg25_linux.tar.gz
+exercise2/aufg25_windows.zip
+exercise2/aufgabenblatt2.pdf
+exercise2/Blatt2.pdf
+exercise2/demo-uebung2.zip
+exercise2/task3.tex.orig
+
+# out
+out/

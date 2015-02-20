@@ -1,0 +1,12 @@
+Primär:
+- Datenbank-Connector
+- Dateneingabe
+- Datenausgabe
+- Datenverarbeitung
+- Ausgabe Auswertung
+- Credentials sichern
+
+Sekundär:
+- auto-connect zu letzt benutzter
+-
+- JSON-File mit alles Strings
