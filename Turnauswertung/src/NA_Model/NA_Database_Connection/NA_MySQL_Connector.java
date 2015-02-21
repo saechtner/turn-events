@@ -1,7 +1,6 @@
 package NA_Model.NA_Database_Connection;
 
 import java.sql.DriverManager;
-import java.sql.SQLException;
 import java.util.List;
 
 public class NA_MySQL_Connector extends NA_DB_Connector{
