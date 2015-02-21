@@ -1,50 +1,45 @@
 package NA_Model.NA_Database_Connection;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.List;
 
-public class NA_DB_Connector {
-    String name, password, url;
-    Connection con;
+public abstract class NA_DB_Connector {
+    private String databaseName;
+    private Connection connection;
 
-    public NA_DB_Connector(String url, String name, String password){
-        this.url = url;
-        this.name = name;
-        this.password = password;
-        con = null;
+    protected Connection getConnection(){
+        return connection;
     }
 
-    private void connect(){
-        try {
-            con = DriverManager.getConnection("jdbc:mysql://"+url,name,password);
-        } catch (SQLException e){
-            e.printStackTrace();
-        }
+    protected void setConnection(Connection newConnection){
+        connection = newConnection;
     }
 
-    private void disconnect(){
+    protected String getDatabaseName(){
+        return databaseName;
+    }
+
+    protected void setDatabaseName(String newUrl){
+        databaseName = newUrl;
+    }
+
+    protected abstract void connect();
+
+    protected void disconnect(){
         try{
-            con.close();
+            getConnection().close();
         } catch (SQLException e){
             e.printStackTrace();
         }
     }
 
-    void executeQuery(String query){
-        connect();
+    public abstract void executeQuery(String query);
 
+    public abstract List<String> retrieveData(String query);
 
-        disconnect();
+    // Constants
+    protected String urlPrefix(){
+        return "jdbc:";
     }
-
-    List<String> retrieveData(String query){
-        connect();
-
-
-        disconnect();
-        return null;
-    }
-
 }

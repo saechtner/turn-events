@@ -2,6 +2,7 @@
   "username": "root",
   "password": "",
   "url": "localhost",
+  "database": "",
   "auto-connect" : false,
   "language": "deutsch"
 }

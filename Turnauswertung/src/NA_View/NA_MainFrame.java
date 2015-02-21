@@ -11,7 +11,7 @@ public class NA_MainFrame extends JFrame{
         super("Turnwettkampf - Auswertung (alpha)");
 
         content = new JPanel();
-        content.add(new JLabel("Works!"));
+        content.add(new JLabel("Much to do here!"));
 
         setContentPane(content);
 

@@ -7,6 +7,5 @@ Primär:
 - Credentials sichern
 
 Sekundär:
-- auto-connect zu letzt benutzter
--
-- JSON-File mit alles Strings
+- auto-connect zu letzt benutzter configuration
+- JSON-File mit allen Strings? (multilanguage)
