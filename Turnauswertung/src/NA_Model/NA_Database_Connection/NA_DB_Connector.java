@@ -3,6 +3,7 @@ package NA_Model.NA_Database_Connection;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.List;
 
 public class NA_DB_Connector {
     String name, password, url;
@@ -29,6 +30,21 @@ public class NA_DB_Connector {
         } catch (SQLException e){
             e.printStackTrace();
         }
+    }
+
+    void executeQuery(String query){
+        connect();
+
+
+        disconnect();
+    }
+
+    List<String> retrieveData(String query){
+        connect();
+
+
+        disconnect();
+        return null;
     }
 
 }

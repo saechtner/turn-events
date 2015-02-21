@@ -1,6 +1,7 @@
 {
   "username": "root",
   "password": "",
-  "url": "",
+  "url": "localhost",
+  "auto-connect" : false,
   "language": "deutsch"
 }
