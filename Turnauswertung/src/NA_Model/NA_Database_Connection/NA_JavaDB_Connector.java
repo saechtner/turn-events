@@ -2,6 +2,7 @@ package NA_Model.NA_Database_Connection;
 
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.List;
 
 public class NA_JavaDB_Connector extends NA_DB_Connector {
@@ -12,16 +13,20 @@ public class NA_JavaDB_Connector extends NA_DB_Connector {
 
     protected void connect() {
         try {
-            setConnection(DriverManager.getConnection(urlPrefix()+ getDatabaseName()+urlSuffix()));
+            setConnection(DriverManager.getConnection(urlPrefix() + getDatabaseName() + urlSuffix()));
         } catch(SQLException e){
-            System.out.println("Something went wrong here!");
+            e.printStackTrace();
         }
     }
 
     public void executeQuery(String query) {
         connect();
-
-
+        try{
+            Statement stmnt = getConnection().createStatement();
+            stmnt.executeQuery(query);
+        } catch (SQLException e){
+            e.printStackTrace();
+        }
         disconnect();
     }
 

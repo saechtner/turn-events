@@ -1,7 +1,14 @@
 package NA_View;
 
+import NA_Controller.JSONController;
+import org.json.simple.JSONObject;
+
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.io.FileReader;
+import java.io.IOException;
 
 public class NA_MainFrame extends JFrame{
 
@@ -21,10 +28,13 @@ public class NA_MainFrame extends JFrame{
 
     private void initializeProperties() {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setExtendedState(JFrame.MAXIMIZED_BOTH);
+//        setExtendedState(JFrame.MAXIMIZED_BOTH);
+        setSize(JSONController.getWindowExtent());
         setVisible(true);
-        setResizable(false);
+        setMinimumSize(new Dimension(320,240));
+//        setResizable(false);
         getContentPane().setBackground(new Color(127, 127, 127));
+        savePropertiesOnClose();
     }
 
 
@@ -35,4 +45,11 @@ public class NA_MainFrame extends JFrame{
         setJMenuBar(menuBar);
     }
 
+    private void savePropertiesOnClose() {
+        addWindowListener(new WindowAdapter() {
+            public void windowClosing(WindowEvent e) {
+                JSONController.setWindowExtent(getSize());
+            }
+        });
+    }
 }

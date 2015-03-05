@@ -1,0 +1,10 @@
+<component name="libraryTable">
+  <library name="org.apache.ibatis:ibatis-sqlmap:2.3.4.726" type="repository">
+    <properties maven-id="org.apache.ibatis:ibatis-sqlmap:2.3.4.726" />
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/lib/ibatis-sqlmap-2.3.4.726.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

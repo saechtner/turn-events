@@ -53,7 +53,7 @@ public class NA_MySQL_Connector extends NA_DB_Connector{
                     getUsername(),
                     getUserPassword()));
         } catch(Exception e){
-            System.out.println("Something went wrong here!");
+            e.printStackTrace();
         }
     }
 

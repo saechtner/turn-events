@@ -12,10 +12,9 @@ import org.json.simple.parser.JSONParser;
 public class Main {
 
     public static void main(String[] args) {
-        JSONParser parser = new JSONParser();
-
         try {
-            Object obj = parser.parse(new FileReader(
+            JSONParser jsonParser = new JSONParser();
+            Object obj = jsonParser.parse(new FileReader(
                     "src/NA_Model/NA_JSON/settings.json"));
 
             JSONObject jsonObject = (JSONObject) obj;
@@ -30,8 +29,8 @@ public class Main {
                 NA_DB_Connector con = new NA_MySQL_Connector(databaseName, name, password);
                 con.executeQuery("");
             } else if(dmbs.equals("JavaDB")){
-                NA_DB_Connector con = new NA_JavaDB_Connector(databaseName);
-                con.executeQuery("");
+                NA_DB_Connector connection = new NA_JavaDB_Connector(databaseName);
+                connection.initializeScheme();
             } else{
                 System.out.println("Couldn't connect to any DB.");
             }
@@ -42,6 +41,5 @@ public class Main {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
     }
 }

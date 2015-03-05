@@ -1,11 +1,21 @@
 Primär:
+- Datenbankschema überarbeiten!!!
 - Datenbank-Connector
 - Dateneingabe
+    - Werte für Riegen
+    - Meta-Daten (Sportler/Vereine etc.)
+    - Riegen manuell (vorerst)
 - Datenausgabe
+    - Meta-Daten
+    - Auswertung
 - Datenverarbeitung
-- Ausgabe Auswertung
+    - Meta Korrekturen
+    - Werteeingaben
+    -
 - Credentials sichern
 
 Sekundär:
+- Datenparser für eingabe
 - auto-connect zu letzt benutzter configuration
 - JSON-File mit allen Strings? (multilanguage)
+
