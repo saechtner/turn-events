@@ -1,9 +1,9 @@
-package Model.dbConnection;
+package turnauswertung.model.dbConnection;
 
 import java.sql.DriverManager;
 import java.util.List;
 
-public class MySQL_Connector extends DB_Connector {
+public class MySQLConnector extends DBConnector {
     protected String username;
     protected String userPassword;
     protected String url;
@@ -32,14 +32,14 @@ public class MySQL_Connector extends DB_Connector {
         this.url = newUrl;
     }
 
-    public MySQL_Connector(String databaseName, String url, String username, String userPassword){
+    public MySQLConnector(String databaseName, String url, String username, String userPassword){
         setDatabaseName(databaseName);
         setUrl(url);
         setUsername(username);
         setUserPassword(userPassword);
     }
 
-    public MySQL_Connector(String databaseName, String username, String userPassword){
+    public MySQLConnector(String databaseName, String username, String userPassword){
         setDatabaseName(databaseName);
         setUrl("localhost:3306/");
         setUsername(username);

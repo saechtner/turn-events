@@ -1,13 +1,13 @@
-package Model.dbConnection;
+package turnauswertung.model.dbConnection;
 
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.List;
 
-public class JavaDB_Connector extends DB_Connector {
+public class JavaDBConnector extends DBConnector {
 
-    public JavaDB_Connector(String url){
+    public JavaDBConnector(String url){
         setDatabaseName(url);
     }
 

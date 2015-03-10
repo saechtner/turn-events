@@ -1,13 +1,13 @@
 package turnauswertung;
-import Model.dbConnection.DB_Connector;
-import Model.dbConnection.JavaDB_Connector;
-import Model.dbConnection.MySQL_Connector;
 
 import java.io.FileReader;
 
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
+import turnauswertung.model.dbConnection.DBConnector;
+import turnauswertung.model.dbConnection.JavaDBConnector;
+import turnauswertung.model.dbConnection.MySQLConnector;
 import turnauswertung.view.MainFrame;
 
 public class Main {
@@ -15,27 +15,24 @@ public class Main {
     public static void main(String[] args) {
         try {
             JSONParser jsonParser = new JSONParser();
-            Object obj = jsonParser.parse(new FileReader(
-                    "src/Model/JSON/settings.json"));
+            Object obj = jsonParser.parse(new FileReader("json/Model/JSON/settings.json"));
 
             JSONObject jsonObject = (JSONObject) obj;
-            String dmbs = (String) jsonObject.get("dbms");
+            String dbms = (String) jsonObject.get("dbms");
             String databaseName = (String) jsonObject.get("database");
 
-
-            if(dmbs.equals("MySQL")) {
+            if(dbms.equals("MySQL")) {
                 String name = (String) jsonObject.get("name");
                 String password = (String) jsonObject.get("password");
                 String url = (String) jsonObject.get("url");
-                DB_Connector con = new MySQL_Connector(databaseName, name, password);
+                DBConnector con = new MySQLConnector(databaseName, name, password);
                 con.executeQuery("");
-            } else if(dmbs.equals("JavaDB")){
-                DB_Connector connection = new JavaDB_Connector(databaseName);
-                connection.initializeScheme();
+            } else if(dbms.equals("JavaDB")){
+                DBConnector connection = new JavaDBConnector(databaseName);
+                connection.initializeSchema();
             } else{
                 System.out.println("Couldn't connect to any DB.");
             }
-
 
             MainFrame window = new MainFrame();
 

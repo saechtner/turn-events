@@ -1,6 +1,6 @@
-package Model.dbConnection;
+package turnauswertung.model.dbConnection;
 
-public class DB_Scheme_Handler {
+public class DBSchemaHandler {
 //
 //    SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 //

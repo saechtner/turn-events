@@ -1,10 +1,10 @@
-package Model.dbConnection;
+package turnauswertung.model.dbConnection;
 
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
 
-public abstract class DB_Connector {
+public abstract class DBConnector {
     private String databaseName;
     private Connection connection;
 
@@ -38,7 +38,7 @@ public abstract class DB_Connector {
 
     public abstract List<String> retrieveData(String query);
 
-    public void initializeScheme(){
+    public void initializeSchema(){
 
 //        try {
 //            // Initialize object for ScripRunner
