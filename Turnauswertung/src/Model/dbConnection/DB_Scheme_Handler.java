@@ -1,4 +1,4 @@
-package Model.Database_Connection;
+package Model.dbConnection;
 
 public class DB_Scheme_Handler {
 //

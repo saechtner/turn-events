@@ -1,4 +1,4 @@
-package Controller;
+package turnauswertung.controller;
 
 import com.google.gson.GsonBuilder;
 import org.json.simple.JSONObject;

@@ -1,8 +1,11 @@
-package View;
+package turnauswertung.view;
 
-import Controller.JSONController;
 
 import javax.swing.*;
+
+import turnauswertung.controller.JSONController;
+
+
 import java.awt.*;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;

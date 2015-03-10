@@ -1,13 +1,14 @@
 package turnauswertung;
-import Model.Database_Connection.DB_Connector;
-import Model.Database_Connection.JavaDB_Connector;
-import Model.Database_Connection.MySQL_Connector;
-import View.MainFrame;
+import Model.dbConnection.DB_Connector;
+import Model.dbConnection.JavaDB_Connector;
+import Model.dbConnection.MySQL_Connector;
 
 import java.io.FileReader;
 
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
+
+import turnauswertung.view.MainFrame;
 
 public class Main {
 

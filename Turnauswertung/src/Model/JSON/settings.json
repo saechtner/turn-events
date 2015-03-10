@@ -1,11 +1,11 @@
 {
-  "password": "",
-  "database": "localDB",
+  "username": "",
+  "auto-connect": false,
   "windowHeight": 486,
-  "dbms": "JavaDB",
   "language": "deutsch",
   "windowWidth": 832,
-  "url": "",
-  "auto-connect": false,
-  "username": ""
+  "password": "",
+  "dbms": "JavaDB",
+  "database": "localDB",
+  "url": ""
 }
