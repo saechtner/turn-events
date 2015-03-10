@@ -2,25 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0d9ac9e5-7a4b-45c7-b715-954ba1564011" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.classpath" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/ResetSettings.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Turnauswertung.eml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Turnauswertung.userlibraries" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/NA_ResetSettings.java" afterPath="" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/NA_Controller/NA_JSONController.java" afterPath="$PROJECT_DIR$/src/Controller/JSONController.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/NA_Main.java" afterPath="$PROJECT_DIR$/src/Main.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/NA_Model/NA_Database_Connection/DB_Scheme.sql" afterPath="$PROJECT_DIR$/src/Model/Database_Connection/DB_Scheme.sql" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/NA_Model/NA_Database_Connection/NA_DB_Connector.java" afterPath="$PROJECT_DIR$/src/Model/Database_Connection/DB_Connector.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/NA_Model/NA_Database_Connection/NA_DB_Scheme_Handler.java" afterPath="$PROJECT_DIR$/src/Model/Database_Connection/DB_Scheme_Handler.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/NA_Model/NA_Database_Connection/NA_JavaDB_Connector.java" afterPath="$PROJECT_DIR$/src/Model/Database_Connection/JavaDB_Connector.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/NA_Model/NA_Database_Connection/NA_MySQL_Connector.java" afterPath="$PROJECT_DIR$/src/Model/Database_Connection/MySQL_Connector.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/NA_Model/NA_JSON/NA_Languages/deutsch.json" afterPath="$PROJECT_DIR$/src/Model/JSON/Languages/deutsch.json" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/NA_Model/NA_JSON/NA_Languages/english.json" afterPath="$PROJECT_DIR$/src/Model/JSON/Languages/english.json" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/NA_Model/NA_JSON/initial_settings.json" afterPath="$PROJECT_DIR$/src/Model/JSON/initial_settings.json" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/NA_Model/NA_JSON/settings.json" afterPath="$PROJECT_DIR$/src/Model/JSON/settings.json" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/NA_Model/NA_JSON/stats.json" afterPath="$PROJECT_DIR$/src/Model/JSON/stats.json" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/NA_View/NA_MainFrame.java" afterPath="$PROJECT_DIR$/src/View/MainFrame.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Turnauswertung.iml" afterPath="$PROJECT_DIR$/Turnauswertung.iml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/mysql-connector-java-5.1.34-bin.jar" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="Turnauswertung.iws" />
@@ -130,8 +112,8 @@
       <file leaf-file-name="MainFrame.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/View/MainFrame.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.43165466" vertical-offset="0" max-vertical-offset="810">
-              <caret line="16" column="31" selection-start-line="16" selection-start-column="31" selection-end-line="16" selection-end-column="31" />
+            <state vertical-scroll-proportion="0.59532374" vertical-offset="44" max-vertical-offset="810">
+              <caret line="25" column="41" selection-start-line="25" selection-start-column="41" selection-end-line="25" selection-end-column="41" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -345,6 +327,20 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Turnauswertung" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Turnauswertung" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="lib" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
         </subPane>
       </pane>
     </panes>
@@ -386,11 +382,12 @@
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/src/NA_Model/NA_JSON" />
     </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/src/NA_Model/NA_Database_Connection" />
-    </key>
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
       <recent name="NA_Model" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/lib" />
+      <recent name="$PROJECT_DIR$/src/NA_Model/NA_Database_Connection" />
     </key>
   </component>
   <component name="RunManager" selected="Application.Main">
@@ -674,7 +671,7 @@
       <workItem from="1424616841176" duration="312000" />
       <workItem from="1425481459762" duration="8345000" />
       <workItem from="1425550325848" duration="7604000" />
-      <workItem from="1426009237425" duration="495000" />
+      <workItem from="1426009237425" duration="765000" />
     </task>
     <task id="LOCAL-00001" summary="- added comments">
       <created>1424474559609</created>
@@ -718,11 +715,17 @@
       <option name="project" value="LOCAL" />
       <updated>1426009391200</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="- removed namespace">
+      <created>1426009754954</created>
+      <option name="number" value="00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1426009754954</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="48607000" />
+    <option name="totallyTimeSpent" value="48877000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1276" height="777" extended-state="6" />
@@ -810,7 +813,8 @@
     <MESSAGE value="- changed the way JSON files are handled&#10;- some minor changes to project structure" />
     <MESSAGE value="- added eclipse support&#10;- not sure what else ;)" />
     <MESSAGE value="- added eclipse support now for real" />
-    <option name="LAST_COMMIT_MESSAGE" value="- added eclipse support now for real" />
+    <MESSAGE value="- removed namespace" />
+    <option name="LAST_COMMIT_MESSAGE" value="- removed namespace" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -1213,8 +1217,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/View/MainFrame.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.43165466" vertical-offset="0" max-vertical-offset="810">
-          <caret line="16" column="31" selection-start-line="16" selection-start-column="31" selection-end-line="16" selection-end-column="31" />
+        <state vertical-scroll-proportion="0.59532374" vertical-offset="44" max-vertical-offset="810">
+          <caret line="25" column="41" selection-start-line="25" selection-start-column="41" selection-end-line="25" selection-end-column="41" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
