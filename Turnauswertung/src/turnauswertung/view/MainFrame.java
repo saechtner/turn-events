@@ -12,7 +12,10 @@ import java.awt.event.WindowEvent;
 
 public class MainFrame extends JFrame{
 
-    JPanel content;
+    /**  */
+	private static final long serialVersionUID = 1L;
+	
+	JPanel content;
 
     public MainFrame(){
         super("Turnwettkampf - Auswertung (alpha)");

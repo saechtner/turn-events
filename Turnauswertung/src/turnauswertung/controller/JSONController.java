@@ -18,19 +18,19 @@ public class JSONController {
     }
 
     public static String settingsPath(){
-        return "src/Model/JSON/settings.json";
+        return "json/model_settings.json";
     }
 
     public static String statsPath(){
-        return "src/Model/JSON/stats.json";
+        return "json/stats.json";
     }
 
     private static JSONObject getJSONObject(String path){
         try {
             return (JSONObject) jsonParser().parse(new FileReader(path));
         } catch(Exception e){
-            System.out.println("Version: "+getVersion());
-            System.out.println("Input: "+path);
+            System.out.println("Version: " + getVersion());
+            System.out.println("Input: " + path);
             e.printStackTrace();
             return null;
         }
@@ -38,13 +38,13 @@ public class JSONController {
 
     private static void writeJSONObject(String path, JSONObject jsonObject){
         try {
-            FileWriter file = new FileWriter(path);
-            file.write(new GsonBuilder().setPrettyPrinting().create().toJson(jsonObject));
-            file.flush();
-            file.close();
+            FileWriter writer = new FileWriter(path);
+            writer.write(new GsonBuilder().setPrettyPrinting().create().toJson(jsonObject));
+            writer.flush();
+            writer.close();
         } catch(Exception e){
-            System.out.println("Version: "+getVersion());
-            System.out.println("Input: "+path);
+            System.out.println("Version: " + getVersion());
+            System.out.println("Input: " + path);
             e.printStackTrace();
         }
     }

@@ -40,7 +40,7 @@ public class JavaDBConnector extends DBConnector {
 
     // Constants
     protected String urlPrefix(){
-        return super.urlPrefix()+"derby:";
+        return super.urlPrefix() + "derby:";
     }
 
     protected String urlSuffix(){

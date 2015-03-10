@@ -15,7 +15,7 @@ public class Main {
     public static void main(String[] args) {
         try {
             JSONParser jsonParser = new JSONParser();
-            Object obj = jsonParser.parse(new FileReader("json/Model/JSON/settings.json"));
+            Object obj = jsonParser.parse(new FileReader("json/model_settings.json"));
 
             JSONObject jsonObject = (JSONObject) obj;
             String dbms = (String) jsonObject.get("dbms");

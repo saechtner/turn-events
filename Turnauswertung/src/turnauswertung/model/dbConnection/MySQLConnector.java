@@ -49,7 +49,7 @@ public class MySQLConnector extends DBConnector {
     protected void connect() {
         try {
             setConnection(DriverManager.getConnection(
-                    urlPrefix()+getUrl()+getDatabaseName(),
+                    urlPrefix() + getUrl() + getDatabaseName(),
                     getUsername(),
                     getUserPassword()));
         } catch(Exception e){
@@ -74,6 +74,6 @@ public class MySQLConnector extends DBConnector {
 
     // Constants
     protected String urlPrefix(){
-        return super.urlPrefix()+"sql://";
+        return super.urlPrefix() + "sql://";
     }
 }

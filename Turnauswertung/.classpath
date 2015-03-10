@@ -14,7 +14,7 @@
 			<attribute name="javadoc_location" value="jar:platform:/resource/Turnauswertung/lib/gson-2.3.1-javadoc.jar!/"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="lib/json-simple-1.1.1.jar">
+	<classpathentry kind="lib" path="lib/json-simple-1.1.1.jar" sourcepath="/Users/sten/.m2/repository/com/googlecode/json-simple/json-simple/1.1.1/json-simple-1.1.1-sources.jar">
 		<attributes>
 			<attribute name="javadoc_location" value="jar:platform:/resource/Turnauswertung/lib/json-simple-1.1.1-javadoc.jar!/"/>
 		</attributes>
