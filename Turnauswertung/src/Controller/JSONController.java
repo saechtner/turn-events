@@ -1,7 +1,6 @@
-package NA_Controller;
+package Controller;
 
 import com.google.gson.GsonBuilder;
-import org.apache.derby.iapi.services.io.FileUtil;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
@@ -10,7 +9,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 
 
-public class NA_JSONController {
+public class JSONController {
 
     private static JSONParser jsonParser = new JSONParser();
 
@@ -19,11 +18,11 @@ public class NA_JSONController {
     }
 
     public static String settingsPath(){
-        return "src/NA_Model/NA_JSON/settings.json";
+        return "src/Model/JSON/settings.json";
     }
 
     public static String statsPath(){
-        return "src/NA_Model/NA_JSON/stats.json";
+        return "src/Model/JSON/stats.json";
     }
 
     private static JSONObject getJSONObject(String path){

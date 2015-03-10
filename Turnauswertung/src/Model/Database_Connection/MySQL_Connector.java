@@ -1,9 +1,9 @@
-package NA_Model.NA_Database_Connection;
+package Model.Database_Connection;
 
 import java.sql.DriverManager;
 import java.util.List;
 
-public class NA_MySQL_Connector extends NA_DB_Connector{
+public class MySQL_Connector extends DB_Connector {
     protected String username;
     protected String userPassword;
     protected String url;
@@ -32,14 +32,14 @@ public class NA_MySQL_Connector extends NA_DB_Connector{
         this.url = newUrl;
     }
 
-    public NA_MySQL_Connector(String databaseName, String url, String username, String userPassword){
+    public MySQL_Connector(String databaseName, String url, String username, String userPassword){
         setDatabaseName(databaseName);
         setUrl(url);
         setUsername(username);
         setUserPassword(userPassword);
     }
 
-    public NA_MySQL_Connector(String databaseName, String username, String userPassword){
+    public MySQL_Connector(String databaseName, String username, String userPassword){
         setDatabaseName(databaseName);
         setUrl("localhost:3306/");
         setUsername(username);

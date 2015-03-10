@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<eclipse-userlibraries>
+  <library name="com.googlecode.json-simple:json-simple:1.1.1">
+    <archive path="/Users/Nico/Programming/Java/nicoae/Turnauswertung/lib/json-simple-1.1.1.jar" />
+    <archive path="/Users/Nico/Programming/Java/nicoae/Turnauswertung/lib/junit-4.10.jar" />
+    <archive path="/Users/Nico/Programming/Java/nicoae/Turnauswertung/lib/hamcrest-core-1.1.jar" />
+  </library>
+  <library name="org.apache.ibatis:ibatis-sqlmap:2.3.4.726">
+    <archive path="/Users/Nico/Programming/Java/nicoae/Turnauswertung/lib/ibatis-sqlmap-2.3.4.726.jar" />
+  </library>
+  <library name="javax.json.processing-1.0">
+    <archive path="/Users/Nico/Programming/Java/nicoae/Turnauswertung/lib/javax.json.jar" />
+  </library>
+  <library name="JDBC" />
+  <library name="org.json:com.springsource.org.json:1.0.0">
+    <archive path="/Users/Nico/Programming/Java/nicoae/Turnauswertung/lib/com.springsource.org.json-1.0.0.jar" />
+  </library>
+  <library name="org.apache.derby:derby:10.11.1.1">
+    <archive path="/Users/Nico/Programming/Java/nicoae/Turnauswertung/lib/derby-10.11.1.1.jar" />
+  </library>
+  <library name="com.google.code.gson:gson:2.3.1">
+    <archive path="/Users/Nico/Programming/Java/nicoae/Turnauswertung/lib/gson-2.3.1.jar" />
+  </library>
+</eclipse-userlibraries>
+

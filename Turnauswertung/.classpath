@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="var" path="USER_HOME/Downloads/mysql-connector-java-5.1.34/mysql-connector-java-5.1.34-bin.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/com.googlecode.json-simple:json-simple:1.1.1"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/org.apache.derby:derby:10.11.1.1"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/org.apache.ibatis:ibatis-sqlmap:2.3.4.726"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/com.google.code.gson:gson:2.3.1"/>
+	<classpathentry kind="output" path="out/production/Turnauswertung"/>
+</classpath>

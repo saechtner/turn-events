@@ -1,21 +1,20 @@
-import NA_Model.NA_Database_Connection.NA_DB_Connector;
-import NA_Model.NA_Database_Connection.NA_JavaDB_Connector;
-import NA_Model.NA_Database_Connection.NA_MySQL_Connector;
-import NA_View.NA_MainFrame;
+import Model.Database_Connection.DB_Connector;
+import Model.Database_Connection.JavaDB_Connector;
+import Model.Database_Connection.MySQL_Connector;
+import View.MainFrame;
 
 import java.io.FileReader;
-import java.sql.Connection;
 
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
-public class NA_Main {
+public class Main {
 
     public static void main(String[] args) {
         try {
             JSONParser jsonParser = new JSONParser();
             Object obj = jsonParser.parse(new FileReader(
-                    "src/NA_Model/NA_JSON/settings.json"));
+                    "src/Model/JSON/settings.json"));
 
             JSONObject jsonObject = (JSONObject) obj;
             String dmbs = (String) jsonObject.get("dbms");
@@ -26,17 +25,17 @@ public class NA_Main {
                 String name = (String) jsonObject.get("name");
                 String password = (String) jsonObject.get("password");
                 String url = (String) jsonObject.get("url");
-                NA_DB_Connector con = new NA_MySQL_Connector(databaseName, name, password);
+                DB_Connector con = new MySQL_Connector(databaseName, name, password);
                 con.executeQuery("");
             } else if(dmbs.equals("JavaDB")){
-                NA_DB_Connector connection = new NA_JavaDB_Connector(databaseName);
+                DB_Connector connection = new JavaDB_Connector(databaseName);
                 connection.initializeScheme();
             } else{
                 System.out.println("Couldn't connect to any DB.");
             }
 
 
-            NA_MainFrame window = new NA_MainFrame();
+            MainFrame window = new MainFrame();
 
         } catch (Exception e) {
             e.printStackTrace();

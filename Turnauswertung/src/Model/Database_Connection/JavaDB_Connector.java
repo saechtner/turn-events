@@ -1,13 +1,13 @@
-package NA_Model.NA_Database_Connection;
+package Model.Database_Connection;
 
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.List;
 
-public class NA_JavaDB_Connector extends NA_DB_Connector {
+public class JavaDB_Connector extends DB_Connector {
 
-    public NA_JavaDB_Connector(String url){
+    public JavaDB_Connector(String url){
         setDatabaseName(url);
     }
 

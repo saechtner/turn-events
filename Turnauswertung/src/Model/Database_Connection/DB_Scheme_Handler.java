@@ -1,6 +1,6 @@
-package NA_Model.NA_Database_Connection;
+package Model.Database_Connection;
 
-public class NA_DB_Scheme_Handler {
+public class DB_Scheme_Handler {
 //
 //    SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 //
