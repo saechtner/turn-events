@@ -9,7 +9,7 @@ import java.sql.Connection;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
-public class Main {
+public class NA_Main {
 
     public static void main(String[] args) {
         try {

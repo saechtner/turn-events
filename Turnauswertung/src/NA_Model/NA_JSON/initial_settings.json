@@ -3,9 +3,8 @@
   "database": "localDB",
   "windowHeight": 480,
   "dbms": "JavaDB",
-  "language": "deutsch",
+  "language": "deutsch", // unused so far
   "windowWidth": 640,
-  "version": "0.1a",
   "url": "",
   "auto-connect": false,
   "username": ""

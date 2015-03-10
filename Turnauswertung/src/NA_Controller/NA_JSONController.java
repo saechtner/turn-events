@@ -10,7 +10,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 
 
-public class JSONController {
+public class NA_JSONController {
 
     private static JSONParser jsonParser = new JSONParser();
 
@@ -20,6 +20,10 @@ public class JSONController {
 
     public static String settingsPath(){
         return "src/NA_Model/NA_JSON/settings.json";
+    }
+
+    public static String statsPath(){
+        return "src/NA_Model/NA_JSON/stats.json";
     }
 
     private static JSONObject getJSONObject(String path){
@@ -40,7 +44,8 @@ public class JSONController {
             file.flush();
             file.close();
         } catch(Exception e){
-            System.out.println("Could not find file at: "+path);
+            System.out.println("Version: "+getVersion());
+            System.out.println("Input: "+path);
             e.printStackTrace();
         }
     }
@@ -95,11 +100,11 @@ public class JSONController {
     }
 
     public static String getVersion(){
-            return (String) getJSONObject("src/NA_Model/NA_JSON/settings.json").get("version");
+            return (String) getJSONObject(statsPath()).get("version");
     }
 
     public static void resetJSONToDefault(String path){
-        JSONObject initialJSONObject = getJSONObject(path+"_initial");
+        JSONObject initialJSONObject = getJSONObject("initial_"+path);
         writeJSONObject(path, initialJSONObject);
     }
 }

@@ -6,13 +6,12 @@ SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 /*!40101 SET NAMES utf8 */;
 
 DROP TABLE IF EXISTS 'Wertung';
-DROP TABLE IF EXISTS 'nimmtTeilAn';
 DROP TABLE IF EXISTS 'Sportler';
+DROP TABLE IF EXISTS 'Mannschaft';
 DROP TABLE IF EXISTS 'Wertungsgruppe';
+DROP TABLE IF EXISTS 'Finale';
 DROP TABLE IF EXISTS 'Sportart';
 DROP TABLE IF EXISTS 'Riege';
-DROP TABLE IF EXISTS 'Finale';
-DROP TABLE IF EXISTS 'Mannschaft';
 DROP TABLE IF EXISTS 'Verein';
 DROP TABLE IF EXISTS 'Wettkampf';
 
@@ -35,27 +34,29 @@ CREATE TABLE IF NOT EXISTS 'Sportart' (
   'SportartName' VARCHAR(100) NOT NULL
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1;
 
-CREATE TABLE IF NOT EXISTS 'Mannschaft' (
-  'MannschaftID' INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
-  'MannschaftName' VARCHAR(100),
-  'WettkampfID' INT NOT NULL,
-  FOREIGN KEY ('WettkampfID') REFERENCES 'Wettkampf' ('WettkampfID')
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1;
-
 CREATE TABLE IF NOT EXISTS 'Finale' (
   'FinaleID' INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
-  'WettkampfID' INT NOT NULL,
   'FinaleAnzTeilnehmer' int(3) NOT NULL,
+  'WettkampfID' INT NOT NULL,
   FOREIGN KEY ('WettkampfID') REFERENCES 'Wettkampf' ('WettkampfID')
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1;
 
 CREATE TABLE IF NOT EXISTS 'Wertungsgruppe' (
   'WertungsgruppeID' INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
-  'WettkampfID' INT NOT NULL,
   'WertungsgruppeName' VARCHAR(100) NOT NULL,
-  'WertungsgruppeAnzahlZuWerten' VARCHAR(100) NOT NULL,
+  'WertungsgruppeAnzahlZuWerten' INT NOT NULL, # is inf for Einzel
+  'WettkampfID' INT NOT NULL,
   FOREIGN KEY ('WettkampfID') REFERENCES 'Wettkampf' ('WettkampfID')
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+CREATE TABLE IF NOT EXISTS 'Mannschaft' (
+  'MannschaftID' INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+  'MannschaftName' VARCHAR(100),
+  'WettkampfID' INT NOT NULL,
+  'WertungsgruppeID' INT NOT NULL,
+  FOREIGN KEY ('WertungsgruppeID') REFERENCES 'Wertungsgruppe' ('WertungsgruppeID'),
+  FOREIGN KEY ('WettkampfID') REFERENCES 'Wettkampf' ('WettkampfID')
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1;
 
 CREATE TABLE IF NOT EXISTS 'Sportler' (
   'SportlerID' INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
@@ -66,9 +67,11 @@ CREATE TABLE IF NOT EXISTS 'Sportler' (
   'WettkampfID' INT NOT NULL,
   'WertungsgruppeID' INT NOT NULL,
   'RiegeID' INT,
+  'MannschaftID' INT,
   FOREIGN KEY ('WettkampfID') REFERENCES 'Wettkampf' ('WettkampfID'),
   FOREIGN KEY ('RiegeID') REFERENCES 'Riege' ('RiegeID'),
-  FOREIGN KEY ('WertungsgruppeID') REFERENCES 'Wertungsgruppe' ('WertungsgruppeID')
+  FOREIGN KEY ('WertungsgruppeID') REFERENCES 'Wertungsgruppe' ('WertungsgruppeID'),
+  FOREIGN KEY ('MannschaftID') REFERENCES 'Mannschaft' ('MannschaftID')
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1;
 
 CREATE TABLE IF NOT EXISTS 'Wertung' (
@@ -80,4 +83,9 @@ CREATE TABLE IF NOT EXISTS 'Wertung' (
   FOREIGN KEY ('WettkampfID') REFERENCES 'Wettkampf' ('WettkampfID'),
   FOREIGN KEY ('SportlerID') REFERENCES 'Sportler' ('SportlerID'),
   FOREIGN KEY ('SportartID') REFERENCES 'Sportart' ('SportartID')
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1;
+
+CREATE TABLE IF NOT EXISTS 'WertungsgruppeMisstInSportart' (
+  'SportartID' INT NOT NULL,
+  'WertungsgruppeID' INT NOT NULL
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1;
