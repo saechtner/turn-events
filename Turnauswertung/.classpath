@@ -3,6 +3,7 @@
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="src" path="json"/>
+	<classpathentry kind="src" path="sql"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/com.googlecode.json-simple:json-simple:1.1.1"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/org.apache.derby:derby:10.11.1.1"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/org.apache.ibatis:ibatis-sqlmap:2.3.4.726"/>
