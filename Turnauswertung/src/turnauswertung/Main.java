@@ -1,3 +1,4 @@
+package turnauswertung;
 import Model.Database_Connection.DB_Connector;
 import Model.Database_Connection.JavaDB_Connector;
 import Model.Database_Connection.MySQL_Connector;
