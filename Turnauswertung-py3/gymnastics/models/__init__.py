@@ -1,0 +1,1 @@
+from gymnastics.models.discipline import Discipline
