@@ -48,9 +48,9 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
 
-ROOT_URLCONF = 'auswertung.urls'
+ROOT_URLCONF = 'Turnauswertung.urls'
 
-WSGI_APPLICATION = 'auswertung.wsgi.application'
+WSGI_APPLICATION = 'Turnauswertung.wsgi.application'
 
 
 # Database
