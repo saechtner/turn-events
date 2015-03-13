@@ -59,6 +59,12 @@ WSGI_APPLICATION = 'Turnauswertung.wsgi.application'
 
 DATABASES = {
     'default': {
+        'ENGINE': 'mysql.connector.django',
+        'NAME': 'TURNAUSWERTUNG',
+        'USER': 'root',
+        'PASSWORD': 'root',
+    },
+    'sqlite_fallback': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
