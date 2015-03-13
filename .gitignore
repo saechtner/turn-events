@@ -14,6 +14,9 @@ target/
 # ignore all class files
 *.class
 
+#ignore all pyc files
+*.pyc
+__pycache__
 
 # tex to pdf files
 *.aux
