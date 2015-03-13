@@ -1,0 +1,1 @@
+from turnapp.models.sportart import Sportart
