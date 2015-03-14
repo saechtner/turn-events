@@ -7,3 +7,6 @@ class Club(models.Model):
 
     class Meta:
         db_table = 'gymnastics_clubs'
+
+    def __str__(self):
+        return self.name
