@@ -5,6 +5,7 @@
   {% csrf_token %}
     {{ form.as_p }}
     <input type="submit" value="Create club"/>
+    <a href="{% url 'clubs.index' %}">back</a>
   </form>
 
   </div>

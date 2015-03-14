@@ -2,4 +2,5 @@
 {% csrf_token %}
     {{ form.as_p }}
     <input type="submit" value="Update" />
+    <a href="{% url 'disciplines.index' %}">back</a>
 </form>

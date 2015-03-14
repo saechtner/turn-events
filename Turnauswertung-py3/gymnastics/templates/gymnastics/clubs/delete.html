@@ -2,4 +2,5 @@
 {% csrf_token %}
     <p>Are you sure you want to delete "{{ object.name }}"?</p>
     <input type="submit" value="Confirm" />
+<a href="{% url 'clubs.index' %}">back</a>
 </form>

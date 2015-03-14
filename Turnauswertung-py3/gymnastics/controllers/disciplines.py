@@ -32,7 +32,6 @@ class DisciplineUpdateView(generic.UpdateView):
 
     def get_success_url(self):
         some_kwargs = self.kwargs
-        import pdb; pdb.set_trace()
         return reverse('disciplines.detail', kwargs = { 'pk' : self.kwargs['pk'] })
 
 
