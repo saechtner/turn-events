@@ -7,6 +7,3 @@ class Discipline(models.Model):
 
     class Meta:
         db_table = 'gymnastics_disciplines'
-
-    def get_absolute_url(self):
-        return reverse('author-detail', kwargs={'pk': self.pk})
