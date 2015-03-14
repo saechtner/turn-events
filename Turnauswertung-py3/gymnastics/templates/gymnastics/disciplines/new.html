@@ -1,0 +1,11 @@
+{% block content %}
+  <div class="row">
+
+  <form action="" method="post">
+  {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="Create discipline"/>
+  </form>
+
+  </div>
+{% endblock content %}

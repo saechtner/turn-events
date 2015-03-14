@@ -1,3 +1,5 @@
+<h1>Disciplines</h1>
+
 {% block content %}
   <div class="row">
 
@@ -5,14 +7,24 @@
 
       <h3>Disciplines</h3>
 
-      <table class="table table-horizontal table-hover" id="disciplines-table">
+      <div>Create new discipline <a href="{% url 'disciplines.new' %}">here</a></div>
+
+      <br/>
+
+      <table class="table" id="disciplines-table">
         <thead>
           <th>Discipline Name</th>
+          <th></th>
+          <th></th>
+          <th></th>
         </thead>
         <tbody>
           {% for discipline in disciplines %}
-            <tr id="tumor_{{ tumor.id }}">
-              <td>{{ discpline.name }}</td>
+            <tr id="discipline_{{ discipline.id }}">
+              <td>{{ discipline.name }}</td>
+              <td><a href="{% url 'disciplines.detail' discipline.id %}">details</a></td>
+              <td><a href="{% url 'disciplines.edit' discipline.id %}">edit</a></td>
+              <td><a href="{% url 'disciplines.delete' discipline.id %}">delete</a></td>
             </tr>
           {% endfor %}
         </tbody>
