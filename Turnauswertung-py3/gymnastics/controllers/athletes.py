@@ -13,7 +13,7 @@ def index(request):
 class AthleteCreateView(generic.CreateView):
 
     model = Athlete
-    fields = ['first_name', 'last_name', 'sex', 'birth_of_year', 'club']
+    fields = ['first_name', 'last_name', 'sex', 'year_of_birth', 'club']
     template_name = 'gymnastics/athletes/new.html'
     success_url = reverse_lazy('athletes.index')
 
