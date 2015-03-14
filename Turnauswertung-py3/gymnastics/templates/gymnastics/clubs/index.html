@@ -1,0 +1,39 @@
+<h1>clubs</h1>
+
+{% block content %}
+  <div class="row">
+
+    <div>Create new club <a href="{% url 'clubs.new' %}">here</a></div>
+
+    {% if clubs %}
+
+      <h3>clubs</h3>
+
+      <br/>
+
+      <table class="table" id="clubs-table">
+        <thead>
+          <th>Club Name</th>
+          <th></th>
+          <th></th>
+          <th></th>
+        </thead>
+        <tbody>
+          {% for club in clubs %}
+            <tr id="club_{{ club.id }}">
+              <td>{{ club.name }}</td>
+              <td><a href="{% url 'clubs.detail' club.id %}">details</a></td>
+              <td><a href="{% url 'clubs.edit' club.id %}">edit</a></td>
+              <td><a href="{% url 'clubs.delete' club.id %}">delete</a></td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+
+    {% else %}
+
+      <div class="alert alert-info">No clubs available in the database.</div>
+
+    {% endif %}
+  </div>
+{% endblock content %}
