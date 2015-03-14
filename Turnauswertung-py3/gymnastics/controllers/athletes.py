@@ -27,7 +27,7 @@ class AthleteDetailView(generic.DetailView):
 class AthleteUpdateView(generic.UpdateView):
 
     model = Athlete
-    fields = ['first_name', 'last_name', 'sex', 'birth_of_year', 'club']
+    fields = ['first_name', 'last_name', 'sex', 'year_of_birth', 'club']
     template_name = 'gymnastics/athletes/edit.html'
 
     def get_success_url(self):
