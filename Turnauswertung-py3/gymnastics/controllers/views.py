@@ -1,9 +1,6 @@
 from django.shortcuts import render
-from django.http import HttpResponse
 
-# Create your views here.
-
+# renders index / home page
 def index(request):
-    return HttpResponse("Hello, world. You're at the sportart index.")
+    return render(request, 'gymnastics/index.html', None)
 
-# initial controller (in python called view) file. Delete it.
