@@ -1,0 +1,12 @@
+{% block content %}
+  <div class="row">
+
+  <form action="" method="post">
+  {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="Create squad"/>
+    <a href="{% url 'squads.index' %}">back</a>
+  </form>
+
+  </div>
+{% endblock content %}

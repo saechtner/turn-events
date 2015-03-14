@@ -1,0 +1,39 @@
+{% extends "gymnastics/base.html" %}
+
+{% block content %}
+  <div class="row">
+
+    <div>Create new squad <a href="{% url 'squads.new' %}">here</a></div>
+
+    {% if squads %}
+
+      <h3>Squads</h3>
+
+      <br/>
+
+      <table class="table" id="squads-table">
+        <thead>
+          <th>Squad Name</th>
+          <th></th>
+          <th></th>
+          <th></th>
+        </thead>
+        <tbody>
+          {% for squad in squads %}
+            <tr id="squad_{{ squad.id }}">
+              <td>{{ squad.name }}</td>
+              <td><a href="{% url 'squads.detail' squad.id %}">details</a></td>
+              <td><a href="{% url 'squads.edit' squad.id %}">edit</a></td>
+              <td><a href="{% url 'squads.delete' squad.id %}">delete</a></td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+
+    {% else %}
+
+      <div class="alert alert-info">No squads available in the database.</div>
+
+    {% endif %}
+  </div>
+{% endblock content %}
