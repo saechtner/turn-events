@@ -1,7 +1,7 @@
 from django.conf.urls import patterns, include, url
 
-from gymnastics.controllers import views
+from gymnastics.controllers import disciplines
 
 urlpatterns = patterns('',
-    url(r'^$', views.index, name='index')
+    url(r'^$', disciplines.index, name='index')
 )

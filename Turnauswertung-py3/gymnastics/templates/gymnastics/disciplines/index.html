@@ -1,0 +1,27 @@
+{% block content %}
+  <div class="row">
+
+    {% if disciplines %}
+
+      <h3>Disciplines</h3>
+
+      <table class="table table-horizontal table-hover" id="disciplines-table">
+        <thead>
+          <th>Discipline Name</th>
+        </thead>
+        <tbody>
+          {% for discipline in disciplines %}
+            <tr id="tumor_{{ tumor.id }}">
+              <td>{{ discpline.name }}</td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+
+    {% else %}
+
+      <div class="alert alert-info">No disciplines available in the database.</div>
+
+    {% endif %}
+  </div>
+{% endblock content %}
