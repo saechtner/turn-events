@@ -1,6 +1,10 @@
-<form action="" method="post">
-{% csrf_token %}
+{% extends "gymnastics/base.html" %}
+
+{% block content %}
+  <form action="" method="post">
+  {% csrf_token %}
     <p>Are you sure you want to delete "{{ object.name }}"?</p>
     <input type="submit" value="Confirm" />
-<a href="{% url 'clubs.index' %}">back</a>
-</form>
+  <a href="{% url 'clubs.index' %}">back</a>
+  </form>
+{% endblock content %}

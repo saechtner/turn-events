@@ -1,4 +1,5 @@
 from django.conf.urls import patterns, include, url
+from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
 from gymnastics.controllers import views, clubs, disciplines, squads
 
@@ -23,3 +24,5 @@ urlpatterns = patterns('',
     url(r'^squads/(?P<pk>\d+)/edit', squads.SquadUpdateView.as_view(), name='squads.edit'),
     url(r'^squads/(?P<pk>\d+)/delete', squads.SquadDeleteView.as_view(), name='squads.delete'),
 )
+
+# urlpatterns += staticfiles_urlpatterns()

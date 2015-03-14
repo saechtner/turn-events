@@ -1,5 +1,9 @@
-<h1>Squad Details</h1>
-<p>{{ object.content }}</p>
-<p>Name: {{ object.name }}</p>
+{% extends "gymnastics/base.html" %}
 
-<a href="{% url 'squads.index' %}">back</a>
+{% block content %}
+  <h1>Squad Details</h1>
+  <p>{{ object.content }}</p>
+  <p>Name: {{ object.name }}</p>
+
+  <a href="{% url 'squads.index' %}">back</a>
+{% endblock content %}

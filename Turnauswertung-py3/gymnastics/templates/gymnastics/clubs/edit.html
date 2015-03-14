@@ -1,6 +1,10 @@
-<form action="" method="post">
-{% csrf_token %}
-    {{ form.as_p }}
-    <input type="submit" value="Update" />
-    <a href="{% url 'clubs.index' %}">back</a>
-</form>
+{% extends "gymnastics/base.html" %}
+
+{% block content %}
+  <form action="" method="post">
+  {% csrf_token %}
+      {{ form.as_p }}
+      <input type="submit" value="Update" />
+      <a href="{% url 'clubs.index' %}">back</a>
+  </form>
+{% endblock content %}
