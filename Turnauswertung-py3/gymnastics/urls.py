@@ -1,10 +1,16 @@
 from django.conf.urls import patterns, include, url
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
-from gymnastics.controllers import views, clubs, disciplines, squads
+from gymnastics.controllers import views, athletes, clubs, disciplines, squads
 
 urlpatterns = patterns('',
     url(r'^$', views.index, name='home'), 
+
+    url(r'^athletes', athletes.index, name='athletes.index'),
+    url(r'^athletes/new$', athletes.AthleteCreateView.as_view(), name='athletes.new'),
+    url(r'^athletes/(?P<pk>\d+)/detail', athletes.AthleteDetailView.as_view(), name='athletes.detail'),
+    url(r'^athletes/(?P<pk>\d+)/edit', athletes.AthleteUpdateView.as_view(), name='athletes.edit'),
+    url(r'^athletes/(?P<pk>\d+)/delete', athletes.AthleteDeleteView.as_view(), name='athletes.delete'),
 
     url(r'^clubs$', clubs.index, name='clubs.index'),
     url(r'^clubs/new$', clubs.ClubCreateView.as_view(), name='clubs.new'),

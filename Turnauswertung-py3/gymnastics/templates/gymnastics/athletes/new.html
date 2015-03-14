@@ -1,0 +1,14 @@
+{% extends "gymnastics/base.html" %}
+
+{% block content %}
+  <div class="row">
+
+  <form action="" method="post">
+  {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="Create athlete"/>
+    <a href="{% url 'athletes.index' %}">back</a>
+  </form>
+
+  </div>
+{% endblock content %}

@@ -1,0 +1,44 @@
+{% extends "gymnastics/base.html" %}
+
+{% block content %}
+  <div>
+    <div>Create new athlete <a href="{% url 'athletes.new' %}">here</a></div>
+
+    {% if athletes %}
+
+      <br/>
+
+      <table class="table" id="athletes-table">
+        <thead>
+          <th>Athlete First Name</th>
+          <th>Athlete Last Name</th>
+          <th>Athlete Sex</th>
+          <th>Athlete Year of birth</th>
+          <th>Athlete Club</th>
+          <th></th>
+          <th></th>
+          <th></th>
+        </thead>
+        <tbody>
+          {% for athlete in athletes %}
+            <tr id="athlete_{{ athlete.id }}">
+              <td>{{ athlete.first_name }}</td>
+              <td>{{ athlete.last_name }}</td>
+              <td>{{ athlete.sex }}</td>
+              <td>{{ athlete.year_of_birth }}</td>
+              <td>{{ athlete.club.name }}</td>
+              <td><a href="{% url 'athletes.detail' athlete.id %}">details</a></td>
+              <td><a href="{% url 'athletes.edit' athlete.id %}">edit</a></td>
+              <td><a href="{% url 'athletes.delete' athlete.id %}">delete</a></td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+
+    {% else %}
+
+      <div class="alert alert-info">No athletes available in the database.</div>
+
+    {% endif %}
+  </div>
+{% endblock content %}
