@@ -2,11 +2,8 @@
 
 {% block content %}
   <div>
-    <div>Create new athlete <a href="{% url 'athletes.new' %}">here</a></div>
 
     {% if athletes %}
-
-      <br/>
 
       <table class="table" id="athletes-table">
         <thead>
@@ -24,7 +21,7 @@
             <tr id="athlete_{{ athlete.id }}">
               <td>{{ athlete.first_name }}</td>
               <td>{{ athlete.last_name }}</td>
-              <td>{% if athlete.sex == 'f' %} female {% else %} male {% endif %}</td>
+              <td>{% if athlete.sex == 'f' %}female{% else %}male{% endif %}</td>
               <td>{{ athlete.year_of_birth }}</td>
               <td>{{ athlete.club }}</td>
               <td><a href="{% url 'athletes.detail' athlete.id %}">details</a></td>
@@ -37,7 +34,7 @@
 
     {% else %}
 
-      <div class="alert alert-info">No athletes available in the database.</div>
+      <div class="alert alert-info">No athletes available in the database. Create one <a href="{% url 'athletes.new' %}">here</a>.</div>
 
     {% endif %}
   </div>

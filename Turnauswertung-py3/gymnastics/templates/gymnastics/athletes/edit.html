@@ -1,5 +1,7 @@
 {% extends "gymnastics/athletes/base.html" %}
 
+{% block action %}edit{% endblock action %}
+
 {% block content %}
   <form action="" method="post">
   {% csrf_token %}
