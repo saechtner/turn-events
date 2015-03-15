@@ -9,7 +9,7 @@
   <form action="" method="post">
   {% csrf_token %}
     <p>Are you sure you want to delete "{{ object }}"?</p>
-    <input class="btn btn-lg btn-primary" type="submit" value="Confirm"/>
-    <input class="btn btn-lg btn-warning" type="button" value="Previous Page" onClick="javascript:history.go(-1);">
+    <input class="btn btn-danger" type="submit" value="Confirm"/>
+    <button class="btn btn-default" type="button" onClick="javascript:history.go(-1);">Cancel</button>
   </form>
 {% endblock content %}
