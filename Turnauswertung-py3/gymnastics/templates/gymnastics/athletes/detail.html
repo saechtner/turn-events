@@ -16,6 +16,6 @@
   <p>Stream: {{ object.stream }}</p>
   <p>Team: {{ object.team }}</p>
 
+  <a type="button" class="btn btn-warning" href="{% url 'athletes.edit' object.id %}">Edit</a>
   <button type="button" class="btn btn-default" onClick="javascript:history.go(-1);">Previous Page</button>
-  <a type="button" class="btn btn-warning" href="{% url 'athletes.edit' object.id %}">edit</a>
 {% endblock content %}
