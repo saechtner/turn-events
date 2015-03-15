@@ -9,7 +9,7 @@ class Athlete(models.Model):
     sex = models.CharField(max_length=1, null=False, choices=(('m', 'male'), ('f', 'female')), default='f')
     year_of_birth = models.IntegerField(default=2000)
 
-    club = models.ForeignKey(Club)
+    club = models.ForeignKey(Club, null=True, blank=True)
 
 
     def __str__(self):

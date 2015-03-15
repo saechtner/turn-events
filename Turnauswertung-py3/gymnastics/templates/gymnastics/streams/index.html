@@ -12,12 +12,6 @@
         <thead>
           <th>Difficulty</th>
           <th>Sex</th>
-          <th>all_around_individual</th>
-          <th>all_around_individual_counting_events</th>
-          <th>all_around_team</th>
-          <th>all_around_team_counting_events</th>
-          <th>discipline_finals</th>
-          <th>discipline_finals_max_participants</th>
           <th>Disciplines</th>
           <th></th>
           <th></th>
@@ -28,28 +22,7 @@
             <tr id="stream_{{ stream.id }}">
               <td>{{ stream.difficulty }}</td>
               <td>{% if stream.sex == 'f' %} female {% else %} male {% endif %}</td>
-              {% if stream.all_around_individual %}
-                <td>{{ stream.all_around_individual }}</td>
-                <td>{{ stream.all_around_individual_counting_events }}</td>
-              {% else %}
-                <td></td>
-                <td></td>
-              {% endif %}
-              {% if stream.all_around_team %}
-                <td>{{ stream.all_around_team }}</td>
-                <td>{{ stream.all_around_team_counting_events }}</td>
-              {% else %}
-                <td></td>
-                <td></td>
-              {% endif %}
-              {% if stream.discipline_finals %}
-                <td>{{ stream.discipline_finals }}</td>
-                <td>{{ stream.discipline_finals_max_participants }}</td>
-              {% else %}
-                <td></td>
-                <td></td>
-              {% endif %}
-              <td>{% for discipline in stream.disciplines.all %} {{ discipline }}{% endfor %}</td>
+              <td>{% for discipline in stream.disciplines.all %} {{ discipline }}<br/>{% endfor %}</td>
               <td><a href="{% url 'streams.detail' stream.id %}">details</a></td>
               <td><a href="{% url 'streams.edit' stream.id %}">edit</a></td>
               <td><a href="{% url 'streams.delete' stream.id %}">delete</a></td>
