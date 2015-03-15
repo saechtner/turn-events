@@ -4,7 +4,8 @@
   <h1>Athlete Details</h1>
   <p>{{ object.content }}</p>
   <p>Difficulty: {{ object.difficulty }}</p>
-  <p>Sex: {% if object.sex == 'f' %} female {% else %} male {% endif %}</p>
+  <p>Sex: {{ object.sexLong }}</p>
+  <p>Minimum Year of birth: {{ object.minimum_year_of_birth }}</p>
   <p>all_around_individual: {{ object.all_around_individual }}</p>
   <p>all_around_individual_counting_events: {{ object.all_around_individual_counting_events }}</p>
   <p>all_around_team: {{ object.all_around_team }}</p>

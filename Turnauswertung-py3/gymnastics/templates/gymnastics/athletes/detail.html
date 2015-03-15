@@ -10,9 +10,12 @@
   <p>{{ object.content }}</p>
   <p>First name: {{ object.first_name }}</p>
   <p>Last name: {{ object.last_name }}</p>
-  <p>Sex: {% if object.sex == 'f' %} female {% else %} male {% endif %}</p>
+  <p>Sex: {{ object.sexLong }}</p>
   <p>Year of birth: {{ object.year_of_birth }}</p>
   <p>Club: {{ object.club }}</p>
+  <p>Squad: {{ object.squad }}</p>
+  <p>Stream: {{ object.stream }}</p>
+  <p>Team: {{ object.team }}</p>
 
   <a href="{% url 'athletes.index' %}">back</a>
 {% endblock content %}

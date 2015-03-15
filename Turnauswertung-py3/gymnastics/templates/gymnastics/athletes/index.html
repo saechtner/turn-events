@@ -12,6 +12,9 @@
           <th>Sex</th>
           <th>Year of birth</th>
           <th>Club</th>
+          <th>Squad</th>
+          <th>Stream</th>
+          <th>Team</th>
           <th></th>
           <th></th>
           <th></th>
@@ -21,9 +24,12 @@
             <tr id="athlete_{{ athlete.id }}">
               <td>{{ athlete.first_name }}</td>
               <td>{{ athlete.last_name }}</td>
-              <td>{% if athlete.sex == 'f' %}female{% else %}male{% endif %}</td>
+              <td>{{ athlete.sexLong }}</td>
               <td>{{ athlete.year_of_birth }}</td>
               <td>{{ athlete.club }}</td>
+              <td>{{ athlete.squad }}</td>
+              <td>{{ athlete.stream }}</td>
+              <td>{{ athlete.team }}</td>
               <td><a href="{% url 'athletes.detail' athlete.id %}">details</a></td>
               <td><a href="{% url 'athletes.edit' athlete.id %}">edit</a></td>
               <td><a href="{% url 'athletes.delete' athlete.id %}">delete</a></td>
