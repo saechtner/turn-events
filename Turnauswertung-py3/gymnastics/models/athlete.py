@@ -1,5 +1,6 @@
 from django.core.urlresolvers import reverse
 from django.db import models
+
 from gymnastics.models.club import Club
 from gymnastics.models.squad import Squad
 from gymnastics.models.stream import Stream
@@ -18,14 +19,14 @@ class Athlete(models.Model):
     team = models.ForeignKey(Team, null=True, blank=True)
 
 
+    class Meta:
+        db_table = 'gymnastics_athletes'
+
     def __str__(self):
         return self.first_name + " " + self.last_name
 
-    def sexLong(self):
+    def sex_long(self):
         if self.sex == 'f':
             return 'female'
         else :
             return 'male'
-
-    class Meta:
-        db_table = 'gymnastics_athletes'
