@@ -22,7 +22,7 @@
           {% for stream in streams %}
             <tr id="stream_{{ stream.id }}">
               <td>{{ stream.difficulty }}</td>
-              <td>{{ stream.sexLong }}</td>
+              <td>{{ stream.sex_long }}</td>
               <td>{% for discipline in stream.disciplines.all %} {{ discipline }}<br/>{% endfor %}</td>
               <td>{{ stream.minimum_year_of_birth }}</td>
               <td><a href="{% url 'streams.detail' stream.id %}">details</a></td>
