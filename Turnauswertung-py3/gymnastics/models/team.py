@@ -9,7 +9,7 @@ class Team(models.Model):
     stream = models.ForeignKey(Stream, null=False)
     
     def __str__(self):
-        return self.name
+        return self.name #+ "(" + self.stream + ")"
 
     class Meta:
         db_table = 'gymnastics_teams'

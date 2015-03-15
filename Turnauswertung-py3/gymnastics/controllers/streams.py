@@ -15,7 +15,7 @@ class StreamCreateView(generic.CreateView):
     model = Stream
     fields = ['difficulty', 'sex', 'minimum_year_of_birth', 
         'all_around_individual', 'all_around_individual_counting_events', 
-        'all_around_team', 'all_around_team_counting_events', 
+        'all_around_team', 'all_around_team_counting_athletes', 
         'discipline_finals', 'discipline_finals_max_participants', 'disciplines']
     template_name = 'gymnastics/streams/new.html'
     success_url = reverse_lazy('streams.index')
@@ -32,7 +32,7 @@ class StreamUpdateView(generic.UpdateView):
     model = Stream
     fields = ['difficulty', 'sex', 'minimum_year_of_birth', 
         'all_around_individual', 'all_around_individual_counting_events', 
-        'all_around_team', 'all_around_team_counting_events', 
+        'all_around_team', 'all_around_team_counting_athletes', 
         'discipline_finals', 'discipline_finals_max_participants', 'disciplines']
     template_name = 'gymnastics/streams/edit.html'
 
