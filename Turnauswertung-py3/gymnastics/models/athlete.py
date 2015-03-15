@@ -24,7 +24,7 @@ class Athlete(models.Model):
     def __str__(self):
         return self.first_name + " " + self.last_name
 
-    def sexLong(self):
+    def sex_long(self):
         if self.sex == 'f':
             return 'female'
         else :
