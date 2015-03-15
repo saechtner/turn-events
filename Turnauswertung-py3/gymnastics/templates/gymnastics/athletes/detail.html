@@ -2,7 +2,6 @@
 
 {% block nav_controller_active %}<li>{% endblock nav_controller_active %}
 {% block nav_action_active %}<li class="active">{% endblock nav_action_active %}
-
 {% block action %}detail{% endblock action %}
 
 {% block content %}
@@ -17,6 +16,6 @@
   <p>Stream: {{ object.stream }}</p>
   <p>Team: {{ object.team }}</p>
 
-  <button type="button" class="btn btn-lg btn-warning" onClick="javascript:history.go(-1);">Previous Page</button>
+  <button type="button" class="btn btn-default" onClick="javascript:history.go(-1);">Previous Page</button>
   <a type="button" class="btn btn-warning" href="{% url 'athletes.edit' object.id %}">edit</a>
 {% endblock content %}
