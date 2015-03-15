@@ -11,7 +11,7 @@
   <p>all_around_team_counting_events: {{ object.all_around_team_counting_events }}</p>
   <p>discipline_finals: {{ object.discipline_finals }}</p>
   <p>discipline_finals_max_participants: {{ object.discipline_finals_max_participants }}</p>
-  <p>Disciplines: {{ object.disciplines }}</p>
+  <p>Disciplines: {% for discipline in object.disciplines.all %} {{ discipline }}, {% endfor %}</p>
 
   <a href="{% url 'streams.index' %}">back</a>
 {% endblock content %}
