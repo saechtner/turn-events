@@ -29,9 +29,15 @@
           <!-- Collect the nav links, forms, and other content for toggling -->
           <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
-              <li><a href="{% url 'home' %}" class="home"><span class="glyphicon glyphicon-home"></span> Home </a></li>
-              <li class="active">{% block controller %}{% endblock controller %}</li>
-              <li><a href="#">{% block action %}{% endblock action %}</a></li>
+              {% block nav_home_active %}<li class="active">{% endblock nav_home_active %}
+                <a href="{% url 'home' %}" class="home"><span class="glyphicon glyphicon-home"></span> Home </a>
+              </li>
+              {% block nav_controller_active %}<li>{% endblock nav_controller_active %}
+                {% block nav_controller_name %}{% endblock nav_controller_name %}
+              </li>
+              {% block nav_action_active %}<li>{% endblock nav_action_active %}
+                <a href="#">{% block action %}{% endblock action %}</a>
+              </li>
             </ul>
 
             <ul class="nav navbar-nav navbar-right">
@@ -51,9 +57,9 @@
                   <li><a href="{% url 'disciplines.index' %}">Disciplines</a></li>
                   <li><a href="{% url 'streams.index' %}">Streams</a></li>
                   <li class="divider"></li>
+                  <li><a href="{% url 'athletes.index' %}">Athletes</a></li>
                   <li><a href="{% url 'clubs.index' %}">Clubs</a></li>
                   <li><a href="#">Teams</a></li>
-                  <li><a href="{% url 'athletes.index' %}">Athletes</a></li>
                   <li class="divider"></li>
                   <li><a href="{% url 'squads.index' %}">Squads</a></li>
                   <li class="divider"></li>
