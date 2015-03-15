@@ -1,0 +1,10 @@
+{% extends "gymnastics/base.html" %}
+
+{% block content %}
+  <form action="" method="post">
+  {% csrf_token %}
+    <p>Are you sure you want to delete "{{ object.difficulty }} {{ object.sex }}"?</p>
+    <input type="submit" value="Confirm" />
+    <a href="{% url 'streams.index' %}">back</a>
+  </form>
+{% endblock content %}

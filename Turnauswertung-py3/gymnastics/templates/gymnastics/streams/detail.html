@@ -1,0 +1,17 @@
+{% extends "gymnastics/base.html" %}
+
+{% block content %}
+  <h1>Athlete Details</h1>
+  <p>{{ object.content }}</p>
+  <p>Difficulty: {{ object.difficulty }}</p>
+  <p>Sex: {% if object.sex == 'f' %} female {% else %} male {% endif %}</p>
+  <p>all_around_individual: {{ object.all_around_individual }}</p>
+  <p>all_around_individual_counting_events: {{ object.all_around_individual_counting_events }}</p>
+  <p>all_around_team: {{ object.all_around_team }}</p>
+  <p>all_around_team_counting_events: {{ object.all_around_team_counting_events }}</p>
+  <p>discipline_finals: {{ object.discipline_finals }}</p>
+  <p>discipline_finals_max_participants: {{ object.discipline_finals_max_participants }}</p>
+  <p>Disciplines: {{ object.disciplines }}</p>
+
+  <a href="{% url 'streams.index' %}">back</a>
+{% endblock content %}

@@ -8,7 +8,12 @@ class Athlete(models.Model):
     last_name = models.CharField(max_length=50, null=False)
     sex = models.CharField(max_length=1, null=False, choices=(('m', 'male'), ('f', 'female')), default='f')
     year_of_birth = models.IntegerField(default=2000)
+
     club = models.ForeignKey(Club)
+
+
+    def __str__(self):
+        return self.first_name + " " + self.last_name
 
     class Meta:
         db_table = 'gymnastics_athletes'
