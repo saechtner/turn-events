@@ -17,5 +17,5 @@
   <p>Stream: {{ object.stream }}</p>
   <p>Team: {{ object.team }}</p>
 
-  <a href="{% url 'athletes.index' %}">back</a>
+  <input class="btn btn-lg btn-warning" type="button" value="Previous Page" onClick="javascript:history.go(-1);">
 {% endblock content %}

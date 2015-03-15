@@ -7,5 +7,5 @@
   <p>Athlete: {{ object.discipline }}</p>
   <p>Athlete: {{ object.performance }}</p>
 
-  <a href="{% url 'performances.index' %}">back</a>
+  <input class="btn btn-lg btn-warning" type="button" value="Previous Page" onClick="javascript:history.go(-1);">
 {% endblock content %}

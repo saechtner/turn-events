@@ -3,8 +3,8 @@
 {% block content %}
   <form action="" method="post">
   {% csrf_token %}
-      {{ form.as_p }}
-      <input type="submit" value="Update" />
-      <a href="{% url 'clubs.index' %}">back</a>
+  {{ form.as_p }}
+    <input class="btn btn-lg btn-primary" type="submit" value="Update"/>
+    <input class="btn btn-lg btn-warning" type="button" value="Previous Page" onClick="javascript:history.go(-1);">
   </form>
 {% endblock content %}

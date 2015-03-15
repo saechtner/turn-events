@@ -14,5 +14,5 @@
   <p>discipline_finals_max_participants: {{ object.discipline_finals_max_participants }}</p>
   <p>Disciplines: {% for discipline in object.disciplines.all %} {{ discipline }}, {% endfor %}</p>
 
-  <a href="{% url 'streams.index' %}">back</a>
+  <input class="btn btn-lg btn-warning" type="button" value="Previous Page" onClick="javascript:history.go(-1);">
 {% endblock content %}
