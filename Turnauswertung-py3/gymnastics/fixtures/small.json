@@ -1,0 +1,44 @@
+[
+    {
+        "pk": "1",
+        "model": "gymnastics.Discipline",
+        "fields": {
+            "name": "Balken"
+        }
+    },
+    {
+        "pk": "2",
+        "model": "gymnastics.Discipline",
+        "fields": {
+            "name": "Stufenbarren"
+        }
+    },
+    {
+        "pk": "3",
+        "model": "gymnastics.Discipline",
+        "fields": {
+            "name": "Parallelbarren"
+        }
+    },
+    {
+        "pk": "4",
+        "model": "gymnastics.Discipline",
+        "fields": {
+            "name": "Bank"
+        }
+    },
+    {
+        "pk": "5",
+        "model": "gymnastics.Discipline",
+        "fields": {
+            "name": "Boden"
+        }
+    },
+    {
+        "pk": "6",
+        "model": "gymnastics.Discipline",
+        "fields": {
+            "name": "Sprung"
+        }
+    }
+]
