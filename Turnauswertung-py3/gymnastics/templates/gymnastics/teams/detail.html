@@ -4,7 +4,10 @@
   <h1>Team Details</h1>
   <p>{{ object.content }}</p>
   <p>Name: {{ object.name }}</p>
+  <p>Club: {{ object.club }}</p>
   <p>Stream: {{ object.stream }}</p>
 
-  <input class="btn btn-lg btn-warning" type="button" value="Previous Page" onClick="javascript:history.go(-1);">
+  <a type="button" class="btn btn-warning" href="{% url 'teams.edit' object.id %}">Edit</a>
+  <a type="button" class="btn btn-warning" href="{% url 'teams.delete' object.id %}">Delete</a>
+  <button type="button" class="btn btn-default" onClick="javascript:history.go(-1);">Previous Page</button>
 {% endblock content %}

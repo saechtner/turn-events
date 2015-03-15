@@ -11,6 +11,7 @@
       <table class="table" id="team-table">
         <thead>
           <th>Name</th>
+          <th>Club</th>
           <th>Stream</th>
           <th></th>
           <th></th>
@@ -20,6 +21,7 @@
           {% for team in teams %}
             <tr id="team_{{ team.id }}">
               <td>{{ team.name }}</td>
+              <td>{{ team.club }}</td>
               <td>{{ team.stream }}</td>
               <td><a href="{% url 'teams.detail' team.id %}">details</a></td>
               <td><a href="{% url 'teams.edit' team.id %}">edit</a></td>

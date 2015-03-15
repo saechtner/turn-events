@@ -6,8 +6,8 @@
   <form action="" method="post">
   {% csrf_token %}
     {{ form.as_p }}
-    <input class="btn btn-lg btn-primary" type="submit" value="Create stream"/>
-    <input class="btn btn-lg btn-warning" type="button" value="Previous Page" onClick="javascript:history.go(-1);">
+    <input class="btn btn-primary" type="submit" value="Create athlete"/>
+    <button class="btn btn-default" type="button" onClick="javascript:history.go(-1);">Cancel</button>
   </form>
 
   </div>

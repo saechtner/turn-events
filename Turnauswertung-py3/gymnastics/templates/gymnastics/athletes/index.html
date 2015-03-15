@@ -20,6 +20,7 @@
           <th></th>
         </thead>
         <tbody>
+        <!-- <a href="{% url 'clubs.delete' club.id %}">delete</a> -->
           {% for athlete in athletes %}
             <tr id="athlete_{{ athlete.id }}">
               <td>{{ athlete.first_name }}</td>

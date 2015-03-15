@@ -5,5 +5,7 @@
   <p>{{ object.content }}</p>
   <p>Name: {{ object.name }}</p>
 
-  <input class="btn btn-lg btn-warning" type="button" value="Previous Page" onClick="javascript:history.go(-1);">
+  <a type="button" class="btn btn-warning" href="{% url 'clubs.edit' object.id %}">Edit</a>
+  <a type="button" class="btn btn-warning" href="{% url 'clubs.delete' object.id %}">Delete</a>
+  <button type="button" class="btn btn-default" onClick="javascript:history.go(-1);">Previous Page</button>
 {% endblock content %}

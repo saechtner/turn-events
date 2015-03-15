@@ -7,5 +7,7 @@
   <p>Athlete: {{ object.discipline }}</p>
   <p>Athlete: {{ object.performance }}</p>
 
-  <input class="btn btn-lg btn-warning" type="button" value="Previous Page" onClick="javascript:history.go(-1);">
+  <a type="button" class="btn btn-warning" href="{% url 'performances.edit' object.id %}">Edit</a>
+  <a type="button" class="btn btn-warning" href="{% url 'performances.delete' object.id %}">Delete</a>
+  <button type="button" class="btn btn-default" onClick="javascript:history.go(-1);">Previous Page</button>
 {% endblock content %}

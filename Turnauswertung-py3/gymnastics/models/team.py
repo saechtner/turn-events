@@ -7,6 +7,7 @@ class Team(models.Model):
   
     name = models.CharField(max_length=50, null=False)
 
+    club = models.ForeignKey('Club', null=True, blank=True)
     stream = models.ForeignKey('Stream', null=False)
 
 

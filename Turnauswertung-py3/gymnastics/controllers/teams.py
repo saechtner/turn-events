@@ -13,7 +13,7 @@ def index(request):
 class TeamCreateView(generic.CreateView):
 
     model = Team
-    fields = ['name', 'stream']
+    fields = ['name', 'club', 'stream']
     template_name = 'gymnastics/teams/new.html'
     success_url = reverse_lazy('teams.index')
 
@@ -27,7 +27,7 @@ class TeamDetailView(generic.DetailView):
 class TeamUpdateView(generic.UpdateView):
 
     model = Team
-    fields = ['name', 'stream']
+    fields = ['name', 'club', 'stream']
     template_name = 'gymnastics/teams/edit.html'
 
     def get_success_url(self):
