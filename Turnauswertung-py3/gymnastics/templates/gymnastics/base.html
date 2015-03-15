@@ -8,73 +8,77 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="{% static 'gymnastics/images/favicon.ico' %}" />
     <link href="{% static 'gymnastics/bootstrap-3.3.2-dist/css/bootstrap.min.css' %}" rel="stylesheet" media="screen">
+    <link href="{% static 'gymnastics/css/carousel.css' %}" rel="stylesheet" media="screen">
   </head>
   <body>
     
-    <div class="container">
+    <div class"container">
 
-      <nav class="navbar navbar-default navbar-inverse">
-        <div class="container-fluid">
-          <!-- Brand and toggle get grouped for better mobile display -->
-          <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-              <span class="sr-only">Toggle navigation</span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="{% url 'home' %}">Gymnastics</a>
-          </div>
+      <!-- Navbar -->
+      <div class="navbar-wrapper">
+        <div class="container">
+          <nav class="navbar navbar-static-top navbar-inverse">
+            <div class="container-fluid">
+              <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                  <span class="sr-only">Toggle navigation</span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="{% url 'home' %}">Gymnastics</a>
+              </div>
 
-          <!-- Collect the nav links, forms, and other content for toggling -->
-          <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-            <ul class="nav navbar-nav">
-              {% block nav_home_active %}<li class="active">{% endblock nav_home_active %}
-                <a href="{% url 'home' %}" class="home"><span class="glyphicon glyphicon-home"></span> Home </a>
-              </li>
-              {% block nav_controller_active %}<li>{% endblock nav_controller_active %}
-                {% block nav_controller_name %}{% endblock nav_controller_name %}
-              </li>
-              {% block nav_action_active %}<li>{% endblock nav_action_active %}
-                <a href="#">{% block action %}{% endblock action %}</a>
-              </li>
-            </ul>
-
-            <ul class="nav navbar-nav navbar-right">
-              {% block controller_actions %}{% endblock controller_actions %}
-              <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Actions <span class="caret"></span></a>
-                <ul class="dropdown-menu" role="menu">
-                  <li><a href="#">Preparation</a></li>
-                  <li><a href="#">RSVP</a></li>
-                  <li class="divider"></li>
-                  <li><a href="#">Add Stream Report</a></li>
+              <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                  {% block nav_home_active %}<li class="active">{% endblock nav_home_active %}
+                    <a href="{% url 'home' %}" class="home"><span class="glyphicon glyphicon-home"></span> Home </a>
+                  </li>
+                  {% block nav_controller_active %}<li>{% endblock nav_controller_active %}
+                    {% block nav_controller_name %}{% endblock nav_controller_name %}
+                  </li>
+                  {% block nav_action_active %}<li>{% endblock nav_action_active %}
+                    <a href="#">{% block action %}{% endblock action %}</a>
+                  </li>
                 </ul>
-              </li>
-              <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Models <span class="caret"></span></a>
-                <ul class="dropdown-menu" role="menu">
-                  <li><a href="{% url 'disciplines.index' %}">Disciplines</a></li>
-                  <li><a href="{% url 'streams.index' %}">Streams</a></li>
-                  <li class="divider"></li>
-                  <li><a href="{% url 'athletes.index' %}">Athletes</a></li>
-                  <li><a href="{% url 'clubs.index' %}">Clubs</a></li>
-                  <li><a href="#">Teams</a></li>
-                  <li class="divider"></li>
-                  <li><a href="{% url 'squads.index' %}">Squads</a></li>
-                  <li class="divider"></li>
-                  <li><a href="{% url 'squads.index' %}">Results / Performances</a></li>
+
+                <ul class="nav navbar-nav navbar-right">
+                  {% block controller_actions %}{% endblock controller_actions %}
+                  <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Actions <span class="caret"></span></a>
+                    <ul class="dropdown-menu" role="menu">
+                      <li><a href="#">Preparation</a></li>
+                      <li><a href="#">RSVP</a></li>
+                      <li class="divider"></li>
+                      <li><a href="#">Add Stream Report</a></li>
+                    </ul>
+                  </li>
+                  <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Models <span class="caret"></span></a>
+                    <ul class="dropdown-menu" role="menu">
+                      <li><a href="{% url 'disciplines.index' %}">Disciplines</a></li>
+                      <li><a href="{% url 'streams.index' %}">Streams</a></li>
+                      <li class="divider"></li>
+                      <li><a href="{% url 'athletes.index' %}">Athletes</a></li>
+                      <li><a href="{% url 'clubs.index' %}">Clubs</a></li>
+                      <li><a href="#">Teams</a></li>
+                      <li class="divider"></li>
+                      <li><a href="{% url 'squads.index' %}">Squads</a></li>
+                      <li class="divider"></li>
+                      <li><a href="{% url 'squads.index' %}">Results / Performances</a></li>
+                    </ul>
+                  </li>
                 </ul>
-              </li>
-            </ul>
-          </div><!-- /.navbar-collapse -->
-        </div><!-- /.container-fluid -->
-      </nav>
+              </div>
+            </div>
+          </nav>
+        </div>
+      </div>
 
-      {% block content %}
-
-      {% endblock content %}
-
+      <div class="container">
+        {% block content %}
+        {% endblock content %}
+      </div>
     </div>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
