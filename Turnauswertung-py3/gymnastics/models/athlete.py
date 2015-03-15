@@ -18,7 +18,7 @@ class Athlete(models.Model):
         db_table = 'gymnastics_athletes'
 
     def __str__(self):
-        return self.first_name + " " + self.last_name
+        return "{0} {1}".format(self.first_name, self.last_name)
 
     def sex_long(self):
         return 'female' if self.sex == 'f' else 'male'

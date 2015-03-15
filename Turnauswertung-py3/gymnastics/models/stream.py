@@ -21,7 +21,7 @@ class Stream(models.Model):
         db_table = 'gymnastics_streams'
         
     def __str__(self):
-        return self.difficulty + " " + self.sex_long()
+        return "{0} {1}".format(self.difficulty, self.sex_long())
 
     def sex_long(self):
         if self.sex == 'f':

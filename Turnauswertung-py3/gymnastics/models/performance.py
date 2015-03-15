@@ -12,4 +12,4 @@ class Performance(models.Model):
         db_table = 'gymnastics_performances'
 
     def __str__(self):
-        return self.athlete + ", " + self.discipline + ": " + self.performance
+        return "{0}, {1}: {2}".format(self.athlete, self.discipline, self.performance)
