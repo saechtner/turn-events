@@ -1,7 +1,7 @@
 from django.conf.urls import patterns, include, url
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
-from gymnastics.controllers import views, athletes, clubs, disciplines, squads
+from gymnastics.controllers import views, athletes, clubs, disciplines, squads, streams
 
 urlpatterns = patterns('',
     url(r'^$', views.index, name='home'), 
@@ -29,6 +29,12 @@ urlpatterns = patterns('',
     url(r'^squads/(?P<pk>\d+)/detail', squads.SquadDetailView.as_view(), name='squads.detail'),
     url(r'^squads/(?P<pk>\d+)/edit', squads.SquadUpdateView.as_view(), name='squads.edit'),
     url(r'^squads/(?P<pk>\d+)/delete', squads.SquadDeleteView.as_view(), name='squads.delete'),
+
+    url(r'^streams$', streams.index, name='streams.index'),
+    url(r'^streams/new$', streams.StreamCreateView.as_view(), name='streams.new'),
+    url(r'^streams/(?P<pk>\d+)/detail', streams.StreamDetailView.as_view(), name='streams.detail'),
+    url(r'^streams/(?P<pk>\d+)/edit', streams.StreamUpdateView.as_view(), name='streams.edit'),
+    url(r'^streams/(?P<pk>\d+)/delete', streams.StreamDeleteView.as_view(), name='streams.delete'),
 )
 
 # urlpatterns += staticfiles_urlpatterns()

@@ -1,0 +1,14 @@
+{% extends "gymnastics/base.html" %}
+
+{% block content %}
+  <div class="row">
+
+  <form action="" method="post">
+  {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="Create stream"/>
+    <a href="{% url 'streams.index' %}">back</a>
+  </form>
+
+  </div>
+{% endblock content %}
