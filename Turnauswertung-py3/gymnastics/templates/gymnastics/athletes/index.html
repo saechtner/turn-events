@@ -20,7 +20,6 @@
           <th></th>
         </thead>
         <tbody>
-        <!-- <a href="{% url 'clubs.delete' club.id %}">delete</a> -->
           {% for athlete in athletes %}
             <tr id="athlete_{{ athlete.id }}">
               <td>{{ athlete.first_name }}</td>
@@ -30,7 +29,7 @@
               <td><a href="{% url 'clubs.detail' athlete.club.id %}">{{ athlete.club }}</a></td>
               <td><a href="{% url 'squads.detail' athlete.squad.id %}">{{ athlete.squad }}</a></td>
               <td><a href="{% url 'streams.detail' athlete.stream.id %}">{{ athlete.stream }}</a></td>
-              <td><a href="{% url 'streams.detail' athlete.stream.id %}">{{ athlete.team }}</a></td>
+              <td><a href="{% url 'teams.detail' athlete.team.id %}">{{ athlete.team }}</a></td>
               <td><a  type="button" class="btn btn-xs btn-success"href="{% url 'athletes.detail' athlete.id %}"><span class="glyphicon glyphicon-search"></span> details</a></td>
               <td><a  type="button" class="btn btn-xs btn-warning"href="{% url 'athletes.edit' athlete.id %}"><span class="glyphicon glyphicon-edit"></span> edit</a></td>
               <td><a  type="button" class="btn btn-xs btn-danger"href="{% url 'athletes.delete' athlete.id %}"><span class="glyphicon glyphicon-remove"></span> delete</a></td>
