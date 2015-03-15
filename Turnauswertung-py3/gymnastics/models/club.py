@@ -11,8 +11,9 @@ class Club(models.Model):
     class Meta:
         db_table = 'gymnastics_clubs'
 
+    @property
+    def athletes(self):
+        return Athlete.objects.filter(club=self)
+        
     def __str__(self):
         return self.name
-
-    def authors(self):
-        return Athlete.objects.filter(club = self)
