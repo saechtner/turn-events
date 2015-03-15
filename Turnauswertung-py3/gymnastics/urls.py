@@ -5,6 +5,7 @@ from gymnastics.controllers import views, athletes, clubs, disciplines, performa
 
 urlpatterns = patterns('',
     url(r'^$', views.index, name='home'), 
+    url(r'^todo$', views.todo, name='todo'), 
 
     url(r'^athletes$', athletes.index, name='athletes.index'),
     url(r'^athletes/new$', athletes.AthleteCreateView.as_view(), name='athletes.new'),

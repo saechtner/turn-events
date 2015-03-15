@@ -4,6 +4,6 @@ from django.shortcuts import render
 def index(request):
     return render(request, 'gymnastics/index.html', None)
 
-# renders index / home page
+# renders todo page
 def todo(request):
     return render(request, 'gymnastics/todo.html', None)

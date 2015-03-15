@@ -9,7 +9,7 @@
     <link rel="shortcut icon" href="{% static 'gymnastics/images/favicon.ico' %}" />
     <link href="{% static 'gymnastics/css/bootstrap.min.css' %}" rel="stylesheet" media="screen">
     <link href="{% static 'gymnastics/css/bbootstrap-theme.min.css' %}" rel="stylesheet" media="screen">
-    <link href="{% static 'gymnastics/css/carousel.css' %}" rel="stylesheet" media="screen">
+    <link href="{% static 'gymnastics/css/custom.css' %}" rel="stylesheet" media="screen">
   </head>
   <body>
     
@@ -48,6 +48,8 @@
                   <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Actions <span class="caret"></span></a>
                     <ul class="dropdown-menu" role="menu">
+                      <li><a href="{% url 'todo' %}">Todo</a></li>
+                      <li class="divider"></li>
                       <li><a href="#">Preparation</a></li>
                       <li><a href="#">RSVP</a></li>
                       <li class="divider"></li>

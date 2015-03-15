@@ -1,1 +1,27 @@
-todo.html
+{% extends "gymnastics/base.html" %}
+
+{% block nav_home_active %}<li>{% endblock nav_home_active %}
+{% block nav_controller_active %}<li class="active">{% endblock nav_controller_active %}
+{% block nav_controller_name %}<a href="#">TODO </a>{% endblock nav_controller_name %}
+
+{% block content %}
+
+<!-- Main jumbotron for a primary marketing message or call to action -->
+  <div class="jumbotron">
+    <div class="container">
+      <h1>Gymnastics TODO</h1>
+      <p>Functionality</p>
+      <ul>
+        <li>Buttons</li>
+        <li>Some better control actions</li>
+      </ul>
+    
+      <p>HTML and Layout</p>
+      <ul>
+        <li>Buttons the same all over the page</li>
+        <li>Navbar for all controllers etc.</li>
+      </ul>
+
+    </div>
+  </div> <!-- /container -->
+{% endblock content %}
