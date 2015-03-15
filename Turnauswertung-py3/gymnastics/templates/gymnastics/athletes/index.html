@@ -27,13 +27,10 @@
               <td>{{ athlete.last_name }}</td>
               <td>{{ athlete.sex_long }}</td>
               <td>{{ athlete.year_of_birth }}</td>
-              <td>{{ athlete.club }}</td>
-              <td>{{ athlete.squad }}</td>
-              <td>{{ athlete.stream }}</td>
-              <td>{{ athlete.team }}</td>
-              <!-- <td><a href="{% url 'athletes.detail' athlete.id %}">details</a></td>
-              <td><a href="{% url 'athletes.edit' athlete.id %}">edit</a></td>
-              <td><a href="{% url 'athletes.delete' athlete.id %}">delete</a></td> -->
+              <td><a href="{% url 'clubs.detail' athlete.club.id %}">{{ athlete.club }}</a></td>
+              <td><a href="{% url 'squads.detail' athlete.squad.id %}">{{ athlete.squad }}</a></td>
+              <td><a href="{% url 'streams.detail' athlete.stream.id %}">{{ athlete.stream }}</a></td>
+              <td><a href="{% url 'streams.detail' athlete.stream.id %}">{{ athlete.team }}</a></td>
               <td><a  type="button" class="btn btn-xs btn-success"href="{% url 'athletes.detail' athlete.id %}"><span class="glyphicon glyphicon-search"></span> details</a></td>
               <td><a  type="button" class="btn btn-xs btn-warning"href="{% url 'athletes.edit' athlete.id %}"><span class="glyphicon glyphicon-edit"></span> edit</a></td>
               <td><a  type="button" class="btn btn-xs btn-danger"href="{% url 'athletes.delete' athlete.id %}"><span class="glyphicon glyphicon-remove"></span> delete</a></td>
