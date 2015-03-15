@@ -5,6 +5,6 @@
   {% csrf_token %}
     <p>Are you sure you want to delete "{{ object }}"?</p>
     <input type="submit" value="Confirm" />
-    <a href="{% url 'streams.index' %}">back</a>
+    <a href="{% url 'teams.index' %}">back</a>
   </form>
 {% endblock content %}

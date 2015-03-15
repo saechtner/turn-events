@@ -1,0 +1,43 @@
+{% extends "gymnastics/base.html" %}
+
+{% block content %}
+  <div class="row">
+
+    <div>Create new performance <a href="{% url 'performances.new' %}">here</a></div>
+
+    {% if performances %}
+
+      <h3>Performances</h3>
+
+      <br/>
+
+      <table class="table" id="performances-table">
+        <thead>
+          <th>Athlete</th>
+          <th>Discipline</th>
+          <th>Performance</th>
+          <th></th>
+          <th></th>
+          <th></th>
+        </thead>
+        <tbody>
+          {% for performance in performances %}
+            <tr id="performance_{{ performance.id }}">
+              <td>{{ performance.athlete }}</td>
+              <td>{{ performance.discipline }}</td>
+              <td>{{ performance.performance }}</td>
+              <td><a href="{% url 'performances.detail' performance.id %}">details</a></td>
+              <td><a href="{% url 'performances.edit' performance.id %}">edit</a></td>
+              <td><a href="{% url 'performances.delete' performance.id %}">delete</a></td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+
+    {% else %}
+
+      <div class="alert alert-info">No performances available in the database.</div>
+
+    {% endif %}
+  </div>
+{% endblock content %}

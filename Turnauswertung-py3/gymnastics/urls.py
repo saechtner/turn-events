@@ -1,7 +1,7 @@
 from django.conf.urls import patterns, include, url
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
-from gymnastics.controllers import views, athletes, clubs, disciplines, squads, streams
+from gymnastics.controllers import views, athletes, clubs, disciplines, performances, squads, streams, teams
 
 urlpatterns = patterns('',
     url(r'^$', views.index, name='home'), 
@@ -24,6 +24,12 @@ urlpatterns = patterns('',
     url(r'^disciplines/(?P<pk>\d+)/edit', disciplines.DisciplineUpdateView.as_view(), name='disciplines.edit'),
     url(r'^disciplines/(?P<pk>\d+)/delete', disciplines.DisciplineDeleteView.as_view(), name='disciplines.delete'),
 
+    url(r'^performances$', performances.index, name='performances.index'),
+    url(r'^performances/new$', performances.PerformanceCreateView.as_view(), name='performances.new'),
+    url(r'^performances/(?P<pk>\d+)/detail', performances.PerformanceDetailView.as_view(), name='performances.detail'),
+    url(r'^performances/(?P<pk>\d+)/edit', performances.PerformanceUpdateView.as_view(), name='performances.edit'),
+    url(r'^performances/(?P<pk>\d+)/delete', performances.PerformanceDeleteView.as_view(), name='performances.delete'),
+
     url(r'^squads$', squads.index, name='squads.index'),
     url(r'^squads/new$', squads.SquadCreateView.as_view(), name='squads.new'),
     url(r'^squads/(?P<pk>\d+)/detail', squads.SquadDetailView.as_view(), name='squads.detail'),
@@ -35,6 +41,12 @@ urlpatterns = patterns('',
     url(r'^streams/(?P<pk>\d+)/detail', streams.StreamDetailView.as_view(), name='streams.detail'),
     url(r'^streams/(?P<pk>\d+)/edit', streams.StreamUpdateView.as_view(), name='streams.edit'),
     url(r'^streams/(?P<pk>\d+)/delete', streams.StreamDeleteView.as_view(), name='streams.delete'),
+
+    url(r'^teams$', teams.index, name='teams.index'),
+    url(r'^teams/new$', teams.TeamCreateView.as_view(), name='teams.new'),
+    url(r'^teams/(?P<pk>\d+)/detail', teams.TeamDetailView.as_view(), name='teams.detail'),
+    url(r'^teams/(?P<pk>\d+)/edit', teams.TeamUpdateView.as_view(), name='teams.edit'),
+    url(r'^teams/(?P<pk>\d+)/delete', teams.TeamDeleteView.as_view(), name='teams.delete'),
 )
 
 # urlpatterns += staticfiles_urlpatterns()

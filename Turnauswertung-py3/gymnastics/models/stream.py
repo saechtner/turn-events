@@ -17,7 +17,7 @@ class Stream(models.Model):
 
 
     def __str__(self):
-        return self.difficulty + self.sex
+        return self.difficulty + " " + self.sex
 
     class Meta:
         db_table = 'gymnastics_streams'

@@ -1,0 +1,36 @@
+{% extends "gymnastics/base.html" %}
+
+{% block content %}
+  <div>
+    <div>Create new team <a href="{% url 'teams.new' %}">here</a></div>
+
+    {% if teams %}
+
+      <br/>
+
+      <table class="table" id="team-table">
+        <thead>
+          <th>Name</th>
+          <th></th>
+          <th></th>
+          <th></th>
+        </thead>
+        <tbody>
+          {% for team in teams %}
+            <tr id="team_{{ team.id }}">
+              <td>{{ team.name }}</td>
+              <td><a href="{% url 'teams.detail' team.id %}">details</a></td>
+              <td><a href="{% url 'teams.edit' team.id %}">edit</a></td>
+              <td><a href="{% url 'teams.delete' team.id %}">delete</a></td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+
+    {% else %}
+
+      <div class="alert alert-info">No team available in the database.</div>
+
+    {% endif %}
+  </div>
+{% endblock content %}

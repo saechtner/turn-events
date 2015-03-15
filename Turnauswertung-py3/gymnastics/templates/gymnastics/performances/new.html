@@ -1,10 +1,14 @@
 {% extends "gymnastics/base.html" %}
 
 {% block content %}
+  <div class="row">
+
   <form action="" method="post">
   {% csrf_token %}
-    <p>Are you sure you want to delete "{{ object }}"?</p>
-    <input type="submit" value="Confirm" />
+    {{ form.as_p }}
+    <input type="submit" value="Create discipline"/>
     <a href="{% url 'disciplines.index' %}">back</a>
   </form>
+
+  </div>
 {% endblock content %}

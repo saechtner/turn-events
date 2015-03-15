@@ -1,0 +1,11 @@
+{% extends "gymnastics/base.html" %}
+
+{% block content %}
+  <h1>Squad Details</h1>
+  <p>{{ object.content }}</p>
+  <p>Athlete: {{ object.athlete }}</p>
+  <p>Athlete: {{ object.discipline }}</p>
+  <p>Athlete: {{ object.performance }}</p>
+
+  <a href="{% url 'performances.index' %}">back</a>
+{% endblock content %}
