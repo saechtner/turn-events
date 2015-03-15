@@ -7,7 +7,7 @@ class Team(models.Model):
   
     name = models.CharField(max_length=50, null=False)
 
-    stream = models.ForeignKey(Stream, null=False)
+    stream = models.ForeignKey('Stream', null=False)
 
 
     class Meta:

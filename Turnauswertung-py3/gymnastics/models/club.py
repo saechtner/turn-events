@@ -1,10 +1,6 @@
 from django.db import models
 
-# from gymnastics.models.athlete import Athlete
-# from gymnastics.models.club import Club
-# from gymnastics.models.squad import Squad
-# from gymnastics.models.stream import Stream
-# from gymnastics.models.team import Team
+from gymnastics.models.athlete import Athlete
 
 
 class Club(models.Model):

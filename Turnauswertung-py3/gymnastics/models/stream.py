@@ -1,4 +1,3 @@
-from django.core.urlresolvers import reverse
 from django.db import models
 
 from gymnastics.models.discipline import Discipline
@@ -15,14 +14,14 @@ class Stream(models.Model):
     discipline_finals = models.BooleanField(default=False)
     discipline_finals_max_participants = models.IntegerField(null=True, blank=True)
 
-    disciplines = models.ManyToManyField(Discipline)
+    disciplines = models.ManyToManyField('Discipline')
 
 
     class Meta:
         db_table = 'gymnastics_streams'
         
     def __str__(self):
-        return self.difficulty + " " + self.sexLong()
+        return self.difficulty + " " + self.sex_long()
 
     def sex_long(self):
         if self.sex == 'f':
