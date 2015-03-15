@@ -4,6 +4,7 @@
   <h1>Squad Details</h1>
   <p>{{ object.content }}</p>
   <p>Name: {{ object.name }}</p>
+  <p>Athlete set: {{ object.athlete_set.all }}</p>
 
   <input class="btn btn-lg btn-warning" type="button" value="Previous Page" onClick="javascript:history.go(-1);">
 {% endblock content %}
