@@ -49,7 +49,7 @@
                 <td></td>
                 <td></td>
               {% endif %}
-              <td>{{ stream.disciplines}}</td>
+              <td>{% for discipline in stream.disciplines.all %} {{ discipline }}{% endfor %}</td>
               <td><a href="{% url 'streams.detail' stream.id %}">details</a></td>
               <td><a href="{% url 'streams.edit' stream.id %}">edit</a></td>
               <td><a href="{% url 'streams.delete' stream.id %}">delete</a></td>
