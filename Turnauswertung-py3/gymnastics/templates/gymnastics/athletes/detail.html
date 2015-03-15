@@ -18,5 +18,5 @@
   <p>Team: {{ object.team }}</p>
 
   <button type="button" class="btn btn-lg btn-warning" onClick="javascript:history.go(-1);">Previous Page</button>
-  <a class="btn btn-warning" href="{% url 'athletes.edit' object.id %}">edit</a>
+  <a type="button" class="btn btn-warning" href="{% url 'athletes.edit' object.id %}">edit</a>
 {% endblock content %}
