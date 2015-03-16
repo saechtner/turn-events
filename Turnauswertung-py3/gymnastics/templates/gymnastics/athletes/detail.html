@@ -5,17 +5,39 @@
 {% block action %}detail{% endblock action %}
 
 {% block content %}
-  <h1>Athlete Details</h1>
-  <p>First name: {{ object.first_name }}</p>
-  <p>Last name: {{ object.last_name }}</p>
-  <p>Sex: {{ object.sex_long }}</p>
-  <p>Year of birth: {{ object.year_of_birth }}</p>
-  <p>Club: {{ object.club }}</p>
-  <p>Squad: {{ object.squad }}</p>
-  <p>Stream: {{ object.stream }}</p>
-  <p>Team: {{ object.team }}</p>
+  <h1>
+    {{ object.first_name }} {{ object.last_name }}
+  </h1>
+
+  <div role="tabpanel">
+    <!-- Nav tabs -->
+    <ul class="nav nav-tabs" role="tablist">
+      <li role="presentation" class="active"><a href="#base" aria-controls="home" role="tab" data-toggle="tab">Base</a></li>
+      <li role="presentation"><a href="#performances" aria-controls="profile" role="tab" data-toggle="tab">Performances</a></li>
+      <li role="presentation"><a href="#placements" aria-controls="messages" role="tab" data-toggle="tab">Placements</a></li>
+    </ul>
+
+    <!-- Tab panes -->
+    <div class="tab-content">
+      <div role="tabpanel" class="tab-pane active" id="base">
+        <p>Sex: {{ object.sex_long }}</p>
+        <p>Year of birth: {{ object.year_of_birth }}</p>
+        <p>Club: {{ object.club }}</p>
+        <p>Squad: {{ object.squad }}</p>
+        <p>Stream: {{ object.stream }}</p>
+        <p>Team: {{ object.team }}</p>
+      </div>
+      <div role="tabpanel" class="tab-pane" id="performances">
+        
+      </div>
+      <div role="tabpanel" class="tab-pane" id="placements">
+        
+      </div>
+    </div>
+  </div>
 
   <a type="button" class="btn btn-warning" href="{% url 'athletes.edit' object.id %}">Edit</a>
   <a type="button" class="btn btn-danger" href="{% url 'athletes.delete' object.id %}">Delete</a>
   <button type="button" class="btn btn-default" onClick="javascript:history.go(-1);">Previous Page</button>
+  
 {% endblock content %}
