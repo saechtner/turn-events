@@ -1,5 +1,10 @@
-{% extends "gymnastics/base.html" %}
-  
+{% extends "gymnastics/disciplines/base.html" %}
+
+{% block nav_controller_active %}<li>{% endblock nav_controller_active %}
+{% block nav_action_active %}<li class="active">{% endblock nav_action_active %}
+
+{% block action %}new{% endblock action %}
+
 {% block content %}
   <div class="row">
 
