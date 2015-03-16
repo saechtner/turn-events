@@ -6,8 +6,6 @@
 
     {% if streams %}
 
-      <br/>
-
       <table class="table" id="stream-table">
         <thead>
           <th>Difficulty</th>
@@ -23,7 +21,7 @@
             <tr id="stream_{{ stream.id }}">
               <td>{{ stream.difficulty }}</td>
               <td>{{ stream.sex_long }}</td>
-              <td>{% for discipline in stream.disciplines.all %} {{ discipline }}<br/>{% endfor %}</td>
+              <td>{% for discipline in stream.disciplines.all %} <a href="{% url 'disciplines.detail' discipline.id %}">{{ discipline }}</a><br/>{% endfor %}</td>
               <td>{{ stream.minimum_year_of_birth }}</td>
               <td><a href="{% url 'streams.detail' stream.id %}">details</a></td>
               <td><a href="{% url 'streams.edit' stream.id %}">edit</a></td>

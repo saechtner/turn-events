@@ -6,6 +6,6 @@
   <p>Name: {{ object.name }}</p>
 
   <a type="button" class="btn btn-warning" href="{% url 'disciplines.edit' object.id %}">Edit</a>
-  <a type="button" class="btn btn-warning" href="{% url 'disciplines.delete' object.id %}">Delete</a>
+  <a type="button" class="btn btn-danger" href="{% url 'disciplines.delete' object.id %}">Delete</a>
   <button type="button" class="btn btn-default" onClick="javascript:history.go(-1);">Previous Page</button>
 {% endblock content %}

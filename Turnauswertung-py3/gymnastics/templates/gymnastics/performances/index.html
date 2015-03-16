@@ -6,11 +6,7 @@
     <div>Create new performance <a href="{% url 'performances.new' %}">here</a></div>
 
     {% if performances %}
-
-      <h3>Performances</h3>
-
-      <br/>
-
+    
       <table class="table" id="performances-table">
         <thead>
           <th>Athlete</th>
@@ -23,8 +19,8 @@
         <tbody>
           {% for performance in performances %}
             <tr id="performance_{{ performance.id }}">
-              <td>{{ performance.athlete }}</td>
-              <td>{{ performance.discipline }}</td>
+              <td><a href="{% url 'athletes.detail' performance.athlete.id %}">{{ performance.athlete }}</a></td>
+              <td><a href="{% url 'disciplines.detail' performance.discipline.id %}">{{ performance.discipline }}</a></td>
               <td>{{ performance.performance }}</td>
               <td><a href="{% url 'performances.detail' performance.id %}">details</a></td>
               <td><a href="{% url 'performances.edit' performance.id %}">edit</a></td>

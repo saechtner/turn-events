@@ -7,6 +7,6 @@
   <p>Athlete set: {{ object.athlete_set.all }}</p>
 
   <a type="button" class="btn btn-warning" href="{% url 'squads.edit' object.id %}">Edit</a>
-  <a type="button" class="btn btn-warning" href="{% url 'squads.delete' object.id %}">Delete</a>
+  <a type="button" class="btn btn-danger" href="{% url 'squads.delete' object.id %}">Delete</a>
   <button type="button" class="btn btn-default" onClick="javascript:history.go(-1);">Previous Page</button>
 {% endblock content %}

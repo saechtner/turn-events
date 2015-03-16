@@ -6,8 +6,6 @@
 
     {% if teams %}
 
-      <br/>
-
       <table class="table" id="team-table">
         <thead>
           <th>Name</th>
@@ -21,8 +19,8 @@
           {% for team in teams %}
             <tr id="team_{{ team.id }}">
               <td>{{ team.name }}</td>
-              <td>{{ team.club }}</td>
-              <td>{{ team.stream }}</td>
+              <td><a href="{% url 'clubs.detail' team.club.id %}">{{ team.club }}</a></td>
+              <td><a href="{% url 'streams.detail' team.stream.id %}">{{ team.stream }}</a></td>
               <td><a href="{% url 'teams.detail' team.id %}">details</a></td>
               <td><a href="{% url 'teams.edit' team.id %}">edit</a></td>
               <td><a href="{% url 'teams.delete' team.id %}">delete</a></td>
