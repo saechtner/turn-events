@@ -17,7 +17,11 @@
           {% for team in teams %}
             <tr id="team_{{ team.id }}">
               <td>{{ team.name }}</td>
-              <td><a href="{% url 'clubs.detail' team.club.id %}">{{ team.club }}</a></td>
+              <td>
+                {% if team.club %}
+                  <a href="{% url 'clubs.detail' team.club.id %}">{{ team.club }}</a>
+                {% endif %}
+              </td>
               <td><a href="{% url 'streams.detail' team.stream.id %}">{{ team.stream }}</a></td>
               <td><a  type="button" class="btn btn-xs btn-success"href="{% url 'teams.detail' team.id %}"><span class="glyphicon glyphicon-search"></span> details</a></td>
               <td><a  type="button" class="btn btn-xs btn-warning"href="{% url 'teams.edit' team.id %}"><span class="glyphicon glyphicon-edit"></span> edit</a></td>
