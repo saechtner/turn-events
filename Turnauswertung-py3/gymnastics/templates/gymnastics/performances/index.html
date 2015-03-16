@@ -12,6 +12,7 @@
           <th>Athlete</th>
           <th>Discipline</th>
           <th>Performance</th>
+          <th>Performance Final</th>
           <th></th>
           <th></th>
           <th></th>
@@ -22,6 +23,7 @@
               <td><a href="{% url 'athletes.detail' performance.athlete.id %}">{{ performance.athlete }}</a></td>
               <td><a href="{% url 'disciplines.detail' performance.discipline.id %}">{{ performance.discipline }}</a></td>
               <td>{{ performance.performance }}</td>
+              <td>{{ performance.performance_final }}</td>
               <td><a  type="button" class="btn btn-xs btn-success"href="{% url 'performances.detail' performance.id %}"><span class="glyphicon glyphicon-search"></span> details</a></td>
               <td><a  type="button" class="btn btn-xs btn-warning"href="{% url 'performances.edit' performance.id %}"><span class="glyphicon glyphicon-edit"></span> edit</a></td>
               <td><a  type="button" class="btn btn-xs btn-danger"href="{% url 'performances.delete' performance.id %}"><span class="glyphicon glyphicon-remove"></span> delete</a></td>

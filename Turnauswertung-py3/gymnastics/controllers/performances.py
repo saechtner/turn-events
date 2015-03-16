@@ -13,7 +13,7 @@ def index(request):
 class PerformanceCreateView(generic.CreateView):
 
     model = Performance
-    fields = ['athlete', 'discipline', 'performance']
+    fields = ['athlete', 'discipline', 'performance', 'performance_final']
     template_name = 'gymnastics/performances/new.html'
     success_url = reverse_lazy('performances.index')
 
@@ -27,7 +27,7 @@ class PerformanceDetailView(generic.DetailView):
 class PerformanceUpdateView(generic.UpdateView):
 
     model = Performance
-    fields = ['athlete', 'discipline', 'performance']
+    fields = ['athlete', 'discipline', 'performance', 'performance_final']
     template_name = 'gymnastics/performances/edit.html'
 
     def get_success_url(self):
