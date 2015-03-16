@@ -81,3 +81,21 @@ body {
     line-height: 1.4;
   }
 }
+
+
+/* Gender Icons
+-------------------------------------------------- */
+
+.gend {
+  font-weight: bolder;
+  text-align: center;
+}
+
+.gend.gend-female {
+  color: red;
+}
+
+.gend.gend-male {
+  color: blue;
+
+}

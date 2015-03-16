@@ -25,9 +25,9 @@
               <td>{{ athlete.first_name }}</td>
               <td>{{ athlete.last_name }}</td>
               {% if athlete.sex == 'f' %}
-                <td class="gend gend_female"> &#9794; </td>
+                <td class="gend gend-female"> &#9792;</td>
               {% else %}
-                <td class="gend gend_male"> &#9792; </td>
+                <td class="gend gend-male"> &#9794;</td>
               {% endif %}
               <td>{{ athlete.year_of_birth }}</td>
               <td><a href="{% url 'clubs.detail' athlete.club.id %}">{{ athlete.club }}</a></td>
