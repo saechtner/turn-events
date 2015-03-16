@@ -7,8 +7,7 @@
 {% block content %}
 
   <div class="row">
-    <div class="col-md-8">
-      <h1>
+      <h1 class="inline-left">
         {{ object }}
         <!-- </br> -->
         <small>
@@ -16,12 +15,11 @@
         <!-- ({{ object.stream }}) -->
         </small>
       </h1>
-  </div>
-    <div class="col-md-4 text-right">
+    <p class="inline-right">
       <a type="button" class="btn btn-warning" href="{% url 'athletes.edit' object.id %}">Edit</a>
       <a type="button" class="btn btn-danger" href="{% url 'athletes.delete' object.id %}">Delete</a>
       <button type="button" class="btn btn-default" onClick="javascript:history.go(-1);">Previous Page</button>
-    </div>
+    </p>
   </div>
 
   <div role="tabpanel">

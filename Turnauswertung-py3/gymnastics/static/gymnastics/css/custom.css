@@ -99,3 +99,20 @@ body {
   color: blue;
 
 }
+
+/* Inline 
+-------------------------------------------------- */
+
+.inline {
+  display: inline;
+}
+
+.inline-left {
+  display: inline;
+  /*float: left;*/
+}
+
+.inline-right {
+  display: inline;
+  float: right;
+}
