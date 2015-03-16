@@ -3,13 +3,13 @@
 {% block nav_home_active %}<li>{% endblock nav_home_active %}
 {% block nav_controller_active %}<li class="active">{% endblock nav_controller_active %}
 
-{% block nav_controller_name %}<a href="{% url 'athletes.index' %}">Athletes </a>{% endblock nav_controller_name %}
+{% block nav_controller_name %}<a href="{% url 'squads.index' %}">Squads </a>{% endblock nav_controller_name %}
 
 {% block controller_actions %}
   <li class="dropdown">
-    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Athletes <span class="caret"></span></a>
+    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Squads <span class="caret"></span></a>
     <ul class="dropdown-menu" role="menu">
-      <li><a href="{% url 'athletes.new' %}">New athlete</a></li>
+      <li><a href="{% url 'squads.new' %}">New squad</a></li>
     </ul>
   </li>
 {% endblock controller_actions %}

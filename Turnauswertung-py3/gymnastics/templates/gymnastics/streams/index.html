@@ -1,4 +1,4 @@
-{% extends "gymnastics/base.html" %}
+{% extends "gymnastics/streams/base.html" %}
 
 {% block content %}
   <div>
@@ -6,7 +6,7 @@
 
     {% if streams %}
 
-      <table class="table" id="stream-table">
+      <table class="table table-hover" id="stream-table">
         <thead>
           <th>Difficulty</th>
           <th>Sex</th>
@@ -20,12 +20,16 @@
           {% for stream in streams %}
             <tr id="stream_{{ stream.id }}">
               <td>{{ stream.difficulty }}</td>
-              <td>{{ stream.sex_long }}</td>
+              {% if stream.sex == 'f' %}
+                <td class="gend gend-female"> &#9792;</td>
+              {% else %}
+                <td class="gend gend-male"> &#9794;</td>
+              {% endif %}
               <td>{% for discipline in stream.disciplines.all %} <a href="{% url 'disciplines.detail' discipline.id %}">{{ discipline }}</a><br/>{% endfor %}</td>
               <td>{{ stream.minimum_year_of_birth }}</td>
-              <td><a href="{% url 'streams.detail' stream.id %}">details</a></td>
-              <td><a href="{% url 'streams.edit' stream.id %}">edit</a></td>
-              <td><a href="{% url 'streams.delete' stream.id %}">delete</a></td>
+              <td><a  type="button" class="btn btn-xs btn-success"href="{% url 'streams.detail' stream.id %}"><span class="glyphicon glyphicon-search"></span> details</a></td>
+              <td><a  type="button" class="btn btn-xs btn-warning"href="{% url 'streams.edit' stream.id %}"><span class="glyphicon glyphicon-edit"></span> edit</a></td>
+              <td><a  type="button" class="btn btn-xs btn-danger"href="{% url 'streams.delete' stream.id %}"><span class="glyphicon glyphicon-remove"></span> delete</a></td>
             </tr>
           {% endfor %}
         </tbody>

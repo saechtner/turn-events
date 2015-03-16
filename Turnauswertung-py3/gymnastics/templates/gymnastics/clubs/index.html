@@ -4,7 +4,7 @@
 
     {% if clubs %}
 
-      <table class="table" id="clubs-table">
+      <table class="table table-hover" id="clubs-table">
         <thead>
           <th>Name</th>
           <th></th>
@@ -15,9 +15,9 @@
           {% for club in clubs %}
             <tr id="club_{{ club.id }}">
               <td>{{ club.name }}</td>
-              <td><a href="{% url 'clubs.detail' club.id %}">details</a></td>
-              <td><a href="{% url 'clubs.edit' club.id %}">edit</a></td>
-              <td><a href="{% url 'clubs.delete' club.id %}">delete</a></td>
+              <td><a  type="button" class="btn btn-xs btn-success"href="{% url 'clubs.detail' club.id %}"><span class="glyphicon glyphicon-search"></span> details</a></td>
+              <td><a  type="button" class="btn btn-xs btn-warning"href="{% url 'clubs.edit' club.id %}"><span class="glyphicon glyphicon-edit"></span> edit</a></td>
+              <td><a  type="button" class="btn btn-xs btn-danger"href="{% url 'clubs.delete' club.id %}"><span class="glyphicon glyphicon-remove"></span> delete</a></td>
             </tr>
           {% endfor %}
         </tbody>

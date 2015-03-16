@@ -1,4 +1,4 @@
-{% extends "gymnastics/base.html" %}
+{% extends "gymnastics/performances/base.html" %}
 
 {% block content %}
   <div class="row">
@@ -7,7 +7,7 @@
 
     {% if performances %}
     
-      <table class="table" id="performances-table">
+      <table class="table table-hover" id="performances-table">
         <thead>
           <th>Athlete</th>
           <th>Discipline</th>
@@ -22,9 +22,9 @@
               <td><a href="{% url 'athletes.detail' performance.athlete.id %}">{{ performance.athlete }}</a></td>
               <td><a href="{% url 'disciplines.detail' performance.discipline.id %}">{{ performance.discipline }}</a></td>
               <td>{{ performance.performance }}</td>
-              <td><a href="{% url 'performances.detail' performance.id %}">details</a></td>
-              <td><a href="{% url 'performances.edit' performance.id %}">edit</a></td>
-              <td><a href="{% url 'performances.delete' performance.id %}">delete</a></td>
+              <td><a  type="button" class="btn btn-xs btn-success"href="{% url 'performances.detail' performance.id %}"><span class="glyphicon glyphicon-search"></span> details</a></td>
+              <td><a  type="button" class="btn btn-xs btn-warning"href="{% url 'performances.edit' performance.id %}"><span class="glyphicon glyphicon-edit"></span> edit</a></td>
+              <td><a  type="button" class="btn btn-xs btn-danger"href="{% url 'performances.delete' performance.id %}"><span class="glyphicon glyphicon-remove"></span> delete</a></td>
             </tr>
           {% endfor %}
         </tbody>
