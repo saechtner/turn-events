@@ -9,36 +9,58 @@
 <!-- Main jumbotron for a primary marketing message or call to action -->
   <div class="jumbotron">
     <div class="container">
-      <h1>Gymnastics TODO</h1>
-      <p>Important and Urgent</p>
-      <ul>
-        <li>nothing</li>
-      </ul>
+      <div class="row">
+        <h1>TODO</h1>
+        <div class="col-md-4">
+          <ul class="list-group">
+            <li class="list-group-item list-group-item-warning">Functionality <span class="badge">7</span></li>
+            <li class="list-group-item list-group-item-danger">Bugs <span class="badge">2</span></li>
+            <li class="list-group-item list-group-item-danger">Layout and Styling <span class="badge">6</span></li>
+          </ul>
+        </div>
+        <div class="col-md-3">
+        </div>
+        <div class="col-md-5">
+          <h2>Recently finished:</h2>
+          <ul class="list-group">
+            <li class="list-group-item list-group-item-info">Consistent Buttons layout for the whole app</li>
+            <li class="list-group-item list-group-item-info">Index page</li>
+          </ul>
+        </div>
+      </div>
     </div>
-  </div> <!-- /container -->
+  </div>
 
   <div class="container">
-    <!-- Example row of columns -->
     <div class="row">
       <div class="col-md-4">
         <h2>Functionality</h2>
-        <ul>
-          <li>Create athletes via Teilnehmertabelle</li>
-          <li>Create athletes via club details page</li>
-          <li>Analyses</li>
+        <ul class="list-group">
+          <li class="list-group-item list-group-item-warning">Reevaluate finals setup (User requests finals, system finds athletes, how and where is the data stored?)</li>
+          <li class="list-group-item list-group-item-success">Second athletes index with discipline results</li>
+          <li class="list-group-item list-group-item-warning">Create athletes via Teilnehmertabelle</li>
+          <li class="list-group-item list-group-item-warning">Create athletes via club details page</li>
+          <li class="list-group-item list-group-item-success">Message and alert box</li>
+          <li class="list-group-item list-group-item-success">Setup alert system</li>
+          <li class="list-group-item list-group-item-info">Analyses</li>
         </ul>
       </div>
       <div class="col-md-4">
         <h2>Bugs</h2>
-        <ul>
-          <li> none known right now</li>
+        <ul class="list-group">
+          <li class="list-group-item list-group-item-warning">Correctly apply Bootstrap Layout</li>
+          <li class="list-group-item list-group-item-danger">Full-width content box in base.html</li>
         </ul>
      </div>
       <div class="col-md-4">
         <h2>Layout and Styling</h2>
-        <ul>
-          <li>Buttons with consistent styling - done?</li>
-          <li>Navbar for all used controllers (clubs, streams, squads, ...) - in progress</li>
+        <ul class="list-group">
+          <li class="list-group-item list-group-item-warning">WIP: Navbar for all used controllers (clubs, streams, squads, ...)</li>
+          <li class="list-group-item list-group-item-danger">Forms with bootstrap basic layout</li>
+          <li class="list-group-item list-group-item-success">Full-width carousel on home page</li>
+          <li class="list-group-item list-group-item-success">JS popup for delete confirmation</li>
+          <li class="list-group-item list-group-item-info">Evaluate usages for js tabs</li>
+          <li class="list-group-item list-group-item-info">Evaluate usages for js popups</li>
         </ul>
       </div>
     </div>
