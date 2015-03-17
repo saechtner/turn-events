@@ -1,4 +1,5 @@
 from django.db import models
+from django.db.models import Sum
 
 
 class Athlete(models.Model):
@@ -20,5 +21,5 @@ class Athlete(models.Model):
     def __str__(self):
         return "{0} {1}".format(self.first_name, self.last_name)
 
-    def sex_long(self):
-        return 'female' if self.sex == 'f' else 'male'
+    def total(self):
+        return self.performance_set.aggregate(Sum('performance')).get('performance__sum', 0.00)

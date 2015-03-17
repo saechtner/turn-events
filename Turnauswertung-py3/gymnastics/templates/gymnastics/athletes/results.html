@@ -1,5 +1,10 @@
 {% extends "gymnastics/athletes/base.html" %}
 
+{% block nav_controller_active %}<li>{% endblock nav_controller_active %}
+{% block nav_action_active %}<li class="active">{% endblock nav_action_active %}
+
+{% block action %}results{% endblock action %}
+
 {% block content %}
   <div>
 
@@ -27,15 +32,7 @@
                 <td class="gend gend-male"> &#9794;</td>
               {% endif %}
               <td><a href="{% url 'streams.detail' athlete.stream.id %}">{{ athlete.stream }}</a></td>
-              <td>
-                {% comment %}
-                  {% with total=0 %}
-                    {{ for performance in athlete.performance_set.all }}
-                      {{ total|add:"2" }}
-                    {{ endfor }}
-                  {% endwith %}
-                {% endcomment %}
-              </td>
+              <td> {{ athlete.total }}</td>
               <td><a  type="button" class="btn btn-xs btn-success"href="{% url 'athletes.detail' athlete.id %}"><span class="glyphicon glyphicon-search"></span> details</a></td>
               <td><a  type="button" class="btn btn-xs btn-warning"href="{% url 'athletes.edit' athlete.id %}"><span class="glyphicon glyphicon-edit"></span> edit</a></td>
               <td><a  type="button" class="btn btn-xs btn-danger"href="{% url 'athletes.delete' athlete.id %}"><span class="glyphicon glyphicon-remove"></span> delete</a></td>

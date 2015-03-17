@@ -14,17 +14,11 @@ class Stream(models.Model):
     discipline_finals = models.BooleanField(default=False)
     discipline_finals_max_participants = models.IntegerField(null=True, blank=True)
 
-    disciplines = models.ManyToManyField('Discipline')
+    discipline_set = models.ManyToManyField('Discipline')
 
 
     class Meta:
         db_table = 'gymnastics_streams'
         
     def __str__(self):
-        return "{0} {1}".format(self.difficulty, self.sex_long())
-
-    def sex_long(self):
-        if self.sex == 'f':
-            return 'female'
-        else :
-            return 'male'
+        return "{0} {1}".format(self.difficulty, self.get_sex_display())
