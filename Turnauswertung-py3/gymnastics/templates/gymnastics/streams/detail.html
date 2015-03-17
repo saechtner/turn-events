@@ -26,17 +26,23 @@
     <!-- Nav tabs -->
     <ul class="nav nav-tabs" role="tablist">
       <li role="presentation" class="active"><a href="#base" aria-controls="home" role="tab" data-toggle="tab">Base</a></li>
-      <li role="presentation"><a href="#performances" aria-controls="profile" role="tab" data-toggle="tab">Performances</a></li>
-      <li role="presentation"><a href="#placements" aria-controls="messages" role="tab" data-toggle="tab">Placements</a></li>
+      <li role="presentation"><a href="#results" aria-controls="profile" role="tab" data-toggle="tab">Results</a></li>
+      <li role="presentation"><a href="#athletes" aria-controls="messages" role="tab" data-toggle="tab">Athletes ({{ stream.athlete_set.count }})</a></li>
     </ul>
 
     <!-- Tab panes -->
     <div class="tab-content">
       <div role="tabpanel" class="tab-pane active" id="base">
-        <p>Number of athletes: {{ stream.athlete_set.count }}</p>
         <p>Difficulty: {{ stream.difficulty }}</p>
         <p>Sex: {{ stream.get_sex_display }}</p>
         <p>Minimum Year of birth: {{ stream.minimum_year_of_birth }}</p>
+        <p>Disciplines:
+        <ul>
+          {% for discipline in stream.discipline_set.all %}
+            <li><a href="{% url 'disciplines.detail' discipline.id %}">{{ discipline }}</a></li>
+          {% endfor %}
+        </ul>
+        </p>
         <p>Performances are compared in 
         <ul>
           {% if stream.all_around_individual %}
@@ -51,10 +57,10 @@
         </ul></p>
       </div>
 
-      <div role="tabpanel" class="tab-pane" id="performances">  
+      <div role="tabpanel" class="tab-pane" id="results">  
       </div>
 
-      <div role="tabpanel" class="tab-pane" id="placements">  
+      <div role="tabpanel" class="tab-pane" id="athletes">  
       </div>
     </div>
   </div> 
