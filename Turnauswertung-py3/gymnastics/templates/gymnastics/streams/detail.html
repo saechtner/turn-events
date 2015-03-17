@@ -7,19 +7,23 @@
 
 {% block content %}
   <h1>Stream Details</h1>
-  <p>{{ object.content }}</p>
-  <p>Difficulty: {{ object.difficulty }}</p>
-  <p>Sex: {{ object.sex_long }}</p>
-  <p>Minimum Year of birth: {{ object.minimum_year_of_birth }}</p>
-  <p>all_around_individual: {{ object.all_around_individual }}</p>
-  <p>all_around_individual_counting_events: {{ object.all_around_individual_counting_events }}</p>
-  <p>all_around_team: {{ object.all_around_team }}</p>
-  <p>all_around_team_counting_athletes: {{ object.all_around_team_counting_athletes }}</p>
-  <p>discipline_finals: {{ object.discipline_finals }}</p>
-  <p>discipline_finals_max_participants: {{ object.discipline_finals_max_participants }}</p>
-  <p>Disciplines: {% for discipline in object.disciplines.all %} {{ discipline }}, {% endfor %}</p>
+  <p>{{ stream.content }}</p>
+  <p>Difficulty: {{ stream.difficulty }}</p>
+  <p>Sex: {{ stream.sex_long }}</p>
+  <p>Minimum Year of birth: {{ stream.minimum_year_of_birth }}</p>
+  <p>all_around_individual: {{ stream.all_around_individual }}</p>
+  <p>all_around_individual_counting_events: {{ stream.all_around_individual_counting_events }}</p>
+  <p>all_around_team: {{ stream.all_around_team }}</p>
+  <p>all_around_team_counting_athletes: {{ stream.all_around_team_counting_athletes }}</p>
+  <p>discipline_finals: {{ stream.discipline_finals }}</p>
+  <p>discipline_finals_max_participants: {{ stream.discipline_finals_max_participants }}</p>
+  <p>Disciplines: 
+    {% for discipline in stream.disciplines.all %}
+      {{ discipline }}, 
+    {% endfor %}
+  </p>
 
-  <a type="button" class="btn btn-warning" href="{% url 'streams.edit' object.id %}">Edit</a>
-  <a type="button" class="btn btn-danger" href="{% url 'streams.delete' object.id %}">Delete</a>
+  <a type="button" class="btn btn-warning" href="{% url 'streams.edit' stream.id %}">Edit</a>
+  <a type="button" class="btn btn-danger" href="{% url 'streams.delete' stream.id %}">Delete</a>
   <button type="button" class="btn btn-default" onClick="javascript:history.go(-1);">Previous Page</button>
 {% endblock content %}

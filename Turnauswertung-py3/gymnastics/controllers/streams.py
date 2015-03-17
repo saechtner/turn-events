@@ -9,6 +9,10 @@ def index(request):
     context = { 'streams': Stream.objects.all() }
     return render(request, 'gymnastics/streams/index.html', context)
 
+def detail(request, id):
+    context = { 'stream': Stream.objects.get(id=id) }
+    return render(request, 'gymnastics/streams/detail.html', context)
+
 
 class StreamCreateView(generic.CreateView):
 
@@ -20,11 +24,10 @@ class StreamCreateView(generic.CreateView):
     template_name = 'gymnastics/streams/new.html'
     success_url = reverse_lazy('streams.index')
 
+# class StreamDetailView(generic.DetailView):
 
-class StreamDetailView(generic.DetailView):
-
-    model = Stream
-    template_name = 'gymnastics/streams/detail.html'
+#     model = Stream
+#     template_name = 'gymnastics/streams/detail.html'
 
 
 class StreamUpdateView(generic.UpdateView):
