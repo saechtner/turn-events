@@ -24,11 +24,6 @@ class StreamCreateView(generic.CreateView):
     template_name = 'gymnastics/streams/new.html'
     success_url = reverse_lazy('streams.index')
 
-# class StreamDetailView(generic.DetailView):
-
-#     model = Stream
-#     template_name = 'gymnastics/streams/detail.html'
-
 
 class StreamUpdateView(generic.UpdateView):
 
