@@ -95,9 +95,16 @@ class AthleteUpdateView(generic.UpdateView):
     fields = ['first_name', 'last_name', 'sex', 'year_of_birth', 'club', 'squad', 'stream', 'team']
     template_name = 'gymnastics/athletes/edit.html'
 
+    # context_object_name = 'athlete' # should be available as well as object because of model = Athlete
+
     def get_success_url(self):
         some_kwargs = self.kwargs
         return reverse('athletes.detail', kwargs = { 'pk' : self.kwargs['pk'] })
+
+    # def get_context_data(self, **kwargs):
+    #     context = super(AthleteUpdateView, self).get_context_data(**kwargs)
+    #     context['latest_articles'] = Article.objects.all()[:5]
+    #     return context
 
 
 class AthleteDeleteView(generic.DeleteView):
