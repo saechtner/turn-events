@@ -34,9 +34,13 @@
               <td><a href="{% url 'squads.detail' athlete.squad.id %}">{{ athlete.squad }}</a></td>
               <td><a href="{% url 'streams.detail' athlete.stream.id %}">{{ athlete.stream }}</a></td>
               <td><a href="{% url 'teams.detail' athlete.team.id %}">{{ athlete.team }}</a></td>
-              <td><a  type="button" class="btn btn-xs btn-success"href="{% url 'athletes.detail' athlete.id %}"><span class="glyphicon glyphicon-search"></span> details</a></td>
-              <td><a  type="button" class="btn btn-xs btn-warning"href="{% url 'athletes.edit' athlete.id %}"><span class="glyphicon glyphicon-edit"></span> edit</a></td>
-              <td><a  type="button" class="btn btn-xs btn-danger"href="{% url 'athletes.delete' athlete.id %}"><span class="glyphicon glyphicon-remove"></span> delete</a></td>
+              <td>
+                <div class="btn-group" role="group">
+                  <a  type="button" class="btn btn-xs btn-success"href="{% url 'athletes.detail' athlete.id %}"><span class="glyphicon glyphicon-search"></span> details</a>
+                  <a  type="button" class="btn btn-xs btn-warning"href="{% url 'athletes.edit' athlete.id %}"><span class="glyphicon glyphicon-edit"></span> edit</a>
+                  <a  type="button" class="btn btn-xs btn-danger"href="{% url 'athletes.delete' athlete.id %}"><span class="glyphicon glyphicon-remove"></span> delete</a>
+                </div>
+              </td>
             </tr>
           {% endfor %}
         </tbody>
