@@ -19,7 +19,7 @@
     <div class="form-group">
       <label for="input_last_name" class="col-md-2 control-label">Last name:</label>
       <div class="col-md-4">
-        <input class="form-control" id="input_last_name" maxlength="50" name="last_name" type="text" value="Korn" />
+        <input class="form-control" id="input_last_name" maxlength="50" name="last_name" type="text" value="{{ athlete.last_name }}" />
       </div>
     </div>
 
@@ -36,7 +36,7 @@
     <div class="form-group">
       <label for="input_year_of_birth" class="col-md-2 control-label">Year of birth:</label>
       <div class="col-md-4">
-        <input class="form-control" id="input_year_of_birth" name="year_of_birth" type="number" value="1998" />
+        <input class="form-control" id="input_year_of_birth" name="year_of_birth" type="number" value="{{ athlete.year_of_birth }}" />
       </div>
     </div>
 

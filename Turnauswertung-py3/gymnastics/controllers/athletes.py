@@ -28,6 +28,7 @@ def edit2(request, pk):
         return render(request, 'gymnastics/athletes/edit2.html', context)
     elif request.method == 'POST':
         # print(request.POST)
+        # print(type(request.POST))
 
         # verify all request.POST fields in athlete and set them if they changed
         # OR 
@@ -39,14 +40,12 @@ def edit2(request, pk):
 
         athlete = Athlete.objects.get(id=pk)
 
-        print(type(request.POST))
-
         # assign all request.POST values to the corresponding athlete field
         for key, value in request.POST.items():
             if hasattr(athlete, key):
                 setattr(athlete, key, value)
 
-        # validate athlete
+        # validate athlete - calls clean_fields, clean and validate_unique
         # athlete.full_clean()
 
         #simple test
