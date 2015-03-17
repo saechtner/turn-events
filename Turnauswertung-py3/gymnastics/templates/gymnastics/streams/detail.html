@@ -2,28 +2,61 @@
 
 {% block nav_controller_active %}<li>{% endblock nav_controller_active %}
 {% block nav_action_active %}<li class="active">{% endblock nav_action_active %}
-
 {% block action %}detail{% endblock action %}
 
 {% block content %}
-  <h1>Stream Details</h1>
-  <p>{{ stream.content }}</p>
-  <p>Difficulty: {{ stream.difficulty }}</p>
-  <p>Sex: {{ stream.get_sex_display }}</p>
-  <p>Minimum Year of birth: {{ stream.minimum_year_of_birth }}</p>
-  <p>all_around_individual: {{ stream.all_around_individual }}</p>
-  <p>all_around_individual_counting_events: {{ stream.all_around_individual_counting_events }}</p>
-  <p>all_around_team: {{ stream.all_around_team }}</p>
-  <p>all_around_team_counting_athletes: {{ stream.all_around_team_counting_athletes }}</p>
-  <p>discipline_finals: {{ stream.discipline_finals }}</p>
-  <p>discipline_finals_max_participants: {{ stream.discipline_finals_max_participants }}</p>
-  <p>Disciplines: 
-    {% for discipline in stream.disciplines.all %}
-      {{ discipline }}, 
-    {% endfor %}
-  </p>
 
-  <a type="button" class="btn btn-warning" href="{% url 'streams.edit' stream.id %}">Edit</a>
-  <a type="button" class="btn btn-danger" href="{% url 'streams.delete' stream.id %}">Delete</a>
-  <button type="button" class="btn btn-default" onClick="javascript:history.go(-1);">Previous Page</button>
+  <div class="row row-relative">
+    <div class="col-md-8">
+      <h1>
+        {{ stream }}
+        <!-- </br> -->
+        <small>
+        </small>
+      </h1>
+    </div>
+    <div class="col-md-4 div-pos-bottom-right text-right">
+      <a type="button" class="btn btn-warning" href="{% url 'streams.edit' stream.id %}">Edit</a>
+      <a type="button" class="btn btn-danger" href="{% url 'streams.delete' stream.id %}">Delete</a>
+      <button type="button" class="btn btn-default" onClick="javascript:history.go(-1);">Previous Page</button>
+    </div>
+  </div>
+
+  <div role="tabpanel">
+    <!-- Nav tabs -->
+    <ul class="nav nav-tabs" role="tablist">
+      <li role="presentation" class="active"><a href="#base" aria-controls="home" role="tab" data-toggle="tab">Base</a></li>
+      <li role="presentation"><a href="#performances" aria-controls="profile" role="tab" data-toggle="tab">Performances</a></li>
+      <li role="presentation"><a href="#placements" aria-controls="messages" role="tab" data-toggle="tab">Placements</a></li>
+    </ul>
+
+    <!-- Tab panes -->
+    <div class="tab-content">
+      <div role="tabpanel" class="tab-pane active" id="base">
+        <p>Number of athletes: {{ stream.athlete_set.count }}</p>
+        <p>Difficulty: {{ stream.difficulty }}</p>
+        <p>Sex: {{ stream.get_sex_display }}</p>
+        <p>Minimum Year of birth: {{ stream.minimum_year_of_birth }}</p>
+        <p>Performances are compared in 
+        <ul>
+          {% if stream.all_around_individual %}
+            <li>all around individual: {{ stream.all_around_individual_counting_events }} counting disciplines</li>
+          {% endif %}
+          {% if stream.all_around_team %}
+            <li>team performances: {{ stream.all_around_team_counting_athletes }} counting events per discipline</li>
+          {% endif %}
+          {% if stream.discipline_finals %}
+            <li>discipline finals: {{ stream.discipline_finals_max_participants }} participants</li>
+          {% endif %}
+        </ul></p>
+      </div>
+
+      <div role="tabpanel" class="tab-pane" id="performances">  
+      </div>
+
+      <div role="tabpanel" class="tab-pane" id="placements">  
+      </div>
+    </div>
+  </div> 
+  
 {% endblock content %}
