@@ -100,19 +100,15 @@ body {
 
 }
 
-/* Inline 
+/* Inside Div Positioning 
 -------------------------------------------------- */
 
-.inline {
-  display: inline;
+.row-relative {
+  position: relative;
 }
 
-.inline-left {
-  display: inline;
-  /*float: left;*/
-}
-
-.inline-right {
-  display: inline;
-  float: right;
+.div-pos-bottom-right {
+  position: absolute;
+  right: 0px;
+  bottom: 0px;
 }
