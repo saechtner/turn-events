@@ -1,0 +1,54 @@
+{% extends "gymnastics/athletes/base.html" %}
+
+{% block content %}
+  <div>
+
+    {% if athletes %}
+
+      <table class="table table-hover" id="athletes-table">
+        <thead>
+          <th>First Name</th>
+          <th>Last Name</th>
+          <th>Sex</th>
+          <th>Stream</th>
+          <th>Total</th>
+          <th></th>
+          <th></th>
+          <th></th>
+        </thead>
+        <tbody>
+          {% for athlete in athletes %}
+            <tr id="athlete_{{ athlete.id }}">
+              <td>{{ athlete.first_name }}</td>
+              <td>{{ athlete.last_name }}</td>
+              {% if athlete.sex == 'f' %}
+                <td class="gend gend-female"> &#9792;</td>
+              {% else %}
+                <td class="gend gend-male"> &#9794;</td>
+              {% endif %}
+              <td><a href="{% url 'streams.detail' athlete.stream.id %}">{{ athlete.stream }}</a></td>
+              <td>
+                {% comment %}
+                  {% with total=0 %}
+                    {{ for performance in athlete.performance_set.all }}
+                      {{ total|add:"2" }}
+                    {{ endfor }}
+                  {% endwith %}
+                {% endcomment %}
+              </td>
+              <td><a  type="button" class="btn btn-xs btn-success"href="{% url 'athletes.detail' athlete.id %}"><span class="glyphicon glyphicon-search"></span> details</a></td>
+              <td><a  type="button" class="btn btn-xs btn-warning"href="{% url 'athletes.edit' athlete.id %}"><span class="glyphicon glyphicon-edit"></span> edit</a></td>
+              <td><a  type="button" class="btn btn-xs btn-danger"href="{% url 'athletes.delete' athlete.id %}"><span class="glyphicon glyphicon-remove"></span> delete</a></td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+
+    {% else %}
+
+      <div class="alert alert-info">No athletes available in the database. Create one <a href="{% url 'athletes.new' %}">here</a>.</div>
+
+    {% endif %}
+    
+  </div>
+{% endblock content %}

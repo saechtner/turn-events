@@ -10,6 +10,10 @@ def index(request):
     context = { 'athletes': Athlete.objects.all() }
     return render(request, 'gymnastics/athletes/index.html', context)
 
+def results(request):
+    context = { 'athletes': Athlete.objects.all() }
+    return render(request, 'gymnastics/athletes/results.html', context)
+
 def edit2(request, pk):
     if request.method == 'GET':
         try:

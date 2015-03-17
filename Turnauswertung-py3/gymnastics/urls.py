@@ -8,6 +8,7 @@ urlpatterns = patterns('',
     url(r'^todo$', views.todo, name='todo'), 
 
     url(r'^athletes$', athletes.index, name='athletes.index'),
+    url(r'^athletes/results$', athletes.results, name='athletes.results'),
     url(r'^athletes/new$', athletes.AthleteCreateView.as_view(), name='athletes.new'),
     url(r'^athletes/(?P<pk>\d+)/detail', athletes.AthleteDetailView.as_view(), name='athletes.detail'),
 
