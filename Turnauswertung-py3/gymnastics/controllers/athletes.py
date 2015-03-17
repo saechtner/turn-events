@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.core.urlresolvers import reverse, reverse_lazy
+from django.http import HttpResponseNotAllowed
 from django.views import generic
 
 from gymnastics.models.athlete import Athlete
@@ -8,6 +9,49 @@ from gymnastics.models.athlete import Athlete
 def index(request):
     context = { 'athletes': Athlete.objects.all() }
     return render(request, 'gymnastics/athletes/index.html', context)
+
+
+def edit2(request, pk):
+    if request.method == 'GET':
+        try:
+            context = {'athlete': Athlete.objects.get(id=pk)}
+        except:
+            # TODO
+            pass
+        return render(request, 'gymnastics/athletes/edit2.html', context)
+    elif request.method == 'POST':
+        # print(request.POST)
+
+        athlete = Athlete.objects.get(id=pk)
+        # verify all request.POST fields in athlete and set them if they changed
+        # OR 
+        # set all athlete fields to the corresponding request.POST values
+        # then try saving it
+        # use verifier on the athlete model to raise proper exceptions if values are shit
+        # catch these exceptions here (maybe use custom clasa)
+        # put error messages together and render them
+
+        #simple test
+        athlete.first_name = request.POST['first_name']
+
+        try:
+            athlete.save() # werden verified erst hier gecallt??
+            # render success
+        except Exception as e:
+            # set error messages (eine error message mit allen exceptions or vice versa)
+            # add errors to context
+            return render(request, 'gymnastics/athletes/edit2.html', context)
+
+        # render success
+        context = {'object': athlete}
+        return render(request, 'gymnastics/athletes/detail.html', context)
+      
+    #http 405! 404?
+    return  HttpResponseNotAllowed(['GET', 'POST'])
+    # ToDO: add 405.http basic template
+    # return  HttpResponseNotAllowed(['PUT'])
+
+
 
 
 class AthleteCreateView(generic.CreateView):

@@ -1,0 +1,103 @@
+{% extends "gymnastics/athletes/base.html" %}
+
+{% block nav_controller_active %}<li>{% endblock nav_controller_active %}
+{% block nav_action_active %}<li class="active">{% endblock nav_action_active %}
+
+{% block action %}edit{% endblock action %}
+
+{% block content %}
+  <form action="{% url 'athletes.edit2' athlete.id %}" method="post" class="form-horizontal">
+  {% csrf_token %}
+
+    <div class="form-group">
+      <label for="id_first_name" class="col-md-2 control-label">First name:</label>
+      <div class="col-md-4">
+        <input class="form-control" id="id_first_name" maxlength="50" name="first_name" type="text" value="Theresa" />
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="id_last_name" class="col-md-2 control-label">Last name:</label>
+      <div class="col-md-4">
+        <input class="form-control" id="id_last_name" maxlength="50" name="last_name" type="text" value="Korn" />
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="id_sex" class="col-md-2 control-label">Sex:</label>
+      <div class="col-md-4">
+        <select class="form-control" id="id_sex" name="sex">
+          <option value="m">male</option>
+          <option value="f" selected="selected">female</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="id_year_of_birth" class="col-md-2 control-label">Year of birth:</label>
+      <div class="col-md-4">
+        <input class="form-control" id="id_year_of_birth" name="year_of_birth" type="number" value="1998" />
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="id_club" class="col-md-2 control-label">Club:</label>
+      <div class="col-md-4">
+        <select class="form-control" id="id_club" name="club">
+          <option value="">---------</option>
+          <option value="1">ASV Michendorf e.V.</option>
+          <option value="2" selected="selected">RSV Eintracht 1949 e.V.</option>
+          <option value="3">MTV 1861 Treuenbrietzen e.V.</option>
+          <option value="4">SG Fredersdorf e.V.</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="id_squad" class="col-md-2 control-label">Squad:</label>
+      <div class="col-md-4">
+        <select class="form-control" id="id_squad" name="squad">
+          <option value="">---------</option>
+          <option value="1" selected="selected">Squad 8</option>
+          <option value="2">Squad 9</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="id_stream" class="col-md-2 control-label">Stream:</label>
+      <div class="col-md-4">
+        <select class="form-control" id="id_stream" name="stream">
+          <option value="">---------</option>
+          <option value="1" selected="selected">KM4 female</option>
+          <option value="2">P2 male</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="id_team" class="col-md-2 control-label">Team:</label>
+      <div class="col-md-4">
+        <select class="form-control" id="id_team" name="team">
+          <option value="">---------</option>
+          <option value="5">Michendorf 1 (KM4 female)</option>
+          <option value="6">Michendorf 1 (P2 male)</option>
+          <option value="7" selected="selected">Eintracht 1 (KM4 female)</option>
+          <option value="8">Eintracht 1 (P2 male)</option>
+          <option value="9">Treuenbrietzen 1 (P2 male)</option>
+          <option value="10">Fredersdorf 1 (P2 male)</option>
+        </select>
+      </div>
+    </div>
+
+
+    <div class="col-md-2">
+    </div>
+    <div class="col-md-5">
+      <input class="btn btn-primary" type="submit" value="Update"/>
+      <button type="button" class="btn btn-default" onClick="javascript:history.go(-1);">Cancel</button>
+    </div>
+  </form>
+{% endblock content %}
+
+

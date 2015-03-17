@@ -10,6 +10,8 @@ urlpatterns = patterns('',
     url(r'^athletes$', athletes.index, name='athletes.index'),
     url(r'^athletes/new$', athletes.AthleteCreateView.as_view(), name='athletes.new'),
     url(r'^athletes/(?P<pk>\d+)/detail', athletes.AthleteDetailView.as_view(), name='athletes.detail'),
+
+    url(r'^athletes/(?P<pk>\d+)/edit2', athletes.edit2, name='athletes.edit2'),
     url(r'^athletes/(?P<pk>\d+)/edit', athletes.AthleteUpdateView.as_view(), name='athletes.edit'),
     url(r'^athletes/(?P<pk>\d+)/delete', athletes.AthleteDeleteView.as_view(), name='athletes.delete'),
 
