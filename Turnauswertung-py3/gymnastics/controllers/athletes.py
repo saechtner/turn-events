@@ -10,19 +10,25 @@ def index(request):
     context = { 'athletes': Athlete.objects.all() }
     return render(request, 'gymnastics/athletes/index.html', context)
 
-
 def edit2(request, pk):
     if request.method == 'GET':
         try:
             context = {'athlete': Athlete.objects.get(id=pk)}
         except:
             # TODO
+            print('!!!!!!!!!!!!!!!!!!!!!!')
             pass
+
+        # print(context)
+        # print(context['athlete'])
+        # print(dir(context['athlete']))
+        # print(Athlete)
+        # print(dir(Athlete))
+
         return render(request, 'gymnastics/athletes/edit2.html', context)
     elif request.method == 'POST':
         # print(request.POST)
 
-        athlete = Athlete.objects.get(id=pk)
         # verify all request.POST fields in athlete and set them if they changed
         # OR 
         # set all athlete fields to the corresponding request.POST values
@@ -31,11 +37,23 @@ def edit2(request, pk):
         # catch these exceptions here (maybe use custom clasa)
         # put error messages together and render them
 
+        athlete = Athlete.objects.get(id=pk)
+
+        print(type(request.POST))
+
+        # assign all request.POST values to the corresponding athlete field
+        for key, value in request.POST.items():
+            if hasattr(athlete, key):
+                setattr(athlete, key, value)
+
+        # validate athlete
+        # athlete.full_clean()
+
         #simple test
-        athlete.first_name = request.POST['first_name']
+        # athlete.first_name = request.POST['first_name']
 
         try:
-            athlete.save() # werden verified erst hier gecallt??
+            athlete.save()
             # render success
         except Exception as e:
             # set error messages (eine error message mit allen exceptions or vice versa)

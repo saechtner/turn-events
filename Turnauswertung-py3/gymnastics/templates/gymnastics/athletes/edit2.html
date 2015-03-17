@@ -10,23 +10,23 @@
   {% csrf_token %}
 
     <div class="form-group">
-      <label for="id_first_name" class="col-md-2 control-label">First name:</label>
+      <label for="input_first_name" class="col-md-2 control-label">First name:</label>
       <div class="col-md-4">
-        <input class="form-control" id="id_first_name" maxlength="50" name="first_name" type="text" value="Theresa" />
+        <input class="form-control" id="input_first_name" maxlength="50" name="first_name" type="text" value="{{ athlete.first_name }}" />
       </div>
     </div>
 
     <div class="form-group">
-      <label for="id_last_name" class="col-md-2 control-label">Last name:</label>
+      <label for="input_last_name" class="col-md-2 control-label">Last name:</label>
       <div class="col-md-4">
-        <input class="form-control" id="id_last_name" maxlength="50" name="last_name" type="text" value="Korn" />
+        <input class="form-control" id="input_last_name" maxlength="50" name="last_name" type="text" value="Korn" />
       </div>
     </div>
 
     <div class="form-group">
-      <label for="id_sex" class="col-md-2 control-label">Sex:</label>
+      <label for="input_sex" class="col-md-2 control-label">Sex:</label>
       <div class="col-md-4">
-        <select class="form-control" id="id_sex" name="sex">
+        <select class="form-control" id="input_sex" name="sex">
           <option value="m">male</option>
           <option value="f" selected="selected">female</option>
         </select>
@@ -34,16 +34,16 @@
     </div>
 
     <div class="form-group">
-      <label for="id_year_of_birth" class="col-md-2 control-label">Year of birth:</label>
+      <label for="input_year_of_birth" class="col-md-2 control-label">Year of birth:</label>
       <div class="col-md-4">
-        <input class="form-control" id="id_year_of_birth" name="year_of_birth" type="number" value="1998" />
+        <input class="form-control" id="input_year_of_birth" name="year_of_birth" type="number" value="1998" />
       </div>
     </div>
 
     <div class="form-group">
-      <label for="id_club" class="col-md-2 control-label">Club:</label>
+      <label for="input_club" class="col-md-2 control-label">Club:</label>
       <div class="col-md-4">
-        <select class="form-control" id="id_club" name="club">
+        <select class="form-control" id="input_club" name="club_id">
           <option value="">---------</option>
           <option value="1">ASV Michendorf e.V.</option>
           <option value="2" selected="selected">RSV Eintracht 1949 e.V.</option>
@@ -54,9 +54,9 @@
     </div>
 
     <div class="form-group">
-      <label for="id_squad" class="col-md-2 control-label">Squad:</label>
+      <label for="input_squad" class="col-md-2 control-label">Squad:</label>
       <div class="col-md-4">
-        <select class="form-control" id="id_squad" name="squad">
+        <select class="form-control" id="input_squad" name="squad_id">
           <option value="">---------</option>
           <option value="1" selected="selected">Squad 8</option>
           <option value="2">Squad 9</option>
@@ -65,9 +65,9 @@
     </div>
 
     <div class="form-group">
-      <label for="id_stream" class="col-md-2 control-label">Stream:</label>
+      <label for="input_stream" class="col-md-2 control-label">Stream:</label>
       <div class="col-md-4">
-        <select class="form-control" id="id_stream" name="stream">
+        <select class="form-control" id="input_stream" name="stream_id">
           <option value="">---------</option>
           <option value="1" selected="selected">KM4 female</option>
           <option value="2">P2 male</option>
@@ -76,9 +76,9 @@
     </div>
 
     <div class="form-group">
-      <label for="id_team" class="col-md-2 control-label">Team:</label>
+      <label for="input_team" class="col-md-2 control-label">Team:</label>
       <div class="col-md-4">
-        <select class="form-control" id="id_team" name="team">
+        <select class="form-control" id="input_team" name="team_id">
           <option value="">---------</option>
           <option value="5">Michendorf 1 (KM4 female)</option>
           <option value="6">Michendorf 1 (P2 male)</option>
