@@ -6,7 +6,7 @@
 {% block action %}edit{% endblock action %}
 
 {% block content %}
-  <form action="{% url 'athletes.edit2' athlete.id %}" method="post" class="form-horizontal">
+  <form action="{% url 'athletes.edit' athlete.id %}" method="post" class="form-horizontal">
   {% csrf_token %}
 
     <div class="form-group">

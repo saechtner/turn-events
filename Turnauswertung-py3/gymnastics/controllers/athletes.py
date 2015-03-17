@@ -1,9 +1,10 @@
-from django.shortcuts import render
 from django.core.urlresolvers import reverse, reverse_lazy
+from django.forms import ModelForm
 from django.http import HttpResponseNotAllowed
+from django.shortcuts import render
 from django.views import generic
 
-from gymnastics.models.athlete import Athlete
+from gymnastics.models import Athlete
 
 
 def index(request):
@@ -14,7 +15,7 @@ def results(request):
     context = { 'athletes': Athlete.objects.all() }
     return render(request, 'gymnastics/athletes/results.html', context)
 
-def edit2(request, pk):
+def edit(request, pk):
     if request.method == 'GET':
         try:
             context = {'athlete': Athlete.objects.get(id=pk)}
@@ -89,22 +90,36 @@ class AthleteDetailView(generic.DetailView):
     template_name = 'gymnastics/athletes/detail.html'
 
 
-class AthleteUpdateView(generic.UpdateView):
+# TODO: remove once custom edit controller function is working ...
+# class AthleteForm(ModelForm):
 
-    model = Athlete
-    fields = ['first_name', 'last_name', 'sex', 'year_of_birth', 'club', 'squad', 'stream', 'team']
-    template_name = 'gymnastics/athletes/edit.html'
+#     class Meta:
+#         model = Athlete
+#         fields = ['first_name', 'last_name', 'sex', 'year_of_birth', 'club', 'squad', 'stream', 'team']
 
-    # context_object_name = 'athlete' # should be available as well as object because of model = Athlete
+#         # widgets = {
+#         #     name = forms.CharField(widget=forms.TextInput(attrs={'class': 'special'}))
+#         # }
 
-    def get_success_url(self):
-        some_kwargs = self.kwargs
-        return reverse('athletes.detail', kwargs = { 'pk' : self.kwargs['pk'] })
+# class AthleteUpdateView(generic.UpdateView):
 
-    # def get_context_data(self, **kwargs):
-    #     context = super(AthleteUpdateView, self).get_context_data(**kwargs)
-    #     context['latest_articles'] = Article.objects.all()[:5]
-    #     return context
+#     model = Athlete
+
+#     # necessary with form_class?
+#     fields = ['first_name', 'last_name', 'sex', 'year_of_birth', 'club', 'squad', 'stream', 'team']
+#     template_name = 'gymnastics/athletes/edit.html'
+
+#     # context_object_name = 'athlete' # should be available as well as object because of model = Athlete
+#     form_class = AthleteForm
+
+#     def get_success_url(self):
+#         some_kwargs = self.kwargs
+#         return reverse('athletes.detail', kwargs = { 'pk' : self.kwargs['pk'] })
+
+#     # def get_context_data(self, **kwargs):
+#     #     context = super(AthleteUpdateView, self).get_context_data(**kwargs)
+#     #     context['latest_articles'] = Article.objects.all()[:5]
+#     #     return context
 
 
 class AthleteDeleteView(generic.DeleteView):
