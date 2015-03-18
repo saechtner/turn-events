@@ -1,5 +1,7 @@
 {% extends "gymnastics/streams/base.html" %}
 
+{% load custom_template_tags %}
+
 {% block nav_controller_active %}<li>{% endblock nav_controller_active %}
 {% block nav_action_active %}<li class="active">{% endblock nav_action_active %}
 {% block action %}detail{% endblock action %}
@@ -68,10 +70,24 @@
           <th>Total</th>
         </thead>
         <tbody>
+          {% for athlete in stream.athlete_set.all %}
+            <tr id="athlete_{{ athlete.id }}">
+              <td><a href="{% url 'athletes.detail' athlete.id %}">{{ athlete }}</a></td>
+              {% with athlete_performance=athlete.performances %}
+                {% for discipline in disciplines %}
+                  {% if athlete_performance|get_item:discipline %}
+                  <td> {{ athlete_performance|get_item:discipline }}</td>
+                  {% else %}
+                    <td> 0.0</td>
+                  {% endif %}
+                {% endfor %}
+              {% endwith %}
+              <td>{{ athlete.total }}</td>
+            </tr>
+          {% endfor %}
         </tbody>
         {% endwith %}
       </table>
-
       </div>
 
       <div role="tabpanel" class="tab-pane" id="athletes">  

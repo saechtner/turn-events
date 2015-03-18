@@ -27,6 +27,6 @@ class Athlete(models.Model):
     def performances(self):
         performance_dict = {}
         for performance in self.performance_set.all():
-            performance_dict[performance.discipline](performance.value)
-            performance_dict['{0}_{1}'.format(performance.discipline, 'final')](performance.value_final)
+            performance_dict[performance.discipline] = (performance.value)
+            performance_dict['{0}_{1}'.format(performance.discipline, 'final')] = (performance.value_final)
         return performance_dict
