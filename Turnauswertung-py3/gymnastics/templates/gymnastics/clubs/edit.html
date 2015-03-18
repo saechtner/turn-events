@@ -4,11 +4,23 @@
 {% block nav_action_active %}<li class="active">{% endblock nav_action_active %}
 {% block action %}edit{% endblock action %}
 
+{% load widget_tweaks %}
+
 {% block content %}
   <form action="" method="post">
   {% csrf_token %}
-  {{ form.as_p }}
-    <input class="btn btn-primary" type="submit" value="Update"/>
-    <button type="button" class="btn btn-default" onClick="javascript:history.go(-1);">Cancel</button>
+
+    {% for field in form %}
+      <div class="form-group">
+        {{ field.label_tag }}
+        {{ field|add_class:"form-control" }}
+      </div>
+    {% endfor %}
+
+    {% comment %}This is exactly the same for all edit templates -> refactor!{% endcomment %}
+      <div>
+        <input class="btn btn-primary" type="submit" value="Update"/>
+        <button type="button" class="btn btn-default" onClick="javascript:history.go(-1);">Cancel</button>
+      </div>
   </form>
 {% endblock content %}
