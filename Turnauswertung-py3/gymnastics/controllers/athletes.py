@@ -30,7 +30,7 @@ def edit(request, pk):
         # print(Athlete)
         # print(dir(Athlete))
 
-        return render(request, 'gymnastics/athletes/edit2.html', context)
+        return render(request, 'gymnastics/athletes/edit.html', context)
     elif request.method == 'POST':
         # print(request.POST)
         # print(type(request.POST))
