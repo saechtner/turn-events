@@ -15,7 +15,7 @@
           {% for discipline in disciplines %}
             <tr id="discipline_{{ discipline.id }}">
               <td>{{ discipline.name }}</td>
-              <td><a  type="button" class="btn btn-xs btn-success"href="{% url 'disciplines.detail' discipline.id %}"><span class="glyphicon glyphicon-search"></span> details</a></td>
+              <td><a  type="button" class="btn btn-xs btn-success"href="{% url 'disciplines.detail' discipline.id %}"><span class="glyphicon glyphicon-search"></span> detail</a></td>
               <td><a  type="button" class="btn btn-xs btn-warning"href="{% url 'disciplines.edit' discipline.id %}"><span class="glyphicon glyphicon-edit"></span> edit</a></td>
               <td><a  type="button" class="btn btn-xs btn-danger"href="{% url 'disciplines.delete' discipline.id %}"><span class="glyphicon glyphicon-remove"></span> delete</a></td>
             </tr>
