@@ -1,9 +1,13 @@
 {% extends "gymnastics/base.html" %}
 
-{% block nav_home_active %}<li>{% endblock nav_home_active %}
-{% block nav_controller_active %}<li class="active">{% endblock nav_controller_active %}
-
-{% block nav_controller_name %}<a href="{% url 'athletes.index' %}">Athletes </a>{% endblock nav_controller_name %}
+{% load custom_template_tags %}
+                  
+{% block nav_level_0 %}
+  {% render_nav_item name='Home' url_name='home' %}
+{% endblock nav_level_0 %}
+{% block nav_level_1 %}
+  {% render_nav_item name='Athletes' url_name='athletes.index' %}
+{% endblock nav_level_1 %}
 
 {% block controller_actions %}
   <li class="dropdown">

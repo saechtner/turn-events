@@ -32,18 +32,14 @@
 
               <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
-                  {% block nav_home_active %}<li class="active">{% endblock nav_home_active %}
-                    <a href="{% url 'home' %}" class="home"><span class="glyphicon glyphicon-home"></span> Home </a>
-                  </li>
-                  {% block nav_controller_active %}<li>{% endblock nav_controller_active %}
-                    {% block nav_controller_name %}{% endblock nav_controller_name %}
-                  </li>
-                  {% block nav_action_active %}<li>{% endblock nav_action_active %}
-                    <a href="#">{% block action %}{% endblock action %}</a>
-                  </li>
-                  {% block nav_3_active %}<li>{% endblock nav_3_active %}
-                    <a href="#">{% block nav_3 %}{% endblock nav_3 %}</a>
-                  </li>
+                  {% load custom_template_tags %}
+                  
+                  {% block nav_level_0 %}
+                    {% render_nav_item name='Home' url_name='home' active=True %}
+                  {% endblock nav_level_0 %}
+                  {% block nav_level_1 %}{% endblock nav_level_1 %}
+                  {% block nav_level_2 %}{% endblock nav_level_2 %}
+                  {% block nav_level_3 %}{% endblock nav_level_3 %}
                 </ul>
 
                 <ul class="nav navbar-nav navbar-right">
@@ -82,12 +78,10 @@
       </div>
 
       <div class="container">
-        {% block content %}
-        {% endblock content %}
+        {% block content %}{% endblock content %}
       </div>
 
-      {% block content_fullwidth %}
-      {% endblock content_fullwidth %}
+      {% block content_fullwidth %}{% endblock content_fullwidth %}
     </div>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>

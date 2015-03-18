@@ -1,0 +1,19 @@
+{% if active == True %}
+  <li class="active">
+  <a href="#" >
+{% else %}
+  <li>
+  {% if url_id %}
+    <a href="{% url url_name url_id %}" >
+  {% else %}
+    <a href="{% url url_name %}" >
+  {% endif %}
+{% endif %}
+
+{% if url_name == 'home' %}
+  <span class="glyphicon glyphicon-home"></span> 
+{% endif %}
+
+{{ name }}
+</a>
+</li>
