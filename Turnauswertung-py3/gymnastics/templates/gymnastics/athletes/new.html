@@ -6,17 +6,26 @@
   {% render_nav_item name='new' active=True %}
 {% endblock nav_level_2 %}
 
-{% block content %}
-  <div class="row">
+{% load widget_tweaks %}
 
-  <form action="" method="post">
-  {% csrf_token %}
-    <table>
-      {{ form }}
-    </table>
+{% block content %}
+<form action="" method="post" class="form-horizontal">
+{% csrf_token %}
+
+  {% for field in form %}
+    <div class="form-group row text-right">
+      <label class="col-md-2 control-label" for="id_{{ field.name }}">{{ field.label }}</label>
+      <div class="col-md-4">
+        {{ field|add_class:"form-control" }}
+      </div>
+    </div>
+  {% endfor %}
+
+  <div class="col-md-2">
+  </div>
+  <div class="col-md-5 btn-group">
     <input class="btn btn-primary" type="submit" value="Create athlete"/>
     <button class="btn btn-default" type="button" onClick="javascript:history.go(-1);">Cancel</button>
-  </form>
-
   </div>
+</form>
 {% endblock content %}

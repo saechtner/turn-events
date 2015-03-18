@@ -11,7 +11,7 @@ urlpatterns = patterns('',
     url(r'^athletes/new$', athletes.AthleteCreateView.as_view(), name='athletes.new'),
     url(r'^athletes/results$', athletes.results, name='athletes.results'),
     url(r'^athletes/(?P<pk>\d+)$', athletes.AthleteDetailView.as_view(), name='athletes.detail'),
-    url(r'^athletes/(?P<pk>\d+)/edit$', athletes.edit, name='athletes.edit'),
+    url(r'^athletes/(?P<pk>\d+)/edit$', athletes.AthleteUpdateView.as_view(), name='athletes.edit'),
     url(r'^athletes/(?P<pk>\d+)/delete$', athletes.AthleteDeleteView.as_view(), name='athletes.delete'),
 
     url(r'^clubs$', clubs.index, name='clubs.index'),
