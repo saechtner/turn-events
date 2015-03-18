@@ -57,7 +57,21 @@
         </ul></p>
       </div>
 
-      <div role="tabpanel" class="tab-pane" id="results">  
+      <div role="tabpanel" class="tab-pane" id="results">
+      <table class="table table-hover" id="stream-table">
+        {% with disciplines=stream.discipline_set.all %}
+        <thead>
+          <th>Athlete</th>
+          {% for discipline in disciplines %}
+            <th><a href="{% url 'disciplines.detail' discipline.id %}">{{ discipline }}</a></th>
+          {% endfor %}
+          <th>Total</th>
+        </thead>
+        <tbody>
+        </tbody>
+        {% endwith %}
+      </table>
+
       </div>
 
       <div role="tabpanel" class="tab-pane" id="athletes">  

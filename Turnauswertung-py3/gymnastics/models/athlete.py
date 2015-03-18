@@ -23,3 +23,10 @@ class Athlete(models.Model):
 
     def total(self):
         return self.performance_set.aggregate(Sum('performance')).get('performance__sum', 0.00)
+
+    def performances(self):
+        performance_dict = {}
+        for performance in self.performance_set.all():
+            performance_dict.update({performance.athlete:performance.value})
+            performance_dict.update({"{0}_{1}".format(performance.discipline, "final"):performance.value_final})
+        return performance_dict
