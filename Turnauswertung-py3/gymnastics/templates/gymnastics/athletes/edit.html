@@ -11,7 +11,7 @@
 
 {% block content %}
   <form action="{% url 'athletes.edit' athlete.id %}" method="post" class="form-horizontal">
-  {% csrf_token %}
+    {% csrf_token %}
 
     <div class="form-group">
       <label for="input_first_name" class="col-md-2 control-label">First name:</label>

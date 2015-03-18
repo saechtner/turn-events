@@ -7,20 +7,23 @@
 {% load widget_tweaks %}
 
 {% block content %}
-  <form action="" method="post">
-  {% csrf_token %}
+  <form action="" method="post" class="form-horizontal">
+    {% csrf_token %}
 
     {% for field in form %}
-      <div class="form-group">
-        {{ field.label_tag }}
-        {{ field|add_class:"form-control" }}
+      <div class="form-group row text-right">
+        <label class="col-md-2 control-label" for="id_{{ field.name }}">{{ field.label }}</label>
+        <div class="col-md-4">
+          {{ field|add_class:"form-control" }}
+        </div>
       </div>
     {% endfor %}
 
-    {% comment %}This is exactly the same for all edit templates -> refactor!{% endcomment %}
-      <div>
-        <input class="btn btn-primary" type="submit" value="Update"/>
-        <button type="button" class="btn btn-default" onClick="javascript:history.go(-1);">Cancel</button>
-      </div>
+    <div class="col-md-2">
+    </div>
+    <div class="col-md-5 btn-group">
+      <input class="btn btn-primary" type="submit" value="Update"/>
+      <button type="button" class="btn btn-default" onClick="javascript:history.go(-1);">Cancel</button>
+    </div>
   </form>
 {% endblock content %}
