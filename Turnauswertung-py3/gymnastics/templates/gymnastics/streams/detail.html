@@ -13,6 +13,7 @@
       <h1>
         {{ stream }}
         <small>
+        {{ stream.athlete_set.count }} Athletes
         </small>
       </h1>
     </div>
@@ -29,9 +30,20 @@
     <!-- Nav tabs -->
     <ul class="nav nav-tabs" role="tablist">
       <li role="presentation" class="active"><a href="#base" aria-controls="home" role="tab" data-toggle="tab">Base</a></li>
-      <li role="presentation"><a href="#athletes" aria-controls="messages" role="tab" data-toggle="tab">Athletes ({{ stream.athlete_set.count }})</a></li>
-      <li role="presentation"><a href="#results" aria-controls="profile" role="tab" data-toggle="tab">Results</a></li>
+      <li role="presentation"><a href="#athletes" aria-controls="messages" role="tab" data-toggle="tab">Athletes</a></li>
+      {% if stream.all_around_individual %}
+        <li role="presentation"><a href="#results_all_around" aria-controls="profile" role="tab" data-toggle="tab">All Around Results</a></li>
+      {% endif %}
+      {% if stream.all_around_team %}
+        <li role="presentation"><a href="#teams" aria-controls="profile" role="tab" data-toggle="tab">Teams</a></li>
+        <li role="presentation"><a href="#results_team" aria-controls="profile" role="tab" data-toggle="tab">Team Results (toDo)</a></li>
+      {% endif %}
+      {% if stream.discipline_finals %}
+        <li role="presentation"><a href="#athletes_final" aria-controls="profile" role="tab" data-toggle="tab">Final Participants (toDo)</a></li>
+        <li role="presentation"><a href="#results_final" aria-controls="profile" role="tab" data-toggle="tab">Final Results (toDo)</a></li>
+      {% endif %}
     </ul>
+
 
     <!-- Tab panes -->
     <div class="tab-content">
@@ -60,8 +72,9 @@
         </ul></p>
       </div>
 
+
       <div role="tabpanel" class="tab-pane" id="athletes"> 
-        <table class="table table-hover" id="athletes-table">
+        <table class="table table-hover table-condensed" id="athletes-table">
           <thead>
             <th>Name</th>
             <th>Sex</th>
@@ -89,70 +102,96 @@
         </table>
       </div>
 
-      <div role="tabpanel" class="tab-pane" id="results">
+
+      <div role="tabpanel" class="tab-pane" id="results_all_around">
         {% with disciplines=stream.discipline_set.all %}
-          {% if stream.all_around_individual %}
-            <div>All around individual:</div>
-            <table class="table table-hover table-condensed" id="stream-table">
-              <thead>
-                <th>Athlete</th>
-                  {% for discipline in disciplines %}
-                    <th><a href="{% url 'disciplines.detail' discipline.id %}">{{ discipline }}</a></th>
-                  {% endfor %}
-                <th>Total</th>
-              </thead>
-              <tbody>
-                {% for athlete in stream.athlete_set.all %}
-                  <tr id="athlete_{{ athlete.id }}">
-                    <td><a href="{% url 'athletes.detail' athlete.id %}">{{ athlete }}</a></td>
-                      {% with athlete_performances=athlete.performances %}
-                        {% for discipline in disciplines %}
-                          <td>
-                            {% if athlete_performances|get_item:discipline %}
-                               {{ athlete_performances|get_item:discipline }}
-                            {% endif %}
-                          </td>
-                        {% endfor %}
-                      {% endwith %}
-                    <td>
-                      {% if athlete.performance_total %}
-                        {{ athlete.performance_total }}
-                      {% endif %}
-                    </td>
-                  </tr>
+          <table class="table table-hover table-condensed" id="stream-table">
+            <thead>
+              <th>Athlete</th>
+                {% for discipline in disciplines %}
+                  <th><a href="{% url 'disciplines.detail' discipline.id %}">{{ discipline }}</a></th>
                 {% endfor %}
-              </tbody>
-            </table>
-          {% endif %}
-          {% if stream.all_around_team %}
-            <div>All around team (toDo):</div>
-            <table class="table table-hover table-condensed" id="stream-table">
-              <thead>
-                <th>Athlete</th>
-                  {% for discipline in disciplines %}
-                    <th><a href="{% url 'disciplines.detail' discipline.id %}">{{ discipline }}</a></th>
-                  {% endfor %}
-                <th>Total</th>
-              </thead>
-              <tbody>
-              </tbody>
-            </table>
-          {% endif %}
-          {% if stream.discipline_finals %}
-            <div>Discipline finals (toDo):</div>
-            <table class="table table-hover table-condensed" id="stream-table">
-              <thead>
-                <th>Athlete</th>
-                  {% for discipline in disciplines %}
-                    <th><a href="{% url 'disciplines.detail' discipline.id %}">{{ discipline }}</a></th>
-                  {% endfor %}
-                <th>Total</th>
-              </thead>
-              <tbody>
-              </tbody>
-            </table>
-          {% endif %}
+              <th>Total</th>
+            </thead>
+            <tbody>
+              {% for athlete in stream.athlete_set.all %}
+                <tr id="athlete_{{ athlete.id }}">
+                  <td><a href="{% url 'athletes.detail' athlete.id %}">{{ athlete }}</a></td>
+                    {% with athlete_performances=athlete.performances %}
+                      {% for discipline in disciplines %}
+                        <td>
+                          {% if athlete_performances|get_item:discipline %}
+                             {{ athlete_performances|get_item:discipline }}
+                          {% endif %}
+                        </td>
+                      {% endfor %}
+                    {% endwith %}
+                  <td>
+                    {% if athlete.performance_total %}
+                      {{ athlete.performance_total }}
+                    {% endif %}
+                  </td>
+                </tr>
+              {% endfor %}
+            </tbody>
+          </table>
         {% endwith %}
+      </div>
+
+
+      <div role="tabpanel" class="tab-pane" id="teams">
+        <table class="table table-hover" id="team-table">
+          <thead>
+            <th>Name</th>
+            <th>Club</th>
+          </thead>
+          <tbody>
+            {% for team in stream.team_set.all %}
+              <tr id="team_{{ team.id }}">
+                <td><a href="{% url 'teams.detail' team.id %}">{{ team.name }}</a></td>
+                <td>
+                  {% if team.club %}
+                    <a href="{% url 'clubs.detail' team.club.id %}">{{ team.club }}</a>
+                  {% endif %}
+                </td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+
+
+      <div role="tabpanel" class="tab-pane" id="results_team">
+        <table class="table table-hover table-condensed" id="stream-table">
+          <thead>
+            <th>Team</th>
+              {% for discipline in disciplines %}
+                <th><a href="{% url 'disciplines.detail' discipline.id %}">{{ discipline }}</a></th>
+              {% endfor %}
+            <th>Total</th>
+          </thead>
+          <tbody>
+          </tbody>
+        </table>
+      </div>
+
+
+      <div role="tabpanel" class="tab-pane" id="athletes_final">
+      </div>
+
+
+      <div role="tabpanel" class="tab-pane" id="results_final">
+        <table class="table table-hover table-condensed" id="stream-table">
+          <thead>
+            <th>Athlete</th>
+              {% for discipline in disciplines %}
+                <th><a href="{% url 'disciplines.detail' discipline.id %}">{{ discipline }}</a></th>
+              {% endfor %}
+            <th>Total</th>
+          </thead>
+          <tbody>
+          </tbody>
+        </table>
       </div>
     </div>
   </div> 

@@ -26,6 +26,7 @@
               <td><a  type="button" class="btn btn-xs btn-success"href="{% url 'teams.detail' team.id %}"><span class="glyphicon glyphicon-search"></span> detail</a></td>
               <td><a  type="button" class="btn btn-xs btn-warning"href="{% url 'teams.edit' team.id %}"><span class="glyphicon glyphicon-edit"></span> edit</a></td>
               <td><a  type="button" class="btn btn-xs btn-danger"href="{% url 'teams.delete' team.id %}"><span class="glyphicon glyphicon-remove"></span> delete</a></td>
+            </tr>
           {% endfor %}
         </tbody>
       </table>
