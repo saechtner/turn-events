@@ -4,12 +4,42 @@
 {% block nav_action_active %}<li class="active">{% endblock nav_action_active %}
 {% block action %}detail{% endblock action %}
 
-{% block content %}
-  <h1>Club Detail</h1>
-  <p>{{ object.content }}</p>
-  <p>Name: {{ object.name }}</p>
 
-  <a type="button" class="btn btn-warning" href="{% url 'clubs.edit' object.id %}">Edit</a>
-  <a type="button" class="btn btn-danger" href="{% url 'clubs.delete' object.id %}">Delete</a>
-  <button type="button" class="btn btn-default" onClick="javascript:history.go(-1);">Previous Page</button>
+{% block content %}
+  <div class="row row-relative">
+    <div class="col-md-8">
+      <h1>
+        {{ club }}
+        <small>
+        {{ club.athlete_set.count }} Athletes
+        </small>
+      </h1>
+    </div>
+    <div class="col-md-4 div-pos-bottom-right text-right">
+      <div class="btn-group">
+        <a type="button" class="btn btn-warning" href="{% url 'clubs.edit' club.id %}">Edit</a>
+        <a type="button" class="btn btn-danger" href="{% url 'clubs.delete' club.id %}">Delete</a>
+        <button type="button" class="btn btn-default" onClick="javascript:history.go(-1);">Previous Page</button>
+      </div>
+    </div>
+  </div>
+
+  <div role="tabpanel">
+    <!-- Nav tabs -->
+    <ul class="nav nav-tabs" role="tablist">
+      <li role="presentation" class="active"><a href="#base" aria-controls="home" role="tab" data-toggle="tab">General</a></li>
+      <li role="presentation"><a href="#athletes" aria-controls="messages" role="tab" data-toggle="tab">Athletes</a></li>
+    </ul>
+
+    <!-- Tab panes -->
+    <div class="tab-content">
+      <div role="tabpanel" class="tab-pane active" id="base">
+        <p>Name: {{ club.name }}</p>
+      </div>
+
+      <div role="tabpanel" class="tab-pane" id="athletes"> 
+        {% include "base/athletes_list.html" with athletes_set=club.athlete_set only %}
+      </div>
+    </div>
+  </div> 
 {% endblock content %}

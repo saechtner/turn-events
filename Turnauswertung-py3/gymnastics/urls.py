@@ -16,7 +16,7 @@ urlpatterns = patterns('',
 
     url(r'^clubs$', clubs.index, name='clubs.index'),
     url(r'^clubs/new$', clubs.ClubCreateView.as_view(), name='clubs.new'),
-    url(r'^clubs/(?P<pk>\d+)$', clubs.ClubDetailView.as_view(), name='clubs.detail'),
+    url(r'^clubs/(?P<id>\d+)$', clubs.detail, name='clubs.detail'),
     url(r'^clubs/(?P<pk>\d+)/edit$', clubs.ClubUpdateView.as_view(), name='clubs.edit'),
     url(r'^clubs/(?P<pk>\d+)/delete$', clubs.ClubDeleteView.as_view(), name='clubs.delete'),
 

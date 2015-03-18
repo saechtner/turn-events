@@ -9,6 +9,10 @@ def index(request):
     context = { 'clubs': Club.objects.all() }
     return render(request, 'gymnastics/clubs/index.html', context)
 
+def detail(request, id):
+    context = { 'club': Club.objects.get(id=id) }
+    return render(request, 'gymnastics/clubs/detail.html', context)
+
 
 class ClubCreateView(generic.CreateView):
 
@@ -16,12 +20,6 @@ class ClubCreateView(generic.CreateView):
     fields = ['name']
     template_name = 'gymnastics/clubs/new.html'
     success_url = reverse_lazy('clubs.index')
-
-
-class ClubDetailView(generic.DetailView):
-
-    model = Club
-    template_name = 'gymnastics/clubs/detail.html'
 
 
 class ClubUpdateView(generic.UpdateView):
