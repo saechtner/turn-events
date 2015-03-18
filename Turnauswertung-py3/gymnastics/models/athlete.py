@@ -19,14 +19,14 @@ class Athlete(models.Model):
         db_table = 'gymnastics_athletes'
 
     def __str__(self):
-        return "{0} {1}".format(self.first_name, self.last_name)
+        return '{0} {1}'.format(self.first_name, self.last_name)
 
     def total(self):
-        return self.performance_set.aggregate(Sum('performance')).get('performance__sum', 0.00)
+        return self.performance_set.aggregate(Sum('value')).get('value__sum', 0.00)
 
     def performances(self):
         performance_dict = {}
         for performance in self.performance_set.all():
-            performance_dict.update({performance.athlete:performance.value})
-            performance_dict.update({"{0}_{1}".format(performance.discipline, "final"):performance.value_final})
+            performance_dict[performance.discipline](performance.value)
+            performance_dict['{0}_{1}'.format(performance.discipline, 'final')](performance.value_final)
         return performance_dict
