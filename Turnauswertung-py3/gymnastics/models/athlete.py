@@ -21,8 +21,11 @@ class Athlete(models.Model):
     def __str__(self):
         return '{0} {1}'.format(self.first_name, self.last_name)
 
-    def total(self):
-        return self.performance_set.aggregate(Sum('value')).get('value__sum', 0.00)
+    def performance_total(self):
+        return self.performance_set.order_by("value")[0:self.stream.all_around_individual_counting_events].aggregate(Sum('value')).get('value__sum', 0.00)
+
+    def performance_final_total(self):
+        return self.performance_set.order_by("value_final").aggregate(Sum('value_final')).get('value__sum', 0.00)
 
     def performances(self):
         performance_dict = {}
