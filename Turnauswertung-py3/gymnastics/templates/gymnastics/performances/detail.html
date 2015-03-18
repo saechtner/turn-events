@@ -12,7 +12,7 @@
   <p>Discipline: {{ object.discipline }}</p>
   <p>Value: {{ object.value }}</p>
   {% if object.performance_final %}
-    <p>Performance Final: {{ object.value_final }}</p>
+    <p>Value Final: {{ object.value_final }}</p>
   {% endif %}
   <a type="button" class="btn btn-warning" href="{% url 'performances.edit' object.id %}">Edit</a>
   <a type="button" class="btn btn-danger" href="{% url 'performances.delete' object.id %}">Delete</a>
