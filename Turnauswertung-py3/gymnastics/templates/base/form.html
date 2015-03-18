@@ -1,0 +1,20 @@
+{% load widget_tweaks %}
+
+
+<form action="" method="post" class="form-horizontal">
+{% csrf_token %}
+
+  {% for field in form %}
+    <div class="form-group row text-right">
+      <label class="col-md-2 col-md-offset-2 control-label" for="id_{{ field.name }}">{{ field.label }}</label>
+      <div class="col-md-4">
+        {{ field|add_class:"form-control" }}
+      </div>
+    </div>
+  {% endfor %}
+
+  <div class="col-md-5 col-md-offset-4 btn-group">
+    <input class="btn btn-primary" type="submit" value="{% if mode == 'new' %}Create{% else %}Update{% endif %}"/>
+    <button class="btn btn-default" type="button" onClick="javascript:history.go(-1);">Cancel</button>
+  </div>
+</form>
