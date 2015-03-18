@@ -29,16 +29,16 @@
               <td>{{ athlete.first_name }}</td>
               <td>{{ athlete.last_name }}</td>
               {% if athlete.sex == 'f' %}
-                <td class="gend gend-female"> &#9792;</td>
+                <td class="gend gend-female"><i class="fa fa-venus fa-fw"></i></td>
               {% else %}
-                <td class="gend gend-male"> &#9794;</td>
+                <td class="gend gend-male"><i class="fa fa-mars fa-fw"></i></td>
               {% endif %}
               <td>{{ athlete.year_of_birth }}</td>
               <td><a href="{% url 'clubs.detail' athlete.club.id %}">{{ athlete.club }}</a></td>
               <td><a href="{% url 'squads.detail' athlete.squad.id %}">{{ athlete.squad }}</a></td>
               <td><a href="{% url 'streams.detail' athlete.stream.id %}">{{ athlete.stream }}</a></td>
               <td><a href="{% url 'teams.detail' athlete.team.id %}">{{ athlete.team }}</a></td>
-              <td>
+              <td class="text-center">
                 <div class="btn-group" role="group">
                   <a  type="button" class="btn btn-xs btn-success"href="{% url 'athletes.detail' athlete.id %}"><span class="glyphicon glyphicon-search"></span> detail</a>
                   <a  type="button" class="btn btn-xs btn-warning"href="{% url 'athletes.edit' athlete.id %}"><span class="glyphicon glyphicon-edit"></span> edit</a>
