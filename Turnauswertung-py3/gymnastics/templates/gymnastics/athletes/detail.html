@@ -47,7 +47,47 @@
         <p>Team: {{ object.team }}</p>
       </div>
 
-      <div role="tabpanel" class="tab-pane" id="performances">  
+      <div role="tabpanel" class="tab-pane" id="performances">
+        {% if object.stream.all_around_individual %}
+          <table class="table table-hover table-condensed" id="stream-table">
+            <thead>
+              <th>Discipline</th>
+              <th>Value</th>
+              {% if object.stream.discipline_finals %}  
+                <th>Final Value</th>
+                <th>Final Rank</th>
+              {% endif %}
+            </thead>
+            <tbody>
+              {% for performance in object.performance_set.all %}
+                <tr id="performance_{{ performance.id }}">
+                  <td><a href="{% url 'disciplines.detail' performance.id %}">{{ performance.discipline }}</a></td>
+                  <td>{{ performance.value }}</td>
+                  {% if object.stream.discipline_finals %}    
+                    <td>{{ performance.value_final }}</td>
+                    <td>toDo</td>
+                  {% endif %}
+                </tr>
+              {% endfor %}
+                <tr id="performance_total">
+                  <td>Total</td>
+                  <td>{{ object.performance_total }}</td>
+                  {% if object.stream.discipline_finals %}  
+                    <td></td>
+                    <td></td>
+                  {% endif %}
+                </tr>
+                <tr id="performance_rank">
+                  <td>Rank</td>
+                  <td>toDo</td>
+                  {% if object.stream.discipline_finals %}
+                    <td></td>
+                    <td></td>
+                  {% endif %}
+                </tr>
+            </tbody>
+          </table>
+        {% endif %}
       </div>
 
       <div role="tabpanel" class="tab-pane" id="placements">  

@@ -36,7 +36,7 @@ class StreamUpdateView(generic.UpdateView):
 
     def get_success_url(self):
         some_kwargs = self.kwargs
-        return reverse('streams.detail', kwargs = { 'pk' : self.kwargs['pk'] })
+        return reverse('streams.detail', kwargs = { 'id' : self.kwargs['pk'] })
 
 
 class StreamDeleteView(generic.DeleteView):
