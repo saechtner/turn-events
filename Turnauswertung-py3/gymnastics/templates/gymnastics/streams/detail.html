@@ -87,27 +87,31 @@
                   <th><a href="{% url 'disciplines.detail' discipline.id %}">{{ discipline }}</a></th>
                 {% endfor %}
               <th>All Arround</th>
+              <th>Rank</th>
             </thead>
             <tbody>
-              {% for athlete in stream.athlete_set.all %}
-                <tr id="athlete_{{ athlete.id }}">
-                  <td><a href="{% url 'athletes.detail' athlete.id %}">{{ athlete }}</a></td>
-                    {% with athlete_performances=athlete.performances %}
-                      {% for discipline in disciplines %}
-                        <td>
-                          {% if athlete_performances|get_item:discipline %}
-                             {{ athlete_performances|get_item:discipline }}
-                          {% endif %}
-                        </td>
-                      {% endfor %}
-                    {% endwith %}
-                  <td>
-                    {% if athlete.performance_total %}
-                      {{ athlete.performance_total }}
-                    {% endif %}
-                  </td>
-                </tr>
-              {% endfor %}
+              {% with athlete_ranks=stream.ranks %}
+                {% for athlete in stream.athlete_set.all %}
+                  <tr id="athlete_{{ athlete.id }}">
+                    <td><a href="{% url 'athletes.detail' athlete.id %}">{{ athlete }}</a></td>
+                      {% with athlete_performances=athlete.performances %}
+                        {% for discipline in disciplines %}
+                          <td>
+                            {% if athlete_performances|get_item:discipline %}
+                               {{ athlete_performances|get_item:discipline }}
+                            {% endif %}
+                          </td>
+                        {% endfor %}
+                      {% endwith %}
+                    <td>
+                      {% if athlete.performance_total %}
+                        {{ athlete.performance_total }}
+                      {% endif %}
+                    </td>
+                    <td>{{ athlete_ranks|get_item:athlete }}</td>
+                  </tr>
+                {% endfor %}
+              {% endwith %}
             </tbody>
           </table>
         {% endwith %}

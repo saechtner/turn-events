@@ -22,3 +22,19 @@ class Stream(models.Model):
         
     def __str__(self):
         return "{0} {1}".format(self.difficulty, self.get_sex_display())
+
+    # fix problem on same values here
+    def ranks(self):
+        athlete_dict = {}
+        for athlete in self.athlete_set.all():
+            athlete_dict[athlete.performance_total()] = athlete
+        rank = 1
+        prev = -1
+        ranks_dict = {}  
+        for total_value, athlete_object in sorted(athlete_dict.items(), reverse=True):
+            ranks_dict[athlete_object] = rank
+            # if total_value != prev:
+            #     rank += 1
+            # prev = total_value
+            rank += 1
+        return ranks_dict
