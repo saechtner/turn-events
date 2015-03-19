@@ -110,7 +110,11 @@
                         {{ athlete.performance_total }}
                       {% endif %}
                     </td>
-                    <td>{{ athlete_ranks|get_item:athlete }}</td>
+                    <td>
+                      {% if athlete_ranks|get_item:athlete %}
+                        {{ athlete_ranks|get_item:athlete }}
+                      {% endif %}
+                    </td>
                   </tr>
                 {% endfor %}
               {% endwith %}
