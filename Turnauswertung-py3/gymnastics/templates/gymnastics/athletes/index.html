@@ -12,42 +12,7 @@
     {% if athletes %}
 
       <table class="table table-hover" id="athletes-table">
-        <thead>
-          <th>First Name</th>
-          <th>Last Name</th>
-          <th>Sex</th>
-          <th>Year of birth</th>
-          <th>Club</th>
-          <th>Squad</th>
-          <th>Stream</th>
-          <th>Team</th>
-          <th></th>
-        </thead>
-        <tbody>
-          {% for athlete in athletes %}
-            <tr id="athlete_{{ athlete.id }}">
-              <td>{{ athlete.first_name }}</td>
-              <td>{{ athlete.last_name }}</td>
-              {% if athlete.sex == 'f' %}
-                <td class="gend gend-female"><i class="fa fa-venus fa-fw"></i></td>
-              {% else %}
-                <td class="gend gend-male"><i class="fa fa-mars fa-fw"></i></td>
-              {% endif %}
-              <td>{{ athlete.year_of_birth }}</td>
-              <td><a href="{% url 'clubs.detail' athlete.club.id %}">{{ athlete.club }}</a></td>
-              <td><a href="{% url 'squads.detail' athlete.squad.id %}">{{ athlete.squad }}</a></td>
-              <td><a href="{% url 'streams.detail' athlete.stream.id %}">{{ athlete.stream }}</a></td>
-              <td><a href="{% url 'teams.detail' athlete.team.id %}">{{ athlete.team }}</a></td>
-              <td class="text-center">
-                <div class="btn-group" role="group">
-                  <a  type="button" class="btn btn-xs btn-success"href="{% url 'athletes.detail' athlete.id %}"><span class="glyphicon glyphicon-search"></span> detail</a>
-                  <a  type="button" class="btn btn-xs btn-warning"href="{% url 'athletes.edit' athlete.id %}"><span class="glyphicon glyphicon-edit"></span> edit</a>
-                  <a  type="button" class="btn btn-xs btn-danger"href="{% url 'athletes.delete' athlete.id %}"><span class="glyphicon glyphicon-remove"></span> delete</a>
-                </div>
-              </td>
-            </tr>
-          {% endfor %}
-        </tbody>
+        {% include "base/athletes_list.html" with athletes_set=athletes only %}
       </table>
 
     {% else %}

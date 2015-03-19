@@ -73,8 +73,10 @@
       </div>
 
 
-      <div role="tabpanel" class="tab-pane" id="athletes"> 
-        {% include "base/athletes_list.html" with athletes_set=stream.athlete_set only %}
+      <div role="tabpanel" class="tab-pane" id="athletes">
+        <table class="table table-hover table-condensed" id="athletes-table">
+          {% include "base/athletes_list.html" with athletes_set=stream.athlete_set only %}
+        </table>
       </div>
 
 
@@ -120,22 +122,7 @@
 
       <div role="tabpanel" class="tab-pane" id="teams">
         <table class="table table-hover table-condensed" id="team-table">
-          <thead>
-            <th>Name</th>
-            <th>Club</th>
-          </thead>
-          <tbody>
-            {% for team in stream.team_set.all %}
-              <tr id="team_{{ team.id }}">
-                <td><a href="{% url 'teams.detail' team.id %}">{{ team.name }}</a></td>
-                <td>
-                  {% if team.club %}
-                    <a href="{% url 'clubs.detail' team.club.id %}">{{ team.club }}</a>
-                  {% endif %}
-                </td>
-              </tr>
-            {% endfor %}
-          </tbody>
+          {% include "base/teams_list.html" with teams_set=stream.team_set only %}
         </table>
       </div>
 

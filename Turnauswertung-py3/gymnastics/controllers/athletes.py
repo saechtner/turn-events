@@ -8,7 +8,7 @@ from gymnastics.models import Athlete
 
 
 def index(request):
-    context = { 'athletes': Athlete.objects.all() }
+    context = { 'athletes': Athlete.objects }
     return render(request, 'gymnastics/athletes/index.html', context)
 
 def results(request):

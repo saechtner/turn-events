@@ -1,0 +1,30 @@
+<thead>
+  <th>Name</th>
+  <th>Club</th>
+  <th>Stream</th>
+  <th></th>
+</thead>
+<tbody>
+  {% for team in teams_set.all %}
+    <tr id="team_{{ team.id }}">
+      <td>{{ team.name }}</td>
+      <td>
+        {% if team.club %}
+          <a href="{% url 'clubs.detail' team.club.id %}">{{ team.club }}</a>
+        {% endif %}
+      </td>
+      <td>
+        {% if team.stream %}
+          <a href="{% url 'streams.detail' team.stream.id %}">{{ team.stream }}</a>
+        {% endif %}
+      </td>
+      <td class="text-center">
+        <div class="btn-group" role="group">
+          <a  type="button" class="btn btn-xs btn-success"href="{% url 'teams.detail' team.id %}"><span class="glyphicon glyphicon-search"></span> detail</a>
+          <a  type="button" class="btn btn-xs btn-warning"href="{% url 'teams.edit' team.id %}"><span class="glyphicon glyphicon-edit"></span> edit</a>
+          <a  type="button" class="btn btn-xs btn-danger"href="{% url 'teams.delete' team.id %}"><span class="glyphicon glyphicon-remove"></span> delete</a>
+        </div>
+      </td>
+    </tr>
+  {% endfor %}
+</tbody>
