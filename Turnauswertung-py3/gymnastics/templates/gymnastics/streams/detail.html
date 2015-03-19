@@ -2,9 +2,9 @@
 
 {% load custom_template_tags %}
 
-{% block nav_controller_active %}<li>{% endblock nav_controller_active %}
-{% block nav_action_active %}<li class="active">{% endblock nav_action_active %}
-{% block action %}detail{% endblock action %}
+{% block nav_level_2 %}
+  {% render_nav_item name=stream active=True %}
+{% endblock nav_level_2 %}
 
 {% block content %}
 
@@ -29,7 +29,7 @@
   <div role="tabpanel">
     <!-- Nav tabs -->
     <ul class="nav nav-tabs" role="tablist">
-      <li role="presentation" class="active"><a href="#base" aria-controls="home" role="tab" data-toggle="tab">Base</a></li>
+      <li role="presentation" class="active"><a href="#base" aria-controls="home" role="tab" data-toggle="tab">General</a></li>
       <li role="presentation"><a href="#athletes" aria-controls="messages" role="tab" data-toggle="tab">Athletes</a></li>
       {% if stream.all_around_individual %}
         <li role="presentation"><a href="#athletes_results" aria-controls="profile" role="tab" data-toggle="tab">Athletes Results</a></li>

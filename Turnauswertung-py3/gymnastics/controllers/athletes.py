@@ -11,6 +11,10 @@ def index(request):
     context = { 'athletes': Athlete.objects }
     return render(request, 'gymnastics/athletes/index.html', context)
 
+def detail(request, id):
+    context = { 'athlete': Athlete.objects.get(id=id) }
+    return render(request, 'gymnastics/athletes/detail.html', context)
+
 def results(request):
     context = { 'athletes': Athlete.objects.all() }
     return render(request, 'gymnastics/athletes/results.html', context)
@@ -22,12 +26,6 @@ class AthleteCreateView(generic.CreateView):
     fields = ['first_name', 'last_name', 'sex', 'year_of_birth', 'club', 'squad', 'stream', 'team']
     template_name = 'gymnastics/athletes/new.html'
     success_url = reverse_lazy('athletes.index')
-
-
-class AthleteDetailView(generic.DetailView):
-
-    model = Athlete
-    template_name = 'gymnastics/athletes/detail.html'
 
 
 class AthleteUpdateView(generic.UpdateView):

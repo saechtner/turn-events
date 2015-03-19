@@ -3,7 +3,7 @@
 {% load custom_template_tags %}
 
 {% block nav_level_2 %}
-  {% render_nav_item name=object active=True %}
+  {% render_nav_item name=athlete active=True %}
 {% endblock nav_level_2 %}
 
 {% block content %}
@@ -11,18 +11,13 @@
   <div class="row row-relative">
     <div class="col-md-8">
       <h1>
-        {{ object }}
-        <!-- </br> -->
-        <small>
-        {{ object.club }}
-        <!-- ({{ object.stream }}) -->
-        </small>
+        {{ athlete }} <small>{{ athlete.club }}</small>
       </h1>
     </div>
     <div class="col-md-4 div-pos-bottom-right text-right">
       <div class="btn-group">
-        <a type="button" class="btn btn-warning" href="{% url 'athletes.edit' object.id %}">Edit</a>
-        <a type="button" class="btn btn-danger" href="{% url 'athletes.delete' object.id %}">Delete</a>
+        <a type="button" class="btn btn-warning" href="{% url 'athletes.edit' athlete.id %}">Edit</a>
+        <a type="button" class="btn btn-danger" href="{% url 'athletes.delete' athlete.id %}">Delete</a>
         <button type="button" class="btn btn-default" onClick="javascript:history.go(-1);">Previous Page</button>
       </div>
     </div>
@@ -31,7 +26,7 @@
   <div role="tabpanel">
     <!-- Nav tabs -->
     <ul class="nav nav-tabs" role="tablist">
-      <li role="presentation" class="active"><a href="#base" aria-controls="home" role="tab" data-toggle="tab">Base</a></li>
+      <li role="presentation" class="active"><a href="#base" aria-controls="home" role="tab" data-toggle="tab">General</a></li>
       <li role="presentation"><a href="#performances" aria-controls="profile" role="tab" data-toggle="tab">Performances</a></li>
       <li role="presentation"><a href="#placements" aria-controls="messages" role="tab" data-toggle="tab">Placements</a></li>
     </ul>
@@ -39,31 +34,31 @@
     <!-- Tab panes -->
     <div class="tab-content">
       <div role="tabpanel" class="tab-pane active" id="base">
-        <p>Sex: {{ object.get_sex_display }}</p>
-        <p>Year of birth: {{ object.year_of_birth }}</p>
-        <p>Club: {{ object.club }}</p>
-        <p>Squad: {{ object.squad }}</p>
-        <p>Stream: {{ object.stream }}</p>
-        <p>Team: {{ object.team }}</p>
+        <p>Sex: {{ athlete.get_sex_display }}</p>
+        <p>Year of birth: {{ athlete.year_of_birth }}</p>
+        <p>Club: {{ athlete.club }}</p>
+        <p>Squad: {{ athlete.squad }}</p>
+        <p>Stream: {{ athlete.stream }}</p>
+        <p>Team: {{ athlete.team }}</p>
       </div>
 
       <div role="tabpanel" class="tab-pane" id="performances">
-        {% if object.stream.all_around_individual %}
+        {% if athlete.stream.all_around_individual %}
           <table class="table table-hover table-condensed" id="stream-table">
             <thead>
               <th>Discipline</th>
               <th>Value</th>
-              {% if object.stream.discipline_finals %}  
+              {% if athlete.stream.discipline_finals %}  
                 <th>Final Value</th>
                 <th>Final Rank</th>
               {% endif %}
             </thead>
             <tbody>
-              {% for performance in object.performance_set.all %}
+              {% for performance in athlete.performance_set.all %}
                 <tr id="performance_{{ performance.id }}">
                   <td><a href="{% url 'disciplines.detail' performance.id %}">{{ performance.discipline }}</a></td>
                   <td>{{ performance.value }}</td>
-                  {% if object.stream.discipline_finals %}    
+                  {% if athlete.stream.discipline_finals %}    
                     <td>{{ performance.value_final }}</td>
                     <td>toDo</td>
                   {% endif %}
@@ -71,8 +66,8 @@
               {% endfor %}
                 <tr id="performance_total">
                   <td>Total</td>
-                  <td>{{ object.performance_total }}</td>
-                  {% if object.stream.discipline_finals %}  
+                  <td>{{ athlete.performance_total }}</td>
+                  {% if athlete.stream.discipline_finals %}  
                     <td></td>
                     <td></td>
                   {% endif %}
@@ -80,7 +75,7 @@
                 <tr id="performance_rank">
                   <td>Rank</td>
                   <td>toDo</td>
-                  {% if object.stream.discipline_finals %}
+                  {% if athlete.stream.discipline_finals %}
                     <td></td>
                     <td></td>
                   {% endif %}

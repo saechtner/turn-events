@@ -1,44 +1,44 @@
 {% extends "gymnastics/streams/base.html" %}
 
+{% load custom_template_tags %}
+
+{% block nav_level_1 %}
+  {% render_nav_item name='Streams' url_name='streams.index' url_id=None active=True %}
+{% endblock nav_level_1 %}
+
 {% block content %}
-
-    {% if streams %}
-
-      <table class="table table-hover" id="stream-table">
-        <thead>
-          <th>Difficulty</th>
-          <th>Sex</th>
-          <th>Number of athletes</th>
-          <th>Minimum year of birth</th>
-          <th></th>
-        </thead>
-        <tbody>
-          {% for stream in streams %}
-            <tr id="stream_{{ stream.id }}">
-              <td>{{ stream.difficulty }}</td>
-              {% if stream.sex == 'f' %}
-                <td class="gend gend-female"> &#9792;</td>
-              {% else %}
-                <td class="gend gend-male"> &#9794;</td>
-              {% endif %}
-              <td> {{ stream.athlete_set.count }}</td>
-              <td>{{ stream.minimum_year_of_birth }}</td>
-              <td>
-                <div class="btn-group" role="group">
-                  <a type="button" class="btn btn-xs btn-success"href="{% url 'streams.detail' stream.id %}"><span class="glyphicon glyphicon-search"></span> detail</a>
-                  <a type="button" class="btn btn-xs btn-warning"href="{% url 'streams.edit' stream.id %}"><span class="glyphicon glyphicon-edit"></span> edit</a>
-                  <a type="button" class="btn btn-xs btn-danger"href="{% url 'streams.delete' stream.id %}"><span class="glyphicon glyphicon-remove"></span> delete</a>
-                </div>
-              </td>
-            </tr>
-          {% endfor %}
-        </tbody>
-      </table>
-
-    {% else %}
-
-      <div class="alert alert-info">No stream available in the database.</div>
-
-    {% endif %}
-  </div>
+  {% if streams %}
+    <table class="table table-hover" id="stream-table">
+      <thead>
+        <th>Difficulty</th>
+        <th>Sex</th>
+        <th>Number of athletes</th>
+        <th>Minimum year of birth</th>
+        <th></th>
+      </thead>
+      <tbody>
+        {% for stream in streams %}
+          <tr id="stream_{{ stream.id }}">
+            <td>{{ stream.difficulty }}</td>
+            {% if stream.sex == 'f' %}
+              <td class="gend gend-female"> &#9792;</td>
+            {% else %}
+              <td class="gend gend-male"> &#9794;</td>
+            {% endif %}
+            <td> {{ stream.athlete_set.count }}</td>
+            <td>{{ stream.minimum_year_of_birth }}</td>
+            <td>
+              <div class="btn-group" role="group">
+                <a type="button" class="btn btn-xs btn-success"href="{% url 'streams.detail' stream.id %}"><span class="glyphicon glyphicon-search"></span> detail</a>
+                <a type="button" class="btn btn-xs btn-warning"href="{% url 'streams.edit' stream.id %}"><span class="glyphicon glyphicon-edit"></span> edit</a>
+                <a type="button" class="btn btn-xs btn-danger"href="{% url 'streams.delete' stream.id %}"><span class="glyphicon glyphicon-remove"></span> delete</a>
+              </div>
+            </td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  {% else %}
+    <div class="alert alert-info">No stream available in the database.</div>
+  {% endif %}
 {% endblock content %}
