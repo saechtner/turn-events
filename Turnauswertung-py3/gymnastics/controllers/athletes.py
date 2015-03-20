@@ -1,3 +1,4 @@
+from django.contrib import messages
 from django.core.urlresolvers import reverse, reverse_lazy
 from django.forms import ModelForm
 from django.http import HttpResponseNotAllowed
@@ -8,6 +9,8 @@ from gymnastics.models import Athlete
 
 
 def index(request):
+    # messages.error(request, "This message gets displayed!")
+
     context = { 'athletes': Athlete.objects }
     return render(request, 'gymnastics/athletes/index.html', context)
 
@@ -18,6 +21,12 @@ def detail(request, id):
 def results(request):
     context = { 'athletes': Athlete.objects.all() }
     return render(request, 'gymnastics/athletes/results.html', context)
+
+
+# if hig_requests.authenticate(request.session, username, password):
+#     messages.success(request, "Successfully authenticated.")
+# else:
+#     messages.error(request, "Authentication failed (invalid username and password.")
 
 
 class AthleteCreateView(generic.CreateView):
@@ -39,12 +48,36 @@ class AthleteUpdateView(generic.UpdateView):
 
     def get_success_url(self):
         some_kwargs = self.kwargs
-        return reverse('athletes.detail', kwargs = { 'pk' : self.kwargs['pk'] })
+        return reverse('athletes.detail', kwargs = { 'id' : self.kwargs['pk'] })
 
     # def get_context_data(self, **kwargs):
     #     context = super(AthleteUpdateView, self).get_context_data(**kwargs)
     #     context['latest_articles'] = Article.objects.all()[:5]
     #     return context
+
+    def form_invalid(self, form):
+        if form.non_field_errors():
+            error_message = "The provided combination of fields is not accepted and thus the object can't be saved."
+            messages.error(self.request, error_message)
+
+        # TODO: give more details about those errors from the ErrorLists 
+        # ErrorLists: (field.errors['field_name']) and field.non_field_errors
+        if form.errors:
+            error_fields_labels = [form[field_with_error].label for field_with_error in form.errors]
+            error_message_base = 'There are errors in the following fields:'
+            error_fields_message = ', '.join(error_fields_labels)
+            error_message = '{0} {1}'.format(error_message_base, error_fields_message)
+            messages.error(self.request, error_message)
+
+        return super().form_invalid(form)
+
+    # def get(self, request, *args, **kwargs):
+    #     view = AthleteUpdateView.as_view()
+    #     return view(request, *args, **kwargs)
+
+    # def post(self, request, *args, **kwargs):
+    #     view = AthleteUpdateView.as_view()
+    #     return view(request, *args, **kwargs)
 
 
 class AthleteDeleteView(generic.DeleteView):

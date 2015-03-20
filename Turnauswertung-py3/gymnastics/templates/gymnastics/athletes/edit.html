@@ -11,5 +11,8 @@
 
 
 {% block content %}
+<form action="" method="post" class="form-horizontal">
+  {% csrf_token %}
   {% include "base/form.html" with form=form mode='edit' only %}
+</form>
 {% endblock content %}

@@ -78,6 +78,21 @@
         </div>
       </div>
 
+      {% comment %}Allows to create messages via messages.error .warning .success and .info.{% endcomment %}
+      <div id="gobal_message_container" class="container">
+        {% if messages %}
+          {% autoescape off %}
+            {% for message in messages %}
+              <div class="alert alert-{{ message.tags }} alert-dismissable">
+                <button type="button" class="close pull-right" data-dismiss="alert" aria-hidden="true">&times;</button>
+                {{ message }}
+              </div>
+            {% endfor %}
+          {% endautoescape %}
+        {% endif %}
+      </div>
+
+
       <div class="container">
         {% block content %}{% endblock content %}
       </div>

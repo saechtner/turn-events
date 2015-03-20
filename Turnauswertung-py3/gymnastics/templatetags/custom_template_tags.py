@@ -9,3 +9,7 @@ def render_nav_item(name, url_name='', url_id=None, active=False):
 @register.filter
 def get_item(dictionary, key):
     return dictionary.get(key)
+
+@register.filter
+def get_index(list_, index):
+    return list_[int(index)]
