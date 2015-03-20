@@ -23,7 +23,7 @@ class Stream(models.Model):
     def __str__(self):
         return "{0} {1}".format(self.difficulty, self.get_sex_display())
 
-    def ranks(self):
+    def athletes_rank(self):
         athlete_dict = {}
         for athlete in self.athlete_set.all():
             performance_total = athlete.performance_total()
@@ -33,7 +33,6 @@ class Stream(models.Model):
                 athlete_dict[performance_total] = []
 
             athlete_dict[performance_total].append(athlete)
-
         rank = 0
         ranks_dict = {}  
         for total_value, athlete_list in sorted(athlete_dict.items(), reverse=True):
@@ -43,3 +42,12 @@ class Stream(models.Model):
             for athlete_object in athlete_list:
                 ranks_dict[athlete_object] = rank
         return ranks_dict
+
+    def team_rank(self):
+        return {}
+
+    def finals_rank(self):
+        return {}
+
+    def finals_participants(self):
+        return []

@@ -16,3 +16,20 @@ class Team(models.Model):
 
     def __str__(self):
         return "{0} ({1})".format(self.name, self.stream)
+
+    def discipline_performance(self):
+        performance_dict = {}
+        for athlete in self.athlete_set.all():
+            for discipline, value in athlete.performances().items():
+                if not performance_dict.get(discipline):
+                    performance_dict[discipline] = []
+                performance_dict[discipline].append(value)
+
+        for discipline, performance_list in performance_dict.items():
+            performance_list.sort(reverse=True)
+            performance_dict[discipline] = sum(performance_list[:self.stream.all_around_team_counting_athletes])
+
+        return performance_dict
+
+    def performance_total(self):
+        return sum(self.discipline_performance().values())
