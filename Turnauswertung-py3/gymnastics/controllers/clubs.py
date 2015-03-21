@@ -1,5 +1,6 @@
-from django.shortcuts import render
+from django.contrib.messages.views import SuccessMessageMixin
 from django.core.urlresolvers import reverse, reverse_lazy
+from django.shortcuts import render
 from django.views import generic
 
 from gymnastics.models.club import Club
@@ -14,12 +15,13 @@ def detail(request, id):
     return render(request, 'gymnastics/clubs/detail.html', context)
 
 
-class ClubCreateView(generic.CreateView):
+class ClubCreateView(SuccessMessageMixin, generic.CreateView):
 
     model = Club
     fields = ['name']
     template_name = 'gymnastics/clubs/new.html'
     success_url = reverse_lazy('clubs.index')
+    success_message = "%(name)s was created successfully"
 
 
 class ClubUpdateView(generic.UpdateView):

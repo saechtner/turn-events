@@ -9,6 +9,7 @@ urlpatterns = patterns('',
 
     url(r'^athletes$', athletes.index, name='athletes.index'),
     url(r'^athletes/new$', athletes.AthleteCreateView.as_view(), name='athletes.new'),
+    url(r'^athletes/import_athletes$', athletes.import_athletes, name='athletes.import_athletes'),
     url(r'^athletes/results$', athletes.results, name='athletes.results'),
     url(r'^athletes/(?P<id>\d+)$', athletes.detail, name='athletes.detail'),
     url(r'^athletes/(?P<pk>\d+)/edit$', athletes.AthleteUpdateView.as_view(), name='athletes.edit'),
