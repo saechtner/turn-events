@@ -26,8 +26,7 @@ class Team(models.Model):
                 performance_dict[discipline].append(value)
 
         for discipline, performance_list in performance_dict.items():
-            performance_list.sort(reverse=True)
-            performance_dict[discipline] = sum(performance_list[:self.stream.all_around_team_counting_athletes])
+            performance_dict[discipline] = sum(sorted(performance_list, reverse=True)[:self.stream.all_around_team_counting_athletes])
 
         return performance_dict
 
