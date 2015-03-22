@@ -13,3 +13,7 @@ def get_item(dictionary, key):
 @register.filter
 def get_index(list_, index):
     return list_[int(index)]
+
+@register.filter
+def get_final_total(athlete, discipline):
+    return athlete.final_total(discipline)

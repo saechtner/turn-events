@@ -87,7 +87,7 @@ class Stream(models.Model):
 
             participants_dict[discipline] = []
             for value, athlete_list in sorted(discipline_performances.items(), reverse=True):
-                participants_dict[discipline].append(athlete_list)
+                participants_dict[discipline].extend(athlete_list)
                 if len(participants_dict[discipline]) >= self.discipline_finals_max_participants:
                     break
 

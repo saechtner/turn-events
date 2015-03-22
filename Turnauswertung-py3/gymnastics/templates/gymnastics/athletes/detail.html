@@ -74,7 +74,7 @@
                 </tr>
                 <tr id="performance_rank">
                   <td>Rank</td>
-                  <td>toDo</td>
+                  <td>{{ athlete.stream.athletes_rank|get_item:athlete }}</td>
                   {% if athlete.stream.discipline_finals %}
                     <td></td>
                     <td></td>

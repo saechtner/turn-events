@@ -31,3 +31,10 @@ class Athlete(models.Model):
 
     def performances_final(self):
         return {performance.discipline: performance.value_final for performance in self.performance_set.all()}
+
+    def final_total(self, discipline):
+        total = self.performances().get(discipline)
+        x = self.performances_final().get(discipline)
+        if x != None:
+            total += x
+        return total
