@@ -38,7 +38,9 @@ class Athlete(models.Model):
         return {performance.discipline: performance.value_final for performance in self.performance_set.all()}
 
     def final_total(self, discipline):
-        total = self.performances().get(discipline)
+        total = 0
+        if self.stream.discipline_finals_both_values_count:
+            total += self.performances().get(discipline)
         x = self.performances_final().get(discipline)
         if x != None:
             total += x

@@ -14,6 +14,7 @@ class Stream(models.Model):
     all_around_team_counting_athletes = models.IntegerField(null=True, blank=True, default=4)
     discipline_finals = models.BooleanField(default=False)
     discipline_finals_max_participants = models.IntegerField(null=True, blank=True)
+    discipline_finals_both_values_count = models.BooleanField(blank=True, default=True)
 
     discipline_set = models.ManyToManyField('Discipline')
 
@@ -28,52 +29,46 @@ class Stream(models.Model):
 
 
     def athletes_rank(self):
-        athlete_dict = {}
-        for athlete in self.athlete_set.all():
-            performance_total = athlete.performance_total()
-            if performance_total == None:
-                performance_total = -1
-            if not athlete_dict.get(performance_total):
-                athlete_dict[performance_total] = []
-
-            athlete_dict[performance_total].append(athlete)
-
-        rank = 0
-        ranks_dict = {}  
-        for total_value, athlete_list in sorted(athlete_dict.items(), reverse=True):
-            rank += 1
-            if total_value < 0:
-                rank = None
-            for athlete_object in athlete_list:
-                ranks_dict[athlete_object] = rank
-
+        athlete_list = sorted({athlete: athlete.performance_total() \
+            for athlete in self.athlete_set.all()}.items(), key=lambda x: x[1], reverse=True)
+        rank = 1
+        prevTotal = athlete_list[0][1]
+        ranks_dict = {}
+        for athlete, total_value in athlete_list:
+            if total_value < prevTotal:
+                rank += 1
+            ranks_dict[athlete] = rank
         return ranks_dict
 
 
     def team_rank(self):
-        team_dict = {}
-        for team in self.team_set.all():
-            performance_total = team.performance_total()
-            if performance_total == None:
-                performance_total = -1
-            if not team_dict.get(performance_total):
-                team_dict[performance_total] = []
-            team_dict[performance_total].append(team)
-
-        rank = 0
-        ranks_dict = {}  
-        for total_value, team_list in sorted(team_dict.items(), reverse=True):
-            rank += 1
-            if total_value < 0:
-                rank = None
-            for team_object in team_list:
-                ranks_dict[team_object] = rank
-
+        team_list = sorted({team: team.performance_total() \
+            for team in self.team_set.all()}.items(), key=lambda x: x[1], reverse=True)
+        rank = 1
+        prevTotal = team_list[0][1]
+        ranks_dict = {}
+        for team, total_value in team_list:
+            if total_value < prevTotal:
+                rank += 1
+            ranks_dict[team] = rank
         return ranks_dict
 
 
-    def finals_rank(self):
-        return {}
+    def final_rank(self):
+        participants = self.final_participants()
+        discipline_rank_dict = {}
+        for discipline in self.discipline_set.all():
+            athlete_list = sorted({athlete: athlete.final_total(discipline) \
+                for athlete in participants.get(discipline)}.items(), key=lambda x: x[1], reverse=True)
+            rank = 1
+            prevTotal = athlete_list[0][1]
+            ranks_dict = {}
+            for athlete, total_value in athlete_list:
+                if total_value < prevTotal:
+                    rank += 1
+                ranks_dict[athlete] = rank
+            discipline_rank_dict[discipline] = ranks_dict
+        return discipline_rank_dict
 
 
     def final_participants(self):
@@ -85,11 +80,9 @@ class Stream(models.Model):
                 if not discipline_performances.get(athlete_performance):
                     discipline_performances[athlete_performance] = []
                 discipline_performances[athlete_performance].append(athlete)
-
             participants_dict[discipline] = []
             for value, athlete_list in sorted(discipline_performances.items(), reverse=True):
                 participants_dict[discipline].extend(athlete_list)
                 if len(participants_dict[discipline]) >= self.discipline_finals_max_participants:
                     break
-
         return participants_dict
