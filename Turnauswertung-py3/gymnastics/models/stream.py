@@ -30,7 +30,7 @@ class Stream(models.Model):
 
     def athletes_rank(self):
         athlete_list = sorted({athlete: athlete.performance_total() \
-            for athlete in self.athlete_set.all()}.items(), key=lambda x: x[1], reverse=True)
+            for athlete in self.athlete_set.all() if athlete.performance_total()}.items(), key=lambda x: x[1], reverse=True)
         rank = 1
         prevTotal = athlete_list[0][1]
         ranks_dict = {}
@@ -43,7 +43,7 @@ class Stream(models.Model):
 
     def team_rank(self):
         team_list = sorted({team: team.performance_total() \
-            for team in self.team_set.all()}.items(), key=lambda x: x[1], reverse=True)
+            for team in self.team_set.all() if team.performance_total()}.items(), key=lambda x: x[1], reverse=True)
         rank = 1
         prevTotal = team_list[0][1]
         ranks_dict = {}
