@@ -10,15 +10,18 @@ class Athlete(models.Model):
     year_of_birth = models.IntegerField(default=2000)
 
     club = models.ForeignKey('Club', null=True, blank=True)
-    squad = models.ForeignKey('Squad', null=True, blank=True)
     stream = models.ForeignKey('Stream', null=False)
     team = models.ForeignKey('Team', null=True, blank=True)
+    squad = models.ForeignKey('Squad', null=True, blank=True)
 
 
     class Meta:
         db_table = 'gymnastics_athletes'
 
     def __str__(self):
+        # Development Output
+        # return 'Athlete: [name: {0} {1}, sex: {2}, year_of_birth: {3}, club; {4}, stream: {5}]'.format( \
+        #     self.first_name, self.last_name, self.sex, self.year_of_birth, self.club, self.stream)
         return '{0} {1}'.format(self.first_name, self.last_name)
 
     def performance_total(self):

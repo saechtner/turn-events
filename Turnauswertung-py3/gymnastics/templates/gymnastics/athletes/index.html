@@ -7,19 +7,13 @@
 {% endblock nav_level_1 %}
 
 {% block content %}
-  <div>
 
-    {% if athletes %}
-
-      <table class="table table-hover" id="athletes-table">
-        {% include "base/athletes_list.html" with athletes_set=athletes only %}
-      </table>
-
-    {% else %}
-
-      <div class="alert alert-info">No athletes available in the database. Create one <a href="{% url 'athletes.new' %}">here</a>.</div>
-
-    {% endif %}
-    
-  </div>
+  {% if athletes %}
+    <table class="table table-hover" id="athletes-table">
+      {% include "base/athletes_list.html" with athletes_set=athletes only %}
+    </table>
+  {% else %}
+    <div class="alert alert-info">No athletes available in the database. Create one <a href="{% url 'athletes.new' %}">here</a>.</div>
+  {% endif %}
+  
 {% endblock content %}

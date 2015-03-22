@@ -1,3 +1,5 @@
+import re
+
 from django.contrib import messages
 from django.contrib.messages.views import SuccessMessageMixin
 from django.core.urlresolvers import reverse, reverse_lazy
@@ -6,11 +8,11 @@ from django.http import HttpResponseNotAllowed
 from django.shortcuts import render
 from django.views import generic
 
-from gymnastics.models import Athlete, Club
+from gymnastics.models import Athlete, Club, Stream, Team
 
 
 def index(request):
-    context = { 'athletes': Athlete.objects }
+    context = { 'athletes': Athlete.objects.all() }
     return render(request, 'gymnastics/athletes/index.html', context)
 
 def detail(request, id):
@@ -21,67 +23,86 @@ def results(request):
     context = { 'athletes': Athlete.objects.all() }
     return render(request, 'gymnastics/athletes/results.html', context)
 
+def _parse_athlete_line(line, club):
+    elements = re.split(r'\t+', line.rstrip())
+    if len(elements) != 5 and len(elements) != 6:
+        return None
+
+    sex = 'm' if elements[2].lower().startswith('m') else Athlete._meta.get_field('sex').default
+
+    year_of_birth = elements[3]
+    if len(year_of_birth) == 2:
+        year_of_birth = '20{0}'.format(year_of_birth)
+    elif len(year_of_birth) != 4:
+        return None
+    try:
+        year_of_birth = int(year_of_birth)
+    except:
+        return None
+
+    stream_name = ''.join(elements[4].split()).upper() # remove all whitespace
+    stream = None
+    try:
+        # import pdb; pdb.set_trace()
+        stream = Stream.objects.get(difficulty=stream_name, sex=sex)
+        if stream.minimum_year_of_birth > year_of_birth:
+            return None
+    except:
+        return None
+
+    # TODO: ... =/
+    # team_name = elements[5])
+    # teams = Team.objects.filter(club=club, stream=stream)
+    # if teams:
+    #     # search if the correct one is among them and use it, otherwise error or generate new one anyways
+    # else:
+    #     # generate them
+
+    print("creating athlete")
+    athlete = Athlete( \
+            first_name=elements[0],
+            last_name=elements[1],
+            sex=sex,
+            year_of_birth=year_of_birth,
+            club=club,
+            stream=stream
+        )
+
+    # Don't allow duplicates!!
+
+    return athlete
+
 def import_athletes(request):
     if request.method == 'GET':
+        messages.info(request, 'Keep in mind the following data structure: First Name | Last Name | Geschlecht | Year of Birth | Stream | Team.')
+
         context = { 'clubs': Club.objects.all() }
         return render(request, 'gymnastics/athletes/import_athletes.html', context)
     elif request.method == 'POST':
-        # working!
-        # print(request.POST['club_id'])
-        # print(request.POST['import_data'])
+        athletes_list = []
 
-        # TODO: parse all this shit
-        # TODO: render the resulting athlete objects in some kind of confirmation table
+        # check if a club was selected and thus it exists in the datbase
+        try:
+            club = Club.objects.get(id=request.POST['club_id'])
+        except:
+            messages.error(request, 'Error: No club selected.')
+            context = { 'clubs': Club.objects.all() }
+            return render(request, 'gymnastics/athletes/import_athletes.html', context)
 
-        context = { 'athletes': Athlete.objects }
-        return render(request, 'gymnastics/athletes/index.html', context)
+        # TODO: make sure there actually are lines
+        lines = request.POST['import_data'].splitlines()
+        if lines[0].startswith('Vorname\tNachname'):
+            lines = lines[1:]
+        for line in lines:
+            athlete = _parse_athlete_line(line, club)
+            # print(athlete)
+            athletes_list.append(athlete)
 
+        if len(lines) > len(athletes_list):
+            messages.warning(request, 'Warning: {0} objects were not created.'.format(len(lines) - len(athletes_list)))
 
-#         return render(request, 'gymnastics/athletes/edit.html', context)
-#     elif request.method == 'POST':
-#         # print(request.POST)
-#         # print(type(request.POST))
-
-#         # verify all request.POST fields in athlete and set them if they changed
-#         # OR 
-#         # set all athlete fields to the corresponding request.POST values
-#         # then try saving it
-#         # use verifier on the athlete model to raise proper exceptions if values are shit
-#         # catch these exceptions here (maybe use custom clasa)
-#         # put error messages together and render them
-
-#         athlete = Athlete.objects.get(id=pk)
-
-#         # assign all request.POST values to the corresponding athlete field
-#         for key, value in request.POST.items():
-#             if hasattr(athlete, key):
-#                 setattr(athlete, key, value)
-
-#         # validate athlete - calls clean_fields, clean and validate_unique
-#         # athlete.full_clean()
-
-#         #simple test
-#         # athlete.first_name = request.POST['first_name']
-
-#         try:
-#             athlete.save()
-#             # render success
-#         except Exception as e:
-#             # set error messages (eine error message mit allen exceptions or vice versa)
-#             # add errors to context
-#             return render(request, 'gymnastics/athletes/edit2.html', context)
-
-#         # render success
-#         context = {'object': athlete}
-#         return render(request, 'gymnastics/athletes/detail.html', context)
-      
-#     #http 405! 404?
-#     return  HttpResponseNotAllowed(['GET', 'POST'])
-#     # ToDO: add 405.http basic template
-#     # return  HttpResponseNotAllowed(['PUT'])
-
-
-
+        context = { 'athletes': athletes_list }
+        return render(request, 'gymnastics/athletes/import_athletes_confirm.html', context)
 
 
 class AthleteCreateView(SuccessMessageMixin, generic.CreateView):
@@ -116,6 +137,8 @@ class AthleteUpdateView(SuccessMessageMixin, generic.UpdateView):
         if form.non_field_errors():
             error_message = "The provided combination of fields is not accepted and thus the object can't be saved."
             messages.error(self.request, error_message)
+
+        # TODO: check 'striptags' django template tag to easily render generated errors from ModelForms
 
         # TODO: give more details about those errors from the ErrorLists 
         # ErrorLists: (field.errors['field_name']) and field.non_field_errors

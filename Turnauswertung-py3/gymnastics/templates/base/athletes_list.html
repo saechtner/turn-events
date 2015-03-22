@@ -10,7 +10,7 @@
   <th></th>
 </thead>
 <tbody>
-  {% for athlete in athletes_set.all %}
+  {% for athlete in athletes_set %}
     <tr id="athlete_{{ athlete.id }}">
       <td>{{ athlete.first_name }}</td>
       <td>{{ athlete.last_name }}</td>
@@ -22,7 +22,11 @@
       <td>{{ athlete.year_of_birth }}</td>
       <td><a href="{% url 'clubs.detail' athlete.club.id %}">{{ athlete.club }}</a></td>
       <td><a href="{% url 'streams.detail' athlete.stream.id %}">{{ athlete.stream }}</a></td>
-      <td><a href="{% url 'teams.detail' athlete.team.id %}">{{ athlete.team }}</a></td>
+      <td>
+        {% if athlete.team %}
+          <a href="{% url 'teams.detail' athlete.team.id %}">{{ athlete.team }}</a>
+        {% endif %}
+      </td>
       <td>
         {% if athlete.squad %}
           <a href="{% url 'squads.detail' athlete.squad.id %}">{{ athlete.squad }}</a>
