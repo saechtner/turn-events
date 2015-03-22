@@ -104,12 +104,8 @@
                             </td>
                           {% endfor %}
                         {% endwith %}
-                      <td>
-                        {{ athlete.performance_total|default:"" }}
-                      </td>
-                      <td>
-                        {{ athlete_ranks|get_item:athlete|default:"" }}
-                      </td>
+                      <td>{{ athlete.performance_total|default:"" }}</td>
+                      <td>{{ athlete_ranks|get_item:athlete|default:"" }}</td>
                     </tr>
                   {% endfor %}
                 {% endwith %}
