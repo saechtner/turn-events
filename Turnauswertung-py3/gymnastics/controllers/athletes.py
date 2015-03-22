@@ -1,5 +1,3 @@
-import re
-
 from django.contrib import messages
 from django.contrib.messages.views import SuccessMessageMixin
 from django.core.urlresolvers import reverse, reverse_lazy
@@ -9,6 +7,7 @@ from django.shortcuts import render
 from django.views import generic
 
 from gymnastics.models import Athlete, Club, Stream, Team
+from gymnastics.models import AthletesImport
 
 
 def index(request):
@@ -22,87 +21,6 @@ def detail(request, id):
 def results(request):
     context = { 'athletes': Athlete.objects.all() }
     return render(request, 'gymnastics/athletes/results.html', context)
-
-def _parse_athlete_line(line, club):
-    elements = re.split(r'\t+', line.rstrip())
-    if len(elements) != 5 and len(elements) != 6:
-        return None
-
-    sex = 'm' if elements[2].lower().startswith('m') else Athlete._meta.get_field('sex').default
-
-    year_of_birth = elements[3]
-    if len(year_of_birth) == 2:
-        year_of_birth = '20{0}'.format(year_of_birth)
-    elif len(year_of_birth) != 4:
-        return None
-    try:
-        year_of_birth = int(year_of_birth)
-    except:
-        return None
-
-    stream_name = ''.join(elements[4].split()).upper() # remove all whitespace
-    stream = None
-    try:
-        # import pdb; pdb.set_trace()
-        stream = Stream.objects.get(difficulty=stream_name, sex=sex)
-        if stream.minimum_year_of_birth > year_of_birth:
-            return None
-    except:
-        return None
-
-    # TODO: ... =/
-    # team_name = elements[5])
-    # teams = Team.objects.filter(club=club, stream=stream)
-    # if teams:
-    #     # search if the correct one is among them and use it, otherwise error or generate new one anyways
-    # else:
-    #     # generate them
-
-    print("creating athlete")
-    athlete = Athlete( \
-            first_name=elements[0],
-            last_name=elements[1],
-            sex=sex,
-            year_of_birth=year_of_birth,
-            club=club,
-            stream=stream
-        )
-
-    # Don't allow duplicates!!
-
-    return athlete
-
-def import_athletes(request):
-    if request.method == 'GET':
-        messages.info(request, 'Keep in mind the following data structure: First Name | Last Name | Geschlecht | Year of Birth | Stream | Team.')
-
-        context = { 'clubs': Club.objects.all() }
-        return render(request, 'gymnastics/athletes/import_athletes.html', context)
-    elif request.method == 'POST':
-        athletes_list = []
-
-        # check if a club was selected and thus it exists in the datbase
-        try:
-            club = Club.objects.get(id=request.POST['club_id'])
-        except:
-            messages.error(request, 'Error: No club selected.')
-            context = { 'clubs': Club.objects.all() }
-            return render(request, 'gymnastics/athletes/import_athletes.html', context)
-
-        # TODO: make sure there actually are lines
-        lines = request.POST['import_data'].splitlines()
-        if lines[0].startswith('Vorname\tNachname'):
-            lines = lines[1:]
-        for line in lines:
-            athlete = _parse_athlete_line(line, club)
-            # print(athlete)
-            athletes_list.append(athlete)
-
-        if len(lines) > len(athletes_list):
-            messages.warning(request, 'Warning: {0} objects were not created.'.format(len(lines) - len(athletes_list)))
-
-        context = { 'athletes': athletes_list }
-        return render(request, 'gymnastics/athletes/import_athletes_confirm.html', context)
 
 
 class AthleteCreateView(SuccessMessageMixin, generic.CreateView):

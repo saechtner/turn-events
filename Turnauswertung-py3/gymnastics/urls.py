@@ -2,6 +2,7 @@ from django.conf.urls import patterns, include, url
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
 from gymnastics.controllers import views, athletes, clubs, disciplines, performances, squads, streams, teams
+from gymnastics.controllers import athletes_imports
 
 urlpatterns = patterns('',
     url(r'^$', views.index, name='home'), 
@@ -9,7 +10,6 @@ urlpatterns = patterns('',
 
     url(r'^athletes$', athletes.index, name='athletes.index'),
     url(r'^athletes/new$', athletes.AthleteCreateView.as_view(), name='athletes.new'),
-    url(r'^athletes/import_athletes$', athletes.import_athletes, name='athletes.import_athletes'),
     url(r'^athletes/results$', athletes.results, name='athletes.results'),
     url(r'^athletes/(?P<id>\d+)$', athletes.detail, name='athletes.detail'),
     url(r'^athletes/(?P<pk>\d+)/edit$', athletes.AthleteUpdateView.as_view(), name='athletes.edit'),
@@ -50,4 +50,9 @@ urlpatterns = patterns('',
     url(r'^teams/(?P<pk>\d+)$', teams.TeamDetailView.as_view(), name='teams.detail'),
     url(r'^teams/(?P<pk>\d+)/edit$', teams.TeamUpdateView.as_view(), name='teams.edit'),
     url(r'^teams/(?P<pk>\d+)/delete$', teams.TeamDeleteView.as_view(), name='teams.delete'),
+
+    url(r'^athletes_imports$', athletes_imports.index, name='athletes_imports.index'),
+    url(r'^athletes_imports/new$', athletes_imports.new, name='athletes_imports.new'),
+    url(r'^athletes_imports/(?P<id>\d+)$', athletes_imports.detail, name='athletes_imports.detail'),
+    url(r'^athletes_imports/(?P<pk>\d+)/delete$', athletes_imports.DeleteView.as_view(), name='athletes_imports.delete'),
 )

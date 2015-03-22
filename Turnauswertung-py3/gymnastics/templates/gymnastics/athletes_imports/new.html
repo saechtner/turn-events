@@ -1,14 +1,14 @@
-{% extends "gymnastics/athletes/base.html" %}
+{% extends "gymnastics/athletes_imports/base.html" %}
 
 {% load custom_template_tags %}
                   
 {% block nav_level_2 %}
-  {% render_nav_item name='import' active=True %}
+  {% render_nav_item name='new' active=True %}
 {% endblock nav_level_2 %}
 
 
 {% block content %}
-  <form action="{% url 'athletes.import_athletes' %}" method="post" class="form-horizontal">
+  <form action="{% url 'athletes_imports.new' %}" method="post" class="form-horizontal">
     {% csrf_token %}
 
     <div class="form-group">
@@ -35,5 +35,4 @@
       <button class="btn btn-default" type="button" onClick="javascript:history.go(-1);">Cancel</button>
     </div>
   </form>
-
 {% endblock content %}
