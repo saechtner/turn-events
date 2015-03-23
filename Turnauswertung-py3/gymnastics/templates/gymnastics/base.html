@@ -101,7 +101,25 @@
       {% block content_fullwidth %}{% endblock content_fullwidth %}
     </div>
 
+    <div class="modal fade" id="delete-modal" tabindex="-1" role="dialog" aria-labelledby="delete-modal" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title" id="exampleModalLabel">Confirm Delete</h4>
+          </div>
+          <div class="modal-body">
+            <p class="delete-modal-question"></p>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-danger delete-modal-confirm">Delete</button>
+            <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
     <script src="{% static 'gymnastics/js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'gymnastics/js/custom.js' %}"></script>
   </body>
 </html>

@@ -87,6 +87,17 @@ class AthleteDeleteView(generic.DeleteView):
     template_name = 'gymnastics/athletes/delete.html'
     success_url = reverse_lazy('athletes.index')
 
+    def dispatch(self, *args, **kwargs):
+        # maybe do some checks here for permissions ...
+
+        resp = super().dispatch(*args, **kwargs)
+        if self.request.is_ajax():
+            response_data = {"result": "ok"}
+            return HttpResponse(json.dumps(response_data), content_type="application/json")
+        else:
+            # POST request (not ajax) will do a redirect to success_url
+            return resp
+
 
 
 # Just here as reference as we probably need it for bulk creation of athletes

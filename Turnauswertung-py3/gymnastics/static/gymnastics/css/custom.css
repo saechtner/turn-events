@@ -97,7 +97,13 @@ body {
 
 .gend.gend-male {
   color: blue;
+}
 
+/* Modal Size 
+-------------------------------------------------- */
+
+body .modal-dialog {
+    width: 500px;
 }
 
 /* Inside Div Positioning 
