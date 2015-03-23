@@ -7,7 +7,7 @@ class AthletesImport(models.Model):
 
     # name = models.CharField(max_length=50, null=False)
 
-    club = models.OneToOneField('Club', null=True, blank=True)    
+    club = models.OneToOneField('Club', null=True, blank=True, on_delete=models.SET_NULL)    
 
     class Meta:
         db_table = 'gymnastics_athletes_imports'

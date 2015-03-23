@@ -10,9 +10,9 @@ class Athlete(models.Model):
     year_of_birth = models.IntegerField(default=2000)
 
     club = models.ForeignKey('Club', null=True, blank=True)
-    stream = models.ForeignKey('Stream', null=False)
-    team = models.ForeignKey('Team', null=True, blank=True)
-    squad = models.ForeignKey('Squad', null=True, blank=True)
+    stream = models.ForeignKey('Stream')
+    team = models.ForeignKey('Team', null=True, blank=True, on_delete=models.SET_NULL)
+    squad = models.ForeignKey('Squad', null=True, blank=True, on_delete=models.SET_NULL)
 
     athletes_import = models.ForeignKey('AthletesImport', null=True, blank=True)
 
