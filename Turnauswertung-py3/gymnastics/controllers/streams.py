@@ -10,39 +10,32 @@ def index(request):
     return render(request, 'gymnastics/streams/index.html', context)
 
 def detail(request, id):
-    # # required objects and information ###
-    # # # General: stream, stream.discipline_set
-    # stream = Stream.objects.select_related().get(id=id)
-    # disciplines = stream.discipline_set.all()
+    # required objects and information ###
+    # # General: stream, stream.discipline_set
+    stream = Stream.objects.select_related().get(id=id)
+    disciplines = stream.discipline_set.all()
 
-    # # # Athletes: stream.athlete_set
-    # athletes = stream.athlete_set.all()
-
-    # # # Results Athletes: stream.athlete_set + disciplines results + all_around result + ranks (sorted ...)
-
-
-    # # # Teams: stream.team_set
-    # team = stream.team_set.all()
-
-    # # # Results Teams: stream.team_set + disciplines results + all_around result + ranks
+    # # Athletes: stream.athlete_set
+    athletes = stream.athlete_set.all() \
+        .select_related('club').select_related('stream').select_related('team').select_related('squad') \
+        .prefetch_related('performance_set')
 
 
+    # # Results Athletes: stream.athlete_set + disciplines results + all_around result + ranks (sorted ...)
 
 
-    # # # from django.db import connection
-    # # # print(connection.queries)
+    # # Teams: stream.team_set
+    teams = stream.team_set.all() \
+        .select_related('stream').select_related('club') \
+        .prefetch_related('athlete_set')
 
-    # context = { 
-    #     'stream': stream, 
-    #     'athletes_all_around_rank_dict': stream.athletes_all_around_rank_dict,
-    #     'teams_all_around_rank_dict': stream.teams_all_around_rank_dict
-    # }
-    # return render(request, 'gymnastics/streams/detail.html', context)
+    # # Results Teams: stream.team_set + disciplines results + all_around result + ranks
 
 
-    stream = Stream.objects.get(id=id)
     context = { 
         'stream': stream, 
+        'athletes': athletes,
+        'teams': teams,
         'athletes_all_around_rank_dict': stream.athletes_all_around_rank_dict,
         'teams_all_around_rank_dict': stream.teams_all_around_rank_dict
     }

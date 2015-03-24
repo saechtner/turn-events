@@ -24,6 +24,8 @@ class Team(models.Model):
 
         # sum via sorted
 
+        # TODO:: finish!
+
 
 
     # discipline -> performance_value
