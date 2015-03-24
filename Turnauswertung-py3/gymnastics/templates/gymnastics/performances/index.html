@@ -1,5 +1,11 @@
 {% extends "gymnastics/performances/base.html" %}
 
+{% load custom_template_tags %}
+
+{% block nav_level_1 %}
+  {% render_nav_item name='Performances' url_name='performances.index' url_id=None active=True %}
+{% endblock nav_level_1 %}
+
 {% block content %}
 
     {% if performances %}
@@ -11,8 +17,6 @@
           <th>Value</th>
           <th>Value Final</th>
           <th></th>
-          <th></th>
-          <th></th>
         </thead>
         <tbody>
           {% for performance in performances %}
@@ -21,9 +25,13 @@
               <td><a href="{% url 'disciplines.detail' performance.discipline.id %}">{{ performance.discipline }}</a></td>
               <td>{{ performance.value }}</td>
               <td>{{ performance.value_final|default:"" }}</td>
-              <td><a  type="button" class="btn btn-xs btn-success"href="{% url 'performances.detail' performance.id %}"><span class="glyphicon glyphicon-search"></span> details</a></td>
-              <td><a  type="button" class="btn btn-xs btn-warning"href="{% url 'performances.edit' performance.id %}"><span class="glyphicon glyphicon-edit"></span> edit</a></td>
-              <td><a  type="button" class="btn btn-xs btn-danger"href="{% url 'performances.delete' performance.id %}"><span class="glyphicon glyphicon-remove"></span> delete</a></td>
+              <td>
+                <div class="btn-group" role="group">
+                  <a  type="button" class="btn btn-xs btn-success"href="{% url 'performances.detail' performance.id %}"><span class="glyphicon glyphicon-search"></span> detail</a>
+                  <a  type="button" class="btn btn-xs btn-warning"href="{% url 'performances.edit' performance.id %}"><span class="glyphicon glyphicon-edit"></span> edit</a>
+                  <a  type="button" class="btn btn-xs btn-danger"href="{% url 'performances.delete' performance.id %}"><span class="glyphicon glyphicon-remove"></span> delete</a>
+                </div>
+              </td>
             </tr>
           {% endfor %}
         </tbody>

@@ -1,18 +1,17 @@
 {% extends "gymnastics/clubs/base.html" %}
 
-{% block nav_controller_active %}<li>{% endblock nav_controller_active %}
-{% block nav_action_active %}<li class="active">{% endblock nav_action_active %}
-{% block action %}detail{% endblock action %}
+{% load custom_template_tags %}
 
+{% block nav_level_2 %}
+  {% render_nav_item name=club active=True %}
+{% endblock nav_level_2 %}
 
 {% block content %}
+
   <div class="row row-relative">
     <div class="col-md-8">
       <h1>
-        {{ club }}
-        <small>
-        {{ club.athlete_set.count }} Athletes
-        </small>
+        {{ club }} <small>{{ club.athlete_set.all.count }} Athletes</small>
       </h1>
     </div>
     <div class="col-md-4 div-pos-bottom-right text-right">
@@ -28,20 +27,13 @@
     <!-- Nav tabs -->
     <ul class="nav nav-tabs" role="tablist">
       <li role="presentation" class="active"><a href="#base" aria-controls="home" role="tab" data-toggle="tab">General</a></li>
-      <li role="presentation"><a href="#athletes" aria-controls="messages" role="tab" data-toggle="tab">Athletes</a></li>
     </ul>
 
     <!-- Tab panes -->
     <div class="tab-content">
       <div role="tabpanel" class="tab-pane active" id="base">
-        <p>Name: {{ club.name }}</p>
-      </div>
-
-      <div role="tabpanel" class="tab-pane" id="athletes"> 
-        <table class="table table-hover table-condensed" id="athletes-table">
-          {% include "base/athletes_list.html" with athletes_set=club.athlete_set.all only %}
-        </table>
       </div>
     </div>
   </div> 
+  
 {% endblock content %}

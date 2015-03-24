@@ -1,20 +1,45 @@
 {% extends "gymnastics/performances/base.html" %}
 
-{% block nav_controller_active %}<li>{% endblock nav_controller_active %}
-{% block nav_action_active %}<li class="active">{% endblock nav_action_active %}
+{% load custom_template_tags %}
 
-{% block action %}detail{% endblock action %}
+{% block nav_level_2 %}
+  {% render_nav_item name=performance active=True %}
+{% endblock nav_level_2 %}
 
 {% block content %}
-  <h1>Performance Details</h1>
-  <p>{{ object.content }}</p>
-  <p>Athlete: {{ object.athlete }}</p>
-  <p>Discipline: {{ object.discipline }}</p>
-  <p>Value: {{ object.value }}</p>
-  {% if object.performance_final %}
-    <p>Value Final: {{ object.value_final }}</p>
-  {% endif %}
-  <a type="button" class="btn btn-warning" href="{% url 'performances.edit' object.id %}">Edit</a>
-  <a type="button" class="btn btn-danger" href="{% url 'performances.delete' object.id %}">Delete</a>
-  <button type="button" class="btn btn-default" onClick="javascript:history.go(-1);">Previous Page</button>
+
+  <div class="row row-relative">
+    <div class="col-md-8">
+      <h1>
+        {{ performance }} <small></small>
+      </h1>
+    </div>
+    <div class="col-md-4 div-pos-bottom-right text-right">
+      <div class="btn-group">
+        <a type="button" class="btn btn-warning" href="{% url 'performances.edit' performance.id %}">Edit</a>
+        <a type="button" class="btn btn-danger" href="{% url 'performances.delete' performance.id %}">Delete</a>
+        <button type="button" class="btn btn-default" onClick="javascript:history.go(-1);">Previous Page</button>
+      </div>
+    </div>
+  </div>
+
+  <div role="tabpanel">
+    <!-- Nav tabs -->
+    <ul class="nav nav-tabs" role="tablist">
+      <li role="presentation" class="active"><a href="#base" aria-controls="home" role="tab" data-toggle="tab">General</a></li>
+    </ul>
+
+    <!-- Tab panes -->
+    <div class="tab-content">
+      <div role="tabpanel" class="tab-pane active" id="base"> 
+        <p>Athlete: {{ object.athlete }}</p>
+        <p>Discipline: {{ object.discipline }}</p>
+        <p>Value: {{ object.value }}</p>
+        {% if object.performance_final %}
+          <p>Value Final: {{ object.value_final }}</p>
+        {% endif %}
+      </div>
+    </div>
+  </div> 
+  
 {% endblock content %}

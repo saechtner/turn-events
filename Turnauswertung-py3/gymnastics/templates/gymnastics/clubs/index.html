@@ -1,5 +1,11 @@
 {% extends "gymnastics/clubs/base.html" %}
 
+{% load custom_template_tags %}
+
+{% block nav_level_1 %}
+  {% render_nav_item name='Clubs' url_name='clubs.index' url_id=None active=True %}
+{% endblock nav_level_1 %}
+
 {% block content %}
 
     {% if clubs %}
@@ -8,16 +14,18 @@
         <thead>
           <th>Name</th>
           <th></th>
-          <th></th>
-          <th></th>
         </thead>
         <tbody>
           {% for club in clubs %}
             <tr id="club_{{ club.id }}">
               <td>{{ club.name }}</td>
-              <td><a  type="button" class="btn btn-xs btn-success"href="{% url 'clubs.detail' club.id %}"><span class="glyphicon glyphicon-search"></span> detail</a></td>
-              <td><a  type="button" class="btn btn-xs btn-warning"href="{% url 'clubs.edit' club.id %}"><span class="glyphicon glyphicon-edit"></span> edit</a></td>
-              <td><a  type="button" class="btn btn-xs btn-danger"href="{% url 'clubs.delete' club.id %}"><span class="glyphicon glyphicon-remove"></span> delete</a></td>
+              <td>
+                <div class="btn-group" role="group">
+                  <a  type="button" class="btn btn-xs btn-success"href="{% url 'clubs.detail' club.id %}"><span class="glyphicon glyphicon-search"></span> detail</a>
+                  <a  type="button" class="btn btn-xs btn-warning"href="{% url 'clubs.edit' club.id %}"><span class="glyphicon glyphicon-edit"></span> edit</a>
+                  <a  type="button" class="btn btn-xs btn-danger"href="{% url 'clubs.delete' club.id %}"><span class="glyphicon glyphicon-remove"></span> delete</a>
+                </div>
+              </td>
             </tr>
           {% endfor %}
         </tbody>

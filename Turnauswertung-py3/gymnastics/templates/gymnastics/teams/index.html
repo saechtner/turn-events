@@ -1,6 +1,13 @@
 {% extends "gymnastics/teams/base.html" %}
 
+{% load custom_template_tags %}
+
+{% block nav_level_1 %}
+  {% render_nav_item name='Teams' url_name='teams.index' url_id=None active=True %}
+{% endblock nav_level_1 %}
+
 {% block content %}
+
 {% if teams %}
 
   <table class="table table-hover" id="team-table">

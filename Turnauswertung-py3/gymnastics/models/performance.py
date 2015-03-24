@@ -13,4 +13,5 @@ class Performance(models.Model):
         db_table = 'gymnastics_performances'
 
     def __str__(self):
-        return "{0}, {1}: {2} {3}".format(self.athlete, self.discipline, self.value, getattr(self, 'value_final', ''))
+        # return "{0}, {1}: {2} {3}".format(self.athlete, self.discipline, self.value, getattr(self, 'value_final', ''))
+        return "{0}, {1}".format(self.athlete, self.discipline)

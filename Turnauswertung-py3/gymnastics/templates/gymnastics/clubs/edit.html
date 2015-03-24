@@ -1,27 +1,18 @@
 {% extends "gymnastics/clubs/base.html" %}
 
-{% block nav_controller_active %}<li>{% endblock nav_controller_active %}
-{% block nav_action_active %}<li class="active">{% endblock nav_action_active %}
-{% block action %}edit{% endblock action %}
+{% load custom_template_tags %}
+                  
+{% block nav_level_2 %}
+  {% render_nav_item name=club url_name='clubs.detail' url_id=club.id %}
+{% endblock nav_level_2 %}
+{% block nav_level_3 %}
+  {% render_nav_item name='edit' active=True %}
+{% endblock nav_level_3 %}
 
-{% load widget_tweaks %}
 
 {% block content %}
-  <form action="" method="post" class="form-horizontal">
-    {% csrf_token %}
-
-    {% for field in form %}
-      <div class="form-group row text-right">
-        <label class="col-md-2 control-label" for="id_{{ field.name }}">{{ field.label }}</label>
-        <div class="col-md-4">
-          {{ field|add_class:"form-control" }}
-        </div>
-      </div>
-    {% endfor %}
-
-    <div class="col-md-5 col-md-offset-2 btn-group">
-      <input class="btn btn-primary" type="submit" value="Update"/>
-      <button type="button" class="btn btn-default" onClick="javascript:history.go(-1);">Cancel</button>
-    </div>
-  </form>
+<form action="" method="post" class="form-horizontal">
+  {% csrf_token %}
+  {% include "base/form.html" with form=form mode='edit' only %}
+</form>
 {% endblock content %}
