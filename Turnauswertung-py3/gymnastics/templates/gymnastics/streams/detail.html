@@ -32,7 +32,7 @@
       <li role="presentation" class="active"><a href="#general" aria-controls="home" role="tab" data-toggle="tab">General</a></li>
       <li role="presentation"><a href="#athletes" aria-controls="messages" role="tab" data-toggle="tab">Athletes</a></li>
       {% if stream.all_around_individual %}
-        <li role="presentation"><a href="#athletes_results" aria-controls="profile" role="tab" data-toggle="tab">Results Athlete</a></li>
+        <li role="presentation"><a href="#athletes_results" aria-controls="profile" role="tab" data-toggle="tab">Results Athletes</a></li>
       {% endif %}
       {% if stream.all_around_team %}
         <li role="presentation"><a href="#teams" aria-controls="profile" role="tab" data-toggle="tab">Teams</a></li>
@@ -153,6 +153,8 @@
 
       {% if stream.discipline_finals %}
         {% with final_participants=stream.final_participants %}
+
+          {% comment %}
           <div role="tabpanel" class="tab-pane" id="athletes_final">
             <table class="table table-condensed" id="final-disciplines-table">
               {% for discipline in disciplines %}
@@ -173,56 +175,61 @@
               {% endfor %}
             </table>
           </div>
+          {% endcomment %}
 
-        <div role="tabpanel" class="tab-pane" id="results_final">
-          <table class="table table-condensed" id="final-disciplines-table">
-            {% with discipline_ranks=stream.final_rank %}
-              {% for discipline in disciplines %}
-                {% with participants=final_participants|get_item:discipline ranks=discipline_ranks|get_item:discipline %}
-                  <thead>
-                    <th>{{ discipline }}</th>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td>
-                        <table class="table table-hover table-condensed" id="final-{{ discipline }}-table">
-                          <thead>
-                            <th>Athlete</th>
-                            {% if stream.discipline_finals_both_values_count %}
-                              <th>Performance</th>
-                            {% endif %}
-                            <th>Final Performance</th>
-                            {% if stream.discipline_finals_both_values_count %}
-                              <th>Total</th>
-                            {% endif %}
-                            <th>Rank</th>
-                          </thead>
-                          <tbody>
-                            {% for athlete in participants %}
-                              <tr>
-                                <td><a href="{% url 'athletes.detail' athlete.id %}">{{ athlete }}</a></td>
-                                {% if stream.discipline_finals_both_values_count %}
-                                  <td>{{ athlete.performances|get_item:discipline|default:"" }}</td>
-                                {% endif %}
-                                <td>{{ athlete.performances_final|get_item:discipline|default:"" }}</td>
-                                {% if stream.discipline_finals_both_values_count %}
-                                  <td>{{ athlete|get_final_total:discipline|default:"" }}</td>
-                                {% endif %}
-                                <td>{{ ranks|get_item:athlete|default:"" }}</td>
-                              </tr>
-                            {% endfor %}
-                          </tbody>
-                        </table>
-                      </td>
-                    </tr>
-                  </tbody>
-                {% endwith %}
-              {% endfor %}
-            {% endwith %}
-          </table>             
+          {% comment %}
+          <div role="tabpanel" class="tab-pane" id="results_final">
+            <table class="table table-condensed" id="final-disciplines-table">
+              {% with discipline_ranks=stream.final_rank %}
+                {% for discipline in disciplines %}
+                  {% with participants=final_participants|get_item:discipline ranks=discipline_ranks|get_item:discipline %}
+                    <thead>
+                      <th>{{ discipline }}</th>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>
+                          <table class="table table-hover table-condensed" id="final-{{ discipline }}-table">
+                            <thead>
+                              <th>Athlete</th>
+                              {% if stream.discipline_finals_both_values_count %}
+                                <th>Performance</th>
+                              {% endif %}
+                              <th>Final Performance</th>
+                              {% if stream.discipline_finals_both_values_count %}
+                                <th>Total</th>
+                              {% endif %}
+                              <th>Rank</th>
+                            </thead>
+                            <tbody>
+                              {% for athlete in participants %}
+                                <tr>
+                                  <td><a href="{% url 'athletes.detail' athlete.id %}">{{ athlete }}</a></td>
+                                  {% if stream.discipline_finals_both_values_count %}
+                                    <td>{{ athlete.performances|get_item:discipline|default:"" }}</td>
+                                  {% endif %}
+                                  <td>{{ athlete.performances_final|get_item:discipline|default:"" }}</td>
+                                  {% if stream.discipline_finals_both_values_count %}
+                                    <td>{{ athlete|get_final_total:discipline|default:"" }}</td>
+                                  {% endif %}
+                                  <td>{{ ranks|get_item:athlete|default:"" }}</td>
+                                </tr>
+                              {% endfor %}
+                            </tbody>
+                          </table>
+                        </td>
+                      </tr>
+                    </tbody>
+                  {% endwith %}
+                {% endfor %}
+              {% endwith %}
+            </table>
+          </div>
+          {% endcomment %}
         {% endwith %}
       {% endif %}
-    </div>
+
+    </div> <!-- end tab-content -->
   </div> 
   
 {% endblock content %}

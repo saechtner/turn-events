@@ -24,7 +24,6 @@ def detail(request, id):
         .prefetch_related('performance_set') \
         .annotate(performances_result_total=Sum('performance__value'))
 
-
     # Results Athletes: stream.athlete_set + disciplines results + all_around result + ranks (sorted ...)
     athletes_discipline_results = stream.athlete_set.all() \
         .values('id', 'performance__discipline_id').annotate(performance_result=Sum('performance__value'))
