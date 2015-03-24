@@ -10,13 +10,23 @@ class Team(models.Model):
     club = models.ForeignKey('Club', null=True, blank=True)
     stream = models.ForeignKey('Stream')
 
-
     class Meta:
         db_table = 'gymnastics_teams'    
 
     def __str__(self):
         return "{0} ({1})".format(self.name, self.stream)
 
+    # discipline.id -> performance_value
+    @property
+    def disciplines_result_dict(self):
+        # list with all team performances
+        athletes_performances_dicts = (athlete.performances_dict for athlete in self.athlete_set.all())
+
+        # sum via sorted
+
+
+
+    # discipline -> performance_value
     def discipline_performance(self):
         performance_dict = {}
         for athlete in self.athlete_set.all():
@@ -30,5 +40,6 @@ class Team(models.Model):
 
         return performance_dict
 
-    def performance_total(self):
+    @property
+    def all_around_total(self):
         return sum(self.discipline_performance().values())

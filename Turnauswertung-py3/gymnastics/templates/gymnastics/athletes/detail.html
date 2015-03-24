@@ -64,9 +64,9 @@
                   {% endif %}
                 </tr>
               {% endfor %}
-                <tr id="performance_total">
+                <tr id="all_around_total">
                   <td>Total</td>
-                  <td>{{ athlete.performance_total }}</td>
+                  <td>{{ athlete.all_around_total }}</td>
                   {% if athlete.stream.discipline_finals %}  
                     <td></td>
                     <td></td>
@@ -74,7 +74,7 @@
                 </tr>
                 <tr id="performance_rank">
                   <td>Rank</td>
-                  <td>{{ athlete.stream.athletes_rank|get_item:athlete }}</td>
+                  <td>{{ athlete_all_around_rank }}</td>
                   {% if athlete.stream.discipline_finals %}
                     <td></td>
                     <td></td>

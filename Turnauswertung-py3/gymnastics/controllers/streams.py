@@ -10,7 +10,42 @@ def index(request):
     return render(request, 'gymnastics/streams/index.html', context)
 
 def detail(request, id):
-    context = { 'stream': Stream.objects.get(id=id) }
+    # # required objects and information ###
+    # # # General: stream, stream.discipline_set
+    # stream = Stream.objects.select_related().get(id=id)
+    # disciplines = stream.discipline_set.all()
+
+    # # # Athletes: stream.athlete_set
+    # athletes = stream.athlete_set.all()
+
+    # # # Results Athletes: stream.athlete_set + disciplines results + all_around result + ranks (sorted ...)
+
+
+    # # # Teams: stream.team_set
+    # team = stream.team_set.all()
+
+    # # # Results Teams: stream.team_set + disciplines results + all_around result + ranks
+
+
+
+
+    # # # from django.db import connection
+    # # # print(connection.queries)
+
+    # context = { 
+    #     'stream': stream, 
+    #     'athletes_all_around_rank_dict': stream.athletes_all_around_rank_dict,
+    #     'teams_all_around_rank_dict': stream.teams_all_around_rank_dict
+    # }
+    # return render(request, 'gymnastics/streams/detail.html', context)
+
+
+    stream = Stream.objects.get(id=id)
+    context = { 
+        'stream': stream, 
+        'athletes_all_around_rank_dict': stream.athletes_all_around_rank_dict,
+        'teams_all_around_rank_dict': stream.teams_all_around_rank_dict
+    }
     return render(request, 'gymnastics/streams/detail.html', context)
 
 

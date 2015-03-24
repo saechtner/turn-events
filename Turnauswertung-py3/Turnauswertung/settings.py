@@ -40,6 +40,8 @@ INSTALLED_APPS = (
     'widget_tweaks',
 
     'gymnastics',
+
+    'debug_toolbar',
 )
 
 MIDDLEWARE_CLASSES = (

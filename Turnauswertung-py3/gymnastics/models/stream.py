@@ -18,41 +18,46 @@ class Stream(models.Model):
 
     discipline_set = models.ManyToManyField('Discipline')
 
-
-
     class Meta:
         db_table = 'gymnastics_streams'
         
-
     def __str__(self):
         return "{0} {1}".format(self.difficulty, self.get_sex_display())
 
+    # athlete.id -> all_around_rank
+    @property
+    def athletes_all_around_rank_dict(self):
+        athlete_all_around_totals = ( (athlete.id, athlete.all_around_total) for athlete in self.athlete_set.all() )
+        athlete_all_around_totals_filtered = [(a, b) for a, b in athlete_all_around_totals if b]
+        athlete_all_around_totals_sorted = sorted(athlete_all_around_totals_filtered, key=lambda x: x[1], reverse=True)
 
-    def athletes_rank(self):
-        athlete_list = sorted({athlete: athlete.performance_total() \
-            for athlete in self.athlete_set.all() if athlete.performance_total()}.items(), key=lambda x: x[1], reverse=True)
-        rank = 1
-        prevTotal = athlete_list[0][1]
-        ranks_dict = {}
-        for athlete, total_value in athlete_list:
-            if total_value < prevTotal:
+        athlete_ranks_dict = {}
+        rank = 0
+        previous_total = -1
+        for athlete_id, athlete_performance in athlete_all_around_totals_sorted:
+            if previous_total != athlete_performance:
                 rank += 1
-            ranks_dict[athlete] = rank
-        return ranks_dict
+                previous_total = athlete_performance
+            athlete_ranks_dict[athlete_id] = rank
 
+        return athlete_ranks_dict
 
-    def team_rank(self):
-        team_list = sorted({team: team.performance_total() \
-            for team in self.team_set.all() if team.performance_total()}.items(), key=lambda x: x[1], reverse=True)
-        rank = 1
-        prevTotal = team_list[0][1]
-        ranks_dict = {}
-        for team, total_value in team_list:
-            if total_value < prevTotal:
+    @property
+    def teams_all_around_rank_dict(self):
+        team_all_around_totals = ( (team.id, team.all_around_total) for team in self.team_set.all() )
+        team_all_around_totals_filtered = [(a, b) for a, b in team_all_around_totals if b]
+        team_all_around_totals_sorted = sorted(team_all_around_totals_filtered, key=lambda x: x[1], reverse=True)
+
+        team_ranks_dict = {}
+        rank = 0
+        previous_total = -1
+        for team_id, team_performance in team_all_around_totals_sorted:
+            if previous_total != team_performance:
                 rank += 1
-            ranks_dict[team] = rank
-        return ranks_dict
+                previous_total = team_performance
+            team_ranks_dict[team_id] = rank
 
+        return team_ranks_dict
 
     def final_rank(self):
         participants = self.final_participants()
@@ -69,7 +74,6 @@ class Stream(models.Model):
                 ranks_dict[athlete] = rank
             discipline_rank_dict[discipline] = ranks_dict
         return discipline_rank_dict
-
 
     def final_participants(self):
         participants_dict = {}

@@ -11,11 +11,14 @@ from gymnastics.models import AthletesImport
 
 
 def index(request):
-    context = { 'athletes': Athlete.objects.all() }
+    context = { 'athletes': Athlete.objects.all() \
+        .select_related('club').select_related('stream').select_related('team').select_related('squad') }
     return render(request, 'gymnastics/athletes/index.html', context)
 
 def detail(request, id):
-    context = { 'athlete': Athlete.objects.get(id=id) }
+    athlete = Athlete.objects.get(id=id)
+    athlete_all_around_rank = athlete.stream.athletes_all_around_rank_dict.get(athlete.id, '')
+    context = { 'athlete': athlete, 'athlete_all_around_rank': athlete_all_around_rank }
     return render(request, 'gymnastics/athletes/detail.html', context)
 
 def results(request):
