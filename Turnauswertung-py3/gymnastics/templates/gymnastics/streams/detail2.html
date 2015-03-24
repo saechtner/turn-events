@@ -98,14 +98,12 @@
                 {% for athlete in athletes %}
                   <tr id="athlete_{{ athlete.id }}">
                     <td><a href="{% url 'athletes.detail' athlete.id %}">{{ athlete }}</a></td>
-                      {% with athlete_performances=athletes_annotated_dict|get_item:athlete.id %}
                         {% for discipline in disciplines %}
                           <td>
-                            {{ athlete_performances|get_item:discipline.id }}
+                            {{ athlete.performances_dict|get_item:discipline.id }}
                           </td>
                         {% endfor %}
-                      {% endwith %}
-                    <td>{{ athlete.performances_result_total }}</td>
+                    <td>{{ athlete.all_around_total|default:"" }}</td>
                     <td>{{ athletes_all_around_rank_dict|get_item:athlete.id|default:"" }}</td>
                   </tr>
                 {% endfor %}
@@ -135,14 +133,14 @@
             </thead>
             <tbody>
               {% for team in teams %}
-                <tr id="team_{{ team.id }}">
+                <tr id="team{{ team.id }}">
                   <td><a href="{% url 'teams.detail' team.id %}">{{ team.name }}</a></td>
-                    {% with team_performances=teams_annotated_dict|get_item:team.id %}
+                    {% with team_performances=team.discipline_performance %}
                       {% for discipline in disciplines %}
-                        <td>{{ team_performances|get_item:discipline.id }}</td>
+                        <td>{{ team_performances|get_item:discipline|default:"" }}</td>
                       {% endfor %}
                     {% endwith %}
-                  <td>{{ team.performances_result_total }}</td>
+                  <td>{{ team.performance_total|default:"" }}</td>
                   <td>{{ teams_all_around_rank_dict|get_item:team.id|default:"" }}</td>
                 </tr>
               {% endfor %}

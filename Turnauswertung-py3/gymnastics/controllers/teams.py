@@ -6,7 +6,7 @@ from gymnastics.models.team import Team
 
 
 def index(request):
-    context = { 'teams': Team.objects }
+    context = { 'teams': Team.objects.all() }
     return render(request, 'gymnastics/teams/index.html', context)
 
 

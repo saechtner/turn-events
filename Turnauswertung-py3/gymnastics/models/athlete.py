@@ -28,10 +28,10 @@ class Athlete(models.Model):
 
     # TODO:: remove!
     def performances(self):
-        return {performance.discipline: performance.value for performance in self.performance_set.all()}
+        return {performance.discipline: performance.value for performance in self.performance_set.all().select_related('discipline')}
 
     def performances_dict(self):
-        return { performance.discipline.id: performance.value for performance in self.performance_set.all() }
+        return { performance.discipline.id: performance.value for performance in self.performance_set.all().select_related('discipline') }
 
     @property
     def all_around_total(self):

@@ -16,22 +16,10 @@ class Team(models.Model):
     def __str__(self):
         return "{0} ({1})".format(self.name, self.stream)
 
-    # discipline.id -> performance_value
-    @property
-    def disciplines_result_dict(self):
-        # list with all team performances
-        athletes_performances_dicts = (athlete.performances_dict for athlete in self.athlete_set.all())
-
-        # sum via sorted
-
-        # TODO:: finish!
-
-
-
     # discipline -> performance_value
     def discipline_performance(self):
         performance_dict = {}
-        for athlete in self.athlete_set.all():
+        for athlete in self.athlete_set.all().prefetch_related('performance_set'):
             for discipline, value in athlete.performances().items():
                 if not performance_dict.get(discipline):
                     performance_dict[discipline] = []
