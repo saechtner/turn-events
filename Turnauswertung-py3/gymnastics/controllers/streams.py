@@ -1,3 +1,6 @@
+import copy
+import operator
+
 from django.db.models import Sum
 from django.core.urlresolvers import reverse, reverse_lazy
 from django.shortcuts import render
@@ -22,40 +25,64 @@ def detail(request, id):
     athletes = stream.athlete_set.all() \
         .select_related('club').select_related('stream').select_related('team').select_related('squad') \
         .prefetch_related('performance_set') \
-        .annotate(performances_result_total=Sum('performance__value'))
+        .annotate(performances_total=Sum('performance__value'))
 
     # Results Athletes: stream.athlete_set + disciplines results + all_around result + ranks (sorted ...)
     athletes_discipline_results = stream.athlete_set.all() \
         .values('id', 'performance__discipline_id').annotate(performance_result=Sum('performance__value'))
 
-    athletes_annotated_dict = { athlete.id: {} for athlete in athletes }
+    athletes_disciplines_result_dict = { athlete.id: {} for athlete in athletes }
     for result in athletes_discipline_results:
-        athletes_annotated_dict[result['id']][result['performance__discipline_id']] = result['performance_result']
+        athletes_disciplines_result_dict[result['id']][result['performance__discipline_id']] = result['performance_result']
+
+    athletes_disciplines_rank_dict = copy.deepcopy(athletes_disciplines_result_dict)
+    itemgetter_1 = operator.itemgetter(1)
+    for discipline in disciplines:
+        performances_sorted = sorted(((key, value.get(discipline.id, 0)) for key, value in athletes_disciplines_result_dict.items()), \
+            key=itemgetter_1, reverse=True)
+        for rank, id_value_tuple in enumerate(performances_sorted, start=1):
+            athletes_disciplines_rank_dict[id_value_tuple[0]][discipline.id] = rank
+
+    totals_sorted = sorted(((a.id, a.performances_total) for a in athletes if a.performances_total), key=itemgetter_1, reverse=True)
+    for rank, id_value_tuple in enumerate(performances_sorted, start=1):
+            athletes_disciplines_rank_dict[id_value_tuple[0]]['total'] = rank
 
     # Teams: stream.team_set
     teams = stream.team_set.all() \
         .select_related('stream').select_related('club') \
         .prefetch_related('athlete_set') \
-        .annotate(performances_result_total=Sum('athlete__performance__value'))
+        .annotate(performances_total=Sum('athlete__performance__value'))
 
     # Results Teams: stream.team_set + disciplines results + all_around result + ranks
     teams_discipline_results = stream.team_set.all() \
         .values('id', 'athlete__performance__discipline_id').annotate(performance_result=Sum('athlete__performance__value'))
 
-    teams_annotated_dict = { team.id: {} for team in teams }
+    teams_disciplines_result_dict = { team.id: {} for team in teams }
     for result in teams_discipline_results:
-        teams_annotated_dict[result['id']][result['athlete__performance__discipline_id']] = result['performance_result']
+        teams_disciplines_result_dict[result['id']][result['athlete__performance__discipline_id']] = result['performance_result']
 
+    teams_disciplines_rank_dict = copy.deepcopy(teams_disciplines_result_dict)
+    itemgetter_1 = operator.itemgetter(1)
+    for discipline in disciplines:
+        performances_sorted = sorted(((key, value.get(discipline.id, 0)) for key, value in teams_disciplines_result_dict.items()), \
+            key=itemgetter_1, reverse=True)
+        for rank, id_value_tuple in enumerate(performances_sorted, start=1):
+            teams_disciplines_rank_dict[id_value_tuple[0]][discipline.id] = rank
 
+    totals_sorted = sorted(((a.id, a.performances_total) for a in athletes if a.performances_total), key=itemgetter_1, reverse=True)
+    for rank, id_value_tuple in enumerate(performances_sorted, start=1):
+            teams_disciplines_rank_dict[id_value_tuple[0]]['total'] = rank
+
+    # build context to pass to template
     context = { 
         'stream': stream, 
         'disciplines': disciplines,
         'athletes': athletes,
-        'athletes_annotated_dict': athletes_annotated_dict,
+        'athletes_disciplines_result_dict': athletes_disciplines_result_dict,
+        'athletes_disciplines_rank_dict': athletes_disciplines_rank_dict,
         'teams': teams,
-        'teams_annotated_dict': teams_annotated_dict,
-        'athletes_all_around_rank_dict': stream.athletes_all_around_rank_dict,
-        'teams_all_around_rank_dict': stream.teams_all_around_rank_dict
+        'teams_disciplines_result_dict': teams_disciplines_result_dict,
+        'teams_disciplines_rank_dict': teams_disciplines_rank_dict,
     }
     return render(request, 'gymnastics/streams/detail.html', context)
 

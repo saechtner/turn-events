@@ -84,26 +84,36 @@
         <div role="tabpanel" class="tab-pane" id="results_athletes">
           <table class="table table-hover table-condensed" id="stream-table">
             <thead>
-              <th>Athlete</th>
+              <th class="text-center">Athlete</th>
                 {% for discipline in disciplines %}
-                  <th>{{ discipline }}</th>
+                  <th class="text-right">{{ discipline }}</th>
+                  <th class="text-center">Rank</th>
                 {% endfor %}
-              <th>All Around Total</th>
-              <th>All Around Rank</th>
+              <th class="text-right">All Around</th>
+              <th class="text-center">Rank</th>
             </thead>
             <tbody>
                 {% for athlete in athletes %}
                   <tr id="athlete_{{ athlete.id }}">
-                    <td><a href="{% url 'athletes.detail' athlete.id %}">{{ athlete }}</a></td>
-                      {% with athlete_performances=athletes_annotated_dict|get_item:athlete.id %}
-                        {% for discipline in disciplines %}
-                          <td>
-                            {{ athlete_performances|get_item:discipline.id }}
-                          </td>
-                        {% endfor %}
-                      {% endwith %}
-                    <td>{{ athlete.performances_result_total }}</td>
-                    <td>{{ athletes_all_around_rank_dict|get_item:athlete.id|default:"" }}</td>
+                    {% with athlete_performances=athletes_disciplines_result_dict|get_item:athlete.id athlete_ranks=athletes_disciplines_rank_dict|get_item:athlete.id %}
+                      <td><a href="{% url 'athletes.detail' athlete.id %}">{{ athlete }}</a></td>
+                          {% for discipline in disciplines %}
+                            <td class="text-right">
+                              {{ athlete_performances|get_item:discipline.id }}
+                            </td>
+                            <td class="text-center">
+                              {% if athlete_performances|get_item:discipline.id %}
+                                {{ athlete_ranks|get_item:discipline.id }}
+                              {% endif %}
+                            </td>
+                          {% endfor %}
+                      <td class="text-right">{{ athlete.performances_total|default:'' }}</td>
+                      <td class="text-center">
+                        {% if athlete.performances_total %}
+                          {{ athlete_ranks|get_item:'total' }}
+                        {% endif %}
+                      </td>
+                    {% endwith %}
                   </tr>
                 {% endfor %}
             </tbody>
@@ -125,22 +135,34 @@
             <thead>
               <th>Team</th>
                 {% for discipline in disciplines %}
-                  <th>{{ discipline }}</th>
+                  <th class="text-right">{{ discipline }}</th>
+                  <th class="text-center">Rank</th>
                 {% endfor %}
-              <th>Team Total</th>
-              <th>Team Rank</th>
+              <th class="text-right">Team Total</th>
+              <th class="text-center">Team Rank</th>
             </thead>
             <tbody>
               {% for team in teams %}
                 <tr id="team_{{ team.id }}">
-                  <td><a href="{% url 'teams.detail' team.id %}">{{ team.name }}</a></td>
-                    {% with team_performances=teams_annotated_dict|get_item:team.id %}
+                  {% with team_performances=teams_disciplines_result_dict|get_item:team.id team_ranks=teams_disciplines_rank_dict|get_item:team.id %}
+                    <td><a href="{% url 'teams.detail' team.id %}">{{ team.name }}</a></td>
                       {% for discipline in disciplines %}
-                        <td>{{ team_performances|get_item:discipline.id }}</td>
+                        <td class="text-right">
+                          {{ team_performances|get_item:discipline.id }}
+                        </td>
+                        <td class="text-center">
+                          {% if team_performances|get_item:discipline.id %}
+                            {{ team_ranks|get_item:discipline.id }}
+                          {% endif %}
+                        </td>
                       {% endfor %}
-                    {% endwith %}
-                  <td>{{ team.performances_result_total }}</td>
-                  <td>{{ teams_all_around_rank_dict|get_item:team.id|default:"" }}</td>
+                      <td class="text-right">{{ team.performances_total|default:'' }}</td>
+                      <td class="text-center">
+                        {% if team.performances_total %}
+                          {{ team_ranks|get_item:'total' }}
+                        {% endif %}
+                      </td>
+                  {% endwith %}
                 </tr>
               {% endfor %}
             </tbody>
