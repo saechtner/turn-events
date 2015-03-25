@@ -9,15 +9,12 @@ def index(request):
     context = { 'teams': Team.objects.all().select_related('club').select_related('stream') }
     return render(request, 'gymnastics/teams/index.html', context)
 
-
 def detail(request, id):
     team = Team.objects.get(id=id)
-    club = team.club
-    stream = team.stream
     context = { 
         'team': team,
-        'club': club,
-        'stream': stream }
+        'club': team.club,
+        'stream': team.stream }
     return render(request, 'gymnastics/teams/detail.html', context)
 
 

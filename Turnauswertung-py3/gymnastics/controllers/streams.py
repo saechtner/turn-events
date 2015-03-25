@@ -23,7 +23,7 @@ def detail(request, id):
 
     # Athletes: stream.athlete_set
     athletes = stream.athlete_set.all() \
-        .select_related('club').select_related('stream').select_related('team').select_related('squad') \
+        .select_related('club').select_related('stream').select_related('team__stream').select_related('squad') \
         .prefetch_related('performance_set') \
         .annotate(performances_total=Sum('performance__value'))
 

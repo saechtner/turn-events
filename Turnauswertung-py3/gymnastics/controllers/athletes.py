@@ -12,7 +12,7 @@ from gymnastics.models import AthletesImport
 
 def index(request):
     context = { 'athletes': Athlete.objects.all() \
-        .select_related('club').select_related('stream').select_related('team').select_related('squad') }
+        .select_related('club').select_related('stream').select_related('team__stream').select_related('squad') }
     return render(request, 'gymnastics/athletes/index.html', context)
 
 def detail(request, id):

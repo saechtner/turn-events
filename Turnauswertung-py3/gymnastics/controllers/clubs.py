@@ -17,7 +17,7 @@ def detail(request, id):
 
     # Athletes: stream.athlete_set
     athletes = club.athlete_set.all() \
-        .select_related('club').select_related('stream').select_related('team').select_related('squad')
+        .select_related('club').select_related('stream').select_related('team__stream').select_related('squad')
 
     context = { 
         'club': club, 
