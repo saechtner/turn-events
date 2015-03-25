@@ -13,12 +13,14 @@
       <table class="table table-hover" id="clubs-table">
         <thead>
           <th>Name</th>
+          <th>#Athletes</th>
           <th></th>
         </thead>
         <tbody>
           {% for club in clubs %}
             <tr id="club_{{ club.id }}">
               <td>{{ club.name }}</td>
+              <td>{{ club.athlete_set.all.count }}</td>
               <td>
                 <div class="btn-group" role="group">
                   <a  type="button" class="btn btn-xs btn-success"href="{% url 'clubs.detail' club.id %}"><span class="glyphicon glyphicon-search"></span> detail</a>

@@ -7,11 +7,22 @@ from gymnastics.models.club import Club
 
 
 def index(request):
-    context = { 'clubs': Club.objects.all() }
+    context = { 'clubs': Club.objects.all() \
+        .prefetch_related('athlete_set') }
     return render(request, 'gymnastics/clubs/index.html', context)
 
 def detail(request, id):
-    context = { 'club': Club.objects.get(id=id) }
+    # Club
+    club = Club.objects.select_related().get(id=id)
+
+    # Athletes: stream.athlete_set
+    athletes = club.athlete_set.all() \
+        .select_related('club').select_related('stream').select_related('team').select_related('squad')
+
+    context = { 
+        'club': club, 
+        'athletes': athletes,
+    }
     return render(request, 'gymnastics/clubs/detail.html', context)
 
 
