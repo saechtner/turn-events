@@ -21,20 +21,21 @@ def detail(request, id):
     stream = Stream.objects.select_related().get(id=id)
     disciplines = stream.discipline_set.all()
 
-    # Athletes: stream.athlete_set
+    #### Athletes ###
     athletes = stream.athlete_set.all() \
         .select_related('club').select_related('stream').select_related('team__stream').select_related('squad') \
         .prefetch_related('performance_set') \
         .annotate(performances_total=Sum('performance__value'))
 
-    # Results Athletes: stream.athlete_set + disciplines results + all_around result + ranks (sorted ...)
+    # Results Athletes: disciplines results
     athletes_discipline_results = stream.athlete_set.all() \
-        .values('id', 'performance__discipline_id').annotate(performance_result=Sum('performance__value'))
-
+        .values('id', 'performance__discipline_id') \
+        .annotate(performance_result=Sum('performance__value'))
     athletes_disciplines_result_dict = { athlete.id: {} for athlete in athletes }
     for result in athletes_discipline_results:
         athletes_disciplines_result_dict[result['id']][result['performance__discipline_id']] = result['performance_result']
 
+    # Results Athletes: discipline ranks
     athletes_disciplines_rank_dict = copy.deepcopy(athletes_disciplines_result_dict)
     itemgetter_1 = operator.itemgetter(1)
     for discipline in disciplines:
@@ -43,24 +44,26 @@ def detail(request, id):
         for rank, id_value_tuple in enumerate(performances_sorted, start=1):
             athletes_disciplines_rank_dict[id_value_tuple[0]][discipline.id] = rank
 
+    # Results Athletes: total rank
     totals_sorted = sorted(((a.id, a.performances_total) for a in athletes if a.performances_total), key=itemgetter_1, reverse=True)
     for rank, id_value_tuple in enumerate(performances_sorted, start=1):
             athletes_disciplines_rank_dict[id_value_tuple[0]]['total'] = rank
 
-    # Teams: stream.team_set
+    ### Teams ###
     teams = stream.team_set.all() \
         .select_related('stream').select_related('club') \
         .prefetch_related('athlete_set') \
         .annotate(performances_total=Sum('athlete__performance__value'))
 
-    # Results Teams: stream.team_set + disciplines results + all_around result + ranks
+    # Results Teams: disciplines results
     teams_discipline_results = stream.team_set.all() \
-        .values('id', 'athlete__performance__discipline_id').annotate(performance_result=Sum('athlete__performance__value'))
-
+        .values('id', 'athlete__performance__discipline_id') \
+        .annotate(performance_result=Sum('athlete__performance__value'))
     teams_disciplines_result_dict = { team.id: {} for team in teams }
     for result in teams_discipline_results:
         teams_disciplines_result_dict[result['id']][result['athlete__performance__discipline_id']] = result['performance_result']
 
+    # Results Teams: discipline ranks
     teams_disciplines_rank_dict = copy.deepcopy(teams_disciplines_result_dict)
     itemgetter_1 = operator.itemgetter(1)
     for discipline in disciplines:
@@ -69,6 +72,7 @@ def detail(request, id):
         for rank, id_value_tuple in enumerate(performances_sorted, start=1):
             teams_disciplines_rank_dict[id_value_tuple[0]][discipline.id] = rank
 
+    # Results Teams: total rank
     totals_sorted = sorted(((a.id, a.performances_total) for a in athletes if a.performances_total), key=itemgetter_1, reverse=True)
     for rank, id_value_tuple in enumerate(performances_sorted, start=1):
             teams_disciplines_rank_dict[id_value_tuple[0]]['total'] = rank
