@@ -47,7 +47,7 @@ urlpatterns = patterns('',
 
     url(r'^teams$', teams.index, name='teams.index'),
     url(r'^teams/new$', teams.TeamCreateView.as_view(), name='teams.new'),
-    url(r'^teams/(?P<pk>\d+)$', teams.TeamDetailView.as_view(), name='teams.detail'),
+    url(r'^teams/(?P<id>\d+)$', teams.detail, name='teams.detail'),
     url(r'^teams/(?P<pk>\d+)/edit$', teams.TeamUpdateView.as_view(), name='teams.edit'),
     url(r'^teams/(?P<pk>\d+)/delete$', teams.TeamDeleteView.as_view(), name='teams.delete'),
 

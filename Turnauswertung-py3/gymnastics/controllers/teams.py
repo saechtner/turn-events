@@ -6,8 +6,19 @@ from gymnastics.models.team import Team
 
 
 def index(request):
-    context = { 'teams': Team.objects.all() }
+    context = { 'teams': Team.objects.all().select_related('club').select_related('stream') }
     return render(request, 'gymnastics/teams/index.html', context)
+
+
+def detail(request, id):
+    team = Team.objects.get(id=id)
+    club = team.club
+    stream = team.stream
+    context = { 
+        'team': team,
+        'club': club,
+        'stream': stream }
+    return render(request, 'gymnastics/teams/detail.html', context)
 
 
 class TeamCreateView(generic.CreateView):
@@ -16,12 +27,6 @@ class TeamCreateView(generic.CreateView):
     fields = ['name', 'club', 'stream']
     template_name = 'gymnastics/teams/new.html'
     success_url = reverse_lazy('teams.index')
-
-
-class TeamDetailView(generic.DetailView):
-
-    model = Team
-    template_name = 'gymnastics/teams/detail.html'
 
 
 class TeamUpdateView(generic.UpdateView):

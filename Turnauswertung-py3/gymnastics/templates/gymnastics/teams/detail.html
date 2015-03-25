@@ -27,16 +27,18 @@
     <!-- Nav tabs -->
     <ul class="nav nav-tabs" role="tablist">
       <li role="presentation" class="active"><a href="#base" aria-controls="home" role="tab" data-toggle="tab">General</a></li>
-      <!-- <li role="presentation"><a href="#placements" aria-controls="messages" role="tab" data-toggle="tab">Placements</a></li> -->
+      <li role="presentation"><a href="#performances" aria-controls="messages" role="tab" data-toggle="tab">Performances</a></li>
     </ul>
 
     <!-- Tab panes -->
     <div class="tab-content">
       <div role="tabpanel" class="tab-pane active" id="base">
-        <p>Club: {{ object.club }}</p>
-        <p>Stream: {{ object.stream }}</p>
+        <p>Club: <a href="{% url 'clubs.detail' club.id %}">{{ club }}</a></p>
+        <p>Stream: <a href="{% url 'streams.detail' stream.id %}">{{ stream }}</a></p>
+      </div>
+      <div role="tabpanel" class="tab-pane active" id="performances">
       </div>
     </div>
   </div> 
-  
+
 {% endblock content %}

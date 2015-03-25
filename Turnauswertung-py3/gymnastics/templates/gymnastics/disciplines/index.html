@@ -19,7 +19,7 @@
           {% for discipline in disciplines %}
             <tr id="discipline_{{ discipline.id }}">
               <td>{{ discipline.name }}</td>
-              <td>
+              <td class="text-right">
                 <div class="btn-group" role="group">
                   <a  type="button" class="btn btn-xs btn-success"href="{% url 'disciplines.detail' discipline.id %}"><span class="glyphicon glyphicon-search"></span> detail</a>
                   <a  type="button" class="btn btn-xs btn-warning"href="{% url 'disciplines.edit' discipline.id %}"><span class="glyphicon glyphicon-edit"></span> edit</a>

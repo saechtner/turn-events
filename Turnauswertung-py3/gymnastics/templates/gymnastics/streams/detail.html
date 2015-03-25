@@ -29,7 +29,7 @@
       <li role="presentation" class="active"><a href="#general" aria-controls="home" role="tab" data-toggle="tab">General</a></li>
       <li role="presentation"><a href="#athletes" aria-controls="messages" role="tab" data-toggle="tab">Athletes</a></li>
       {% if stream.all_around_individual %}
-        <li role="presentation"><a href="#athletes_results" aria-controls="profile" role="tab" data-toggle="tab">Results Athletes</a></li>
+        <li role="presentation"><a href="#results_athletes" aria-controls="profile" role="tab" data-toggle="tab">Results Athletes</a></li>
       {% endif %}
       {% if stream.all_around_team %}
         <li role="presentation"><a href="#teams" aria-controls="profile" role="tab" data-toggle="tab">Teams</a></li>
@@ -81,7 +81,7 @@
       </div>
 
       {% if stream.all_around_individual %}
-        <div role="tabpanel" class="tab-pane" id="athletes_results">
+        <div role="tabpanel" class="tab-pane" id="results_athletes">
           <table class="table table-hover table-condensed" id="stream-table">
             <thead>
               <th>Athlete</th>

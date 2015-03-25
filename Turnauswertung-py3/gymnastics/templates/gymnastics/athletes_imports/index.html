@@ -25,7 +25,7 @@
                 <a href="{% url 'clubs.detail' athletes_import.club.id %}">{{ athletes_import.club }}</a>
               {% endif %}
             </td>
-            <td class="text-center">
+            <td class="text-right">
               <div class="btn-group" role="group">
                 <a  type="button" class="btn btn-xs btn-success"href="{% url 'athletes_imports.detail' athletes_import.id %}"><span class="glyphicon glyphicon-search"></span> detail</a>
                 <a  type="button" class="btn btn-xs btn-danger"href="{% url 'athletes_imports.delete' athletes_import.id %}"><span class="glyphicon glyphicon-remove"></span> delete</a>
