@@ -1,3 +1,6 @@
+/* Initiate LightTable filter */
+$(document).ready(LightTableFilter.init());
+
 /* Handle the data arguments of the delete modal */
 $('#delete-modal').on('show.bs.modal', function (event) {
   var button = $(event.relatedTarget) // Button that triggered the modal
