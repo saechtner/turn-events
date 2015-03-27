@@ -82,15 +82,15 @@
 
       {% if stream.all_around_individual %}
         <div role="tabpanel" class="tab-pane" id="results_athletes">
-          <table class="table table-hover table-condensed" id="stream-table">
+          <table class="table table-hover table-condensed" id="stream-table" data-toggle="table">
             <thead>
-              <th>Athlete</th>
+              <th data-sortable="true">Athlete</th>
                 {% for discipline in disciplines %}
-                  <th class="text-right">{{ discipline }}</th>
-                  <th class="text-center">Rank</th>
+                  <th class="text-right" data-sortable="true">{{ discipline }}</th>
+                  <th class="text-center" data-sortable="true" data-sorter="reversedSorter">Rank</th>
                 {% endfor %}
-              <th class="text-right">All Around</th>
-              <th class="text-center">Rank</th>
+              <th data-sortable="true">All Around</th>
+              <th data-sortable="true" data-sorter="reversedSorter">Rank</th>
             </thead>
             <tbody>
                 {% for athlete in athletes %}
@@ -107,8 +107,8 @@
                               {% endif %}
                             </td>
                           {% endfor %}
-                      <td class="text-right">{{ athlete.performances_total|default:'' }}</td>
-                      <td class="text-center">
+                      <td>{{ athlete.performances_total|default:'' }}</td>
+                      <td>
                         {% if athlete.performances_total %}
                           {{ athlete_ranks|get_item:'total' }}
                         {% endif %}

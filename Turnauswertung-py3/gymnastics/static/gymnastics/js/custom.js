@@ -6,14 +6,16 @@ $('#delete-modal').on('show.bs.modal', function (event) {
   var button = $(event.relatedTarget) // Button that triggered the modal
   var id = button.data('id') // Extract info from data-* attributes
   var name = button.data('name')
+  var url = button.data('url')
 
   // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
   // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
   var modal = $(this)
   modal.find('.delete-modal-question').text('Are you sure you want to delete \"' + name + '\"?')
+  modal.find('.delete-modal-confirm').attr('href', url);
 })
 
-
+/* Ajax post delete handling */
 function getCookie(name) {
     var cookieValue = null;
     if (document.cookie && document.cookie != '') {
@@ -48,22 +50,52 @@ $(document).ready(function() {
     });
 
     // This function must be customized
-    var onDelete = function(){
-        $.post(this.href, function(data) {
-            if (data.result == "ok"){
-                alert("data deleted successfully");
-            } else {
-                // handle error processed by server here
-                alert("smth goes wrong");
-            }
-        }).fail(function() {
+    var onDelete = function() {
+        var posting = $.post(this.href, function(data) {
+            // if (data.result == "ok"){
+            //     alert("posted with result ok");
+            // } else {
+            //     // handle error processed by server here
+            //     alert("posting with result NOT ok");
+            // }
+        });
+
+        posting.fail(function() {
+            // find out what the actual problem is!
+
             // handle unexpected error here
             // TODO: ...
-            alert("error");
+            alert("posting.fail");
         });
+
+        posting.done(function(data) {
+            if (data.result == "ok"){
+                alert("posted with result ok");
+            } else {
+                // handle error processed by server here
+                alert("posting with result NOT ok");
+            }
+        });
+
         return false;
     }
 
     // $(".delete-modal-confirm").click(onDelete);
-    $(".athlete-detail-delete").click(onDelete);
+    $(".delete-modal-confirm").click(onDelete);
 });
+
+/* Table Sorter Functions*/
+function reversedSorter(a, b) {
+    var a_trimmed = a.trim();
+    var b_trimmed = b.trim();
+    
+    if (a_trimmed && b_trimmed) {
+        if (a_trimmed < b_trimmed) return 1;
+        if (a_trimmed > b_trimmed) return -1;
+    } else {
+        if (a_trimmed) return 1;
+        if (b_trimmed) return -1;
+    }
+    
+    return 0;
+}

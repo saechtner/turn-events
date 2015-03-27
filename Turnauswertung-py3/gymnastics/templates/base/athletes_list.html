@@ -39,7 +39,7 @@
           <a  type="button" class="btn btn-xs btn-success" href="{% url 'athletes.detail' athlete.id %}"><span class="glyphicon glyphicon-search"></span> detail</a>
           <a  type="button" class="btn btn-xs btn-warning" href="{% url 'athletes.edit' athlete.id %}"><span class="glyphicon glyphicon-edit"></span> edit</a>
 
-          <button type="button" class="btn btn-xs btn-danger" data-toggle="modal" data-target="#delete-modal" data-id="{{ athlete.id }}" data-name="{{ athlete }}">
+          <button type="button" class="btn btn-xs btn-danger" data-toggle="modal" data-target="#delete-modal" data-id="{{ athlete.id }}" data-name="{{ athlete }}" data-url="{% url 'athletes.delete' athlete.id %}">
             <span class="glyphicon glyphicon-remove"></span> delete
           </button>
 
