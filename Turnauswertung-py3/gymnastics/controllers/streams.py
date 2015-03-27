@@ -44,6 +44,7 @@ def detail(request, id):
         for rank, id_value_tuple in enumerate(performances_sorted, start=1):
             athletes_disciplines_rank_dict[id_value_tuple[0]][discipline.id] = rank
 
+
     # Results Athletes: total rank
     totals_sorted = sorted(((a.id, a.performances_total) for a in athletes if a.performances_total), key=itemgetter_1, reverse=True)
     for rank, id_value_tuple in enumerate(performances_sorted, start=1):

@@ -33,11 +33,11 @@
     <!-- Tab panes -->
     <div class="tab-content">
       <div role="tabpanel" class="tab-pane active" id="base"> 
-        <p>Athlete: {{ object.athlete }}</p>
-        <p>Discipline: {{ object.discipline }}</p>
-        <p>Value: {{ object.value }}</p>
-        {% if object.performance_final %}
-          <p>Value Final: {{ object.value_final }}</p>
+        <p>Athlete: {{ performance.athlete }}</p>
+        <p>Discipline: {{ performance.discipline }}</p>
+        <p>Value: {{ performance.value }}</p>
+        {% if performance.value_final %}
+          <p>Value Final: {{ performance.value_final }}</p>
         {% endif %}
       </div>
     </div>

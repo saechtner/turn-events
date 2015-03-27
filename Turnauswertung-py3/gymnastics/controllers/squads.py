@@ -22,25 +22,31 @@ def detail(request, id):
         .prefetch_related('performance_set') \
         .annotate(performances_total=Sum('performance__value'))
 
-    # ### Streams ###
-    # streams = set([Stream.objects.get(id=id) for athlete in athletes])
-    # for stream in streams:
-    #     stream.prefetch_related('discipline_set')
 
-    # # Results Athletes: disciplines results
-    # athletes_discipline_results = squad.athlete_set.all() \
-    #     .values('id', 'performance__discipline_id') \
-    #     .annotate(performance_result=Sum('performance__value'))
-    # athletes_disciplines_result_dict = { athlete.id: {} for athlete in athletes }
-    # for result in athletes_discipline_results:
-    #     athletes_disciplines_result_dict[result['id']][result['performance__discipline_id']] = result['performance_result']
+    ### Streams ###
+    streams_disctinct = set([athlete.stream for athlete in athletes])
+    stream_athletes_disciplines = { stream.id: {'athletes': [], 'disciplines': stream.discipline_set.all()} for stream in streams_disctinct }
+    for athlete in athletes:
+        stream_athletes_disciplines[athlete.stream.id]['athletes'].append(athlete)
+
+
+    # Results Athletes: disciplines results
+    athletes_discipline_results = squad.athlete_set.all() \
+        .values('id', 'performance__discipline_id') \
+        .annotate(performance_result=Sum('performance__value'))
+    athletes_disciplines_result_dict = { athlete.id: {} for athlete in athletes }
+    for result in athletes_discipline_results:
+        athletes_disciplines_result_dict[result['id']][result['performance__discipline_id']] = result['performance_result']
+
+    print(athletes_disciplines_result_dict)
 
     context = { 
         'squad': squad,
         'athletes': athletes,
-        'athletes_count': len(athletes)
-        # 'athletes_disciplines_result_dict': athletes_disciplines_result_dict,
-        # 'streams': streams
+        'athletes_count': len(athletes),
+        'athletes_disciplines_result_dict': athletes_disciplines_result_dict,
+        'streams': streams_disctinct,
+        'stream_athletes_disciplines': stream_athletes_disciplines
     }
     return render(request, 'gymnastics/squads/detail.html', context)
 

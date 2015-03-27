@@ -89,8 +89,8 @@
                   <th class="text-right" data-sortable="true">{{ discipline }}</th>
                   <th class="text-center" data-sortable="true" data-sorter="reversedSorter">Rank</th>
                 {% endfor %}
-              <th data-sortable="true">All Around</th>
-              <th data-sortable="true" data-sorter="reversedSorter">Rank</th>
+              <th class="text-center" data-sortable="true">All Around</th>
+              <th class="text-center" data-sortable="true" data-sorter="reversedSorter">Rank</th>
             </thead>
             <tbody>
                 {% for athlete in athletes %}
@@ -107,8 +107,8 @@
                               {% endif %}
                             </td>
                           {% endfor %}
-                      <td>{{ athlete.performances_total|default:'' }}</td>
-                      <td>
+                      <td class="text-right">{{ athlete.performances_total|default:'' }}</td>
+                      <td class="text-center">
                         {% if athlete.performances_total %}
                           {{ athlete_ranks|get_item:'total' }}
                         {% endif %}
