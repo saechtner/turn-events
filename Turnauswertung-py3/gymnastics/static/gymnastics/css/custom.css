@@ -7,9 +7,12 @@ body {
   color: #5a5a5a;
 }
 
-
 /* CUSTOMIZE THE NAVBAR
 -------------------------------------------------- */
+
+.navbar-brand {
+  padding: 10px 0px 0px 15px;
+}
 
 /* Flip around the padding for proper display in narrow viewports */
 .navbar-wrapper > .container {
