@@ -2,12 +2,47 @@ from django.shortcuts import render
 from django.core.urlresolvers import reverse, reverse_lazy
 from django.views import generic
 
+from django.db.models import Sum
+
 from gymnastics.models.squad import Squad
+from gymnastics.models.stream import Stream
 
 
 def index(request):
     context = { 'squads': Squad.objects.all() }
     return render(request, 'gymnastics/squads/index.html', context)
+
+
+def detail(request, id):
+    squad = Squad.objects.get(id=id)
+
+    #### Athletes ###
+    athletes = squad.athlete_set.all() \
+        .select_related('club').select_related('stream').select_related('team__stream').select_related('squad') \
+        .prefetch_related('performance_set') \
+        .annotate(performances_total=Sum('performance__value'))
+
+    # ### Streams ###
+    # streams = set([Stream.objects.get(id=id) for athlete in athletes])
+    # for stream in streams:
+    #     stream.prefetch_related('discipline_set')
+
+    # # Results Athletes: disciplines results
+    # athletes_discipline_results = squad.athlete_set.all() \
+    #     .values('id', 'performance__discipline_id') \
+    #     .annotate(performance_result=Sum('performance__value'))
+    # athletes_disciplines_result_dict = { athlete.id: {} for athlete in athletes }
+    # for result in athletes_discipline_results:
+    #     athletes_disciplines_result_dict[result['id']][result['performance__discipline_id']] = result['performance_result']
+
+    context = { 
+        'squad': squad,
+        'athletes': athletes,
+        'athletes_count': len(athletes)
+        # 'athletes_disciplines_result_dict': athletes_disciplines_result_dict,
+        # 'streams': streams
+    }
+    return render(request, 'gymnastics/squads/detail.html', context)
 
 
 class SquadCreateView(generic.CreateView):
@@ -16,12 +51,6 @@ class SquadCreateView(generic.CreateView):
     fields = ['name']
     template_name = 'gymnastics/squads/new.html'
     success_url = reverse_lazy('squads.index')
-
-
-class SquadDetailView(generic.DetailView):
-
-    model = Squad
-    template_name = 'gymnastics/squads/detail.html'
 
 
 class SquadUpdateView(generic.UpdateView):

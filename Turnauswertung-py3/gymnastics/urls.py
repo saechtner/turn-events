@@ -23,7 +23,7 @@ urlpatterns = patterns('',
 
     url(r'^disciplines$', disciplines.index, name='disciplines.index'),
     url(r'^disciplines/new$', disciplines.DisciplineCreateView.as_view(), name='disciplines.new'),
-    url(r'^disciplines/(?P<pk>\d+)$', disciplines.DisciplineDetailView.as_view(), name='disciplines.detail'),
+    url(r'^disciplines/(?P<id>\d+)$', disciplines.detail, name='disciplines.detail'),
     url(r'^disciplines/(?P<pk>\d+)/edit$', disciplines.DisciplineUpdateView.as_view(), name='disciplines.edit'),
     url(r'^disciplines/(?P<pk>\d+)/delete$', disciplines.DisciplineDeleteView.as_view(), name='disciplines.delete'),
 
@@ -35,7 +35,7 @@ urlpatterns = patterns('',
 
     url(r'^squads$', squads.index, name='squads.index'),
     url(r'^squads/new$', squads.SquadCreateView.as_view(), name='squads.new'),
-    url(r'^squads/(?P<pk>\d+)$', squads.SquadDetailView.as_view(), name='squads.detail'),
+    url(r'^squads/(?P<id>\d+)$', squads.detail, name='squads.detail'),
     url(r'^squads/(?P<pk>\d+)/edit$', squads.SquadUpdateView.as_view(), name='squads.edit'),
     url(r'^squads/(?P<pk>\d+)/delete$', squads.SquadDeleteView.as_view(), name='squads.delete'),
 

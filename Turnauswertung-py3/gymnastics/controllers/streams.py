@@ -82,6 +82,7 @@ def detail(request, id):
         'stream': stream, 
         'disciplines': disciplines,
         'athletes': athletes,
+        'athletes_count': len(athletes),
         'athletes_disciplines_result_dict': athletes_disciplines_result_dict,
         'athletes_disciplines_rank_dict': athletes_disciplines_rank_dict,
         'teams': teams,
