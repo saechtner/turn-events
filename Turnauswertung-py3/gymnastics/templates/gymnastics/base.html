@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>{% block title %}Gymnastics{% endblock title %}</title>
+    <title>{% block title %}Turnen{% endblock title %}</title>
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="{% static 'gymnastics/images/favicon.ico' %}" />
@@ -125,5 +125,8 @@
     <script src="{% static 'gymnastics/js/bootstrap-table.min.js' %}"></script>
     <script src="{% static 'gymnastics/js/light_table_filter.js' %}"></script>
     <script src="{% static 'gymnastics/js/custom.js' %}"></script>
+
+    {% block javascript %}
+    {% endblock javascript %}
   </body>
 </html>

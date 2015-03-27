@@ -99,3 +99,15 @@ function reversedSorter(a, b) {
     
     return 0;
 }
+
+/* Table Sorter Functions*/
+function regularStringSorter(a, b) {
+    var a_trimmed = a.trim().toLowerCase();
+    var b_trimmed = b.trim().toLowerCase();
+    
+    // if (a_trimmed < b_trimmed) return 1;
+    // if (a_trimmed > b_trimmed) return -1;
+    // return 0;
+
+    return a_trimmed.localeCompare(b_trimmed);
+}
