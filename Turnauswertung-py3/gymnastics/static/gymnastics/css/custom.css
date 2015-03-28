@@ -11,6 +11,10 @@ body {
   background-repeat: no-repeat;*/
 }
 
+.fixed-table-loading {
+  display: none;
+}
+
 /*body {
   padding-top: 10px;
   padding-bottom: 20px;
