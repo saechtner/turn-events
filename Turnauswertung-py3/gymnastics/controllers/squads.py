@@ -19,16 +19,13 @@ def detail(request, id):
     #### Athletes ###
     athletes = squad.athlete_set.all() \
         .select_related('club').select_related('stream').select_related('team__stream').select_related('squad') \
-        .prefetch_related('performance_set') \
-        .annotate(performances_total=Sum('performance__value'))
-
+        .prefetch_related('performance_set')
 
     ### Streams ###
     streams_disctinct = set([athlete.stream for athlete in athletes])
     stream_athletes_disciplines = { stream.id: {'athletes': [], 'disciplines': stream.discipline_set.all()} for stream in streams_disctinct }
     for athlete in athletes:
         stream_athletes_disciplines[athlete.stream.id]['athletes'].append(athlete)
-
 
     # Results Athletes: disciplines results
     athletes_discipline_results = squad.athlete_set.all() \
