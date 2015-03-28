@@ -38,8 +38,6 @@ def detail(request, id):
     for result in athletes_discipline_results:
         athletes_disciplines_result_dict[result['id']][result['performance__discipline_id']] = result['performance_result']
 
-    print(athletes_disciplines_result_dict)
-
     context = { 
         'squad': squad,
         'athletes': athletes,

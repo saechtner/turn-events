@@ -96,7 +96,7 @@
                 {% for athlete in athletes %}
                   <tr id="athlete_{{ athlete.id }}">
                     {% with athlete_performances=athletes_disciplines_result_dict|get_item:athlete.id athlete_ranks=athletes_disciplines_rank_dict|get_item:athlete.id %}
-                      <td><a href="{% url 'athletes.detail' athlete.id %}">{{ athlete }}</a></td>
+                      <td><a data-name="{{ athlete }}" href="{% url 'athletes.detail' athlete.id %}">{{ athlete }}</a></td>
                           {% for discipline in disciplines %}
                             <td class="text-right">
                               {{ athlete_performances|get_item:discipline.id }}

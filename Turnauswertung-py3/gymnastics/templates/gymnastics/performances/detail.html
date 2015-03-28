@@ -33,8 +33,8 @@
     <!-- Tab panes -->
     <div class="tab-content">
       <div role="tabpanel" class="tab-pane active" id="base"> 
-        <p>Athlete: {{ performance.athlete }}</p>
-        <p>Discipline: {{ performance.discipline }}</p>
+        <p>Athlete: <a href="{% url 'athletes.detail' performance.athlete.id %}">{{ performance.athlete }}</a></p>
+        <p>Discipline: <a href="{% url 'disciplines.detail' performance.discipline.id %}">{{ performance.discipline }}</a></p>
         <p>Value: {{ performance.value }}</p>
         {% if performance.value_final %}
           <p>Value Final: {{ performance.value_final }}</p>
