@@ -50,6 +50,7 @@ body {
 
 /* Since positioning the image, we need to help out the caption */
 .carousel-caption {
+  height: 450px;
   z-index: 10;
 }
 
@@ -68,8 +69,8 @@ body {
 }
 
 .carousel .main-page-gym-img {
-  width: 278px;
-  height: 60px;
+  width: 417px;
+  height: 90px;
   margin-bottom: 50px;
 }
 
