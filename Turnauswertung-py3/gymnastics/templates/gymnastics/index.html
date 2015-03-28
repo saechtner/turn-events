@@ -1,8 +1,10 @@
 {% extends "gymnastics/base.html" %}
 
+{% load staticfiles %}
+
 {% block content %}
 <!-- Carousel -->
-<div id="myCarousel" class="carousel slide" data-ride="carousel">
+<div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="false">
   <!-- Indicators -->
   <ol class="carousel-indicators">
     <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
@@ -14,6 +16,7 @@
       <img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="First slide">
       <div class="container">
         <div class="carousel-caption">
+          <img class="main-page-gym-img" alt="" src="{% static 'gymnastics/images/logo_03.png' %}">
           <h1>Step 1: Tournament Preparation </h1>
           <p>Welcome to your gymnastics tournament management system. Go ahead and create some disciplines and streams to start a new tournament.</p>
           <p>
@@ -29,9 +32,16 @@
       <img src="data:image/gif;base64,R0lGODlhAQABAIAAAGZmZgAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Second slide">
       <div class="container">
         <div class="carousel-caption">
+          <img class="main-page-gym-img" alt="" src="{% static 'gymnastics/images/logo_03.png' %}">
           <h1>Step 2: Tournament Performances</h1>
-          <p>Allow last minute RSVP changes. Eventually, each squad performs at its disciplines and results are added to the system.</p>
-          <p><a class="btn btn-lg btn-primary" href="#" role="button">Add Squad Results</a></p>
+          <p>Add clubs, athletes and eventually their performances to the database.</p>
+          <p>
+            <div class="btn-group">
+              <a class="btn btn-lg btn-primary" href="{% url 'clubs.index' %}" role="button">Clubs</a>
+              <a class="btn btn-lg btn-primary" href="{% url 'athletes.index' %}" role="button">Athletes</a>
+              <a class="btn btn-lg btn-primary" href="{% url 'performances.index' %}" role="button">Performances</a>
+            </div>
+          </p>
         </div>
       </div>
     </div>
@@ -39,9 +49,15 @@
       <img src="data:image/gif;base64,R0lGODlhAQABAIAAAFVVVQAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Third slide">
       <div class="container">
         <div class="carousel-caption">
+          <img class="main-page-gym-img" alt="" src="{% static 'gymnastics/images/logo_03.png' %}">
           <h1>Step 3: Tournament Evaluation</h1>
-          <p>Calculate a ranking for all streams and events. Afterwards the victors can be announced.</p>
-          <p><a class="btn btn-lg btn-primary" href="#" role="button">Analyze</a></p>
+          <p>Keep up to date with all team and individual results and check who is on top of the standings for each stream and discipline.</p>
+          <p>
+            <div class="btn-group">
+              <a class="btn btn-lg btn-primary" href="{% url 'clubs.index' %}" role="button">Streams</a>
+              <a class="btn btn-lg btn-primary" href="{% url 'performances.index' %}" role="button">Performances</a>
+            </div>
+          </p>
         </div>
       </div>
     </div>
