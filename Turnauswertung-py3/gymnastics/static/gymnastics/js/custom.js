@@ -15,7 +15,17 @@ $('#delete-modal').on('show.bs.modal', function (event) {
   modal.find('.delete-modal-confirm').attr('href', url);
 })
 
-/* Ajax post delete handling */
+/* Delete confirm popup and ajax post delete handling */
+$(".confirm").confirm({
+    confirm: function(button) {
+        var buttonText = button.attr('href');
+
+        console.log('Button function with ' + buttonText);
+
+        ajaxDelete(buttonText);
+    },
+});
+
 function getCookie(name) {
     var cookieValue = null;
     if (document.cookie && document.cookie != '') {
@@ -32,7 +42,27 @@ function getCookie(name) {
     return cookieValue;
 }
 
-$(document).ready(function() {
+// $(document).ready(function() {
+//     var csrftoken = getCookie('csrftoken');
+
+//     function csrfSafeMethod(method) {
+//         // these HTTP methods do not require CSRF protection
+//         return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+//     }
+
+//     $.ajaxSetup({
+//         crossDomain: false, // obviates need for sameOrigin test
+//         beforeSend: function(xhr, settings) {
+//             if (!csrfSafeMethod(settings.type)) {
+//                 xhr.setRequestHeader("X-CSRFToken", csrftoken);
+//             }
+//         }
+//     });
+// });
+
+function ajaxDelete(href) {
+    console.log("AjaxDelete with " + href);
+
     var csrftoken = getCookie('csrftoken');
 
     function csrfSafeMethod(method) {
@@ -40,8 +70,10 @@ $(document).ready(function() {
         return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
     }
 
-    $.ajaxSetup({
-        crossDomain: false, // obviates need for sameOrigin test
+    var posting = $.ajax({
+        type:"POST",
+        url:href,
+        crossDomain: false,
         beforeSend: function(xhr, settings) {
             if (!csrfSafeMethod(settings.type)) {
                 xhr.setRequestHeader("X-CSRFToken", csrftoken);
@@ -49,40 +81,26 @@ $(document).ready(function() {
         }
     });
 
-    // This function must be customized
-    var onDelete = function() {
-        var posting = $.post(this.href, function(data) {
-            // if (data.result == "ok"){
-            //     alert("posted with result ok");
-            // } else {
-            //     // handle error processed by server here
-            //     alert("posting with result NOT ok");
-            // }
-        });
+    posting.fail(function() {
+        // find out what the actual problem is!
 
-        posting.fail(function() {
-            // find out what the actual problem is!
+        // handle unexpected error here
+        // TODO: ...
+        alert("posting.fail");
+    });
 
-            // handle unexpected error here
-            // TODO: ...
-            alert("posting.fail");
-        });
+    posting.done(function(data) {
+        if (data.result == "ok"){
+            alert("posted with result ok");
+        } else {
+            // handle error processed by server here
+            alert("posting with result NOT ok");
+        }
+    });
 
-        posting.done(function(data) {
-            if (data.result == "ok"){
-                alert("posted with result ok");
-            } else {
-                // handle error processed by server here
-                alert("posting with result NOT ok");
-            }
-        });
+    return false;
+}
 
-        return false;
-    }
-
-    // $(".delete-modal-confirm").click(onDelete);
-    $(".delete-modal-confirm").click(onDelete);
-});
 
 /* Table Sorter Functions*/
 function reversedSorter(a, b) {
@@ -100,7 +118,6 @@ function reversedSorter(a, b) {
     return 0;
 }
 
-/* Table Sorter Functions*/
 function regularStringSorter(a, b) {
     var a_trimmed = a.trim().toLowerCase();
     var b_trimmed = b.trim().toLowerCase();
