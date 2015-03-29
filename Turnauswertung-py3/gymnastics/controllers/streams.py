@@ -41,14 +41,22 @@ def detail(request, id):
     for discipline in disciplines:
         performances_sorted = sorted(((key, value.get(discipline.id, 0)) for key, value in athletes_disciplines_result_dict.items()), \
             key=itemgetter_1, reverse=True)
+        prev_value = None
+        equal_value_counter = 0
         for rank, id_value_tuple in enumerate(performances_sorted, start=1):
-            athletes_disciplines_rank_dict[id_value_tuple[0]][discipline.id] = rank
+            equal_value_counter = equal_value_counter + 1 if prev_value == id_value_tuple[1] else 0
+            athletes_disciplines_rank_dict[id_value_tuple[0]][discipline.id] = rank - equal_value_counter
+            prev_value = id_value_tuple[1]
 
+    # Results Athletes: total rankprev_value = None
+    athletes_totals_sorted = sorted(((a.id, a.performances_total) for a in athletes if a.performances_total), key=itemgetter_1, reverse=True)
+    # prev_value = None,
+    equal_value_counter = 0
+    for rank, id_value_tuple in enumerate(athletes_totals_sorted, start=1):
+        # equal_value_counter = equal_value_counter + 1 if prev_value == id_value_tuple[1] else 0
+        athletes_disciplines_rank_dict[id_value_tuple[0]]['total'] = rank - equal_value_counter
+        # prev_value = id_value_tuple[1]
 
-    # Results Athletes: total rank
-    totals_sorted = sorted(((a.id, a.performances_total) for a in athletes if a.performances_total), key=itemgetter_1, reverse=True)
-    for rank, id_value_tuple in enumerate(performances_sorted, start=1):
-            athletes_disciplines_rank_dict[id_value_tuple[0]]['total'] = rank
 
     ### Teams ###
     teams = stream.team_set.all() \
@@ -70,13 +78,21 @@ def detail(request, id):
     for discipline in disciplines:
         performances_sorted = sorted(((key, value.get(discipline.id, 0)) for key, value in teams_disciplines_result_dict.items()), \
             key=itemgetter_1, reverse=True)
+        # prev_value = None,
+        equal_valaue_counter = 0
         for rank, id_value_tuple in enumerate(performances_sorted, start=1):
+            # equal_value_counter = equal_value_counter + 1 if prev_value == id_value_tuple[1] else 0
             teams_disciplines_rank_dict[id_value_tuple[0]][discipline.id] = rank
+            # prev_value = id_value_tuple[1]
 
     # Results Teams: total rank
-    totals_sorted = sorted(((a.id, a.performances_total) for a in athletes if a.performances_total), key=itemgetter_1, reverse=True)
-    for rank, id_value_tuple in enumerate(performances_sorted, start=1):
-            teams_disciplines_rank_dict[id_value_tuple[0]]['total'] = rank
+    teams_totals_sorted = sorted(((t.id, t.performances_total) for t in teams if t.performances_total), key=itemgetter_1, reverse=True)
+    prev_value = None,
+    equal_value_counter = 0
+    for rank, id_value_tuple in enumerate(teams_totals_sorted, start=1):
+        equal_value_counter = equal_value_counter + 1 if prev_value == id_value_tuple[1] else 0
+        teams_disciplines_rank_dict[id_value_tuple[0]]['total'] = rank
+        prev_value = id_value_tuple[1]
 
     # build context to pass to template
     context = { 
