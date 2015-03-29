@@ -1,0 +1,22 @@
+{% extends "gymnastics/squads/base.html" %}
+
+{% load custom_template_tags %}
+                  
+{% block nav_level_2 %}
+  {% render_nav_item name=squad url_name='squads.detail' url_id=squad.id %}
+{% endblock nav_level_2 %}
+{% block nav_level_3 %}
+  {% render_nav_item name='enter values' active=True %}
+{% endblock nav_level_3 %}
+
+
+{% block content %}
+<form action="{% url 'squads.enter_performances' squad.id %}" method="post" class="form-horizontal">
+  {% csrf_token %}
+  {% include "base/squads_enter_performances.html" %}
+  <div class="col-md-5 col-md-offset-4 btn-group">
+    <input class="btn btn-primary" type="submit" value="Submit"/>
+    <button class="btn btn-default" type="button" onClick="javascript:history.go(-1);">Cancel</button>
+  </div>
+</form>
+{% endblock content %}

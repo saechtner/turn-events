@@ -37,6 +37,7 @@ urlpatterns = patterns('',
     url(r'^squads/new$', squads.SquadCreateView.as_view(), name='squads.new'),
     url(r'^squads/(?P<id>\d+)$', squads.detail, name='squads.detail'),
     url(r'^squads/(?P<pk>\d+)/edit$', squads.SquadUpdateView.as_view(), name='squads.edit'),
+    url(r'^squads/(?P<id>\d+)/enter_performances$', squads.enter_performances, name='squads.enter_performances'),
     url(r'^squads/(?P<pk>\d+)/delete$', squads.SquadDeleteView.as_view(), name='squads.delete'),
 
     url(r'^streams$', streams.index, name='streams.index'),
