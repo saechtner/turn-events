@@ -1,28 +1,14 @@
 /* Initiate LightTable filter */
 $(document).ready(LightTableFilter.init());
 
-/* Handle the data arguments of the delete modal */
-$('#delete-modal').on('show.bs.modal', function (event) {
-  var button = $(event.relatedTarget) // Button that triggered the modal
-  var id = button.data('id') // Extract info from data-* attributes
-  var name = button.data('name')
-  var url = button.data('url')
-
-  // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
-  // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
-  var modal = $(this)
-  modal.find('.delete-modal-question').text('Are you sure you want to delete \"' + name + '\"?')
-  modal.find('.delete-modal-confirm').attr('href', url);
-})
 
 /* Delete confirm popup and ajax post delete handling */
 $(".confirm").confirm({
     confirm: function(button) {
-        var buttonText = button.attr('href');
+        var href = button.attr('href');
+        var id = button.data('id');
 
-        console.log('Button function with ' + buttonText);
-
-        ajaxDelete(buttonText);
+        ajaxDelete(href, id);
     },
 });
 
@@ -42,27 +28,7 @@ function getCookie(name) {
     return cookieValue;
 }
 
-// $(document).ready(function() {
-//     var csrftoken = getCookie('csrftoken');
-
-//     function csrfSafeMethod(method) {
-//         // these HTTP methods do not require CSRF protection
-//         return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
-//     }
-
-//     $.ajaxSetup({
-//         crossDomain: false, // obviates need for sameOrigin test
-//         beforeSend: function(xhr, settings) {
-//             if (!csrfSafeMethod(settings.type)) {
-//                 xhr.setRequestHeader("X-CSRFToken", csrftoken);
-//             }
-//         }
-//     });
-// });
-
-function ajaxDelete(href) {
-    console.log("AjaxDelete with " + href);
-
+$(document).ready(function() {
     var csrftoken = getCookie('csrftoken');
 
     function csrfSafeMethod(method) {
@@ -70,32 +36,35 @@ function ajaxDelete(href) {
         return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
     }
 
-    var posting = $.ajax({
-        type:"POST",
-        url:href,
-        crossDomain: false,
+    $.ajaxSetup({
+        crossDomain: false, // obviates need for sameOrigin test
         beforeSend: function(xhr, settings) {
             if (!csrfSafeMethod(settings.type)) {
                 xhr.setRequestHeader("X-CSRFToken", csrftoken);
             }
         }
     });
+});
 
-    posting.fail(function() {
-        // find out what the actual problem is!
-
-        // handle unexpected error here
-        // TODO: ...
-        alert("posting.fail");
+function ajaxDelete(href, id) {
+    var posting = $.ajax({
+        type: 'post',
+        url: href,
+        crossDomain: false
     });
 
     posting.done(function(data) {
         if (data.result == "ok"){
-            alert("posted with result ok");
+            $("#athletes_row_" + id).addClass("hidden")
         } else {
             // handle error processed by server here
             alert("posting with result NOT ok");
         }
+    });
+
+    posting.fail(function() {
+        // handle unexpected error here
+        alert("posting.fail");
     });
 
     return false;
