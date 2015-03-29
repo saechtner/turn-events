@@ -96,7 +96,7 @@ def new(request):
 
     if request.method == 'GET':
         messages.info(request, 'Keep in mind the following data structure: \
-            First Name | Last Name | Geschlecht | Year of Birth | Stream | Team.')
+            First Name | Last Name | Sex | Year of Birth | Stream | Team.')
 
         context = { 'clubs': Club.objects.all() }
         return render(request, 'gymnastics/athletes_imports/new.html', context)
