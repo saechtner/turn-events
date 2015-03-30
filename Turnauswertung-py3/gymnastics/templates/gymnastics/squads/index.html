@@ -21,6 +21,7 @@
               <td>{{ squad.name }}</td>
               <td class="text-right">
                 <div class="btn-group" role="group">
+                  <a type="button" class="btn btn-xs btn-primary" href="{% url 'squads.enter_performances' squad.id %}">Enter performances</a>
                   <a  type="button" class="btn btn-xs btn-success"href="{% url 'squads.detail' squad.id %}"><span class="glyphicon glyphicon-search"></span> detail</a>
                   <a  type="button" class="btn btn-xs btn-warning"href="{% url 'squads.edit' squad.id %}"><span class="glyphicon glyphicon-edit"></span> edit</a>
                   <a  type="button" class="btn btn-xs btn-danger"href="{% url 'squads.delete' squad.id %}"><span class="glyphicon glyphicon-remove"></span> delete</a>

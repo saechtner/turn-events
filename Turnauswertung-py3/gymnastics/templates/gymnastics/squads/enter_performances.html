@@ -13,47 +13,43 @@
 {% block content %}
 <form action="{% url 'squads.handle_entered_performances' %}" method="post" class="form-horizontal">
   {% csrf_token %}
-  <div class="form-group row {% if form.errors|get_item:field.name %} has-error{% endif %}">
-    {% for stream in streams %}
-      {% with stream_id=stream.id %}
-        <div class="panel panel-default">
-          <div class="panel-heading text-center">
-            <a data-toggle="collapse" href="#collapse{{ stream_id }}" aria-expanded="true" aria-controls="collapse{{ stream_id }}">
-              <h3 class="panel-title">{{ stream }}</h3>
-            </a>
-          </div>
-          {% with disciplines=stream_athletes_disciplines|get_item:stream_id|get_item:'disciplines' stream_athletes=stream_athletes_disciplines|get_item:stream_id|get_item:'athletes' %}
-            <div id="collapse{{ stream_id }}" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
-              <table class="table table-hover table-condensed" id="stream-{{ stream }}-table">
-                <thead>
-                  <th>Athlete</th>
-                  {% for discipline in disciplines %}
-                    <th>{{ discipline }}</th>
-                  {% endfor %}
-                </thead>
-                <tbody>
-                  {% for athlete in stream_athletes %}
-                    <tr id="athlete_{{ athlete.id }}">
-                      {% with athlete_performances=athletes_disciplines_result_dict|get_item:athlete.id %}
-                        <td><a href="{% url 'athletes.detail' athlete.id %}" tabindex="-1">{{ athlete }}</a></td>
-                        {% for discipline in disciplines %}
-                          <td>
-                            <div class="form-group col-md-6">
-                              <input class="form-control" type="number" min="0.00" max="10.00" step="0.01" name="{{ athlete.id }}-{{ discipline.id }}" id="{{ athlete }}-{{ discipline }}" placeholder="{{ athlete_performances|get_item:discipline.id|default:'0.00' }}">
-                            </div>
-                          </td>
-                        {% endfor %}
-                      {% endwith %}
-                    </tr>
-                  {% endfor %}
-                </tbody>
-              </table>
-            </div>
-          {% endwith %}
+  {% for stream in streams %}
+    <div class="panel panel-default">
+      <div class="panel-heading text-center">
+        <a data-toggle="collapse" href="#collapse_{{ stream_id }}" aria-expanded="true" aria-controls="collapse_{{ stream_id }}">
+          <h3 class="panel-title">{{ stream }}</h3>
+        </a>
+      </div>
+      {% with disciplines=stream_athletes_disciplines|get_item:stream.id|get_item:'disciplines' stream_athletes=stream_athletes_disciplines|get_item:stream.id|get_item:'athletes' %}
+        <div id="collapse_{{ stream_id }}" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+          <table class="table table-hover table-condensed" id="stream-{{ stream }}-table">
+            <thead>
+              <th>Athlete</th>
+              {% for discipline in disciplines %}
+                <th class="text-center">{{ discipline }}</th>
+              {% endfor %}
+            </thead>
+            <tbody>
+              {% for athlete in stream_athletes %}
+                <tr id="athlete_{{ athlete.id }}">
+                  {% with athlete_performances=athletes_disciplines_result_dict|get_item:athlete.id %}
+                    <td><a href="{% url 'athletes.detail' athlete.id %}" >{{ athlete }}</a></td>
+                    {% for discipline in disciplines %}
+                      <td>
+                        <div class="col-md-6 col-md-offset-3">
+                          <input class="form-control" type="number" min="0.00" max="10.00" step="0.01" name="{{ athlete.id }}-{{ discipline.id }}" placeholder="{{ athlete_performances|get_item:discipline.id }}" tabindex="{{ discipline_tabindex_dict|get_item:discipline|default:0 }}">
+                        </div>
+                      </td>
+                    {% endfor %}
+                  {% endwith %}
+                </tr>
+              {% endfor %}
+            </tbody>
+          </table>
         </div>
       {% endwith %}
-    {% endfor %}
-  </div>
+    </div>
+  {% endfor %}
   <div class="col-md-5 col-md-offset-4 btn-group">
     <input class="btn btn-primary" type="submit" value="Submit"/>
     <button class="btn btn-default" type="button" onClick="javascript:history.go(-1);">Cancel</button>

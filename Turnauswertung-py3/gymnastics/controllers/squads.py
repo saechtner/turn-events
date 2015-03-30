@@ -27,8 +27,8 @@ def detail(request, id):
         .prefetch_related('performance_set')
 
     ### Streams ###
-    streams_disctinct = set([athlete.stream for athlete in athletes])
-    stream_athletes_disciplines = { stream.id: {'athletes': [], 'disciplines': stream.discipline_set.all()} for stream in streams_disctinct }
+    streams_distinct = set([athlete.stream for athlete in athletes])
+    stream_athletes_disciplines = { stream.id: {'athletes': [], 'disciplines': stream.discipline_set.all()} for stream in streams_distinct }
     for athlete in athletes:
         stream_athletes_disciplines[athlete.stream.id]['athletes'].append(athlete)
 
@@ -44,7 +44,7 @@ def detail(request, id):
         'athletes': athletes,
         'athletes_count': len(athletes),
         'athletes_disciplines_result_dict': athletes_disciplines_result_dict,
-        'streams': streams_disctinct,
+        'streams': streams_distinct,
         'stream_athletes_disciplines': stream_athletes_disciplines
     }
     return render(request, 'gymnastics/squads/detail.html', context)
@@ -59,10 +59,24 @@ def enter_performances(request, id):
         .prefetch_related('performance_set')
 
     ### Streams ###
-    streams_disctinct = set([athlete.stream for athlete in athletes])
-    stream_athletes_disciplines = { stream.id: {'athletes': [], 'disciplines': stream.discipline_set.all()} for stream in streams_disctinct }
+    streams_distinct = set([athlete.stream for athlete in athletes])
+    stream_athletes_disciplines = { stream.id: {'athletes': [], 'disciplines': stream.discipline_set.all()} for stream in streams_distinct }
+    discipline_list = []
+
     for athlete in athletes:
         stream_athletes_disciplines[athlete.stream.id]['athletes'].append(athlete)
+
+    ### Tabindex ###
+    for stream in streams_distinct:
+        discipline_list.extend(stream_athletes_disciplines[stream.id]['disciplines'])
+
+    x = 1
+    discipline_tabindex_dict = {}
+    for discipline in set(discipline_list):
+        discipline_tabindex_dict[discipline] = x
+        x += 1
+
+    print(discipline_tabindex_dict)
 
     # Results Athletes: disciplines results
     athletes_discipline_results = squad.athlete_set.all() \
@@ -78,8 +92,9 @@ def enter_performances(request, id):
         'athletes': athletes,
         'athletes_count': len(athletes),
         'athletes_disciplines_result_dict': athletes_disciplines_result_dict,
-        'streams': streams_disctinct,
-        'stream_athletes_disciplines': stream_athletes_disciplines
+        'streams': streams_distinct,
+        'stream_athletes_disciplines': stream_athletes_disciplines,
+        'discipline_tabindex_dict': discipline_tabindex_dict
     }
 
     return render(request, 'gymnastics/squads/enter_performances.html', context)
