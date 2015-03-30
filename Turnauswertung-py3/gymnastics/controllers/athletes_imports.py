@@ -98,7 +98,10 @@ def new(request):
         messages.info(request, 'Keep in mind the following data structure: \
             First Name | Last Name | Sex | Year of Birth | Stream | Team.')
 
-        selected_club_id = int(request.GET['club_id']) if request.GET['club_id'] else None
+        try:
+            selected_club_id = int(request.GET['club_id'])
+        except: 
+            selected_club_id = None
 
         context = { 
             'clubs': Club.objects.all(),
