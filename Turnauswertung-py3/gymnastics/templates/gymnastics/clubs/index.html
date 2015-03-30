@@ -23,6 +23,7 @@
               <td>{{ club.athlete_set.all.count }}</td>
               <td class="text-right">
                 <div class="btn-group" role="group">
+                  <a type="button" class="btn btn-xs btn-primary" href="{% url 'athletes_imports.new' %}?club_id={{ club.id }}">Import Athletes</a>
                   <a  type="button" class="btn btn-xs btn-success"href="{% url 'clubs.detail' club.id %}"><span class="glyphicon glyphicon-search"></span> detail</a>
                   <a  type="button" class="btn btn-xs btn-warning"href="{% url 'clubs.edit' club.id %}"><span class="glyphicon glyphicon-edit"></span> edit</a>
                   <a  type="button" class="btn btn-xs btn-danger"href="{% url 'clubs.delete' club.id %}"><span class="glyphicon glyphicon-remove"></span> delete</a>

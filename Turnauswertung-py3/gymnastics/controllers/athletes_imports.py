@@ -78,7 +78,7 @@ def _parse_athlete_line(line, club, athletes_import):
 
     return athlete
 
-def abort_athletes_import(request, athletes_import, error_message):
+def _abort_athletes_import(request, athletes_import, error_message):
     try:
         athletes_import.delete()
     except:
@@ -98,7 +98,11 @@ def new(request):
         messages.info(request, 'Keep in mind the following data structure: \
             First Name | Last Name | Sex | Year of Birth | Stream | Team.')
 
-        context = { 'clubs': Club.objects.all() }
+        selected_club_id = int(request.GET['club_id']) if request.GET['club_id'] else None
+
+        context = { 
+            'clubs': Club.objects.all(),
+            'selected_club_id': selected_club_id }
         return render(request, 'gymnastics/athletes_imports/new.html', context)
 
     elif request.method == 'POST':
@@ -111,11 +115,11 @@ def new(request):
             athletes_import.club = club
             athletes_import.save()
         except:
-            return abort_athletes_import(request, athletes_import, 'Error: No club selected.')
+            return _abort_athletes_import(request, athletes_import, 'Error: No club selected.')
 
         # TODO: make sure there actually are lines
         if not request.POST['import_data']:
-            return abort_athletes_import(request, athletes_import, 'Error: No import data added.')
+            return _abort_athletes_import(request, athletes_import, 'Error: No import data added.')
 
         lines = request.POST['import_data'].splitlines()
         if lines[0].startswith('Vorname\tNachname'):

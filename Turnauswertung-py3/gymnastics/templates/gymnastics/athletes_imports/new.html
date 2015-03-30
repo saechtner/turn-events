@@ -17,7 +17,7 @@
         <select class="form-control" id="input_club" name="club_id">
           <option value=""></option>
           {% for club in clubs %}
-            <option value="{{ club.id }}">{{ club.name }}</option>
+            <option value="{{ club.id }}" {% if selected_club_id == club.id %}selected{% endif %}>{{ club.name }}</option>
           {% endfor %}
         </select>
       </div>

@@ -16,6 +16,7 @@
     </div>
     <div class="col-md-4 div-pos-bottom-right text-right">
       <div class="btn-group">
+        <a type="button" class="btn btn-primary" href="{% url 'athletes_imports.new' %}?club_id={{ club.id }}">Import Athletes</a>
         <a type="button" class="btn btn-warning" href="{% url 'clubs.edit' club.id %}">Edit</a>
         <a type="button" class="btn btn-danger" href="{% url 'clubs.delete' club.id %}">Delete</a>
         <button type="button" class="btn btn-default" onClick="javascript:history.go(-1);">Previous Page</button>
