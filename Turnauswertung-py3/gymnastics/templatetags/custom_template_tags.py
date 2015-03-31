@@ -1,4 +1,5 @@
 from django import template
+from django.utils.translation import ugettext_lazy
 
 register = template.Library()
 
@@ -17,3 +18,7 @@ def get_index(list_, index):
 @register.filter
 def get_final_total(athlete, discipline):
     return athlete.final_total(discipline)
+
+@register.filter
+def translate(value):
+    return ugettext_lazy(value)

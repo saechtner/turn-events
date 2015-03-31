@@ -11,13 +11,11 @@
     <tr id="team_{{ team.id }}">
       <td>{{ team.name }}</td>
       <td>
-        {% if team.club %}
-          <a href="{% url 'clubs.detail' team.club.id %}">{{ team.club }}</a>
-        {% endif %}
+        <a href="{% url 'streams.detail' team.stream.id %}">{{ team.stream }}</a>
       </td>
       <td>
-        {% if team.stream %}
-          <a href="{% url 'streams.detail' team.stream.id %}">{{ team.stream }}</a>
+        {% if team.club %}
+          <a href="{% url 'clubs.detail' team.club.id %}">{{ team.club }}</a>
         {% endif %}
       </td>
       <td>

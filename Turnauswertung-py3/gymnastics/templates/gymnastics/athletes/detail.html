@@ -1,4 +1,5 @@
 {% extends "gymnastics/athletes/base.html" %}
+{% load i18n %}
 
 {% load custom_template_tags %}
 
@@ -16,9 +17,9 @@
     </div>
     <div class="col-md-4 div-pos-bottom-right text-right">
       <div class="btn-group">
-        <a type="button" class="btn btn-warning" href="{% url 'athletes.edit' athlete.id %}">Edit</a>
-        <a type="button" class="btn btn-danger athlete-detail-delete" href="{% url 'athletes.delete' athlete.id %}">Delete</a>
-        <button type="button" class="btn btn-default" onClick="javascript:history.go(-1);">Previous Page</button>
+        <a type="button" class="btn btn-warning" href="{% url 'athletes.edit' athlete.id %}">{% trans "Edit" %}</a>
+        <a type="button" class="btn btn-danger athlete-detail-delete" href="{% url 'athletes.delete' athlete.id %}">{% trans "Delete" %}</a>
+        <button type="button" class="btn btn-default" onClick="javascript:history.go(-1);">{% trans "Previous Page" %}</button>
       </div>
     </div>
   </div>
@@ -26,25 +27,25 @@
   <div role="tabpanel">
     <!-- Nav tabs -->
     <ul class="nav nav-tabs" role="tablist">
-      <li role="presentation" class="active"><a href="#base" aria-controls="home" role="tab" data-toggle="tab">General</a></li>
-      <li role="presentation"><a href="#performances" aria-controls="profile" role="tab" data-toggle="tab">Performances</a></li>
-      <li role="presentation"><a href="#placements" aria-controls="messages" role="tab" data-toggle="tab">Placements</a></li>
+      <li role="presentation" class="active"><a href="#base" aria-controls="home" role="tab" data-toggle="tab">{% trans "General" %}</a></li>
+      <li role="presentation"><a href="#performances" aria-controls="profile" role="tab" data-toggle="tab">{% trans "Performances" %}</a></li>
+      <li role="presentation"><a href="#placements" aria-controls="messages" role="tab" data-toggle="tab">{% trans "Placements" %}</a></li>
     </ul>
 
     <!-- Tab panes -->
     <div class="tab-content">
       <div role="tabpanel" class="tab-pane active" id="base">
-        <p>Sex: {{ athlete.get_sex_display }}</p>
-        <p>Year of birth: {{ athlete.year_of_birth }}</p>
+        <p>{% trans "Sex" %}: {{ athlete.get_sex_display }}</p>
+        <p>{% trans "Year of Birth" %}: {{ athlete.year_of_birth }}</p>
         {% if athlete.club %}
-          <p>Club: <a href="{% url 'clubs.detail' athlete.club.id %}">{{ athlete.club }}</a></p>
+          <p>{% trans "Club" %}: <a href="{% url 'clubs.detail' athlete.club.id %}">{{ athlete.club }}</a></p>
         {% endif %}
         {% if athlete.squad %}
-          <p>Squad: <a href="{% url 'squads.detail' athlete.squad.id %}">{{ athlete.squad }}</a></p>
+          <p>{% trans "Squad" %}: <a href="{% url 'squads.detail' athlete.squad.id %}">{{ athlete.squad }}</a></p>
         {% endif %}
-        <p>Stream: <a href="{% url 'streams.detail' athlete.stream.id %}">{{ athlete.stream }}</a></p>
+        <p>{% trans "Stream" %}: <a href="{% url 'streams.detail' athlete.stream.id %}">{{ athlete.stream }}</a></p>
         {% if athlete.team %}
-          <p>Team: <a href="{% url 'teams.detail' athlete.team.id %}">{{ athlete.team }}</a></p>
+          <p>{% trans "Team" %}: <a href="{% url 'teams.detail' athlete.team.id %}">{{ athlete.team }}</a></p>
         {% endif %}
       </div>
 
