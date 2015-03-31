@@ -76,8 +76,6 @@ def enter_performances(request, id):
         discipline_tabindex_dict[discipline] = x
         x += 1
 
-    print(discipline_tabindex_dict)
-
     # Results Athletes: disciplines results
     athletes_discipline_results = squad.athlete_set.all() \
         .values('id', 'performance__discipline_id') \

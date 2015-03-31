@@ -8,44 +8,37 @@
 },
 {
   "fields": {
-    "name": "Bank"
+    "name": "Boden"
   },
   "pk": 2,
   "model": "gymnastics.discipline"
 },
 {
   "fields": {
-    "name": "Boden"
+    "name": "Barren"
   },
   "pk": 3,
   "model": "gymnastics.discipline"
 },
 {
   "fields": {
-    "name": "Parallelbarren"
+    "name": "Reck"
   },
   "pk": 4,
   "model": "gymnastics.discipline"
 },
 {
   "fields": {
-    "name": "Reck"
+    "name": "Sprung"
   },
   "pk": 5,
   "model": "gymnastics.discipline"
 },
 {
   "fields": {
-    "name": "Sprung"
-  },
-  "pk": 6,
-  "model": "gymnastics.discipline"
-},
-{
-  "fields": {
     "name": "Stufenbarren"
   },
-  "pk": 7,
+  "pk": 6,
   "model": "gymnastics.discipline"
 }
 ]

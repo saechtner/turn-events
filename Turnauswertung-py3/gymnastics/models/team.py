@@ -14,7 +14,7 @@ class Team(models.Model):
         db_table = 'gymnastics_teams'    
 
     def __str__(self):
-        return "{0} ({1})".format(self.name, self.stream)
+        return self.name
 
     # discipline -> performance_value
     def discipline_performance(self):

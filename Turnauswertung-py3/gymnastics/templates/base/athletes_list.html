@@ -1,12 +1,13 @@
+{% load i18n %}
 <thead>
-  <th>First Name</th>
-  <th>Last Name</th>
-  <th>Sex</th>
-  <th>Year of Birth</th>
-  <th>Club</th>
-  <th>Stream</th>
-  <th>Team</th>
-  <th>Squad</th>
+  <th>{% trans "First Name" %}</th>
+  <th>{% trans "Last Name" %}</th>
+  <th>{% trans "Sex" %}</th>
+  <th>{% trans "Year of Birth" %}</th>
+  <th>{% trans "Club" %}</th>
+  <th>{% trans "Stream" %}</th>
+  <th>{% trans "Team" %}</th>
+  <th>{% trans "Squad" %}</th>
   <th>
     <input type="search" class="light-table-filter form-control" data-table="athletes-table" name="table_filter">
   </th>
@@ -36,18 +37,9 @@
       </td>
       <td class="text-right">
         <div class="btn-group" role="group">
-          <a type="button" class="btn btn-xs btn-success" href="{% url 'athletes.detail' athlete.id %}"><span class="glyphicon glyphicon-search"></span> detail</a>
-          <a type="button" class="btn btn-xs btn-warning" href="{% url 'athletes.edit' athlete.id %}"><span class="glyphicon glyphicon-edit"></span> edit</a>
-          <a type="button" class="btn btn-xs btn-danger confirm" data-title="Confirm Delete" data-text="Do you really want to delete {{ athlete }}?" data-confirm-button="Delete" data-confirm-button-class="btn-danger" data-id="{{ athlete.id }}" href="{% url 'athletes.delete' athlete.id %}"><span class="glyphicon glyphicon-remove"></span> delete</a>
-
-          {% comment %}
-          <button type="button" class="btn btn-xs btn-danger" data-toggle="modal" data-target="#delete-modal" data-id="{{ athlete.id }}" data-name="{{ athlete }}" data-url="{% url 'athletes.delete' athlete.id %}">
-            <span class="glyphicon glyphicon-remove"></span> delete
-          </button>
-
-          <a  type="button" class="btn btn-xs btn-danger" href="{% url 'athletes.delete' athlete.id %}"><span class="glyphicon glyphicon-remove"></span> delete</a>
-          {% endcomment %}
-
+          <a type="button" class="btn btn-xs btn-success" href="{% url 'athletes.detail' athlete.id %}"><span class="glyphicon glyphicon-search"></span>{% trans " detail" %}</a>
+          <a type="button" class="btn btn-xs btn-warning" href="{% url 'athletes.edit' athlete.id %}"><span class="glyphicon glyphicon-edit"></span>{% trans " edit" %}</a>
+          <a type="button" class="btn btn-xs btn-danger confirm" data-title="Confirm Delete" data-text="{% trans "Do you really want to delete " %}{{ athlete }}?" data-confirm-button="Delete" data-confirm-button-class="btn-danger" data-id="{{ athlete.id }}" href="{% url 'athletes.delete' athlete.id %}"><span class="glyphicon glyphicon-remove"></span>{% trans " delete" %}</a>
         </div>
       </td>
     </tr>

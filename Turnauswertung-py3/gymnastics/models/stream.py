@@ -1,3 +1,4 @@
+from django.utils.translation import ugettext_lazy as _
 from django.db import models
 
 from gymnastics.models.discipline import Discipline
@@ -22,7 +23,7 @@ class Stream(models.Model):
         db_table = 'gymnastics_streams'
         
     def __str__(self):
-        return "{0} {1}".format(self.difficulty, self.get_sex_display())
+        return "{0} {1}".format(self.difficulty, _(self.get_sex_display()))
 
     # athlete.id -> all_around_rank
     @property

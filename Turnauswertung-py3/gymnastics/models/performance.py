@@ -3,7 +3,7 @@ from django.db import models
 class Performance(models.Model):
   
     value = models.DecimalField(null=False, max_digits=4, decimal_places=2, default=0.0)
-    value_final = models.DecimalField(null=True, max_digits=4, decimal_places=2)
+    value_final = models.DecimalField(null=True, blank=True, max_digits=4, decimal_places=2)
     
     athlete = models.ForeignKey('Athlete')
     discipline = models.ForeignKey('Discipline')
