@@ -17,9 +17,9 @@
     </div>
     <div class="col-md-4 div-pos-bottom-right text-right">
       <div class="btn-group">
-        <a type="button" class="btn btn-warning" href="{% url 'disciplines.edit' discipline.id %}">Edit</a>
-        <a type="button" class="btn btn-danger" href="{% url 'disciplines.delete' discipline.id %}">Delete</a>
-        <button type="button" class="btn btn-default" onClick="javascript:history.go(-1);">Previous Page</button>
+        <a type="button" class="btn btn-warning" href="{% url 'disciplines.edit' discipline.id %}">{% trans "Edit" %}</a>
+        <a type="button" class="btn btn-danger" href="{% url 'disciplines.delete' discipline.id %}">{% trans "Delete" %}</a>
+        <button type="button" class="btn btn-default" onClick="javascript:history.go(-1);">{% trans "Previous Page" %}</button>
       </div>
     </div>
   </div>
@@ -28,16 +28,16 @@
     <div role="tabpanel">
       <!-- Nav tabs -->
       <ul class="nav nav-tabs" role="tablist">
-        <li role="presentation" class="active"><a href="#streams" aria-controls="home" role="tab" data-toggle="tab">Streams</a></li>
+        <li role="presentation" class="active"><a href="#streams" aria-controls="home" role="tab" data-toggle="tab">{% trans "Streams" %}</a></li>
         {% if performances %}
-          <li role="presentation"><a href="#performances" aria-controls="messages" role="tab" data-toggle="tab">Performances</a></li>
+          <li role="presentation"><a href="#performances" aria-controls="messages" role="tab" data-toggle="tab">{% trans "Performances" %}</a></li>
         {% endif %}
       </ul>
 
       <!-- Tab panes -->
       <div class="tab-content">
         <div role="tabpanel" class="tab-pane active" id="streams">
-          This discipline is competed in following streams:
+          {% trans "This discipline is competed in following streams:" %}
           <ul>
             {% for stream in streams %}
               <li><a href="{% url 'streams.detail' stream.id %}">{{ stream }}</a></li>
@@ -47,12 +47,12 @@
 
         {% if performances %}
           <div role="tabpanel" class="tab-pane" id="performances">
-            Following scores has been achieved in this discipline:
+            {% trans "Following scores has been achieved in this discipline:" %}
             <ul>
               {% for performance in performances %}
                 <li><a href="{% url 'athletes.detail' performance.athlete.id %}">{{ performance.athlete }}</a>: {{performance.value}}
                 {% if performance.value_final %}
-                  (Final: {{ performance.value_final }})
+                  ({ % trans "Final" %}: {{ performance.value_final }})
                 {% endif %}</li>
               {% endfor %}
             </ul>
@@ -60,5 +60,5 @@
         {% endif %}
       </div>
     </div>
-{% endif %}
+  {% endif %}
 {% endblock content %}

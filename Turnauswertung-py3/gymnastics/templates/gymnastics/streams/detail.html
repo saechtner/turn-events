@@ -12,14 +12,14 @@
   <div class="row row-relative">
     <div class="col-md-8">
       <h1>
-        {{ stream }} <small> {{ athletes_count }} Athletes</small>
+        {{ stream }} <small> {{ athletes_count }} {% trans "Athletes" %}</small>
       </h1>
     </div>
     <div class="col-md-4 div-pos-bottom-right text-right">
       <div class="btn-group">
-        <a type="button" class="btn btn-warning" href="{% url 'streams.edit' stream.id %}">Edit</a>
-        <a type="button" class="btn btn-danger" href="{% url 'streams.delete' stream.id %}">Delete</a>
-        <button type="button" class="btn btn-default" onClick="javascript:history.go(-1);">Previous Page</button>
+        <a type="button" class="btn btn-warning" href="{% url 'streams.edit' stream.id %}">{% trans "Edit" %}</a>
+        <a type="button" class="btn btn-danger" href="{% url 'streams.delete' stream.id %}">{% trans "Delete" %}</a>
+        <button type="button" class="btn btn-default" onClick="javascript:history.go(-1);">{% trans "Previous Page" %}</button>
       </div>
     </div>
   </div>
@@ -27,18 +27,18 @@
   <div role="tabpanel">
     <!-- Nav tabs -->
     <ul class="nav nav-tabs" role="tablist">
-      <li role="presentation" class="active"><a href="#general" aria-controls="home" role="tab" data-toggle="tab">General</a></li>
-      <li role="presentation"><a href="#athletes" aria-controls="messages" role="tab" data-toggle="tab">Athletes</a></li>
+      <li role="presentation" class="active"><a href="#general" aria-controls="home" role="tab" data-toggle="tab">{% trans "General" %}</a></li>
+      <li role="presentation"><a href="#athletes" aria-controls="messages" role="tab" data-toggle="tab">{% trans "Athletes" %}</a></li>
       {% if stream.all_around_individual %}
-        <li role="presentation"><a href="#results_athletes" aria-controls="profile" role="tab" data-toggle="tab">Results Athletes</a></li>
+        <li role="presentation"><a href="#results_athletes" aria-controls="profile" role="tab" data-toggle="tab">{% trans "Results Athletes" %}</a></li>
       {% endif %}
       {% if stream.all_around_team %}
-        <li role="presentation"><a href="#teams" aria-controls="profile" role="tab" data-toggle="tab">Teams</a></li>
-        <li role="presentation"><a href="#results_team" aria-controls="profile" role="tab" data-toggle="tab">Results Teams</a></li>
+        <li role="presentation"><a href="#teams" aria-controls="profile" role="tab" data-toggle="tab">{% trans "Teams" %}</a></li>
+        <li role="presentation"><a href="#results_team" aria-controls="profile" role="tab" data-toggle="tab">{% trans "Results Teams" %}</a></li>
       {% endif %}
       {% if stream.discipline_finals %}
-        <li role="presentation"><a href="#athletes_final" aria-controls="profile" role="tab" data-toggle="tab">Athletes Finals</a></li>
-        <li role="presentation"><a href="#results_final" aria-controls="profile" role="tab" data-toggle="tab">Results Finals</a></li>
+        <li role="presentation"><a href="#athletes_final" aria-controls="profile" role="tab" data-toggle="tab">{% trans "Athletes Finals" %}</a></li>
+        <li role="presentation"><a href="#results_final" aria-controls="profile" role="tab" data-toggle="tab">{% trans "Results Finals" %}</a></li>
       {% endif %}
     </ul>
 
@@ -46,30 +46,30 @@
     <!-- Tab panes -->
     <div class="tab-content">
       <div role="tabpanel" class="tab-pane active" id="general">
-        <p>Difficulty: {{ stream.difficulty }}</p>
-        <p>Sex: {{ stream.get_sex_display }}</p>
-        <p>Minimum Year of Birth: {{ stream.minimum_year_of_birth }}</p>
-        <p>Disciplines:
+        <p>{% trans "Difficulty" %}: {{ stream.difficulty }}</p>
+        <p>{% trans "Sex" %}: {{ stream.get_sex_display }}</p>
+        <p>{% trans "Minimum Year of Birth" %}: {{ stream.minimum_year_of_birth }}</p>
+        <p>{% trans "Disciplines" %}:
         <ul>
           {% for discipline in stream.discipline_set.all %}
             <li><a href="{% url 'disciplines.detail' discipline.id %}">{{ discipline }}</a></li>
           {% endfor %}
         </ul>
         </p>
-        <p>Performances are compared in:
+        <p>{% trans "Performances are compared in" %}:
         <ul>
           {% if stream.all_around_individual %}
-            <li>all around individual: {{ stream.all_around_individual_counting_events }} counting disciplines</li>
+            <li>{% trans "all around individual" %}: {{ stream.all_around_individual_counting_events }} {% trans "counting disciplines" %}</li>
           {% endif %}
           {% if stream.all_around_team %}
-            <li>team performances: {{ stream.all_around_team_counting_athletes }} counting events per discipline</li>
+            <li>{% trans "team performances" %}: {{ stream.all_around_team_counting_athletes }} {% trans "counting events per discipline" %}</li>
           {% endif %}
           {% if stream.discipline_finals %}
-            <li>discipline finals: {{ stream.discipline_finals_max_participants }} participants and 
+            <li>{% trans "discipline finals" %}: {{ stream.discipline_finals_max_participants }} {% trans "participants and" %} 
             {% if stream.discipline_finals_both_values_count %}
-              both values counting
+              {% trans "both values counting" %}
             {% else %}
-              only final values counting
+              {% trans "only final values counting" %}
             {% endif %}</li>
           {% endif %}
         </ul></p>
@@ -85,13 +85,13 @@
         <div role="tabpanel" class="tab-pane" id="results_athletes">
           <table class="table table-hover table-condensed" id="stream-table" data-toggle="table">
             <thead>
-              <th data-sortable="true" data-sorter="regularStringSorter">Athlete</th>
+              <th data-sortable="true" data-sorter="regularStringSorter">{% trans "Athlete" %}</th>
                 {% for discipline in disciplines %}
                   <th class="text-right" data-sortable="true" data-sorter="regularSorter">{{ discipline }}</th>
-                  <th class="text-center" data-sortable="true" data-sorter="reversedSorter">Rank</th>
+                  <th class="text-center" data-sortable="true" data-sorter="reversedSorter">{% trans "Rank" %}</th>
                 {% endfor %}
-              <th class="text-right" data-sortable="true" data-sorter="regularSorter">All Around</th>
-              <th class="text-center" data-sortable="true" data-sorter="reversedSorter">Rank</th>
+              <th class="text-right" data-sortable="true" data-sorter="regularSorter">{% trans "All Around" %}</th>
+              <th class="text-center" data-sortable="true" data-sorter="reversedSorter">{% trans "Rank" %}</th>
             </thead>
             <tbody>
                 {% for athlete in athletes %}
@@ -134,13 +134,13 @@
         <div role="tabpanel" class="tab-pane" id="results_team">
           <table class="table table-hover table-condensed" id="stream-table">
             <thead>
-              <th>Team</th>
+              <th>{% trans "Team" %}</th>
                 {% for discipline in disciplines %}
                   <th class="text-right">{{ discipline }}</th>
-                  <th class="text-center">Rank</th>
+                  <th class="text-center">{% trans "Rank" %}</th>
                 {% endfor %}
-              <th class="text-right">Team Total</th>
-              <th class="text-center">Team Rank</th>
+              <th class="text-right">{% trans "Team Total" %}</th>
+              <th class="text-center">{% trans "Team Rank" %}</th>
             </thead>
             <tbody>
               {% for team in teams %}

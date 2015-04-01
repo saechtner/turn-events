@@ -17,9 +17,9 @@
     </div>
     <div class="col-md-4 div-pos-bottom-right text-right">
       <div class="btn-group">
-        <a type="button" class="btn btn-warning" href="{% url 'performances.edit' performance.id %}">Edit</a>
-        <a type="button" class="btn btn-danger" href="{% url 'performances.delete' performance.id %}">Delete</a>
-        <button type="button" class="btn btn-default" onClick="javascript:history.go(-1);">Previous Page</button>
+        <a type="button" class="btn btn-warning" href="{% url 'performances.edit' performance.id %}">{% trans "Edit" %}</a>
+        <a type="button" class="btn btn-danger" href="{% url 'performances.delete' performance.id %}">{% trans "Delete" %}</a>
+        <button type="button" class="btn btn-default" onClick="javascript:history.go(-1);">{% trans "Previous Page" %}</button>
       </div>
     </div>
   </div>
@@ -27,18 +27,18 @@
   <div role="tabpanel">
     <!-- Nav tabs -->
     <ul class="nav nav-tabs" role="tablist">
-      <li role="presentation" class="active"><a href="#base" aria-controls="home" role="tab" data-toggle="tab">General</a></li>
+      <li role="presentation" class="active"><a href="#base" aria-controls="home" role="tab" data-toggle="tab">{% trans "General" %}</a></li>
       <!-- <li role="presentation"><a href="#placements" aria-controls="messages" role="tab" data-toggle="tab">Placements</a></li> -->
     </ul>
 
     <!-- Tab panes -->
     <div class="tab-content">
       <div role="tabpanel" class="tab-pane active" id="base"> 
-        <p>Athlete: <a href="{% url 'athletes.detail' performance.athlete.id %}">{{ performance.athlete }}</a></p>
-        <p>Discipline: <a href="{% url 'disciplines.detail' performance.discipline.id %}">{{ performance.discipline }}</a></p>
-        <p>Value: {{ performance.value }}</p>
+        <p>{% trans "Athlete" %}: <a href="{% url 'athletes.detail' performance.athlete.id %}">{{ performance.athlete }}</a></p>
+        <p>{% trans "Discipline" %}: <a href="{% url 'disciplines.detail' performance.discipline.id %}">{{ performance.discipline }}</a></p>
+        <p>{% trans "Value" %}: {{ performance.value }}</p>
         {% if performance.value_final %}
-          <p>Value Final: {{ performance.value_final }}</p>
+          <p>{% trans "Value Final" %}: {{ performance.value_final }}</p>
         {% endif %}
       </div>
     </div>

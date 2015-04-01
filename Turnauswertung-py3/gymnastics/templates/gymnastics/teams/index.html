@@ -3,7 +3,7 @@
 {% load custom_template_tags %}
 
 {% block nav_level_1 %}
-  {% render_nav_item name='Teams' url_name='teams.index' url_id=None active=True %}
+  {% render_nav_item name='Teams'|trans url_name='teams.index' url_id=None active=True %}
 {% endblock nav_level_1 %}
 
 {% block content %}
@@ -16,7 +16,7 @@
 
 {% else %}
 
-  <div class="alert alert-info">No team available in the database.</div>
+  <div class="alert alert-info">{% trans "No team available in the database." %}</div>
 
 {% endif %}
 {% endblock content %}

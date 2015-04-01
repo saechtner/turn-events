@@ -4,7 +4,7 @@
 {% load custom_template_tags %}
 
 {% block nav_level_1 %}
-  {% render_nav_item name='Clubs' url_name='clubs.index' url_id=None active=True %}
+  {% render_nav_item name="Clubs"|trans url_name='clubs.index' url_id=None active=True %}
 {% endblock nav_level_1 %}
 
 {% block content %}
@@ -13,8 +13,8 @@
 
       <table class="table table-hover" id="clubs-table">
         <thead>
-          <th>Name</th>
-          <th>#Athletes</th>
+          <th>{% trans "Name" %}</th>
+          <th>#{% trans "Athletes" %}</th>
           <th></th>
         </thead>
         <tbody>
@@ -24,10 +24,10 @@
               <td>{{ club.athlete_set.all.count }}</td>
               <td class="text-right">
                 <div class="btn-group" role="group">
-                  <a type="button" class="btn btn-xs btn-primary" href="{% url 'athletes_imports.new' %}?club_id={{ club.id }}">Import Athletes</a>
-                  <a  type="button" class="btn btn-xs btn-success"href="{% url 'clubs.detail' club.id %}"><span class="glyphicon glyphicon-search"></span>{% trans " detail" %}</a>
-                  <a  type="button" class="btn btn-xs btn-warning"href="{% url 'clubs.edit' club.id %}"><span class="glyphicon glyphicon-edit"></span>{% trans " edit" %}</a>
-                  <a  type="button" class="btn btn-xs btn-danger"href="{% url 'clubs.delete' club.id %}"><span class="glyphicon glyphicon-remove"></span>{% trans " edit" %}</a>
+                  <a type="button" class="btn btn-xs btn-primary" href="{% url 'athletes_imports.new' %}?club_id={{ club.id }}">{% trans "Import Athletes" %}</a>
+                  <a  type="button" class="btn btn-xs btn-success"href="{% url 'clubs.detail' club.id %}"><span class="glyphicon glyphicon-search"></span> {% trans "detail" %}</a>
+                  <a  type="button" class="btn btn-xs btn-warning"href="{% url 'clubs.edit' club.id %}"><span class="glyphicon glyphicon-edit"></span> {% trans "edit" %}</a>
+                  <a  type="button" class="btn btn-xs btn-danger"href="{% url 'clubs.delete' club.id %}"><span class="glyphicon glyphicon-remove"></span> {% trans "delete" %}</a>
                 </div>
               </td>
             </tr>
@@ -37,7 +37,7 @@
 
     {% else %}
 
-      <div class="alert alert-info">No clubs available in the database.</div>
+      <div class="alert alert-info">{% trans "No clubs available in the database." %}</div>
 
     {% endif %}
   </div>

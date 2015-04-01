@@ -6,7 +6,7 @@
 {% for field in form %}
   <div class="form-group row text-right {% if form.errors|get_item:field.name %} has-error{% endif %}">
 
-    <label class="col-md-2 col-md-offset-2 control-label" for="id_{{ field.name }}">{{ field.label|translate }}</label>
+    <label class="col-md-2 col-md-offset-2 control-label" for="id_{{ field.name }}">{{ field.label|trans }}</label>
     <div class="col-md-4">
       {{ field|add_class:"form-control" }}
     </div>
@@ -14,6 +14,6 @@
 {% endfor %}
 
 <div class="col-md-5 col-md-offset-4 btn-group">
-  <input class="btn btn-primary" type="submit" value="{% if mode == 'new' %}Create{% else %}Update{% endif %}"/>
+  <input class="btn btn-primary" type="submit" value="{% if mode == 'new' %}{% trans "Create" %}{% else %}{% trans "Update" %}{% endif %}"/>
   <button class="btn btn-default" type="button" onClick="javascript:history.go(-1);">{% trans "Cancel" %}</button>
 </div>

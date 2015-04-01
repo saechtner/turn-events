@@ -12,14 +12,14 @@
   <div class="row row-relative">
     <div class="col-md-8">
       <h1>
-        {{ team }} <small>{{ team.athlete_set.all.count }} Athletes</small>
+        {{ team }} <small>{{ team.athlete_set.all.count }} {% trans "Athletes" %}</small>
       </h1>
     </div>
     <div class="col-md-4 div-pos-bottom-right text-right">
       <div class="btn-group">
-        <a type="button" class="btn btn-warning" href="{% url 'teams.edit' team.id %}">Edit</a>
-        <a type="button" class="btn btn-danger" href="{% url 'teams.delete' team.id %}">Delete</a>
-        <button type="button" class="btn btn-default" onClick="javascript:history.go(-1);">Previous Page</button>
+        <a type="button" class="btn btn-warning" href="{% url 'teams.edit' team.id %}">{% trans "Edit" %}</a>
+        <a type="button" class="btn btn-danger" href="{% url 'teams.delete' team.id %}">{% trans "Delete" %}</a>
+        <button type="button" class="btn btn-default" onClick="javascript:history.go(-1);">{% trans "Previous Page" %}</button>
       </div>
     </div>
   </div>
@@ -27,15 +27,15 @@
   <div role="tabpanel">
     <!-- Nav tabs -->
     <ul class="nav nav-tabs" role="tablist">
-      <li role="presentation" class="active"><a href="#base" aria-controls="home" role="tab" data-toggle="tab">General</a></li>
-      <li role="presentation"><a href="#performances" aria-controls="messages" role="tab" data-toggle="tab">Performances</a></li>
+      <li role="presentation" class="active"><a href="#base" aria-controls="home" role="tab" data-toggle="tab">{% trans "General" %}</a></li>
+      <li role="presentation"><a href="#performances" aria-controls="messages" role="tab" data-toggle="tab">{% trans "Performance" %}s</a></li>
     </ul>
 
     <!-- Tab panes -->
     <div class="tab-content">
       <div role="tabpanel" class="tab-pane active" id="base">
-        <p>Club: <a href="{% url 'clubs.detail' club.id %}">{{ club }}</a></p>
-        <p>Stream: <a href="{% url 'streams.detail' stream.id %}">{{ stream }}</a></p>
+        <p>{% trans "Club" %}: <a href="{% url 'clubs.detail' club.id %}">{{ club }}</a></p>
+        <p>{% trans "Stream" %}: <a href="{% url 'streams.detail' stream.id %}">{{ stream }}</a></p>
       </div>
       <div role="tabpanel" class="tab-pane active" id="performances">
       </div>

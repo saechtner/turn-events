@@ -20,5 +20,5 @@ def get_final_total(athlete, discipline):
     return athlete.final_total(discipline)
 
 @register.filter
-def translate(value):
+def trans(value):
     return ugettext_lazy(value)

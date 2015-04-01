@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils.translation import ugettext_lazy as _
 
 from gymnastics.models.discipline import Discipline
 
@@ -8,13 +9,13 @@ class Stream(models.Model):
     sex = models.CharField(max_length=1, null=False, choices=(('m', 'male'), ('f', 'female')), default='f')
     minimum_year_of_birth = models.IntegerField(default=2000, null=False)
     
-    all_around_individual = models.BooleanField(default=True)
-    all_around_individual_counting_events = models.IntegerField(null=True, blank=True, default=4)
-    all_around_team = models.BooleanField(default=True)
-    all_around_team_counting_athletes = models.IntegerField(null=True, blank=True, default=4)
-    discipline_finals = models.BooleanField(default=False)
-    discipline_finals_max_participants = models.IntegerField(null=True, blank=True)
-    discipline_finals_both_values_count = models.BooleanField(blank=True, default=True)
+    all_around_individual = models.BooleanField(default=True) #, label="Do athletes compete in all around individual?")
+    all_around_individual_counting_events = models.IntegerField(null=True, blank=True, default=4) #, label="How many events count in all around individual?")
+    all_around_team = models.BooleanField(default=True) #, label="Do athletes compete in all around team?")
+    all_around_team_counting_athletes = models.IntegerField(null=True, blank=True, default=4) #, label="How many performances count for each discipline in all around individual?")
+    discipline_finals = models.BooleanField(default=False) #, label="Do athletes compete in discipline finals?")
+    discipline_finals_max_participants = models.IntegerField(null=True, blank=True) #, label="How many athletes may participate in finals?")
+    discipline_finals_both_values_count = models.BooleanField(blank=True, default=True) #, label="Do both values count for the final rank?")
 
     discipline_set = models.ManyToManyField('Discipline')
 

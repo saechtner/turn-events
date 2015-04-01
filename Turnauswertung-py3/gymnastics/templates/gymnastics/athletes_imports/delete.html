@@ -7,14 +7,14 @@
   {% render_nav_item name=object url_name='athletes_imports.detail' url_id=object.id %}
 {% endblock nav_level_2 %}
 {% block nav_level_3 %}
-  {% render_nav_item name='delete' active=True %}
+  {% render_nav_item name="delete"|trans active=True %}
 {% endblock nav_level_3 %}
 
 {% block content %}
   <form action="" method="post">
     {% csrf_token %}
-    <p>Are you sure you want to delete "{{ object }}"?</p>
-    <input class="btn btn-danger" type="submit" value="Confirm"/>
-    <button class="btn btn-default" type="button" onClick="javascript:history.go(-1);">Cancel</button>
+    <p>{% trans "Are you sure you want to delete" %} "{{ object }}"?</p>
+    <input class="btn btn-danger" type="submit" value="{% trans "Confirm" %}"/>
+    <button class="btn btn-default" type="button" onClick="javascript:history.go(-1);">{% trans "Cancel" %}</button>
   </form>
 {% endblock content %}

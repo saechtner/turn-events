@@ -4,7 +4,7 @@
 {% load custom_template_tags %}
                   
 {% block nav_level_2 %}
-  {% render_nav_item name='results' active=True %}
+  {% render_nav_item name="results"|trans active=True %}
 {% endblock nav_level_2 %}
 
 {% block content %}
@@ -35,9 +35,13 @@
               {% endif %}
               <td><a href="{% url 'streams.detail' athlete.stream.id %}">{{ athlete.stream }}</a></td>
               <td>{{ athlete.all_around_total }}</td>
-              <td><a type="button" class="btn btn-xs btn-success"href="{% url 'athletes.detail' athlete.id %}"><span class="glyphicon glyphicon-search"></span> details</a></td>
-              <td><a type="button" class="btn btn-xs btn-warning"href="{% url 'athletes.edit' athlete.id %}"><span class="glyphicon glyphicon-edit"></span>{% trans " edit" %}</a></td>
-              <td><a type="button" class="btn btn-xs btn-danger"href="{% url 'athletes.delete' athlete.id %}"><span class="glyphicon glyphicon-remove"></span>{% trans " edit" %}</a></td>
+              <td class="text-right">
+                <div class="btn-group" role="group">
+                  <a  type="button" class="btn btn-xs btn-success"href="{% url 'athletes.detail' athlete.id %}"><span class="glyphicon glyphicon-search"></span> {% trans "detail" %}</a>
+                  <a  type="button" class="btn btn-xs btn-warning"href="{% url 'athletes.edit' athlete.id %}"><span class="glyphicon glyphicon-edit"></span> {% trans "edit" %}</a>
+                  <a  type="button" class="btn btn-xs btn-danger"href="{% url 'athletes.delete' athlete.id %}"><span class="glyphicon glyphicon-remove"></span> {% trans "delete" %}</a>
+                </div>
+              </td>
             </tr>
           {% endfor %}
         </tbody>
@@ -45,7 +49,7 @@
 
     {% else %}
 
-      <div class="alert alert-info">No athletes available in the database. Create one <a href="{% url 'athletes.new' %}">here</a>.</div>
+      <div class="alert alert-info">{% trans "No athletes available in the database. Create one" %} <a href="{% url 'athletes.new' %}">{% trans "here" %}</a>.</div>
 
     {% endif %}
     

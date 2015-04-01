@@ -4,7 +4,7 @@
 {% load custom_template_tags %}
 
 {% block nav_level_1 %}
-  {% render_nav_item name='Performances' url_name='performances.index' url_id=None active=True %}
+  {% render_nav_item name="Performances"|trans url_name='performances.index' url_id=None active=True %}
 {% endblock nav_level_1 %}
 
 {% block content %}
@@ -13,10 +13,10 @@
     
       <table class="table table-hover performances-table" id="performances-table">
         <thead>
-          <th>Athlete</th>
-          <th>Discipline</th>
-          <th>Value</th>
-          <th>Value Final</th>
+          <th>{% trans "Athlete" %}</th>
+          <th>{% trans "Discipline" %}</th>
+          <th>{% trans "Value" %}</th>
+          <th>{% trans "Value Final" %}</th>
           <th>
             <input type="search" class="light-table-filter form-control" data-table="performances-table" name="table_filter">
           </th>
@@ -30,9 +30,9 @@
               <td>{{ performance.value_final|default:"" }}</td>
               <td class="text-right">
                 <div class="btn-group" role="group">
-                  <a  type="button" class="btn btn-xs btn-success"href="{% url 'performances.detail' performance.id %}"><span class="glyphicon glyphicon-search"></span>{% trans " detail" %}</a>
-                  <a  type="button" class="btn btn-xs btn-warning"href="{% url 'performances.edit' performance.id %}"><span class="glyphicon glyphicon-edit"></span>{% trans " edit" %}</a>
-                  <a  type="button" class="btn btn-xs btn-danger"href="{% url 'performances.delete' performance.id %}"><span class="glyphicon glyphicon-remove"></span>{% trans " edit" %}</a>
+                  <a  type="button" class="btn btn-xs btn-success"href="{% url 'performances.detail' performance.id %}"><span class="glyphicon glyphicon-search"></span> {% trans "detail" %}</a>
+                  <a  type="button" class="btn btn-xs btn-warning"href="{% url 'performances.edit' performance.id %}"><span class="glyphicon glyphicon-edit"></span> {% trans "edit" %}</a>
+                  <a  type="button" class="btn btn-xs btn-danger"href="{% url 'performances.delete' performance.id %}"><span class="glyphicon glyphicon-remove"></span> {% trans "delete" %}</a>
                 </div>
               </td>
             </tr>
@@ -42,7 +42,7 @@
 
     {% else %}
 
-      <div class="alert alert-info">No performances available in the database.</div>
+      <div class="alert alert-info">{% trans "No performances available in the database." %}</div>
 
     {% endif %}
   </div>

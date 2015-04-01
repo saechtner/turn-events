@@ -15,8 +15,8 @@
     </div>
     <div class="col-md-4 div-pos-bottom-right text-right">
       <div class="btn-group">
-        <a type="button" class="btn btn-danger" href="{% url 'athletes_imports.delete' athletes_import.id %}">Delete Imported Athletes</a>
-        <button type="button" class="btn btn-default" onClick="javascript:history.go(-1);">Previous Page</button>
+        <a type="button" class="btn btn-danger" href="{% url 'athletes_imports.delete' athletes_import.id %}">{% trans "Delete Imported Athletes" %}</a>
+        <button type="button" class="btn btn-default" onClick="javascript:history.go(-1);">{% trans "Previous Page" %}</button>
       </div>
     </div>
   </div>
@@ -24,7 +24,7 @@
   <div role="tabpanel">
     <!-- Nav tabs -->
     <ul class="nav nav-tabs" role="tablist">
-      <li role="presentation" class="active"><a href="#athletes" aria-controls="home" role="tab" data-toggle="tab">Imported Athletes</a></li>
+      <li role="presentation" class="active"><a href="#athletes" aria-controls="home" role="tab" data-toggle="tab">{% trans "Imported Athletes" %}</a></li>
     </ul>
 
     <!-- Tab panes -->

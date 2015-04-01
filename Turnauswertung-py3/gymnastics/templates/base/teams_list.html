@@ -1,9 +1,9 @@
 {% load i18n %}
 <thead>
-  <th>Name</th>
-  <th>Club</th>
-  <th>Stream</th>
-  <th>#Athletes</th>
+  <th>{% trans "Name" %}</th>
+  <th>{% trans "Stream" %}</th>
+  <th>{% trans "Club" %}</th>
+  <th>#{% trans "Athletes" %}</th>
   <th></th>
 </thead>
 <tbody>
@@ -23,9 +23,9 @@
       </td>
       <td class="text-right">
         <div class="btn-group" role="group">
-          <a  type="button" class="btn btn-xs btn-success"href="{% url 'teams.detail' team.id %}"><span class="glyphicon glyphicon-search"></span>{% trans " detail" %}</a>
-          <a  type="button" class="btn btn-xs btn-warning"href="{% url 'teams.edit' team.id %}"><span class="glyphicon glyphicon-edit"></span>{% trans " edit" %}</a>
-          <a  type="button" class="btn btn-xs btn-danger"href="{% url 'teams.delete' team.id %}"><span class="glyphicon glyphicon-remove"></span>{% trans " delete" %}</a>
+          <a  type="button" class="btn btn-xs btn-success"href="{% url 'teams.detail' team.id %}"><span class="glyphicon glyphicon-search"></span> {% trans "detail" %}</a>
+          <a  type="button" class="btn btn-xs btn-warning"href="{% url 'teams.edit' team.id %}"><span class="glyphicon glyphicon-edit"></span> {% trans "edit" %}</a>
+          <a  type="button" class="btn btn-xs btn-danger"href="{% url 'teams.delete' team.id %}"><span class="glyphicon glyphicon-remove"></span> {% trans "delete" %}</a>
         </div>
       </td>
     </tr>

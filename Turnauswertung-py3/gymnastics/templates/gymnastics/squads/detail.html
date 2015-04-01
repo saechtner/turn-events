@@ -12,15 +12,15 @@
   <div class="row row-relative">
     <div class="col-md-7">
       <h1>
-        {{ squad }} <small>{{ athletes_count }} Athletes</small>
+        {{ squad }} <small>{{ athletes_count }} {% trans "Athletes" %}</small>
       </h1>
     </div>
     <div class="col-md-5 div-pos-bottom-right text-right">
       <div class="btn-group">
-        <a type="button" class="btn btn-primary" href="{% url 'squads.enter_performances' squad.id %}">Enter performances</a>
-        <a type="button" class="btn btn-warning" href="{% url 'squads.edit' squad.id %}">Edit</a>
-        <a type="button" class="btn btn-danger" href="{% url 'squads.delete' squad.id %}">Delete</a>
-        <button type="button" class="btn btn-default" onClick="javascript:history.go(-1);">Previous Page</button>
+        <a type="button" class="btn btn-primary" href="{% url 'squads.enter_performances' squad.id %}">{% trans "Enter performances" %}</a>
+        <a type="button" class="btn btn-warning" href="{% url 'squads.edit' squad.id %}">{% trans "Edit" %}</a>
+        <a type="button" class="btn btn-danger" href="{% url 'squads.delete' squad.id %}">{% trans "Delete" %}</a>
+        <button type="button" class="btn btn-default" onClick="javascript:history.go(-1);">{% trans "Previous Page" %}</button>
       </div>
     </div>
   </div>
@@ -28,8 +28,8 @@
   <div role="tabpanel">
     <!-- Nav tabs -->
     <ul class="nav nav-tabs" role="tablist">
-      <li role="presentation" class="active"><a href="#athletes" aria-controls="home" role="tab" data-toggle="tab">Athletes</a></li>
-      <li role="presentation"><a href="#performances" aria-controls="messages" role="tab" data-toggle="tab">Performances</a></li>
+      <li role="presentation" class="active"><a href="#athletes" aria-controls="home" role="tab" data-toggle="tab">{% trans "Athletes" %}</a></li>
+      <li role="presentation"><a href="#performances" aria-controls="messages" role="tab" data-toggle="tab">{% trans "Performances% }</a></li>
     </ul>
 
     <!-- Tab panes -->
@@ -54,7 +54,7 @@
                 <div id="collapse_{{ stream_id }}" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
                   <table class="table table-hover table-condensed" id="stream-{{ stream }}-table">
                     <thead>
-                      <th>Athlete</th>
+                      <th>{% trans "Athlete" %}</th>
                       {% for discipline in disciplines %}
                         <th>{{ discipline }}</th>
                       {% endfor %}

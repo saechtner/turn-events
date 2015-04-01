@@ -7,7 +7,7 @@
   {% render_nav_item name='Home' url_name='home' %}
 {% endblock nav_level_0 %}
 {% block nav_level_1 %}
-  {% render_nav_item name='{{ Athletes|translate }}' url_name='athletes.index' %}
+  {% render_nav_item name="Athletes"|trans url_name='athletes.index' %}
 {% endblock nav_level_1 %}
 
 {% block controller_actions %}
