@@ -91,3 +91,16 @@ class Stream(models.Model):
                 if len(participants_dict[discipline]) >= self.discipline_finals_max_participants:
                     break
         return participants_dict
+
+# class StreamForm(forms.Form):
+#     difficulty = forms.CharField()
+#     sex = forms.CharField()
+#     minimum_year_of_birth = forms.IntegerField(label="Minimum Year of Birth")
+    
+#     all_around_individual = forms.BooleanField(label="Do athletes compete in all around individual?")
+#     all_around_individual_counting_events = forms.IntegerField(label="How many events count in all around individual?")
+#     all_around_team = forms.BooleanField(label="Do athletes compete in all around team?")
+#     all_around_team_counting_athletes = forms.IntegerField(label="How many performances count for each discipline in all around individual?")
+#     discipline_finals = forms.BooleanField(label="Do athletes compete in discipline finals?")
+#     discipline_finals_max_participants = forms.IntegerField(label="How many athletes may participate in finals?")
+#     discipline_finals_both_values_count = forms.BooleanField(label="Do both values count for the final rank?")

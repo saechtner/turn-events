@@ -1,0 +1,24 @@
+{% comment %}
+    {% extends "base/base.tex" %}
+{% endcomment %}
+
+{% autoescape on %}
+
+    {% load i18n %}
+    {% load custom_template_tags %}
+
+
+    \documentclass[a4paper,14pt]{scrartcl}
+    \pagestyle{empty}
+
+    \begin{document}
+        {% for squad in squads %}
+            {{ squad }}
+            \begin{itemize}
+                {% for athlete in squad.athlete_set.all %}
+                    \item {{ athlete }} {% if athlete.club %} - {{ athlete.club }} {% endif %}
+                {% endfor %}
+            \end{itemize}
+        {% endfor %}
+    \end{document}
+{% endautoescape %}

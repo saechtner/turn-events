@@ -1,0 +1,40 @@
+{% comment %}
+    {% extends "base/base.tex" %}
+{% endcomment %}
+
+{% autoescape on %}
+
+    {% load i18n %}
+    {% load custom_template_tags %}
+
+
+    \documentclass[a4paper,12pt]{article}
+    \usepackage[a4paper,landscape,margin=0.75cm]{geometry}
+    \pagestyle{empty}
+
+    \begin{document}
+        {% for squad in squads %}
+            {% for discipline in squad_disciplines|get_item:squad.id %}
+                \begin{minipage}{.45\linewidth}
+                    \begin{tabular}[t]{|p{2cm}|*{3}{|p{1.75cm}}||p{1.75cm}|}
+                        \hline\multicolumn{5}{|c|}{ {{ squad }}: {{ discipline }} }\\
+                        \hline&\multicolumn{3}{|c||}{\bfseries{ {% trans 'Judge' %} }}&\\
+                        \hline\bfseries{ {% trans 'Name' %} }&\multicolumn{1}{|c}{\bfseries{1}}&\multicolumn{1}{|c}{\bfseries{2}}&\multicolumn{1}{|c||}{\bfseries{3}}&\multicolumn{1}{c|}{\bfseries{ {% trans 'Overall' %} }}\\
+                        \hline
+                        {% for athlete in squad.athlete_set.all %}
+                            \hline {{ athlete }} &&&&\\
+                        {% endfor %}
+                            \hline &&&&\\
+                            \hline &&&&\\
+                            \hline &&&&\\
+                        \hline\hline \multicolumn{5}{|c|}{\bfseries{ {% trans "Sign" %} }}\\
+                        \hline\bfseries{ {% trans "Judge" %} 1}&\multicolumn{4}{|c|}{ }\\
+                        \hline\bfseries{ {% trans "Judge" %} 2}&\multicolumn{4}{|c|}{ }\\
+                        \hline\bfseries{ {% trans "Judge" %} 3}&\multicolumn{4}{|c|}{ }\\
+                        \hline
+                    \end{tabular}
+                \end{minipage}%
+            {% endfor %}
+        {% endfor %}
+    \end{document}
+{% endautoescape %}

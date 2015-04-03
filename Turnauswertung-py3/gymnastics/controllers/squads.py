@@ -6,6 +6,15 @@ from django.views import generic
 
 from django.db.models import Sum
 
+from django.utils.translation import ugettext_lazy as _
+from django.http import HttpResponse
+from django.template import Context
+from django.template.loader import get_template
+from subprocess import Popen, PIPE
+import tempfile
+
+
+
 from gymnastics.models.athlete import Athlete
 from gymnastics.models.discipline import Discipline
 from gymnastics.models.performance import Performance
@@ -124,6 +133,74 @@ def handle_entered_performances(request):
             performance.save()
 
     return redirect(reverse('squads.index'))
+
+def judge_pdf(request):
+    squads = Squad.objects.all().prefetch_related('athlete_set')
+    squad_disciplines = {}
+    for squad in squads:
+        squad_disciplines[squad.id] = []
+        athletes = squad.athlete_set.all().select_related('stream')
+        for athlete in athletes:
+            squad_disciplines[squad.id].extend([ discipline for discipline in athlete.stream.discipline_set.all() ])
+        squad_disciplines[squad.id] = set(squad_disciplines[squad.id])
+
+    context = Context({
+            'squads': squads,
+            'squad_disciplines': squad_disciplines,
+        })
+
+    template = get_template('gymnastics/squads/squads_judges.tex')
+    rendered_tpl = template.render(context).encode('utf-8')
+
+    import os
+    with tempfile.TemporaryDirectory() as tempdir:
+        # Create subprocess, supress output with PIPE and 
+        # run latex twice to generate the TOC properly. 
+        # Finally read the generated pdf.
+        for i in range(2):
+            process = Popen(
+                ['pdflatex', '-output-directory', tempdir],
+                stdin=PIPE,
+                stdout=PIPE,
+            )
+            process.communicate(rendered_tpl)
+        with open(os.path.join(tempdir, 'texput.pdf'), 'rb') as f:
+            pdf = f.read()
+
+    r = HttpResponse(content_type='application/pdf')
+    r['Content-Disposition'] = 'attachment; filename={0}_{1}_{2}.pdf'.format(_('Squads'), _('Judge'), _('Lists'))
+    r.write(pdf)
+    return r
+
+def overview_pdf(request):
+    squads = Squad.objects.all().prefetch_related('athlete_set').select_related('athlete_set__club')
+
+    context = Context({
+            'squads': squads,
+        })
+
+    template = get_template('gymnastics/squads/squads_athletes.tex')
+    rendered_tpl = template.render(context).encode('utf-8')
+
+    import os
+    with tempfile.TemporaryDirectory() as tempdir:
+        # Create subprocess, supress output with PIPE and 
+        # run latex twice to generate the TOC properly. 
+        # Finally read the generated pdf.
+        for i in range(2):
+            process = Popen(
+                ['pdflatex', '-output-directory', tempdir],
+                stdin=PIPE,
+                stdout=PIPE,
+            )
+            process.communicate(rendered_tpl)
+        with open(os.path.join(tempdir, 'texput.pdf'), 'rb') as f:
+            pdf = f.read()
+
+    r = HttpResponse(content_type='application/pdf')
+    r['Content-Disposition'] = 'attachment; filename={0}_{1}.pdf'.format(_('Squads'), _('Overview'))
+    r.write(pdf)
+    return r
 
 
 class SquadCreateView(generic.CreateView):

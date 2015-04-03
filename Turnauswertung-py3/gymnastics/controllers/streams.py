@@ -6,6 +6,8 @@ from django.core.urlresolvers import reverse, reverse_lazy
 from django.shortcuts import render
 from django.views import generic
 
+from django.utils.translation import ugettext_lazy as _
+
 from gymnastics.models import Stream
 
 
@@ -117,6 +119,7 @@ class StreamCreateView(generic.CreateView):
         'all_around_team', 'all_around_team_counting_athletes', 
         'discipline_finals', 'discipline_finals_max_participants', 
         'discipline_finals_both_values_count', 'discipline_set']
+    
     template_name = 'gymnastics/streams/new.html'
     success_url = reverse_lazy('streams.index')
 
@@ -129,6 +132,8 @@ class StreamUpdateView(generic.UpdateView):
         'all_around_team', 'all_around_team_counting_athletes', 
         'discipline_finals', 'discipline_finals_max_participants', 
         'discipline_finals_both_values_count', 'discipline_set']
+
+
     template_name = 'gymnastics/streams/edit.html'
 
     def get_success_url(self):

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-04-01 22:28+0200\n"
+"POT-Creation-Date: 2015-04-03 16:44+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -24,6 +24,24 @@ msgstr "Englisch"
 #: Turnauswertung/settings.py:132
 msgid "German"
 msgstr "Deutsch"
+
+#: gymnastics/controllers/squads.py:171 gymnastics/controllers/squads.py:201
+#: gymnastics/templates/gymnastics/base.html:73
+#: gymnastics/templates/gymnastics/squads/base.html:15
+msgid "Squads"
+msgstr "Riegen"
+
+#: gymnastics/controllers/squads.py:171
+msgid "Judge"
+msgstr "Kampfrichter"
+
+#: gymnastics/controllers/squads.py:171
+msgid "Lists"
+msgstr "Listen"
+
+#: gymnastics/controllers/squads.py:201
+msgid "Overview"
+msgstr "Übersicht"
 
 #: gymnastics/templates/base/athletes_list.html:3
 msgid "First Name"
@@ -148,6 +166,7 @@ msgstr "Name"
 #: gymnastics/templates/gymnastics/index.html:42
 #: gymnastics/templates/gymnastics/squads/detail.html:15
 #: gymnastics/templates/gymnastics/squads/detail.html:31
+#: gymnastics/templates/gymnastics/streams/detail.html:15
 #: gymnastics/templates/gymnastics/streams/detail.html:31
 #: gymnastics/templates/gymnastics/streams/index.html:17
 #: gymnastics/templates/gymnastics/teams/detail.html:15
@@ -322,11 +341,6 @@ msgstr "Vereine"
 msgid "Teams"
 msgstr "Mannschaften"
 
-#: gymnastics/templates/gymnastics/base.html:73
-#: gymnastics/templates/gymnastics/squads/base.html:15
-msgid "Squads"
-msgstr "Riegen"
-
 #: gymnastics/templates/gymnastics/clubs/base.html:17
 msgid "New club"
 msgstr "Neuer Verein"
@@ -337,7 +351,7 @@ msgstr "Es sind keine Vereine vorhanden."
 
 #: gymnastics/templates/gymnastics/disciplines/base.html:17
 msgid "New discipline"
-msgstr "Neue Diszipline"
+msgstr "Neue Disziplin"
 
 #: gymnastics/templates/gymnastics/disciplines/detail.html:40
 msgid "This discipline is competed in following streams:"
@@ -424,7 +438,15 @@ msgstr "Es sind keine Wertungen vorhanden."
 
 #: gymnastics/templates/gymnastics/squads/base.html:17
 msgid "New squad"
-msgstr "Neue Wertungsgruppe"
+msgstr "Neue Riege"
+
+#: gymnastics/templates/gymnastics/squads/base.html:18
+msgid "Generate Overview PDF"
+msgstr "Übersichts-PDF erstellen"
+
+#: gymnastics/templates/gymnastics/squads/base.html:19
+msgid "Generate Judge PDF"
+msgstr "Kampfrichter-PDF erstellen"
 
 #: gymnastics/templates/gymnastics/squads/detail.html:20
 #: gymnastics/templates/gymnastics/squads/index.html:25
@@ -433,7 +455,7 @@ msgstr "Wertungen eingeben"
 
 #: gymnastics/templates/gymnastics/squads/enter_performances.html:55
 msgid "Submit"
-msgstr ""
+msgstr "Abschicken"
 
 #: gymnastics/templates/gymnastics/squads/index.html:38
 msgid "No squads available in the database."
@@ -535,6 +557,14 @@ msgstr "Neue Mannschaft"
 msgid "Performance"
 msgstr "Wertung"
 
-#: gymnastics/templates/gymnastics/teams/index.html:19
+#: gymnastics/templates/gymnastics/teams/index.html:20
 msgid "No team available in the database."
 msgstr "Es sind keine Mannschaften vorhanden."
+
+#: gymnastics/templates/gymnastics/squads/squads_judges.tex:21
+msgid "Overall"
+msgstr "Gesamt"
+
+#: gymnastics/templates/gymnastics/squads/squads_judges.tex:21
+msgid "Sign"
+msgstr "Unterschrift"
