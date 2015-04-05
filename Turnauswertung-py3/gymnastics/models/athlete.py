@@ -26,19 +26,15 @@ class Athlete(models.Model):
         #     self.first_name, self.last_name, self.sex, self.year_of_birth, self.club, self.stream)
         return '{0} {1}'.format(self.first_name, self.last_name)
 
-    # TODO:: remove!
-    def performances(self):
-        return {performance.discipline: performance.value for performance in self.performance_set.all().select_related('discipline')}
+    def get_disciplines_result_dict(self):
+        return { perf.discipline_id: perf.value for perf in self.performance_set.all() }
 
-    def performances_dict(self):
-        return { performance.discipline.id: performance.value for performance in self.performance_set.all().select_related('discipline') }
+    def get_all_around_result(self):
+        results_sorted = sorted((perf.value for perf in self.performance_set.all()), reverse=True)
+        return sum(results_sorted[:self.stream.all_around_individual_counting_events])
 
-    @property
-    def all_around_total(self):
-        return self.performance_set \
-            .order_by("value")[:self.stream.all_around_individual_counting_events] \
-            .aggregate(Sum('value')).get('value__sum', 0.00)
 
+    # TODO:: rework!
     def final_total(self, discipline):
         total = 0
         if self.stream.discipline_finals_both_values_count:

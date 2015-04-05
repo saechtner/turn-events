@@ -1,7 +1,5 @@
-from django.core.urlresolvers import reverse
 from django.db import models
 
-from gymnastics.models.stream import Stream
 
 class Team(models.Model):
   
@@ -16,20 +14,16 @@ class Team(models.Model):
     def __str__(self):
         return self.name
 
-    # discipline -> performance_value
-    def discipline_performance(self):
-        performance_dict = {}
-        for athlete in self.athlete_set.all().prefetch_related('performance_set'):
-            for discipline, value in athlete.performances().items():
-                if not performance_dict.get(discipline):
-                    performance_dict[discipline] = []
-                performance_dict[discipline].append(value)
+    def get_disciplines_result_dict(self):
+        disciplines_results_dict = { disc.id: [] for disc in self.stream.discipline_set.all() }
+        for athlete in self.athlete_set.all():
+            for perf in athlete.performance_set.all():
+                disciplines_results_dict[perf.discipline_id].append(perf.value)
 
-        for discipline, performance_list in performance_dict.items():
-            performance_dict[discipline] = sum(sorted(performance_list, reverse=True)[:self.stream.all_around_team_counting_athletes])
+        counting_athletes = self.stream.all_around_team_counting_athletes
+        return { k: sum(sorted(v, reverse=True)[:counting_athletes]) for k, v in disciplines_results_dict.items() }
 
-        return performance_dict
-
-    @property
-    def all_around_total(self):
-        return sum(self.discipline_performance().values())
+    def get_all_around_result(self, disciplines_result_dict=None):
+        if not disciplines_result_dict:
+            disciplines_result_dict = self.get_disciplines_result_dict()
+        return sum(disciplines_result_dict.values())
