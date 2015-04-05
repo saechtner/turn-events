@@ -18,9 +18,26 @@ def index(request):
     return render(request, 'gymnastics/athletes/index.html', context)
 
 def detail(request, id):
-    athlete = Athlete.objects.get(id=id)
-    athlete_all_around_rank = athlete.stream.athletes_all_around_rank_dict.get(athlete.id, '')
-    context = { 'athlete': athlete, 'athlete_all_around_rank': athlete_all_around_rank }
+    athlete = Athlete.objects \
+        .select_related('stream') \
+            .prefetch_related('stream__discipline_set') \
+            .prefetch_related('stream__athlete_set') \
+                .prefetch_related('stream__athlete_set__performance_set') \
+        .select_related('team') \
+        .select_related('club') \
+        .select_related('squad') \
+        .get(id=id)
+
+    disciplines = athlete.stream.discipline_set.all()
+
+    athletes_disciplines_result_dict = athlete.stream.get_athletes_disciplines_result_dict()
+    athletes_disciplines_rank_dict = athlete.stream.get_athletes_disciplines_rank_dict(athletes_disciplines_result_dict)
+
+    context = { 
+        'athlete': athlete, 
+        'disciplines': disciplines,
+        'athlete_disciplines_result_dict': athletes_disciplines_result_dict[athlete.id],
+        'athlete_disciplines_rank_dict': athletes_disciplines_rank_dict[athlete.id] }
     return render(request, 'gymnastics/athletes/detail.html', context)
 
 def results(request):

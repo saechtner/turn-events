@@ -47,8 +47,7 @@ def detail(request, id):
         'athletes_disciplines_rank_dict': athletes_disciplines_rank_dict,
         'teams': teams,
         'teams_disciplines_result_dict': teams_disciplines_result_dict,
-        'teams_disciplines_rank_dict': teams_disciplines_rank_dict,
-    }
+        'teams_disciplines_rank_dict': teams_disciplines_rank_dict,}
     return render(request, 'gymnastics/streams/detail.html', context)
 
 

@@ -27,9 +27,14 @@
   <div role="tabpanel">
     <!-- Nav tabs -->
     <ul class="nav nav-tabs" role="tablist">
+<<<<<<< HEAD
       <li role="presentation" class="active"><a href="#base" aria-controls="home" role="tab" data-toggle="tab">{% trans "General" %}</a></li>
       <li role="presentation"><a href="#performances" aria-controls="profile" role="tab" data-toggle="tab">{% trans "Performances" %}</a></li>
       <li role="presentation"><a href="#placements" aria-controls="messages" role="tab" data-toggle="tab">{% trans "Placements" %}</a></li>
+=======
+      <li role="presentation" class="active"><a href="#base" aria-controls="home" role="tab" data-toggle="tab">General</a></li>
+      <li role="presentation"><a href="#performances" aria-controls="profile" role="tab" data-toggle="tab">Results</a></li>
+>>>>>>> 8300000... - Athlete.detail: added new result and rank stuff
     </ul>
 
     <!-- Tab panes -->
@@ -50,55 +55,49 @@
       </div>
 
       <div role="tabpanel" class="tab-pane" id="performances">
-        {% if athlete.stream.all_around_individual %}
-          <table class="table table-hover table-condensed" id="stream-table">
-
-          {% comment %}
-
-            <thead>
-              <th>Discipline</th>
-              <th>Value</th>
-              {% if athlete.stream.discipline_finals %}
-                <th>Final Value</th>
-                <th>Final Rank</th>
-              {% endif %}
-            </thead>
-            <tbody>
-              {% for performance in athlete.performance_set.all %}
-                <tr id="performance_{{ performance.id }}">
-                  <td><a href="{% url 'disciplines.detail' performance.id %}">{{ performance.discipline }}</a></td>
-                  <td>{{ performance.value }}</td>
-                  {% if athlete.stream.discipline_finals %}
-                    <td>{{ performance.value_final }}</td>
-                    <td>toDo</td>
+        <table class="table table-hover table-condensed" id="stream-table">
+          <thead>
+            <th>Discipline</th>
+            <th>Value</th>
+            <th>Rank</th>
+            {% if athlete.stream.discipline_finals %}
+              <th>Final Value</th>
+              <th>Final Rank</th>
+            {% endif %}
+          </thead>
+          <tbody>
+            {% for discipline in disciplines %}
+              <tr id="discipline_{{ discipline.id }}">
+                <td><a href="{% url 'disciplines.detail' discipline.id %}">{{ discipline }}</a></td>
+                <td>{{ athlete_disciplines_result_dict|get_item:discipline.id|default:'' }}</td>
+                <td>
+                  {% if athlete_disciplines_result_dict|get_item:discipline.id %}
+                    {{ athlete_disciplines_rank_dict|get_item:discipline.id }}
                   {% endif %}
-                </tr>
-              {% endfor %}
-                <tr id="all_around_total">
-                  <td>Total</td>
-                  <td>{{ athlete.all_around_total }}</td>
-                  {% if athlete.stream.discipline_finals %}
-                    <td></td>
-                    <td></td>
+                </td>
+                {% if athlete.stream.discipline_finals %}
+                  <td></td>
+                  <td></td>
+                {% endif %}
+              </tr>
+            {% endfor %}
+            {% if athlete.stream.all_around_individual %}
+              <tr id="all_around_total">
+                <td>Total</td>
+                <td>{{ athlete_disciplines_result_dict|get_item:'total'|default:'' }}</td>
+                <td>
+                  {% if athlete_disciplines_result_dict|get_item:'total' %}
+                    {{ athlete_disciplines_rank_dict|get_item:'total' }}
                   {% endif %}
-                </tr>
-                <tr id="performance_rank">
-                  <td>Rank</td>
-                  <td>{{ athlete_all_around_rank }}</td>
-                  {% if athlete.stream.discipline_finals %}
-                    <td></td>
-                    <td></td>
-                  {% endif %}
-                </tr>
-            </tbody>
-
-            {% endcomment %}
-
-          </table>
-        {% endif %}
-      </div>
-
-      <div role="tabpanel" class="tab-pane" id="placements">
+                </td>
+                {% if athlete.stream.discipline_finals %}
+                  <td></td>
+                  <td></td>
+                {% endif %}
+              </tr>
+            {% endif %}
+          </tbody>
+        </table>
       </div>
     </div>
   </div>
