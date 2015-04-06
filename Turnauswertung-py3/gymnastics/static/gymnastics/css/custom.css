@@ -35,6 +35,10 @@ body {
     user-select: none;
 }
 
+.caret {
+  margin: 0px 5px !important;
+}
+
 /* CUSTOMIZE THE NAVBAR
 -------------------------------------------------- */
 
@@ -139,13 +143,6 @@ body {
 
 .gend.gend-male {
   color: blue;
-}
-
-/* Modal Size 
--------------------------------------------------- */
-
-body .modal-dialog {
-    width: 500px;
 }
 
 /* Inside Div Positioning 
