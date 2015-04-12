@@ -15,8 +15,6 @@
     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">{% trans "Squads" %}<span class="caret"></span></a>
     <ul class="dropdown-menu" role="menu">
       <li><a href="{% url 'squads.new' %}">{% trans "New squad" %}</a></li>
-      <li><a href="{% url 'squads.overview_pdf' %}">{% trans "Generate Overview PDF" %}</a></li>
-      <li><a href="{% url 'squads.judge_pdf' %}">{% trans "Generate Judge PDF" %}</a></li>
     </ul>
   </li>
 {% endblock controller_actions %}

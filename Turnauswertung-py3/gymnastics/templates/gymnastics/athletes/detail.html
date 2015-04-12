@@ -38,7 +38,13 @@
     <!-- Tab panes -->
     <div class="tab-content">
       <div role="tabpanel" class="tab-pane active" id="base">
-        <p>{% trans "Sex" %}: {{ athlete.get_sex_display }}</p>
+        <p>{% trans "Sex" %}:
+          {% if athlete.sex == 'f' %}
+            <span class="gend gend-female"><i class="fa fa-venus fa-fw"></i></span>
+          {% else %}
+            <span class="gend gend-male"><i class="fa fa-mars fa-fw"></i></span>
+          {% endif %}
+        </p>
         <p>{% trans "Year of Birth" %}: {{ athlete.year_of_birth }}</p>
         {% if athlete.club %}
           <p>{% trans "Club" %}: <a href="{% url 'clubs.detail' athlete.club.id %}">{{ athlete.club }}</a></p>

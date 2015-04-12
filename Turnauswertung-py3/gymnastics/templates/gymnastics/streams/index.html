@@ -23,9 +23,9 @@
           <tr id="stream_{{ stream.id }}">
             <td>{{ stream.difficulty }}</td>
             {% if stream.sex == 'f' %}
-              <td class="gend gend-female"> &#9792;</td>
+              <td class="gend gend-female"><i class="fa fa-venus fa-fw"></i></td>
             {% else %}
-              <td class="gend gend-male"> &#9794;</td>
+              <td class="gend gend-male"><i class="fa fa-mars fa-fw"></i></td>
             {% endif %}
             <td> {{ stream.athlete_set.count }}</td>
             <td>{{ stream.minimum_year_of_birth }}</td>

@@ -8,7 +8,7 @@ from gymnastics.models.discipline import Discipline
 class Stream(models.Model):
   
     difficulty = models.CharField(max_length=10, null=False)
-    sex = models.CharField(max_length=1, null=False, choices=(('m', 'male'), ('f', 'female')), default='f')
+    sex = models.CharField(max_length=1, null=False, choices=(('m', _('male')), ('f', _('female'))), default='f')
     minimum_year_of_birth = models.IntegerField(default=2000, null=False)
     
     all_around_individual = models.BooleanField(default=True) #, label="Do athletes compete in all around individual?")
