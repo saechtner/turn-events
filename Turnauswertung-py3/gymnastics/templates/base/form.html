@@ -5,7 +5,6 @@
 
 {% for field in form %}
   <div class="form-group row text-right {% if form.errors|get_item:field.name %} has-error{% endif %}">
-
     <label class="col-md-2 col-md-offset-2 control-label" for="id_{{ field.name }}">{{ field.label|trans }}</label>
     <div class="col-md-4">
       {{ field|add_class:"form-control" }}
