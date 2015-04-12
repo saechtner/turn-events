@@ -571,5 +571,5 @@ msgstr "Platzierungen"
 msgid "Overall"
 msgstr "Gesamt"
 
-msgid "Sign"
+msgid "Signature"
 msgstr "Unterschrift"
