@@ -168,7 +168,8 @@ def judge_pdf(request):
             pdf = f.read()
 
     r = HttpResponse(content_type='application/pdf')
-    r['Content-Disposition'] = 'attachment; filename={0}_{1}_{2}.pdf'.format(_('Squads'), _('Judge'), _('Lists'))
+    # r['Content-Disposition'] = 'attachment; filename={0}_{1}_{2}.pdf'.format(_('Squads'), _('Judge'), _('Lists'))
+    r['Content-Disposition'] = 'filename={0}_{1}_{2}.pdf'.format(_('Squads'), _('Judge'), _('Lists'))
     r.write(pdf)
     return r
 
@@ -198,7 +199,8 @@ def overview_pdf(request):
             pdf = f.read()
 
     r = HttpResponse(content_type='application/pdf')
-    r['Content-Disposition'] = 'attachment; filename={0}_{1}.pdf'.format(_('Squads'), _('Overview'))
+    # r['Content-Disposition'] = 'attachment; filename={0}_{1}.pdf'.format(_('Squads'), _('Overview'))
+    r['Content-Disposition'] = 'filename={0}_{1}.pdf'.format(_('Squads'), _('Overview'))
     r.write(pdf)
     return r
 
