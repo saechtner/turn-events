@@ -48,9 +48,9 @@
         <p>{% trans "Difficulty" %}: {{ stream.difficulty }}</p>
         <p>{% trans "Sex" %}:
           {% if stream.sex == 'f' %}
-            <span class="gend gend-female"><i class="fa fa-venus fa-fw"></i></span>
+            <span class="gend gend-female"><i class="fa fa-venus fa-fw" alt="{% trans 'female' %}"></i></span>
           {% else %}
-            <span class="gend gend-male"><i class="fa fa-mars fa-fw"></i></span>
+            <span class="gend gend-male"><i class="fa fa-mars fa-fw" alt="{% trans 'male' %}"></i></span>
           {% endif %}
         </p>
         <p>{% trans "Minimum Year of Birth" %}: {{ stream.minimum_year_of_birth }}</p>
