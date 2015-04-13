@@ -9,9 +9,11 @@ class Performance(models.Model):
     discipline = models.ForeignKey('Discipline')
 
 
+
     class Meta:
         db_table = 'gymnastics_performances'
+        unique_together = (("athlete", "discipline"), )
 
     def __str__(self):
-        # return "{0}, {1}".format(self.athlete, self.discipline) # old
-        return "{0}, {1}: {2}".format(self.athlete, self.discipline, self.value)
+        return "{0}, {1}".format(self.athlete, self.discipline) # old
+        # return "{0}, {1}: {2}".format(self.athlete, self.discipline, self.value)
