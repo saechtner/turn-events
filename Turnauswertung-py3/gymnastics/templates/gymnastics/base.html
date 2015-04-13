@@ -10,7 +10,6 @@
     <link rel="shortcut icon" href="{% static 'gymnastics/images/favicon.ico' %}" />
     <link href="{% static 'gymnastics/css/bootstrap.min.css' %}" rel="stylesheet" media="screen">
     <link href="{% static 'gymnastics/css/bootstrap-theme.min.css' %}" rel="stylesheet" media="screen">
-    <!-- <link href="{% static 'gymnastics/css/bootstrap-table.min.css' %}" rel="stylesheet" media="screen"> -->
     <link href="{% static 'gymnastics/css/custom.css' %}" rel="stylesheet" media="screen">
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
   </head>
@@ -107,20 +106,11 @@
       {% block content_fullwidth %}{% endblock content_fullwidth %}
     </div>
 
-    {% comment %}
-    <script src="{% static 'gymnastics/js/jquery-1.11.2.min.js' %}"></script>
-    <script src="{% static 'gymnastics/js/bootstrap.min.js' %}"></script>
-    <script src="{% static 'gymnastics/js/bootstrap-table.min.js' %}"></script>
-    <script src="{% static 'gymnastics/js/light_table_filter.js' %}"></script>
-    <script src="{% static 'gymnastics/js/jquery.confirm.min.js' %}"></script>
-    <script src="{% static 'gymnastics/js/custom.js' %}"></script>
-    {% endcomment %}
-
     <script src="{% static 'gymnastics/js/jquery-1.11.2.js' %}"></script>
     <script src="{% static 'gymnastics/js/bootstrap.js' %}"></script>
-    <script src="{% static 'gymnastics/js/bootstrap-table.min.js' %}"></script>
-    <script src="{% static 'gymnastics/js/light_table_filter.js' %}"></script>
     <script src="{% static 'gymnastics/js/jquery.confirm.js' %}"></script>
+    <script src="{% static 'gymnastics/js/jquery.tablesorter.js' %}"></script>
+    <script src="{% static 'gymnastics/js/light_table_filter.js' %}"></script>
     <script src="{% static 'gymnastics/js/custom.js' %}"></script>
 
     {% block javascript %}
