@@ -9,17 +9,17 @@ class Stream(models.Model):
   
     difficulty = models.CharField(max_length=10, null=False)
     sex = models.CharField(max_length=1, null=False, choices=(('m', _('male')), ('f', _('female'))), default='f')
-    minimum_year_of_birth = models.IntegerField(default=2000, null=False)
+    minimum_year_of_birth = models.IntegerField(default=2000, null=False, verbose_name='minimum Year of Birth')
     
-    all_around_individual = models.BooleanField(default=True) #, label="Do athletes compete in all around individual?")
-    all_around_individual_counting_events = models.IntegerField(null=True, blank=True, default=4) #, label="How many events count in all around individual?")
-    all_around_team = models.BooleanField(default=True) #, label="Do athletes compete in all around team?")
-    all_around_team_counting_athletes = models.IntegerField(null=True, blank=True, default=4) #, label="How many performances count for each discipline in all around individual?")
-    discipline_finals = models.BooleanField(default=False) #, label="Do athletes compete in discipline finals?")
-    discipline_finals_max_participants = models.IntegerField(null=True, blank=True) #, label="How many athletes may participate in finals?")
-    discipline_finals_both_values_count = models.BooleanField(blank=True, default=True) #, label="Do both values count for the final rank?")
+    all_around_individual = models.BooleanField(default=True)
+    all_around_individual_counting_events = models.IntegerField(null=True, blank=True, default=4)
+    all_around_team = models.BooleanField(default=True)
+    all_around_team_counting_athletes = models.IntegerField(null=True, blank=True, default=4)
+    discipline_finals = models.BooleanField(default=False)
+    discipline_finals_max_participants = models.IntegerField(null=True, blank=True)
+    discipline_finals_both_values_count = models.BooleanField(blank=True, default=True)
 
-    discipline_set = models.ManyToManyField('Discipline')
+    discipline_set = models.ManyToManyField('Discipline', through='DisciplineIndex')
 
     class Meta:
         db_table = 'gymnastics_streams'
@@ -105,15 +105,12 @@ class Stream(models.Model):
                     break
         return participants_dict
 
-# class StreamForm(forms.Form):
-#     difficulty = forms.CharField()
-#     sex = forms.CharField()
-#     minimum_year_of_birth = forms.IntegerField(label="Minimum Year of Birth")
-    
-#     all_around_individual = forms.BooleanField(label="Do athletes compete in all around individual?")
-#     all_around_individual_counting_events = forms.IntegerField(label="How many events count in all around individual?")
-#     all_around_team = forms.BooleanField(label="Do athletes compete in all around team?")
-#     all_around_team_counting_athletes = forms.IntegerField(label="How many performances count for each discipline in all around individual?")
-#     discipline_finals = forms.BooleanField(label="Do athletes compete in discipline finals?")
-#     discipline_finals_max_participants = forms.IntegerField(label="How many athletes may participate in finals?")
-#     discipline_finals_both_values_count = forms.BooleanField(label="Do both values count for the final rank?")
+# rework
+class DisciplineIndex(models.Model):
+    position = models.IntegerField(null=False)
+    stream = models.ForeignKey('Stream')
+    discipline = models.ForeignKey('Discipline')
+
+    class Meta:
+        db_table = 'gymnastics_discipline_indices'
+        unique_together = (('stream', 'discipline', 'position'), )
