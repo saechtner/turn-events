@@ -14,7 +14,7 @@
       {% include "base/athletes_list.html" with athletes_set=athletes only %}
     </table>
   {% else %}
-    <div class="alert alert-info">{% trans "No athletes available in the database. Create one" %} <a href="{% url 'athletes.new' %}">{% trans "here" %}</a>.</div>
+    <div class="alert alert-info">{% trans "No athletes available in the database." %}</div>
   {% endif %}
   
 {% endblock content %}
