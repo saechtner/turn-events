@@ -107,10 +107,9 @@ class Stream(models.Model):
 
 # rework
 class DisciplineIndex(models.Model):
-    position = models.IntegerField(null=False)
+    position = models.IntegerField(null=True)
     stream = models.ForeignKey('Stream')
     discipline = models.ForeignKey('Discipline')
 
     class Meta:
         db_table = 'gymnastics_discipline_indices'
-        unique_together = (('stream', 'discipline', 'position'), )
