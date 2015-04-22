@@ -4,6 +4,7 @@ from django.db import models
 from django.utils.translation import ugettext_lazy as _
 
 from gymnastics.models.discipline import Discipline
+from gymnastics.models.stream_discipline_join import StreamDisciplineJoin
 
 class Stream(models.Model):
   
@@ -19,7 +20,7 @@ class Stream(models.Model):
     discipline_finals_max_participants = models.IntegerField(null=True, blank=True)
     discipline_finals_both_values_count = models.BooleanField(blank=True, default=True)
 
-    discipline_set = models.ManyToManyField('Discipline', through='DisciplineIndex')
+    discipline_set = models.ManyToManyField('Discipline', through='StreamDisciplineJoin')
 
     class Meta:
         db_table = 'gymnastics_streams'
@@ -104,12 +105,3 @@ class Stream(models.Model):
                 if len(participants_dict[discipline]) >= self.discipline_finals_max_participants:
                     break
         return participants_dict
-
-# rework
-class DisciplineIndex(models.Model):
-    position = models.IntegerField(null=True)
-    stream = models.ForeignKey('Stream')
-    discipline = models.ForeignKey('Discipline')
-
-    class Meta:
-        db_table = 'gymnastics_discipline_indices'
