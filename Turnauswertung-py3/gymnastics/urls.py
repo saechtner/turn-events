@@ -6,7 +6,7 @@ from gymnastics.controllers import athletes_imports
 
 urlpatterns = patterns('',
     url(r'^$', views.index, name='home'), 
-    url(r'^todo$', views.todo, name='todo'),
+    url(r'^process', views.process, name='process'),
 
     url(r'^athletes$', athletes.index, name='athletes.index'),
     url(r'^athletes/new$', athletes.AthleteCreateView.as_view(), name='athletes.new'),

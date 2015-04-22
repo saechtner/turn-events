@@ -1,0 +1,51 @@
+{% extends "gymnastics/base.html" %}
+{% load i18n %}
+
+{% load custom_template_tags %}
+                  
+{% block nav_level_0 %}
+  {% render_nav_item name='Home' url_name='home' %}
+{% endblock nav_level_0 %}
+{% block nav_level_1 %}
+  {% render_nav_item name='Process' url_name='process' url_id=None active=True %}
+{% endblock nav_level_1 %}
+
+{% block content %}
+<div class="col-md-8 col-md-offset-2">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h3 class="panel-title">Overall Process</h3>
+    </div>
+
+    <div class="panel-body">
+      <h4>Progress</h4>
+
+      <div class="progress">
+        <div class="progress-bar" role="progressbar" aria-valuenow="1" aria-valuemin="0" aria-valuemax="4" style="width: 25%;">
+          <span class="sr-only">25% Complete</span>
+          1/4
+        </div>
+      </div>
+    </div>
+
+    <ul class="list-group">
+      <li class="list-group-item list-group-item-info">
+        <a type="button" class="btn btn-xs btn-default" href="#"><span class="glyphicon glyphicon-remove"></span></a>
+        Tournament Preparation
+      </li>
+      <li class="list-group-item">
+        <a type="button" class="btn btn-xs btn-primary" href="#"><span class="glyphicon glyphicon-ok"></span></a>
+        RSVPs
+      </li>
+      <li class="list-group-item">
+        <a type="button" class="btn btn-xs btn-primary" href="#"><span class="glyphicon glyphicon-ok"></span></a>
+        Tournament Performances
+      </li>
+      <li class="list-group-item">
+        <a type="button" class="btn btn-xs btn-primary" href="#"><span class="glyphicon glyphicon-ok"></span></a>
+        Evaluation
+      </li>
+    </ul>
+  </div>
+</div>
+{% endblock content %}
