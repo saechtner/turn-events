@@ -85,7 +85,7 @@
 
       <div role="tabpanel" class="tab-pane" id="athletes">
         <table class="table table-hover table-condensed athletes-table" id="athletes-table">
-          {% include "base/athletes_list.html" with athletes_set=athletes only %}
+          {% include "gymnastics/includes/athletes_list.html" with athletes_set=athletes only %}
         </table>
       </div>
 
@@ -133,7 +133,7 @@
       {% if stream.all_around_team %}
         <div role="tabpanel" class="tab-pane" id="teams">
           <table class="table table-hover table-condensed" id="team-table">
-            {% include "base/teams_list.html" with teams_set=teams only %}
+            {% include "gymnastics/includes/teams_list.html" with teams_set=teams only %}
           </table>
         </div>
 
@@ -191,7 +191,7 @@
                     <tr>
                       <td>
                         <table class="table table-hover table-condensed" id="{{ discipline }}-athletes-final-table">
-                          {% include "base/athletes_list.html" with athletes_set=participants only %}
+                          {% include "gymnastics/includes/athletes_list.html" with athletes_set=participants only %}
                         </table>
                       </td>
                     </tr>
