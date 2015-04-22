@@ -26,24 +26,58 @@
           1/4
         </div>
       </div>
+
+      <h4>Progress</h4>
     </div>
 
     <ul class="list-group">
-      <li class="list-group-item list-group-item-info">
-        <a type="button" class="btn btn-xs btn-default" href="#"><span class="glyphicon glyphicon-remove"></span></a>
-        Tournament Preparation
+      <li class="list-group-item list-group-item-info panel-list-group-item">
+        <div class="col-md-6">
+          <a type="button" class="btn btn-xs btn-primary" href="#"><span class="glyphicon glyphicon-ok"></span></a>
+          Preparation
+        </div>
+        <div class="col-md-6 text-right">
+          <!-- <div class="btn-group" role="group"> -->
+            <a type="button" class="btn btn-sm btn-primary" href="#">Tournament</a>
+            <a type="button" class="btn btn-sm btn-primary" href="{% url 'disciplines.index' %}">Disciplines</a>
+            <a type="button" class="btn btn-sm btn-primary" href="{% url 'streams.index' %}">Streams</a>
+          <!-- </div> -->
+        </div>
       </li>
-      <li class="list-group-item">
-        <a type="button" class="btn btn-xs btn-primary" href="#"><span class="glyphicon glyphicon-ok"></span></a>
-        RSVPs
+      <li class="list-group-item panel-list-group-item panel-list-group-item">
+        <div class="col-md-6">
+          <a type="button" class="btn btn-xs btn-danger" href="#"><span class="glyphicon glyphicon-remove"></span></a>
+          RSVPs
+        </div>
+        <div class="col-md-6 text-right">
+          <div class="btn-group" role="group">
+            <a type="button" class="btn btn-sm btn-primary" href="{% url 'clubs.index' %}">Clubs</a>
+            <a type="button" class="btn btn-sm btn-primary" href="{% url 'athletes.index' %}">Athletes</a>
+            <a type="button" class="btn btn-sm btn-primary" href="{% url 'athletes_imports.index' %}">Import Athletes</a>
+          </div>
+        </div>
       </li>
-      <li class="list-group-item">
-        <a type="button" class="btn btn-xs btn-primary" href="#"><span class="glyphicon glyphicon-ok"></span></a>
-        Tournament Performances
+      <li class="list-group-item panel-list-group-item panel-list-group-item">
+        <div class="col-md-6">
+          <a type="button" class="btn btn-xs btn-danger" href="#"><span class="glyphicon glyphicon-remove"></span></a>
+          Results
+        </div>
+        <div class="col-md-6 text-right">
+          <!-- <div class="btn-group" role="group"> -->
+            <a type="button" class="btn btn-sm btn-primary" href="{% url 'squads.index' %}">Squads</a>
+          <!-- </div> -->
+        </div>
       </li>
-      <li class="list-group-item">
-        <a type="button" class="btn btn-xs btn-primary" href="#"><span class="glyphicon glyphicon-ok"></span></a>
-        Evaluation
+      <li class="list-group-item panel-list-group-item panel-list-group-item">
+        <div class="col-md-6">
+          <a type="button" class="btn btn-xs btn-danger" href="#"><span class="glyphicon glyphicon-remove"></span></a>
+          Evaluation
+        </div>
+        <div class="col-md-6 text-right">
+          <!-- <div class="btn-group" role="group"> -->
+            <a type="button" class="btn btn-sm btn-primary btn-block" href="{% url 'streams.index' %}">Streams</a>
+          <!-- </div> -->
+        </div>
       </li>
     </ul>
   </div>

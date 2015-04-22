@@ -99,6 +99,14 @@ th.headerSortDown {
 }
 
 
+/* CUSTOMIZE THE PANEL
+-------------------------------------------------- */
+
+.panel-list-group-item {
+  height: 50px;
+}
+
+
 /* RESPONSIVE CSS
 -------------------------------------------------- */
 
