@@ -46,7 +46,7 @@ urlpatterns = patterns('',
     url(r'^streams$', streams.index, name='streams.index'),
     url(r'^streams/new$', streams.new, name='streams.new'),
     url(r'^streams/(?P<id>\d+)$', streams.detail, name='streams.detail'),
-    url(r'^streams/(?P<pk>\d+)/edit$', streams.StreamUpdateView.as_view(), name='streams.edit'),
+    url(r'^streams/(?P<id>\d+)/edit$', streams.edit, name='streams.edit'),
     url(r'^streams/(?P<pk>\d+)/delete$', streams.StreamDeleteView.as_view(), name='streams.delete'),
 
     url(r'^teams$', teams.index, name='teams.index'),

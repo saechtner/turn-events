@@ -21,6 +21,7 @@ class Migration(migrations.Migration):
             ],
             options={
                 'db_table': 'gymnastics_stream_discipline_joins',
+                'ordering': ['position'],
             },
             bases=(models.Model,),
         ),
