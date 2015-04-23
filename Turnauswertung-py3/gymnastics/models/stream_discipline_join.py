@@ -10,3 +10,7 @@ class StreamDisciplineJoin(models.Model):
 
     class Meta:
         db_table = 'gymnastics_stream_discipline_joins'
+
+
+    def __str__(self):
+        return "No {0}: {1} in {2}".format(self.position, self.discipline, self.stream)

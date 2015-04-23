@@ -4,12 +4,13 @@ from django.db import models
 from django.utils.translation import ugettext_lazy as _
 
 from gymnastics.models.discipline import Discipline
+from gymnastics.models.stream_discipline_join import StreamDisciplineJoin
 
 class Stream(models.Model):
   
     difficulty = models.CharField(max_length=10, null=False)
     sex = models.CharField(max_length=1, null=False, choices=(('m', _('male')), ('f', _('female'))), default='f')
-    minimum_year_of_birth = models.IntegerField(default=2000, null=False, verbose_name='minimum Year of Birth')
+    minimum_year_of_birth = models.IntegerField(default=2000, null=False)
     
     all_around_individual = models.BooleanField(default=True)
     all_around_individual_counting_events = models.IntegerField(null=True, blank=True, default=4)
@@ -20,6 +21,7 @@ class Stream(models.Model):
     discipline_finals_both_values_count = models.BooleanField(blank=True, default=True)
 
     discipline_set = models.ManyToManyField('Discipline', through='StreamDisciplineJoin')
+
 
     class Meta:
         db_table = 'gymnastics_streams'

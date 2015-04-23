@@ -59,9 +59,9 @@ $(document).ready(function() {
 
     function saveOrder() {
         var data = $("#chosen-list li").map(function() { 
-            return $(this).children().html(); 
+            return $(this).data('itemidx'); 
         }).get();
-        $("input[name=chosenListOrder]").val(data.join("|"));
+        $("input[name=chosen_list_order]").val(data.join(" "));
     };
 
     $("#chosen-list, #available-list").dragsort({ 

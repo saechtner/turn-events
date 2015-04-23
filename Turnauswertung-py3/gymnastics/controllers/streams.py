@@ -1,11 +1,14 @@
+from django.contrib import messages
+
 from django.core.urlresolvers import reverse, reverse_lazy
-from django.shortcuts import render
+from django.shortcuts import redirect, render
 from django.views import generic
 
 from django.utils.translation import ugettext_lazy as _
 
 from gymnastics.models import Stream
 from gymnastics.models import Discipline
+from gymnastics.models import StreamDisciplineJoin
 
 
 def index(request):
@@ -51,6 +54,16 @@ def detail(request, id):
         'teams_disciplines_rank_dict': teams_disciplines_rank_dict,}
     return render(request, 'gymnastics/streams/detail.html', context)
 
+def _abort_stream_create(request, error_message):
+    if error_message:
+        messages.error(request, error_message)
+
+    print(error_message)
+    context = { 
+        'disciplines': Discipline.objects.all(),
+    }
+    return render(request, 'gymnastics/streams/new.html', context)
+
 
 def new(request):
     # TODO: clean this up before it's too late
@@ -62,38 +75,97 @@ def new(request):
         return render(request, 'gymnastics/streams/new.html', context)
 
     elif request.method == 'POST':
-        # athletes_import = AthletesImport()
-        # athletes_list = []
+        all_disciplines = Discipline.objects.all()
+        missing_fields = []
 
-        # # check if a club was selected and thus it exists in the datbase
-        # try:
-        #     club = Club.objects.get(id=request.POST['club_id'])
-        #     athletes_import.club = club
-        #     athletes_import.save()
-        # except:
-        #     return _abort_athletes_import(request, athletes_import, 'Error: No club selected.')
+        # check if selected disciplines exist
+        try:
+            disciplines = [all_disciplines.get(id=discipline_id) for discipline_id in request.POST['chosen_list_order'].split()]
+        except:
+            return _abort_stream_create(request, _('Error: At least one discipline was not found.'))
 
-        # # TODO: make sure there actually are lines
-        # if not request.POST['import_data']:
-        #     return _abort_athletes_import(request, athletes_import, 'Error: No import data added.')
+        try:
+            difficulty=request.POST['difficulty']
+        except:
+            missing_fields.append(_('Difficulty'))
 
-        # lines = request.POST['import_data'].splitlines()
-        # if lines[0].startswith('Vorname\tNachname'):
-        #     lines = lines[1:]
-        # for line in lines:
-        #     athlete = _parse_athlete_line(line, club, athletes_import)
-        #     athletes_list.append(athlete)
+        try:
+            sex=request.POST['sex']
+        except:
+            missing_fields.append(_('Sex'))
 
-        # if len(lines) > len(athletes_list):
-        #     messages.warning(request, 'Warning: {0} objects were not created.'.format(len(lines) - len(athletes_list)))
+        try:
+            minimum_year_of_birth=int(request.POST['minimum_year_of_birth'])
+        except:
+            missing_fields.append(_('Minimum Year of Birth'))
+
+        try:
+            all_around_individual=request.POST['all_around_individual']
+        except:
+            all_around_individual=False
+
+        try:
+            all_around_individual_counting_events=int(request.POST['all_around_individual_counting_events'])
+        except:
+            all_around_individual_counting_events=0
+
+        try:
+            all_around_team=request.POST['all_around_team']
+        except:
+            all_around_team=False
+
+        try:
+            all_around_team_counting_athletes=int("{1} {2}".format(request.POST['all_around_team_counting_athletes'], "is missing."))
+        except:
+            all_around_team_counting_athletes=0
+
+        try:
+            discipline_finals=request.POST['discipline_finals']
+        except:
+            discipline_finals=False
+
+        try:
+            discipline_finals_max_participants=int(request.POST['discipline_finals_max_participants'])
+        except:
+            discipline_finals_max_participants=0
+
+        try:
+            discipline_finals_both_values_count=request.POST['discipline_finals_both_values_count']
+        except:
+            discipline_finals_both_values_count=False
+
+        if len(missing_fields) > 0:
+            _abort_stream_create(request, missing_fields, missing_fields.join(","))
+
+        stream = Stream( \
+            difficulty=difficulty,
+            sex=sex,
+            minimum_year_of_birth=minimum_year_of_birth,
+            all_around_individual=all_around_individual,
+            all_around_individual_counting_events=all_around_individual_counting_events,
+            all_around_team=all_around_team,
+            all_around_team_counting_athletes=all_around_team_counting_athletes,
+            discipline_finals=discipline_finals,
+            discipline_finals_max_participants=discipline_finals_max_participants,
+            discipline_finals_both_values_count=discipline_finals_both_values_count,
+        )
+
+        stream.save()
+
+        position = 1
+        print(disciplines)
         
-        # return redirect(reverse('athletes_imports.detail', kwargs={ 'id': athletes_import.id }))
-
-        context = { 
-            'disciplines': Discipline.objects.all(),
-        }
+        for discipline in disciplines:
+            stream_discipline_join = StreamDisciplineJoin( \
+                stream=stream,
+                discipline=discipline,
+                position=position
+            )
+            stream_discipline_join.save()
+            print(stream_discipline_join)
+            position += 1
         
-        return render(request, 'gymnastics/streams/new.html', context)
+        return redirect(reverse('streams.detail', kwargs={ 'id': stream.id }))
 
 
 class StreamUpdateView(generic.UpdateView):
