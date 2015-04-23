@@ -16,95 +16,117 @@
   </head>
   <body>
     
-    <div class"container">
+    <div id="doc" class"container">
 
-      <!-- Navbar -->
-      <div class="navbar-wrapper">
-        <div class="container">
-          <nav class="navbar navbar-static-top navbar-inverse">
-            <div class="container-fluid">
-              <div class="navbar-header">
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse-1">
-                  <span class="sr-only">{% trans "Toggle navigation" %}</span>
-                  <span class="icon-bar"></span>
-                  <span class="icon-bar"></span>
-                  <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="{% url 'home' %}">
-                  <img alt="Turnen" src="{% static 'gymnastics/images/logo_03.png' %}" width="139px" height="30px">
-                </a>
-              </div>
+      <!-- top navbar -->
+      <div class="navbar navbar-fixed-top navbar-inverse gym-top-navbar">
+        <div class="container-fluid">
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#top-navbar-collapse">
+              <span class="sr-only">{% trans "Toggle navigation" %}</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="{% url 'home' %}">
+              <img alt="Turnen" src="{% static 'gymnastics/images/logo_03.png' %}" width="139px" height="30px">
+            </a>
+          </div>
 
-              <div class="collapse navbar-collapse" id="navbar-collapse-1">
-                <ul class="nav navbar-nav">
-                  {% load custom_template_tags %}
-                  
-                  {% block nav_level_0 %}
-                    {% render_nav_item name='Home' url_name='home' active=True %}
-                  {% endblock nav_level_0 %}
-                  {% block nav_level_1 %}{% endblock nav_level_1 %}
-                  {% block nav_level_2 %}{% endblock nav_level_2 %}
-                  {% block nav_level_3 %}{% endblock nav_level_3 %}
+          <div class="collapse navbar-collapse" id="top-navbar-collapse">
+            <ul class="nav navbar-nav">
+              {% load custom_template_tags %}
+              
+              {% block nav_level_0 %}
+                {% render_nav_item name='Home' url_name='home' active=True %}
+              {% endblock nav_level_0 %}
+              {% block nav_level_1 %}{% endblock nav_level_1 %}
+              {% block nav_level_2 %}{% endblock nav_level_2 %}
+              {% block nav_level_3 %}{% endblock nav_level_3 %}
+            </ul>
+
+            <ul class="nav navbar-nav navbar-right">
+              {% block controller_actions %}{% endblock controller_actions %}
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">{% trans "Actions" %}<span class="caret"></span></a>
+                <ul class="dropdown-menu" role="menu">
+                  <li><a href="{% url 'process' %}">Process</a></li>
+                  <li class="divider"></li>
+                  <li><a href="#">{% trans "Preparation" %}</a></li>
+                  <li><a href="#">{% trans "RSVP" %}</a></li>
+                  <li class="divider"></li>
+                  <li><a href="{% url 'squads.overview_pdf' %}" target="_blank">{% trans "Generate Overview PDF" %}</a></li>
+                  <li><a href="{% url 'squads.judge_pdf' %}" target="_blank">{% trans "Generate Judge PDF" %}</a></li>
+                  <li class="divider"></li>
+                  <li><a href="{% url 'athletes_imports.index' %}">{% trans "Import Athletes" %}</a></li>
                 </ul>
-
-                <ul class="nav navbar-nav navbar-right">
-                  {% block controller_actions %}{% endblock controller_actions %}
-                  <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">{% trans "Actions" %}<span class="caret"></span></a>
-                    <ul class="dropdown-menu" role="menu">
-                      <li><a href="{% url 'process' %}">Process</a></li>
-                      <li class="divider"></li>
-                      <li><a href="#">{% trans "Preparation" %}</a></li>
-                      <li><a href="#">{% trans "RSVP" %}</a></li>
-                      <li class="divider"></li>
-                      <li><a href="{% url 'squads.overview_pdf' %}" target="_blank">{% trans "Generate Overview PDF" %}</a></li>
-                      <li><a href="{% url 'squads.judge_pdf' %}" target="_blank">{% trans "Generate Judge PDF" %}</a></li>
-                      <li class="divider"></li>
-                      <li><a href="{% url 'athletes_imports.index' %}">{% trans "Import Athletes" %}</a></li>
-                    </ul>
-                  </li>
-                  <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">{% trans "Models" %}<span class="caret"></span></a>
-                    <ul class="dropdown-menu" role="menu">
-                      <li><a href="{% url 'disciplines.index' %}">{% trans "Disciplines" %}</a></li>
-                      <li><a href="{% url 'streams.index' %}">{% trans "Streams" %}</a></li>
-                      <li class="divider"></li>
-                      <li><a href="{% url 'athletes.index' %}">{% trans "Athletes" %}</a></li>
-                      <li><a href="{% url 'clubs.index' %}">{% trans "Clubs" %}</a></li>
-                      <li><a href="{% url 'teams.index' %}">{% trans "Teams" %}</a></li>
-                      <li class="divider"></li>
-                      <li><a href="{% url 'squads.index' %}">{% trans "Squads" %}</a></li>
-                      <li class="divider"></li>
-                      <li><a href="{% url 'performances.index' %}">{% trans "Performances" %}</a></li>
-                    </ul>
-                  </li>
+              </li>
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">{% trans "Models" %}<span class="caret"></span></a>
+                <ul class="dropdown-menu" role="menu">
+                  <li><a href="{% url 'disciplines.index' %}">{% trans "Disciplines" %}</a></li>
+                  <li><a href="{% url 'streams.index' %}">{% trans "Streams" %}</a></li>
+                  <li class="divider"></li>
+                  <li><a href="{% url 'athletes.index' %}">{% trans "Athletes" %}</a></li>
+                  <li><a href="{% url 'clubs.index' %}">{% trans "Clubs" %}</a></li>
+                  <li><a href="{% url 'teams.index' %}">{% trans "Teams" %}</a></li>
+                  <li class="divider"></li>
+                  <li><a href="{% url 'squads.index' %}">{% trans "Squads" %}</a></li>
+                  <li class="divider"></li>
+                  <li><a href="{% url 'performances.index' %}">{% trans "Performances" %}</a></li>
                 </ul>
-              </div>
-            </div>
-          </nav>
+              </li>
+            </ul>
+          </div>
         </div>
-      </div>
+      </div> <!-- top navbar -->
 
-      {% comment %}Allows to create messages via messages.error .warning .success and .info.{% endcomment %}
-      <div id="gobal_message_container" class="container">
-        {% if messages %}
-          {% autoescape off %}
-            {% for message in messages %}
-              <div class="alert alert-{{ message.tags }} alert-dismissable">
-                <button type="button" class="close pull-right" data-dismiss="alert" aria-hidden="true">&times;</button>
-                {{ message }}
+      
+      <div class="page-outer">
+        <div class="page-container">
+
+          <div class="page-header">
+            <div class="page-header-inner">
+
+              <div class="page-header-bg">
+                <div class="page-header-bg-img">
+                  <img alt="" src="{% static 'gymnastics/images/bg_header.jpeg' %}" style="transform: none;">
+                </div>
               </div>
-            {% endfor %}
-          {% endautoescape %}
-        {% endif %}
-      </div>
+
+              <!-- app navbar -->
+              <div class="page-header-navbar">
+                <div class="navbar navbar-static-top navbar-inverse gym-app-navbar">
+                </div>
+              </div><!-- app navbar -->
+
+            </div>          
+          </div> 
+
+          
+
+          {% comment %}Allows to create messages via messages.error .warning .success and .info.{% endcomment %}
+          <div id="gobal_message_container" class="container">
+            {% if messages %}
+              {% autoescape off %}
+                {% for message in messages %}
+                  <div class="alert alert-{{ message.tags }} alert-dismissable">
+                    <button type="button" class="close pull-right" data-dismiss="alert" aria-hidden="true">&times;</button>
+                    {{ message }}
+                  </div>
+                {% endfor %}
+              {% endautoescape %}
+            {% endif %}
+          </div>
 
 
-      <div class="container">
-        {% block content %}{% endblock content %}
-      </div>
+          <div class="container">
+            {% block content %}{% endblock content %}
+          </div>
 
-      {% block content_fullwidth %}{% endblock content_fullwidth %}
+          {% block content_fullwidth %}{% endblock content_fullwidth %}
+        </div> <!-- page container -->
+      </div> <!-- page outer -->
     </div>
 
     <script src="{% static 'gymnastics/js/jquery-1.11.2.js' %}"></script>

@@ -3,9 +3,99 @@
 /* Padding below the footer and lighter body text */
 
 body {
-  padding-bottom: 40px;
+  /*padding-top: 70px;*/
+  /*padding-bottom: 40px;*/
   color: #5a5a5a;
 }
+
+.page-container {
+  padding-top: 50px;
+  position: relative;
+}
+
+.page-header {
+  margin: 0;
+  position: relative;
+  padding-bottom: 50px;
+  height: 220px;
+  border: none;
+}
+
+.page-header-inner {
+  position: relative;
+  z-index: 4;
+}
+
+.page-header.is-locked .page-header-inner {
+  position: fixed;
+  top: 0;
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
+  width: 100%;
+}
+
+.page-header-bg {
+  position: relative;
+  height: 170px;
+  z-index: 3;
+}
+
+.page-header.is-locked .page-header-inner .page-header-bg {
+  margin-top: -80px;
+}
+
+.page-header-bg-img {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  overflow: hidden;
+}
+
+.page-header-bg-img img {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: -9999px;
+  bottom: -9999px;
+  margin: auto 0;
+  width: 100%;
+}
+
+
+/* CUSTOMIZE NAVBARS AN HEADER
+-------------------------------------------------- */
+
+
+
+
+
+
+.navbar-brand {
+  padding: 10px 5px 0px 10px;
+}
+
+/* TODO:: fix for new navbars */
+/* Flip around the padding for proper display in narrow viewports */
+.navbar-wrapper > .container {
+  padding-right: 0;
+  padding-left: 0;
+}
+
+.navbar-wrapper .navbar {
+  padding-right: 15px;
+  padding-left: 15px;
+}
+
+.navbar-wrapper .navbar .container {
+  width: auto;
+}
+
+
+
+
+
 
 /* CUSTOMIZE TABLES
 -------------------------------------------------- */
@@ -38,28 +128,6 @@ th.headerSortUp {
 
 th.headerSortDown { 
   background-image: url(../images/tables/desc.gif);
-}
-
-/* CUSTOMIZE THE NAVBAR
--------------------------------------------------- */
-
-.navbar-brand {
-  padding: 10px 5px 0px 10px;
-}
-
-/* Flip around the padding for proper display in narrow viewports */
-.navbar-wrapper > .container {
-  padding-right: 0;
-  padding-left: 0;
-}
-
-.navbar-wrapper .navbar {
-  padding-right: 15px;
-  padding-left: 15px;
-}
-
-.navbar-wrapper .navbar .container {
-  width: auto;
 }
 
 
@@ -99,7 +167,7 @@ th.headerSortDown {
 }
 
 
-/* CUSTOMIZE THE PANEL
+/* CUSTOMIZE PANELS
 -------------------------------------------------- */
 
 .panel-list-group-item {
@@ -122,11 +190,6 @@ th.headerSortDown {
   .navbar-wrapper .navbar {
     padding-right: 0;
     padding-left: 0;
-  }
-
-  /* The navbar becomes detached from the top, so we round the corners */
-  .navbar-wrapper .navbar {
-    border-radius: 4px;
   }
 
   /* Bump up size of carousel content */

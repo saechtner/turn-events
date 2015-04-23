@@ -119,3 +119,25 @@ function ajaxDelete(href, id) {
 
     return false;
 }
+
+$(document).ready(function() {
+    $(window).scroll(function() {
+        var page_header_div = $(".page-header:first");
+        var is_locked = page_header_div.hasClass("is-locked");
+
+        var scroll_top = $(window).scrollTop();
+
+        // handle header icon transforms
+
+        // make header static from certain height/scroll onwards
+        if (scroll_top >= 130 && !is_locked) {
+            console.log("locking");
+
+            page_header_div.addClass("is-locked");
+        } else if (scroll_top < 130 && is_locked) {
+            console.log("unlocking");
+
+            page_header_div.removeClass("is-locked");
+        }
+    });
+});
