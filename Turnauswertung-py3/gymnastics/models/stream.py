@@ -4,7 +4,6 @@ from django.db import models
 from django.utils.translation import ugettext_lazy as _
 
 from gymnastics.models.discipline import Discipline
-from gymnastics.models.stream_discipline_join import StreamDisciplineJoin
 
 class Stream(models.Model):
   
