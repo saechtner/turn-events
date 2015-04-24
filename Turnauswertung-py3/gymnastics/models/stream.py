@@ -28,6 +28,10 @@ class Stream(models.Model):
     def __str__(self):
         return "{0} {1}".format(self.difficulty, self.get_sex_display())
 
+    @property
+    def ordered_disciplines(self):
+        return self.discipline_set.select_related('discipline').order_by('streamdisciplinejoin__position')
+    
     def get_athletes_disciplines_result_dict(self):
         athletes_disciplines_result_dict = { a.id: a.get_disciplines_result_dict() for a in self.athlete_set.all() }
 

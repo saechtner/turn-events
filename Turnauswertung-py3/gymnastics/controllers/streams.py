@@ -25,7 +25,7 @@ def detail(request, id):
             .prefetch_related('athlete_set__performance_set') \
         .get(id=id)
 
-    disciplines = stream.discipline_set.all()
+    disciplines = stream.ordered_disciplines.all()
 
     athletes = stream.athlete_set.all() \
         .select_related('club').select_related('stream').select_related('team__stream').select_related('squad') \
@@ -118,7 +118,7 @@ def edit(request,id):
 
         context = { 
             'stream': stream,
-            'stream_disciplines': stream.discipline_set.all(),
+            'stream_disciplines': stream.ordered_disciplines.all(),
             'disciplines': [discipline\
                             for discipline in Discipline.objects.all()\
                             if discipline not in stream.discipline_set.all()],
@@ -144,7 +144,7 @@ def edit(request,id):
         stream.difficulty = difficulty
         stream.sex=request.POST.get('sex', 'f')
         stream.minimum_year_of_birth=int(request.POST.get('minimum_year_of_birth', '2000'))
-        stream.all_around_individual=request.POST.get('all_around_individual', True)
+        stream.all_around_individual=request.POST.get('all_around_individual', False)
         stream.all_around_individual_counting_events=int(request.POST.get('all_around_individual_counting_events', 0))
         stream.all_around_team=request.POST.get('all_around_team', False)
         stream.all_around_team_counting_athletes=int(request.POST.get('all_around_team_counting_athletes', 0))
