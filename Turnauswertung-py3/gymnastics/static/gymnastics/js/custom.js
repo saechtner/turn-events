@@ -121,23 +121,31 @@ function ajaxDelete(href, id) {
 }
 
 $(document).ready(function() {
-    $(window).scroll(function() {
-        var page_header_div = $(".page-header:first");
-        var is_locked = page_header_div.hasClass("is-locked");
+    function scrollTransformResponse(element, tranform_value) {
+        if (tranform_value) {
+            element.css("transform", "translate3d(0px, " + tranform_value + "px, 0px)");
+        } else {
+            element.css("transform", "none");
+        }
+    }
 
+    $(window).scroll(function() {
         var scroll_top = $(window).scrollTop();
 
-        // handle header icon transforms
+        var page_header_div = $(".page-header:first");
+        var is_locked = page_header_div.hasClass("is-locked");
+        var page_header_bg_img = page_header_div.find("img:first");
 
-        // make header static from certain height/scroll onwards
-        if (scroll_top >= 130 && !is_locked) {
-            console.log("locking");
-
+        if (scroll_top == 0) {
+            scrollTransformResponse(page_header_bg_img, null);
+        } else if (scroll_top < 120) {
+            if (is_locked) {
+                page_header_div.removeClass("is-locked");
+            }
+            scrollTransformResponse(page_header_bg_img, scroll_top/5);
+        } else if (scroll_top >= 120 && !is_locked) {
             page_header_div.addClass("is-locked");
-        } else if (scroll_top < 130 && is_locked) {
-            console.log("unlocking");
-
-            page_header_div.removeClass("is-locked");
+            scrollTransformResponse(page_header_bg_img, 120/5);
         }
     });
 });

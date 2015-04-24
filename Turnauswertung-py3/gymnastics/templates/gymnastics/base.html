@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>{% block title %}{% trans "Gymnastics" %}{% endblock title %}</title>
+    <title>{% block title %}{% trans "Turnen" %}{% endblock title %}</title>
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="{% static 'gymnastics/images/favicon.ico' %}" />
@@ -19,65 +19,32 @@
     <div id="doc" class"container">
 
       <!-- top navbar -->
-      <div class="navbar navbar-fixed-top navbar-inverse gym-top-navbar">
-        <div class="container-fluid">
-          <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#top-navbar-collapse">
-              <span class="sr-only">{% trans "Toggle navigation" %}</span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="{% url 'home' %}">
-              <img alt="Turnen" src="{% static 'gymnastics/images/logo_03.png' %}" width="139px" height="30px">
-            </a>
-          </div>
+      <div class="navbar navbar-fixed-top navbar-inverse static-navbar" role="navigation">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#static-navbar-collapse">
+            <span class="sr-only">{% trans "Toggle navigation" %}</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
 
-          <div class="collapse navbar-collapse" id="top-navbar-collapse">
-            <ul class="nav navbar-nav">
-              {% load custom_template_tags %}
-              
-              {% block nav_level_0 %}
-                {% render_nav_item name='Home' url_name='home' active=True %}
-              {% endblock nav_level_0 %}
-              {% block nav_level_1 %}{% endblock nav_level_1 %}
-              {% block nav_level_2 %}{% endblock nav_level_2 %}
-              {% block nav_level_3 %}{% endblock nav_level_3 %}
-            </ul>
+          <a class="navbar-brand" href="{% url 'home' %}">
+            <img alt="Turnen" src="{% static 'gymnastics/images/logo_03.png' %}" width="139px" height="30px">
+          </a>
+        </div>
 
-            <ul class="nav navbar-nav navbar-right">
-              {% block controller_actions %}{% endblock controller_actions %}
-              <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">{% trans "Actions" %}<span class="caret"></span></a>
-                <ul class="dropdown-menu" role="menu">
-                  <li><a href="{% url 'process' %}">Process</a></li>
-                  <li class="divider"></li>
-                  <li><a href="#">{% trans "Preparation" %}</a></li>
-                  <li><a href="#">{% trans "RSVP" %}</a></li>
-                  <li class="divider"></li>
-                  <li><a href="{% url 'squads.overview_pdf' %}" target="_blank">{% trans "Generate Overview PDF" %}</a></li>
-                  <li><a href="{% url 'squads.judge_pdf' %}" target="_blank">{% trans "Generate Judge PDF" %}</a></li>
-                  <li class="divider"></li>
-                  <li><a href="{% url 'athletes_imports.index' %}">{% trans "Import Athletes" %}</a></li>
-                </ul>
-              </li>
-              <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">{% trans "Models" %}<span class="caret"></span></a>
-                <ul class="dropdown-menu" role="menu">
-                  <li><a href="{% url 'disciplines.index' %}">{% trans "Disciplines" %}</a></li>
-                  <li><a href="{% url 'streams.index' %}">{% trans "Streams" %}</a></li>
-                  <li class="divider"></li>
-                  <li><a href="{% url 'athletes.index' %}">{% trans "Athletes" %}</a></li>
-                  <li><a href="{% url 'clubs.index' %}">{% trans "Clubs" %}</a></li>
-                  <li><a href="{% url 'teams.index' %}">{% trans "Teams" %}</a></li>
-                  <li class="divider"></li>
-                  <li><a href="{% url 'squads.index' %}">{% trans "Squads" %}</a></li>
-                  <li class="divider"></li>
-                  <li><a href="{% url 'performances.index' %}">{% trans "Performances" %}</a></li>
-                </ul>
-              </li>
-            </ul>
-          </div>
+        <div class="collapse navbar-collapse" id="static-navbar-collapse">
+          <ul class="nav navbar-nav">
+            <li><a href="#">{% trans "Tournament" %}</a></li>
+            <li><a href="{% url 'streams.index' %}">{% trans "Streams" %}</a></li>
+            <li><a href="{% url 'clubs.index' %}">{% trans "Clubs" %}</a></li>
+            <li><a href="{% url 'athletes.index' %}">{% trans "Athletes" %}</a></li>
+            <li><a href="{% url 'squads.index' %}">{% trans "Squads" %}</a></li>
+          </ul>
+
+          <ul class="nav navbar-nav navbar-right">
+            
+          </ul>
         </div>
       </div> <!-- top navbar -->
 
@@ -94,11 +61,68 @@
                 </div>
               </div>
 
-              <!-- app navbar -->
+              
               <div class="page-header-navbar">
-                <div class="navbar navbar-static-top navbar-inverse gym-app-navbar">
-                </div>
-              </div><!-- app navbar -->
+                <!-- app navbar -->
+                <div class="navbar navbar-static-top navbar-inverse dynamic-navbar" role="navigation">
+                  <div class="container-fluid">
+                    <div class="navbar-header">
+                      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#dynamic-navbar-collapse">
+                        <span class="sr-only">{% trans "Toggle navigation" %}</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                      </button>
+                    </div>
+
+                    <div class="collapse navbar-collapse" id="dynamic-navbar-collapse">
+                      <ul class="nav navbar-nav">
+                        {% load custom_template_tags %}
+                        
+                        {% block nav_level_0 %}
+                          {% render_nav_item name='Home' url_name='home' active=True %}
+                        {% endblock nav_level_0 %}
+                        {% block nav_level_1 %}{% endblock nav_level_1 %}
+                        {% block nav_level_2 %}{% endblock nav_level_2 %}
+                        {% block nav_level_3 %}{% endblock nav_level_3 %}
+                      </ul>
+
+                      <ul class="nav navbar-nav navbar-right">
+                        {% block controller_actions %}{% endblock controller_actions %}
+                        <li class="dropdown">
+                          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">{% trans "Actions" %}<span class="caret"></span></a>
+                          <ul class="dropdown-menu" role="menu">
+                            <li><a href="{% url 'process' %}">Process</a></li>
+                            <li class="divider"></li>
+                            <li><a href="#">{% trans "Preparation" %}</a></li>
+                            <li><a href="#">{% trans "RSVP" %}</a></li>
+                            <li class="divider"></li>
+                            <li><a href="{% url 'squads.overview_pdf' %}" target="_blank">{% trans "Generate Overview PDF" %}</a></li>
+                            <li><a href="{% url 'squads.judge_pdf' %}" target="_blank">{% trans "Generate Judge PDF" %}</a></li>
+                            <li class="divider"></li>
+                            <li><a href="{% url 'athletes_imports.index' %}">{% trans "Import Athletes" %}</a></li>
+                          </ul>
+                        </li>
+                        <li class="dropdown">
+                          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">{% trans "Models" %}<span class="caret"></span></a>
+                          <ul class="dropdown-menu" role="menu">
+                            <li><a href="{% url 'disciplines.index' %}">{% trans "Disciplines" %}</a></li>
+                            <li><a href="{% url 'streams.index' %}">{% trans "Streams" %}</a></li>
+                            <li class="divider"></li>
+                            <li><a href="{% url 'athletes.index' %}">{% trans "Athletes" %}</a></li>
+                            <li><a href="{% url 'clubs.index' %}">{% trans "Clubs" %}</a></li>
+                            <li><a href="{% url 'teams.index' %}">{% trans "Teams" %}</a></li>
+                            <li class="divider"></li>
+                            <li><a href="{% url 'squads.index' %}">{% trans "Squads" %}</a></li>
+                            <li class="divider"></li>
+                            <li><a href="{% url 'performances.index' %}">{% trans "Performances" %}</a></li>
+                          </ul>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div><!-- app navbar -->
+              </div>
 
             </div>          
           </div> 

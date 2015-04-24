@@ -9,7 +9,7 @@ body {
 }
 
 .page-container {
-  padding-top: 50px;
+  padding-top: 40px;
   position: relative;
 }
 
@@ -67,13 +67,22 @@ body {
 /* CUSTOMIZE NAVBARS AN HEADER
 -------------------------------------------------- */
 
+.static-navbar {
+  height: 40px;
+  min-height: 40px;
+}
 
+.static-navbar .navbar-nav a {
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
 
+.dynamic-navbar {
 
-
+}
 
 .navbar-brand {
-  padding: 10px 5px 0px 10px;
+  padding: 5px 5px 0px 10px;
 }
 
 /* TODO:: fix for new navbars */
@@ -91,9 +100,6 @@ body {
 .navbar-wrapper .navbar .container {
   width: auto;
 }
-
-
-
 
 
 
