@@ -67,9 +67,25 @@
 
           <!-- <p class="navbar-text navbar-right">Sign in</p> -->
 
+
+
           <ul class="nav navbar-nav navbar-right">
-            <button type="button" class="btn btn-sm btn-default navbar-btn">LANG</button>
-            <button type="button" class="btn btn-sm btn-primary navbar-btn">Sign in</button>
+            <button type="button" class="btn btn-sm btn-default navbar-btn dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+              {% trans "Language" %} <span class="caret">
+            </button>
+
+            <ul class="dropdown-menu lang-menu" role="menu">
+              {% get_available_languages as LANGUAGES %}
+              {% get_language_info_list for LANGUAGES as languages %}
+
+              {% for lan in languages %}
+                  {% language lan.code %}
+                    <li><a href="{% url 'home' %}">{% trans lan.name %} ({{ lan.name_local }})</a></li>
+                  {% endlanguage %}
+              {% endfor %}
+            </ul>
+
+            <button type="button" class="btn btn-sm btn-default navbar-btn">Sign in</button>
           </ul>
 
           

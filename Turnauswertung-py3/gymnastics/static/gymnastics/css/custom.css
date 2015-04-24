@@ -100,6 +100,10 @@ body {
   margin-top: 4px;
 }
 
+.static-navbar .navbar-right .lang-menu {
+  margin: -3px 79px 0 0;
+}
+
 .dynamic-navbar {
 
 }
