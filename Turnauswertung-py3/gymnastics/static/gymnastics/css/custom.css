@@ -41,7 +41,7 @@ body {
 }
 
 .page-header.is-locked .page-header-inner .page-header-bg {
-  margin-top: -80px;
+  margin-top: -90px;
 }
 
 .page-header-bg-img {
@@ -70,11 +70,26 @@ body {
 .static-navbar {
   height: 40px;
   min-height: 40px;
+
+  -webkit-box-shadow: 0px 1px 3px 0px rgba(0,0,0,0.6);
+  -moz-box-shadow: 0px 1px 3px 0px rgba(0,0,0,0.6);
+  box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.6);
 }
 
-.static-navbar .navbar-nav a {
+.static-navbar .navbar-nav>li>a {
   padding-top: 10px;
   padding-bottom: 10px;
+  text-transform: uppercase;
+  font-family: Helvetica, sans-serif;
+  font-weight: 400;
+}
+
+.static-navbar .navbar-nav>li>a:hover {
+  background-color: #080808;
+}
+
+.static-navbar .navbar-nav>li>a:active {
+  background-color: #080808;
 }
 
 .dynamic-navbar {
@@ -82,7 +97,7 @@ body {
 }
 
 .navbar-brand {
-  padding: 5px 5px 0px 10px;
+  padding: 5px 50px 0px 10px;
 }
 
 /* TODO:: fix for new navbars */

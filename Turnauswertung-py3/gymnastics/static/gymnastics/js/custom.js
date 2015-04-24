@@ -138,14 +138,14 @@ $(document).ready(function() {
 
         if (scroll_top == 0) {
             scrollTransformResponse(page_header_bg_img, null);
-        } else if (scroll_top < 120) {
+        } else if (scroll_top < 130) {
             if (is_locked) {
                 page_header_div.removeClass("is-locked");
             }
             scrollTransformResponse(page_header_bg_img, scroll_top/5);
-        } else if (scroll_top >= 120 && !is_locked) {
+        } else if (scroll_top >= 130 && !is_locked) {
             page_header_div.addClass("is-locked");
-            scrollTransformResponse(page_header_bg_img, 120/5);
+            scrollTransformResponse(page_header_bg_img, 130/5);
         }
     });
 });
