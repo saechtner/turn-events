@@ -12,7 +12,7 @@
 {% endblock nav_level_1 %}
 
 {% block controller_actions %}
-  <li class="dropdown">
+  <li class="dropdown" role="menu">
     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">{% trans "Athletes" %}<span class="caret"></span></a>
     <ul class="dropdown-menu" role="menu">
       <li><a href="{% url 'athletes.new' %}">{% trans "New athlete" %}</a></li>

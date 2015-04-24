@@ -92,6 +92,14 @@ body {
   background-color: #080808;
 }
 
+.static-navbar .navbar-right {
+  margin-right: 80px;
+}
+
+.static-navbar .navbar-right .navbar-btn {
+  margin-top: 4px;
+}
+
 .dynamic-navbar {
 
 }

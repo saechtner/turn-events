@@ -40,11 +40,41 @@
             <li><a href="{% url 'clubs.index' %}">{% trans "Clubs" %}</a></li>
             <li><a href="{% url 'athletes.index' %}">{% trans "Athletes" %}</a></li>
             <li><a href="{% url 'squads.index' %}">{% trans "Squads" %}</a></li>
+
+            <!-- All menu item. Kinda legacy. -->
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">{% trans "All" %}<span class="caret"></span></a>
+              <ul class="dropdown-menu" role="menu">
+                <li><a href="{% url 'process' %}">Process</a></li>
+                <li class="divider"></li>
+                <li><a href="{% url 'athletes.index' %}">{% trans "Athletes" %}</a></li>
+                <li><a href="{% url 'clubs.index' %}">{% trans "Clubs" %}</a></li>
+                <li><a href="{% url 'disciplines.index' %}">{% trans "Disciplines" %}</a></li>
+                <li><a href="{% url 'performances.index' %}">{% trans "Performances" %}</a></li>
+                <li><a href="{% url 'streams.index' %}">{% trans "Streams" %}</a></li>
+                <li><a href="{% url 'squads.index' %}">{% trans "Squads" %}</a></li>
+                <li><a href="{% url 'teams.index' %}">{% trans "Teams" %}</a></li>
+                <li class="divider"></li>
+                <li><a href="{% url 'athletes_imports.index' %}">{% trans "Import Athletes" %}</a></li>
+                <li><a href="{% url 'squads.overview_pdf' %}" target="_blank">{% trans "Generate Overview PDF" %}</a></li>
+                <li><a href="{% url 'squads.judge_pdf' %}" target="_blank">{% trans "Generate Judge PDF" %}</a></li>
+              </ul>
+            </li>
+
+            <!-- Controller actions menu item. Also legacy. -->
+            {% block controller_actions %}{% endblock controller_actions %}
           </ul>
 
+          <!-- <p class="navbar-text navbar-right">Sign in</p> -->
+
           <ul class="nav navbar-nav navbar-right">
-            
+            <button type="button" class="btn btn-sm btn-default navbar-btn">LANG</button>
+            <button type="button" class="btn btn-sm btn-primary navbar-btn">Sign in</button>
           </ul>
+
+          
+
+
         </div>
       </div> <!-- top navbar -->
 
@@ -87,38 +117,7 @@
                         {% block nav_level_3 %}{% endblock nav_level_3 %}
                       </ul>
 
-                      <ul class="nav navbar-nav navbar-right">
-                        {% block controller_actions %}{% endblock controller_actions %}
-                        <li class="dropdown">
-                          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">{% trans "Actions" %}<span class="caret"></span></a>
-                          <ul class="dropdown-menu" role="menu">
-                            <li><a href="{% url 'process' %}">Process</a></li>
-                            <li class="divider"></li>
-                            <li><a href="#">{% trans "Preparation" %}</a></li>
-                            <li><a href="#">{% trans "RSVP" %}</a></li>
-                            <li class="divider"></li>
-                            <li><a href="{% url 'squads.overview_pdf' %}" target="_blank">{% trans "Generate Overview PDF" %}</a></li>
-                            <li><a href="{% url 'squads.judge_pdf' %}" target="_blank">{% trans "Generate Judge PDF" %}</a></li>
-                            <li class="divider"></li>
-                            <li><a href="{% url 'athletes_imports.index' %}">{% trans "Import Athletes" %}</a></li>
-                          </ul>
-                        </li>
-                        <li class="dropdown">
-                          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">{% trans "Models" %}<span class="caret"></span></a>
-                          <ul class="dropdown-menu" role="menu">
-                            <li><a href="{% url 'disciplines.index' %}">{% trans "Disciplines" %}</a></li>
-                            <li><a href="{% url 'streams.index' %}">{% trans "Streams" %}</a></li>
-                            <li class="divider"></li>
-                            <li><a href="{% url 'athletes.index' %}">{% trans "Athletes" %}</a></li>
-                            <li><a href="{% url 'clubs.index' %}">{% trans "Clubs" %}</a></li>
-                            <li><a href="{% url 'teams.index' %}">{% trans "Teams" %}</a></li>
-                            <li class="divider"></li>
-                            <li><a href="{% url 'squads.index' %}">{% trans "Squads" %}</a></li>
-                            <li class="divider"></li>
-                            <li><a href="{% url 'performances.index' %}">{% trans "Performances" %}</a></li>
-                          </ul>
-                        </li>
-                      </ul>
+                      
                     </div>
                   </div>
                 </div><!-- app navbar -->
