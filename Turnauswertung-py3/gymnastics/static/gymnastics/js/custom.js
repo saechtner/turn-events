@@ -130,13 +130,13 @@ $(document).ready(function() {
     }
 
     $(window).scroll(function() {
-        var scroll_limit = 180;
+        var scroll_limit = 160;
 
         var scroll_top = $(window).scrollTop();
 
         var page_header_div = $(".page-header:first");
         var is_locked = page_header_div.hasClass("is-locked");
-        var page_header_bg_img = page_header_div.find("img:first");
+        var page_header_bg_img = page_header_div.find(".page-header-bg-img:first");
 
         if (scroll_top == 0) {
             scrollTransformResponse(page_header_bg_img, null);

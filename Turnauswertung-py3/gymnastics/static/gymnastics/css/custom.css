@@ -34,6 +34,19 @@ body {
   width: 100%;
 }
 
+.page-header-headline {
+  position: relative; 
+  left: 330px;;
+  top: 107px;
+  z-index: 4;
+
+  color: rgb(51, 51, 51);
+}
+
+.page-header-headline > small {
+  color: #5a5a5a;
+}
+
 .page-header-bg {
   position: relative;
   height: 200px;
@@ -42,7 +55,7 @@ body {
 
 /* put here negative value of scroll_limit - static-navbar height as margin-top  */
 .page-header.is-locked .page-header-inner .page-header-bg {
-  margin-top: -140px;
+  margin-top: -120px;
 }
 
 .page-header-bg-img {

@@ -4,7 +4,7 @@
 {% load staticfiles %}
 
 {% block name %}{% trans 'Home' %}{% endblock name %}
-{% block current_url %}{% url 'home' %}{% endblock current_url %}
+{% block nav_main_url %}{% url 'home' %}{% endblock nav_main_url %}
 
 {% block nav_main %}
   <li><a href="{% url 'process' %}">Process</a></li>

@@ -2,13 +2,12 @@
 
 {% load i18n %}
 
-{% block name %}Athletes{% endblock name %}
-{% block current_url %}{% url 'athletes.index' %}{% endblock current_url %}
-
-{% block nav_main %}
+{% block headline %}{% trans 'Athletes' %}{% endblock headline %}
+{% block name %}{% trans 'Athletes' %}{% endblock name %}
+{% block nav_main_url %}{% url 'athletes.index' %}{% endblock nav_main_url %}
+{% block nav_links %}
   <li><a href="{% url 'athletes.results' %}">{% trans "Results" %}</a></li>
-{% endblock nav_main %}
-
+{% endblock nav_links %}
 {% block nav_regular_buttons %}
   <a type="button" class="btn btn-default navbar-btn" href="{% url 'athletes.new' %}">{% trans "New athlete" %}</a>
 {% endblock nav_regular_buttons %}

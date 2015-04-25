@@ -96,6 +96,7 @@
 
               <div class="page-header-bg">
                 <div class="page-header-bg-img">
+                  <h1 class="page-header-headline">{% block headline %}TURNEN{% endblock headline %}</h1>
                   <img alt="" src="{% static 'gymnastics/images/bg_header.jpeg' %}" style="transform: none;">
                 </div>
               </div>
@@ -115,18 +116,16 @@
 
                     <div class="collapse navbar-collapse" id="dynamic-navbar-collapse">
                       <div class="container">
-                      <a class="navbar-brand name" href="{% block current_url %}#{% endblock current_url %}">
+                        <a class="navbar-brand name" href="{% block nav_main_url %}#{% endblock nav_main_url %}">
                           {% block name %}{% endblock name %}
                         </a>
 
                         <ul class="nav navbar-nav">
-                          {% block nav_main %}
-                          {% endblock nav_main %}
+                          {% block nav_links %}{% endblock nav_links %}
                         </ul>
 
                         <div class="nav navbar-nav navbar-right btn-group">
-                          {% block nav_regular_buttons %}
-                          {% endblock nav_regular_buttons %}
+                          {% block nav_regular_buttons %}{% endblock nav_regular_buttons %}
                         </div>
                       </div>
                       
@@ -160,6 +159,7 @@
           {% block content_fullwidth %}{% endblock content_fullwidth %}
         </div> <!-- page container -->
       </div> <!-- page outer -->
+      
     </div>
 
     <script src="{% static 'gymnastics/js/jquery-1.11.2.js' %}"></script>

@@ -3,12 +3,10 @@
 {% load i18n %}
 {% load custom_template_tags %}
 
+{% block headline %}{{ athlete }} <small>{{ athlete.club }}</small>{% endblock headline %}
 {% block name %}{{ athlete }}{% endblock name %}
-{% block current_url %}{% url 'athletes.detail' athlete.id %}{% endblock current_url %}
-
-{% block nav_main %}
-{% endblock nav_main %}
-
+{% block nav_main_url %}{% url 'athletes.detail' athlete.id %}{% endblock nav_main_url %}
+{% block nav_links %}{% endblock nav_links %}
 {% block nav_regular_buttons %}
   <a type="button" class="btn btn-warning navbar-btn" href="{% url 'athletes.edit' athlete.id %}">{% trans "Edit" %}</a>
   <a type="button" class="btn btn-danger navbar-btn athlete-detail-delete" href="{% url 'athletes.delete' athlete.id %}">{% trans "Delete" %}</a>
@@ -16,15 +14,6 @@
 {% endblock nav_regular_buttons %}
 
 {% block content %}
-
-  <div class="row row-relative">
-    <div class="col-md-12">
-      <h1>
-        {{ athlete }} <small>{{ athlete.club }}</small>
-      </h1>
-    </div>
-  </div>
-
   <div role="tabpanel">
     <!-- Nav tabs -->
     <ul class="nav nav-tabs" role="tablist">
