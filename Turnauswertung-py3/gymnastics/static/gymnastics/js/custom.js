@@ -130,6 +130,8 @@ $(document).ready(function() {
     }
 
     $(window).scroll(function() {
+        var scroll_limit = 180;
+
         var scroll_top = $(window).scrollTop();
 
         var page_header_div = $(".page-header:first");
@@ -138,14 +140,14 @@ $(document).ready(function() {
 
         if (scroll_top == 0) {
             scrollTransformResponse(page_header_bg_img, null);
-        } else if (scroll_top < 130) {
+        } else if (scroll_top < scroll_limit) {
             if (is_locked) {
                 page_header_div.removeClass("is-locked");
             }
             scrollTransformResponse(page_header_bg_img, scroll_top/5);
-        } else if (scroll_top >= 130 && !is_locked) {
+        } else if (scroll_top >= scroll_limit && !is_locked) {
             page_header_div.addClass("is-locked");
-            scrollTransformResponse(page_header_bg_img, 130/5);
+            scrollTransformResponse(page_header_bg_img, scroll_limit/5);
         }
     });
 });

@@ -17,7 +17,7 @@ body {
   margin: 0;
   position: relative;
   padding-bottom: 50px;
-  height: 220px;
+  height: 250px;
   border: none;
 }
 
@@ -36,12 +36,13 @@ body {
 
 .page-header-bg {
   position: relative;
-  height: 170px;
+  height: 200px;
   z-index: 3;
 }
 
+/* put here negative value of scroll_limit - static-navbar height as margin-top  */
 .page-header.is-locked .page-header-inner .page-header-bg {
-  margin-top: -90px;
+  margin-top: -140px;
 }
 
 .page-header-bg-img {
@@ -64,7 +65,7 @@ body {
 }
 
 
-/* CUSTOMIZE NAVBARS AN HEADER
+/* CUSTOMIZE NAVBARS AND HEADER
 -------------------------------------------------- */
 
 .static-navbar {
@@ -76,24 +77,36 @@ body {
   box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.6);
 }
 
-.static-navbar .navbar-nav>li>a {
+.static-navbar .navbar-brand {
+  padding: 5px 10px 0px 10px;
+  margin-right: 40px;
+}
+
+.static-navbar .navbar-nav > li > a {
   padding-top: 10px;
   padding-bottom: 10px;
+
   text-transform: uppercase;
   font-family: Helvetica, sans-serif;
   font-weight: 400;
 }
 
-.static-navbar .navbar-nav>li>a:hover {
+.static-navbar .navbar-nav > li > a:hover {
   background-color: #080808;
+
+  -o-transition:background .1s ease-in;
+  -ms-transition:background .1s ease-in;
+  -moz-transition:background .1s ease-in;
+  -webkit-transition:background .1s ease-in;
+  transition:, background .1s ease-in;
 }
 
-.static-navbar .navbar-nav>li>a:active {
+.static-navbar .navbar-nav > li > a:active {
   background-color: #080808;
 }
 
 .static-navbar .navbar-right {
-  margin-right: 80px;
+  margin-right: 15px;
 }
 
 .static-navbar .navbar-right .navbar-btn {
@@ -101,15 +114,43 @@ body {
 }
 
 .static-navbar .navbar-right .lang-menu {
-  margin: -3px 79px 0 0;
+  margin: -3px 14px 0 0;
 }
 
 .dynamic-navbar {
-
+  -webkit-box-shadow: 0px 1px 3px 0px rgba(0,0,0,0.6);
+  -moz-box-shadow: 0px 1px 3px 0px rgba(0,0,0,0.6);
+  box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.6);
 }
 
-.navbar-brand {
-  padding: 5px 50px 0px 10px;
+.dynamic-navbar .name {
+  margin: 0 40px 0 0;
+  color: #fff;
+}
+
+.dynamic-navbar .navbar-nav > li > a {
+  text-transform: uppercase;
+  font-family: Helvetica, sans-serif;
+  font-weight: 400;
+
+  padding: 5px;
+  margin: 10px;
+}
+
+.dynamic-navbar .navbar-nav > li > a:hover {
+  /*background-color: #080808;*/
+  color: #5a5a5a;
+  background: #fff;
+
+  -o-transition:background .1s ease-in;
+  -ms-transition:background .1s ease-in;
+  -moz-transition:background .1s ease-in;
+  -webkit-transition:background .1s ease-in;
+  transition:, background .1s ease-in;
+}
+
+.dynamic-navbar .navbar-nav > li > a:active {
+  /*background-color: #080808;*/
 }
 
 /* TODO:: fix for new navbars */

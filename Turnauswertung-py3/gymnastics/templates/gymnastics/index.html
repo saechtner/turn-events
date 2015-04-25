@@ -1,7 +1,17 @@
 {% extends "gymnastics/base.html" %}
-{% load i18n %}
 
+{% load i18n %}
 {% load staticfiles %}
+
+{% block name %}{% trans 'Home' %}{% endblock name %}
+{% block current_url %}{% url 'home' %}{% endblock current_url %}
+
+{% block nav_main %}
+  <li><a href="{% url 'process' %}">Process</a></li>
+{% endblock nav_main %}
+
+{% block nav_regular_buttons %}
+{% endblock nav_regular_buttons %}
 
 {% block content %}
 <!-- Carousel -->
