@@ -30,11 +30,17 @@ class DeleteView(generic.DeleteView):
 def _parse_athlete_line(line, club, athletes_import):
     # TODO: idea - remove all return none and catch everything one level below
 
-    elements = re.split(r'\t+', line.rstrip())
-    if len(elements) != 6:
+    elements = re.split(r'\t', line.rstrip())
+
+    if len(elements) != 6 and len(elements) != 7:
         return None
 
-    sex = 'm' if elements[5].lower().startswith('m') else Athlete._meta.get_field('sex').default
+    sex = 'm' if elements[5].lower().startswith('x') else Athlete._meta.get_field('sex').default
+
+    # date regex: 
+    # ^\d{1,2}\/\d{1,2}\/\d{4}$
+    # american date regex with lots of alternatives: 
+    # ^[0,1]?\d{1}\/(([0-2]?\d{1})|([3][0,1]{1}))\/(([1]{1}[9]{1}[9]{1}\d{1})|([2-9]{1}\d{3}))$
 
     year_of_birth = elements[2]
     if not year_of_birth.isdigit():
@@ -49,7 +55,7 @@ def _parse_athlete_line(line, club, athletes_import):
     stream = None
     try:
         stream = Stream.objects.get(difficulty=stream_name, sex=sex)
-        if year_of_birth < stream.minimum_year_of_birth:
+        if int(year_of_birth) < stream.minimum_year_of_birth:
             return None
     except:
         return None
@@ -127,6 +133,9 @@ def new(request):
             return _abort_athletes_import(request, athletes_import, 'Error: No import data added.')
 
         lines = request.POST['import_data'].splitlines()
+
+        print(lines)
+
         if lines[0].startswith('Vorname\tN'):
             lines = lines[1:]
         for line in lines:
@@ -137,3 +146,5 @@ def new(request):
             messages.warning(request, 'Warning: {0} objects were not created.'.format(len(lines) - len(athletes_list)))
         
         return redirect(reverse('athletes_imports.detail', kwargs={ 'id': athletes_import.id }))
+
+    return  HttpResponseNotAllowed(['GET', 'POST'])

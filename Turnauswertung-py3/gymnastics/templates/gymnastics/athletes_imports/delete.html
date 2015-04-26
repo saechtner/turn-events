@@ -2,9 +2,9 @@
 
 {% load i18n %}
 
-{% block headline %}<small>{% trans 'Delete' %}</small> {{ object }}{% trans 'Import Athletes' %}{% endblock headline %}
+{% block headline %}<small>{% trans 'Delete' %}</small> {{ object }}{% endblock headline %}
 {% block nav_main %}{% trans 'Athletes Imports' %}{% endblock nav_main %}
-{% block nav_main_url %}{% url 'athletes_imports.index' %}{% endblock nav_main_url %}
+{% block nav_main_url %}{% url 'athletes_imports.detail' object.id %}{% endblock nav_main_url %}
 {% block nav_links %}{% endblock nav_links %}
 {% block nav_regular_buttons %}{% endblock nav_regular_buttons %}
 
