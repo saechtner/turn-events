@@ -6,20 +6,22 @@
 {% block name %}{% trans 'Athletes' %}{% endblock name %}
 {% block nav_main_url %}{% url 'athletes.index' %}{% endblock nav_main_url %}
 {% block nav_links %}
-  <li><a href="{% url 'athletes.results' %}">{% trans "Results" %}</a></li>
+  <!-- <li><a href="{% url 'athletes.results' %}">{% trans "Results" %}</a></li> -->
 {% endblock nav_links %}
 {% block nav_regular_buttons %}
   <a type="button" class="btn btn-default navbar-btn" href="{% url 'athletes.new' %}">{% trans "New athlete" %}</a>
 {% endblock nav_regular_buttons %}
 
 {% block content %}
-
-  {% if athletes %}
-    <table class="table table-hover athletes-table" id="athletes-table">
-      {% include "gymnastics/includes/athletes_list.html" with athletes_set=athletes only %}
-    </table>
-  {% else %}
-    <div class="alert alert-info">{% trans "No athletes available in the database." %}</div>
-  {% endif %}
-  
+  <div class="panel">
+    <div class="panel-body">
+      {% if athletes %}
+        <table class="table table-hover athletes-table" id="athletes-table">
+          {% include "gymnastics/includes/athletes_list.html" with athletes_set=athletes only %}
+        </table>
+      {% else %}
+        <div class="alert alert-info">{% trans "No athletes available in the database." %}</div>
+      {% endif %}
+    </div>
+  </div>
 {% endblock content %}

@@ -2,16 +2,19 @@
 
 {% load i18n %}
 
-{% block headline %}{% trans 'Edit' %}: {{ athlete }}{% endblock headline %}
+{% block headline %}<small>{% trans 'Edit' %}</small> {{ athlete }}{% endblock headline %}
 {% block name %}{{ athlete }}{% endblock name %}
 {% block nav_main_url %}{% url 'athletes.detail' athlete.id %}{% endblock nav_main_url %}
 {% block nav_links %}{% endblock nav_links %}
 {% block nav_regular_buttons %}{% endblock nav_regular_buttons %}
 
-
 {% block content %}
-<form action="" method="post" class="form-horizontal">
-  {% csrf_token %}
-  {% include "gymnastics/includes/form.html" with form=form mode='edit' only %}
-</form>
+  <div class="panel">
+    <div class="panel-body">
+      <form action="" method="post" class="form-horizontal">
+        {% csrf_token %}
+        {% include "gymnastics/includes/form.html" with form=form mode='edit' only %}
+      </form>
+    </div>
+  </div>
 {% endblock content %}

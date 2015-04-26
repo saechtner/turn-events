@@ -96,7 +96,7 @@
 
               <div class="page-header-bg">
                 <div class="page-header-bg-img">
-                  <h1 class="page-header-headline">{% block headline %}TURNEN{% endblock headline %}</h1>
+                  <h1 class="page-header-headline">{% block headline %}{% endblock headline %}</h1>
                   <img alt="" src="{% static 'gymnastics/images/bg_header.jpeg' %}" style="transform: none;">
                 </div>
               </div>
@@ -137,7 +137,7 @@
             </div>          
           </div> <!-- page-header -->
 
-          {% comment %}Allows to create messages via messages.error .warning .success and .info.{% endcomment %}
+          <!-- Allows to create messages via messages.error .warning .success and .info. -->
           <div id="gobal_message_container" class="container">
             {% if messages %}
               {% autoescape off %}
@@ -151,8 +151,7 @@
             {% endif %}
           </div>
 
-
-          <div class="container">
+          <div class="container page-body">
             {% block content %}{% endblock content %}
           </div>
 
