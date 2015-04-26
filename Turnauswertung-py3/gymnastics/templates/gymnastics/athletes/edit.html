@@ -3,13 +3,13 @@
 {% load i18n %}
 
 {% block headline %}<small>{% trans 'Edit' %}</small> {{ athlete }}{% endblock headline %}
-{% block name %}{{ athlete }}{% endblock name %}
+{% block nav_main %}{{ athlete }}{% endblock nav_main %}
 {% block nav_main_url %}{% url 'athletes.detail' athlete.id %}{% endblock nav_main_url %}
 {% block nav_links %}{% endblock nav_links %}
 {% block nav_regular_buttons %}{% endblock nav_regular_buttons %}
 
 {% block content %}
-  <div class="panel">
+  <div class="panel panel-default">
     <div class="panel-body">
       <form action="" method="post" class="form-horizontal">
         {% csrf_token %}

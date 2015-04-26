@@ -1,20 +1,22 @@
 {% extends "gymnastics/athletes_imports/base.html" %}
+
 {% load i18n %}
 
-{% load custom_template_tags %}
-                  
-{% block nav_level_2 %}
-  {% render_nav_item name=object url_name='athletes_imports.detail' url_id=object.id %}
-{% endblock nav_level_2 %}
-{% block nav_level_3 %}
-  {% render_nav_item name='delete' active=True %}
-{% endblock nav_level_3 %}
+{% block headline %}<small>{% trans 'Delete' %}</small> {{ object }}{% trans 'Import Athletes' %}{% endblock headline %}
+{% block nav_main %}{% trans 'Athletes Imports' %}{% endblock nav_main %}
+{% block nav_main_url %}{% url 'athletes_imports.index' %}{% endblock nav_main_url %}
+{% block nav_links %}{% endblock nav_links %}
+{% block nav_regular_buttons %}{% endblock nav_regular_buttons %}
 
 {% block content %}
-  <form action="" method="post">
-    {% csrf_token %}
-    <p>{% trans "Are you sure you want to delete" %} "{{ object }}"?</p>
-    <input class="btn btn-danger" type="submit" value="{% trans "Confirm" %}"/>
-    <button class="btn btn-default" type="button" onClick="javascript:history.go(-1);">{% trans "Cancel" %}</button>
-  </form>
+  <div class="panel panel-default">
+    <div class="panel-body">
+      <form action="" method="post">
+        {% csrf_token %}
+        <p>{% trans "Are you sure you want to delete" %} <strong>{{ object }}</strong>?</p>
+        <input class="btn btn-danger" type="submit" value="{% trans "Confirm" %}"/>
+        <button class="btn btn-default" type="button" onClick="javascript:history.go(-1);">{% trans "Cancel" %}</button>
+      </form>
+    </div>
+  </div>
 {% endblock content %}

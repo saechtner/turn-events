@@ -1,40 +1,43 @@
 {% extends "gymnastics/athletes_imports/base.html" %}
+
 {% load i18n %}
 
-{% load custom_template_tags %}
-
-{% block nav_level_2 %}
-  {% render_nav_item name=athletes_import active=True %}
-{% endblock nav_level_2 %}
+{% block headline %}
+  {{ athletes_import }} <small>{{ athletes_import.athlete_set.count }} {% trans 'Athletes' %}</small>
+{% endblock headline %}
+{% block nav_main %}{{ athletes_import }}{% endblock nav_main %}
+{% block nav_main_url %}{% url 'athletes_imports.detail' athletes_import.id %}{% endblock nav_main_url %}
+{% block nav_links %}
+  <li role="presentation" class="active">
+    <a href="#base" aria-controls="home" role="tab" data-toggle="tab">{% trans "General" %}</a>
+  </li>
+  <li role="presentation">
+    <a href="#athletes" aria-controls="profile" role="tab" data-toggle="tab">{% trans "Imported Athletes" %}</a>
+  </li>
+{% endblock nav_links %}
+{% block nav_regular_buttons %}
+  <a type="button" class="btn btn-danger navbar-btn" href="{% url 'athletes_imports.delete' athletes_import.id %}">{% trans "Delete Import" %}</a>
+{% endblock nav_regular_buttons %}
 
 {% block content %}
+  <div class="panel panel-default" role="tabpanel">
+    <div class="panel-body tab-content">
+      <div role="tabpanel">
+        <!-- Tab panes -->
+        <div class="tab-content">
+          <div role="tabpanel" class="tab-pane active" id="base">
+            {% if athletes_import.club %}
+              <p>{% trans "Club" %}: <a href="{% url 'clubs.detail' athletes_import.club.id %}">{{ athletes_import.club }}</a></p>
+            {% endif %}
+          </div>
 
-  <div class="row row-relative">
-    <div class="col-md-8">
-      <h1>{{ athletes_import }}<small> {{ athletes_import.athlete_set.count }} Athletes</small></h1>
-    </div>
-    <div class="col-md-4 div-pos-bottom-right text-right">
-      <div class="btn-group">
-        <a type="button" class="btn btn-danger" href="{% url 'athletes_imports.delete' athletes_import.id %}">{% trans "Delete Imported Athletes" %}</a>
-        <button type="button" class="btn btn-default" onClick="javascript:history.go(-1);">{% trans "Previous Page" %}</button>
-      </div>
+          <div role="tabpanel" class="tab-pane" id="athletes">
+            <table class="table table-hover table-condensed" id="athletes-table">
+              {% include "gymnastics/includes/athletes_list.html" with athletes_set=athletes_import.athlete_set.all only %}
+            </table>
+          </div>
+        </div>
+      </div> 
     </div>
   </div>
-
-  <div role="tabpanel">
-    <!-- Nav tabs -->
-    <ul class="nav nav-tabs" role="tablist">
-      <li role="presentation" class="active"><a href="#athletes" aria-controls="home" role="tab" data-toggle="tab">{% trans "Imported Athletes" %}</a></li>
-    </ul>
-
-    <!-- Tab panes -->
-    <div class="tab-content">
-      <div role="tabpanel" class="tab-pane active" id="athletes">
-        <table class="table table-hover table-condensed" id="athletes-table">
-          {% include "gymnastics/includes/athletes_list.html" with athletes_set=athletes_import.athlete_set.all only %}
-        </table>
-      </div>
-    </div>
-  </div> 
-  
 {% endblock content %}

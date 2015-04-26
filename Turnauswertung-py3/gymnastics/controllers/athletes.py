@@ -65,7 +65,6 @@ class AthleteUpdateView(SuccessMessageMixin, generic.UpdateView):
     # form_class = AthleteForm
 
     def get_success_url(self):
-        some_kwargs = self.kwargs
         return reverse('athletes.detail', kwargs = { 'id' : self.kwargs['pk'] })
 
     # def get_context_data(self, **kwargs):

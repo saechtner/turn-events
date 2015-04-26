@@ -10,10 +10,10 @@ from django.utils.translation import ugettext_lazy as _
 from django.http import HttpResponse
 from django.template import Context
 from django.template.loader import get_template
+
 from subprocess import Popen, PIPE
+
 import tempfile
-
-
 
 from gymnastics.models.athlete import Athlete
 from gymnastics.models.discipline import Discipline
@@ -79,11 +79,7 @@ def enter_performances(request, id):
     for stream in streams_distinct:
         discipline_list.extend(stream_athletes_disciplines[stream.id]['disciplines'])
 
-    x = 1
-    discipline_tabindex_dict = {}
-    for discipline in set(discipline_list):
-        discipline_tabindex_dict[discipline] = x
-        x += 1
+    discipline_tabindex_dict = { discipline: index for index, discipline in enumerate(set(discipline_list)) }
 
     # Results Athletes: disciplines results
     athletes_discipline_results = squad.athlete_set.all() \
@@ -115,20 +111,19 @@ def handle_entered_performances(request):
 
     for key, value in performanceDict.items():
         if '-' in key and value:
-            athleteID, performanceID = re.split(r'-+', key.rstrip())
+            athlete_id, performance_id = re.split(r'-+', key.rstrip())
 
-            athlete = athletes.get(id=athleteID)
-            discipline = disciplines.get(id=performanceID)
+            athlete = athletes.get(id=athlete_id)
+            discipline = disciplines.get(id=performance_id)
 
             try:
-                performance = performances.get(athlete=athlete,discipline=discipline)
+                performance = performances.get(athlete=athlete, discipline=discipline)
                 performance.value = value
             except:
                 performance = Performance( \
                     value=value,
                     athlete=athlete,
-                    discipline=discipline
-                )
+                    discipline=discipline)
 
             performance.save()
 
@@ -168,8 +163,8 @@ def judge_pdf(request):
             pdf = f.read()
 
     r = HttpResponse(content_type='application/pdf')
-    # r['Content-Disposition'] = 'attachment; filename={0}_{1}_{2}.pdf'.format(_('Squads'), _('Judge'), _('Lists'))
-    r['Content-Disposition'] = 'filename={0}_{1}_{2}.pdf'.format(_('Squads'), _('Judge'), _('Lists'))
+    # r['Content-Disposition'] = 'attachment; filename={0}_{1}_{2}.pdf'.format(ugettext_lazy('Squads'), ugettext_lazy('Judge'), ugettext_lazy('Lists'))
+    r['Content-Disposition'] = 'filename={0}_{1}_{2}.pdf'.format(ugettext_lazy('Squads'), ugettext_lazy('Judge'), ugettext_lazy('Lists'))
     r.write(pdf)
     return r
 
@@ -199,8 +194,8 @@ def overview_pdf(request):
             pdf = f.read()
 
     r = HttpResponse(content_type='application/pdf')
-    # r['Content-Disposition'] = 'attachment; filename={0}_{1}.pdf'.format(_('Squads'), _('Overview'))
-    r['Content-Disposition'] = 'filename={0}_{1}.pdf'.format(_('Squads'), _('Overview'))
+    # r['Content-Disposition'] = 'attachment; filename={0}_{1}.pdf'.format(ugettext_lazy('Squads'), ugettext_lazy('Overview'))
+    r['Content-Disposition'] = 'filename={0}_{1}.pdf'.format(ugettext_lazy('Squads'), ugettext_lazy('Overview'))
     r.write(pdf)
     return r
 
@@ -220,8 +215,7 @@ class SquadUpdateView(generic.UpdateView):
     template_name = 'gymnastics/squads/edit.html'
 
     def get_success_url(self):
-        some_kwargs = self.kwargs
-        return reverse('squads.detail', kwargs = { 'pk' : self.kwargs['pk'] })
+        return reverse('squads.detail', kwargs = { 'id' : self.kwargs['pk'] })
 
 
 class SquadDeleteView(generic.DeleteView):

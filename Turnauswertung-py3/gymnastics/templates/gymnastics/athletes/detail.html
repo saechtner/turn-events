@@ -4,7 +4,7 @@
 {% load custom_template_tags %}
 
 {% block headline %}{{ athlete }} <small>{{ athlete.club }}</small>{% endblock headline %}
-{% block name %}{{ athlete }}{% endblock name %}
+{% block nav_main %}{{ athlete }}{% endblock nav_main %}
 {% block nav_main_url %}{% url 'athletes.detail' athlete.id %}{% endblock nav_main_url %}
 {% block nav_links %}
   <li role="presentation" class="active">
@@ -21,7 +21,7 @@
 
 {% block content %}
 
-  <div class="panel" role="tabpanel">
+  <div class="panel panel-default" role="tabpanel">
 
     <div class="panel-body tab-content">
       <div role="tabpanel" class="tab-pane active" id="base">
@@ -91,6 +91,7 @@
         </table>
       </div>
     </div>
+    
   </div>
 
 {% endblock content %}

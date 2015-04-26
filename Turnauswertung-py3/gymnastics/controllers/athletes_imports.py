@@ -25,34 +25,37 @@ class DeleteView(generic.DeleteView):
     success_url = reverse_lazy('athletes_imports.index')
 
 
+# line: Vorname      Name       Geb.    AK  Mannschaft  männlich    weiblich
+# m/w in einer Spalte und männlich/weiblich als mögliche Werte ...
 def _parse_athlete_line(line, club, athletes_import):
+    # TODO: idea - remove all return none and catch everything one level below
+
     elements = re.split(r'\t+', line.rstrip())
-    if len(elements) != 5 and len(elements) != 6:
+    if len(elements) != 6:
         return None
 
-    sex = 'm' if elements[2].lower().startswith('m') else Athlete._meta.get_field('sex').default
+    sex = 'm' if elements[5].lower().startswith('m') else Athlete._meta.get_field('sex').default
 
-    year_of_birth = elements[3]
+    year_of_birth = elements[2]
+    if not year_of_birth.isdigit():
+        return None
     if len(year_of_birth) == 2:
-        year_of_birth = '20{0}'.format(year_of_birth)
+        century_string = '20' if int(year_of_birth) < 60 else '19'
+        year_of_birth = '{0}{1}'.format(century_string, year_of_birth)
     elif len(year_of_birth) != 4:
         return None
-    try:
-        year_of_birth = int(year_of_birth)
-    except:
-        return None
 
-    stream_name = ''.join(elements[4].split()).upper() # remove all whitespace
+    stream_name = ''.join(elements[3].split()).upper() # remove all whitespace
     stream = None
     try:
         stream = Stream.objects.get(difficulty=stream_name, sex=sex)
-        if stream.minimum_year_of_birth > year_of_birth:
+        if year_of_birth < stream.minimum_year_of_birth:
             return None
     except:
         return None
 
     # TODO: handle teams during athletes import ... =/
-    # team_name = elements[5])
+    # team_name = elements[4])
     # teams = Team.objects.filter(club=club, stream=stream)
     # if teams:
     #     # search if the correct one is among them and use it, otherwise error or generate new one anyways
@@ -66,8 +69,7 @@ def _parse_athlete_line(line, club, athletes_import):
             year_of_birth=year_of_birth,
             club=club,
             stream=stream,
-            athletes_import=athletes_import
-        )
+            athletes_import=athletes_import)
 
     try:
         athlete.save()
@@ -125,7 +127,7 @@ def new(request):
             return _abort_athletes_import(request, athletes_import, 'Error: No import data added.')
 
         lines = request.POST['import_data'].splitlines()
-        if lines[0].startswith('Vorname\tNachname'):
+        if lines[0].startswith('Vorname\tN'):
             lines = lines[1:]
         for line in lines:
             athlete = _parse_athlete_line(line, club, athletes_import)

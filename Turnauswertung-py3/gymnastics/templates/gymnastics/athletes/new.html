@@ -3,13 +3,15 @@
 {% load i18n %}
 
 {% block headline %}{% trans 'Create New Athlete' %}{% endblock headline %}
-{% block name %}{% trans 'New Athlete' %}{% endblock name %}
-{% block nav_main_url %}#{% endblock nav_main_url %}
+{% block nav_main %}{% trans 'Athletes' %}{% endblock nav_main %}
+{% block nav_main_url %}
+  {% url 'athletes.index' %}
+{% endblock nav_main_url %}
 {% block nav_links %}{% endblock nav_links %}
 {% block nav_regular_buttons %}{% endblock nav_regular_buttons %}
 
 {% block content %}
-  <div class="panel">
+  <div class="panel panel-default">
     <div class="panel-body">
       <form action="" method="post" class="form-horizontal">
         {% csrf_token %}

@@ -3,7 +3,7 @@
 {% load i18n %}
 
 {% block headline %}{% trans 'Athletes' %}{% endblock headline %}
-{% block name %}{% trans 'Athletes' %}{% endblock name %}
+{% block nav_main %}{% trans 'Athletes' %}{% endblock nav_main %}
 {% block nav_main_url %}{% url 'athletes.index' %}{% endblock nav_main_url %}
 {% block nav_links %}
   <!-- <li><a href="{% url 'athletes.results' %}">{% trans "Results" %}</a></li> -->
@@ -13,14 +13,14 @@
 {% endblock nav_regular_buttons %}
 
 {% block content %}
-  <div class="panel">
+  <div class="panel panel-default">
     <div class="panel-body">
       {% if athletes %}
         <table class="table table-hover athletes-table" id="athletes-table">
           {% include "gymnastics/includes/athletes_list.html" with athletes_set=athletes only %}
         </table>
       {% else %}
-        <div class="alert alert-info">{% trans "No athletes available in the database." %}</div>
+          <div class="alert alert-info">{% trans "No athletes available in the database." %}</div>
       {% endif %}
     </div>
   </div>

@@ -12,7 +12,6 @@
     <link href="{% static 'gymnastics/css/bootstrap-theme.css' %}" rel="stylesheet" media="screen">
     <link href="{% static 'gymnastics/css/font-awesome.min.css' %}" rel="stylesheet" media="screen">
     <link href="{% static 'gymnastics/css/custom.css' %}" rel="stylesheet" media="screen">
-
   </head>
   <body>
     
@@ -46,6 +45,7 @@
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">{% trans "All" %}<span class="caret"></span></a>
               <ul class="dropdown-menu" role="menu">
                 <li><a href="{% url 'process' %}">Process</a></li>
+                <li><a href="{% url 'athletes_imports.index' %}">{% trans "Athletes Imports" %}</a></li>
                 <li class="divider"></li>
                 <li><a href="{% url 'athletes.index' %}">{% trans "Athletes" %}</a></li>
                 <li><a href="{% url 'clubs.index' %}">{% trans "Clubs" %}</a></li>
@@ -55,7 +55,6 @@
                 <li><a href="{% url 'squads.index' %}">{% trans "Squads" %}</a></li>
                 <li><a href="{% url 'teams.index' %}">{% trans "Teams" %}</a></li>
                 <li class="divider"></li>
-                <li><a href="{% url 'athletes_imports.index' %}">{% trans "Import Athletes" %}</a></li>
                 <li><a href="{% url 'squads.overview_pdf' %}" target="_blank">{% trans "Generate Overview PDF" %}</a></li>
                 <li><a href="{% url 'squads.judge_pdf' %}" target="_blank">{% trans "Generate Judge PDF" %}</a></li>
               </ul>
@@ -116,8 +115,8 @@
 
                     <div class="collapse navbar-collapse" id="dynamic-navbar-collapse">
                       <div class="container">
-                        <a class="navbar-brand name" href="{% block nav_main_url %}#{% endblock nav_main_url %}">
-                          {% block name %}{% endblock name %}
+                        <a class="navbar-brand nav_main" href="{% block nav_main_url %}#{% endblock nav_main_url %}">
+                          {% block nav_main %}{% endblock nav_main %}
                         </a>
 
                         <ul class="nav navbar-nav">

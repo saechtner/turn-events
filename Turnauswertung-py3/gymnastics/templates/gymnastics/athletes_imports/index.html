@@ -1,45 +1,49 @@
 {% extends "gymnastics/athletes_imports/base.html" %}
+
 {% load i18n %}
 
-{% load custom_template_tags %}
-
-{% block nav_level_1 %}
-  {% render_nav_item name='Athletes Imports' url_name='athletes_imports.index' url_id=None active=True %}
-{% endblock nav_level_1 %}
+{% block headline %}{% trans 'Athletes Imports' %}{% endblock headline %}
+{% block nav_main %}{% trans 'Athletes Imports' %}{% endblock nav_main %}
+{% block nav_main_url %}{% url 'athletes_imports.index' %}{% endblock nav_main_url %}
+{% block nav_links %}{% endblock nav_links %}
+{% block nav_regular_buttons %}
+  <a type="button" class="btn btn-default navbar-btn" href="{% url 'athletes_imports.new' %}">{% trans "New Import" %}</a>
+{% endblock nav_regular_buttons %}
 
 {% block content %}
-
-  {% if athletes_imports %}
-    <table class="table table-hover" id="athletes-table">
-
-      <thead>
-        <th>{% trans "Name" %}</th>
-        <th>{% trans "Club" %}</th>
-        <th></th>
-      </thead>
-      <tbody>
-        {% for athletes_import in athletes_imports %}
-          <tr id="athlete_{{ athlete.id }}">
-            <td>{{ athletes_import }}</td>
-            <td>
-              {% if athletes_import.club %}
-                <a href="{% url 'clubs.detail' athletes_import.club.id %}">{{ athletes_import.club }}</a>
-              {% endif %}
-            </td>
-            <td class="text-right">
-              <div class="btn-group" role="group">
-                <a  type="button" class="btn btn-xs btn-success"href="{% url 'athletes_imports.detail' athletes_import.id %}"><span class="glyphicon glyphicon-search"></span> {% trans "detail" %}</a>
-                <a  type="button" class="btn btn-xs btn-danger"href="{% url 'athletes_imports.delete' athletes_import.id %}"><span class="glyphicon glyphicon-remove"></span> {% trans "edit" %}</a>
-              </div>
-            </td>
-          </tr>
-        {% endfor %}
-      </tbody>
-
-
-    </table>
-  {% else %}
-    <div class="alert alert-info">{% trans "No athletes imports available in the database." %}</div>
-  {% endif %}
+  <div class="panel panel-default">
+    <div class="panel-body">
   
+      {% if athletes_imports %}
+        <table class="table table-hover" id="athletes-table">
+          <thead>
+            <th>{% trans "Name" %}</th>
+            <th>{% trans "Club" %}</th>
+            <th></th>
+          </thead>
+          <tbody>
+            {% for athletes_import in athletes_imports %}
+              <tr id="athlete_{{ athlete.id }}">
+                <td>{{ athletes_import }}</td>
+                <td>
+                  {% if athletes_import.club %}
+                    <a href="{% url 'clubs.detail' athletes_import.club.id %}">{{ athletes_import.club }}</a>
+                  {% endif %}
+                </td>
+                <td class="text-right">
+                  <div class="btn-group" role="group">
+                    <a  type="button" class="btn btn-xs btn-success"href="{% url 'athletes_imports.detail' athletes_import.id %}"><span class="glyphicon glyphicon-search"></span> {% trans "detail" %}</a>
+                    <a  type="button" class="btn btn-xs btn-danger"href="{% url 'athletes_imports.delete' athletes_import.id %}"><span class="glyphicon glyphicon-remove"></span> {% trans "delete" %}</a>
+                  </div>
+                </td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      {% else %}
+       {% trans "No athletes imports available in the database." %}
+      {% endif %}
+
+    </div>
+  </div>
 {% endblock content %}

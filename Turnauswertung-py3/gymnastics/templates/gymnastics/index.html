@@ -3,15 +3,13 @@
 {% load i18n %}
 {% load staticfiles %}
 
-{% block name %}{% trans 'Home' %}{% endblock name %}
+{% block headline %}{% endblock headline %}
+{% block nav_main %}{% trans 'Home' %}{% endblock nav_main %}
 {% block nav_main_url %}{% url 'home' %}{% endblock nav_main_url %}
-
-{% block nav_main %}
+{% block nav_links %}
   <li><a href="{% url 'process' %}">Process</a></li>
-{% endblock nav_main %}
-
-{% block nav_regular_buttons %}
-{% endblock nav_regular_buttons %}
+{% endblock nav_links %}
+{% block nav_regular_buttons %}{% endblock nav_regular_buttons %}
 
 {% block content %}
 <!-- Carousel -->
