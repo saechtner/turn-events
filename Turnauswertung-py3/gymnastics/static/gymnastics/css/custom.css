@@ -234,6 +234,21 @@ th.headerSortDown {
   background-image: url(../images/tables/desc.gif);
 }
 
+/* CUSTOMIZE OTHER BASIC ELEMENTS
+-------------------------------------------------- */
+
+.dl-detail {
+  font-size: 16px;
+}
+
+.dl-detail > dt {
+  width: 200px;
+  padding-bottom: 5px;
+}
+
+.dl-detail > dd {
+  margin-left: 220px;
+}
 
 /* CUSTOMIZE THE CAROUSEL
 -------------------------------------------------- */

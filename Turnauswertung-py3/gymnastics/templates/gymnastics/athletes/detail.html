@@ -25,24 +25,48 @@
 
     <div class="panel-body tab-content">
       <div role="tabpanel" class="tab-pane active" id="base">
-        <p>{% trans "Sex" %}:
-          {% if athlete.sex == 'f' %}
-            <span class="gend gend-female"><i class="fa fa-venus fa-fw"></i></span>
-          {% else %}
-            <span class="gend gend-male"><i class="fa fa-mars fa-fw"></i></span>
-          {% endif %}
-        </p>
-        <p>{% trans "Year of Birth" %}: {{ athlete.year_of_birth }}</p>
-        {% if athlete.club %}
-          <p>{% trans "Club" %}: <a href="{% url 'clubs.detail' athlete.club.id %}">{{ athlete.club }}</a></p>
-        {% endif %}
-        {% if athlete.squad %}
-          <p>{% trans "Squad" %}: <a href="{% url 'squads.detail' athlete.squad.id %}">{{ athlete.squad }}</a></p>
-        {% endif %}
-        <p>{% trans "Stream" %}: <a href="{% url 'streams.detail' athlete.stream.id %}">{{ athlete.stream }}</a></p>
-        {% if athlete.team %}
-          <p>{% trans "Team" %}: <a href="{% url 'teams.detail' athlete.team.id %}">{{ athlete.team }}</a></p>
-        {% endif %}
+
+        <dl class="dl-horizontal dl-detail">
+          <dt>{% trans "First Name" %}</dt>
+          <dd>{{ athlete.first_name }}</dd>
+
+          <dt>{% trans "Last name" %}</dt>
+          <dd>{{ athlete.last_name }}</dd>
+
+          <dt>{% trans "Sex" %}</dt>
+          <dd>
+            {% if athlete.sex == 'f' %}
+              <span class="gend gend-female"><i class="fa fa-venus fa-fw"></i></span>
+            {% else %}
+              <span class="gend gend-male"><i class="fa fa-mars fa-fw"></i></span>
+            {% endif %}
+          </dd>
+
+          <dt>{% trans "Year of Birth" %}</dt>
+          <dd>{{ athlete.year_of_birth }}</dd>
+
+          <dt>{% trans "Club" %}</dt>
+          <dd>
+            {% if athlete.club %}
+              <a href="{% url 'clubs.detail' athlete.club.id %}">{{ athlete.club }}</a>
+            {% endif %}
+          </dd>
+
+          <dt>{% trans "Squad" %}</dt>
+          <dd>
+            {% if athlete.squad %}
+              <a href="{% url 'squads.detail' athlete.squad.id %}">{{ athlete.squad }}</a>
+            {% endif %}
+          </dd>
+
+          <dt>{% trans "Team" %}</dt>
+          <dd>
+            {% if athlete.team %}
+              <a href="{% url 'teams.detail' athlete.team.id %}">{{ athlete.team }}</a>
+            {% endif %}
+          </dd>
+        </dl>
+
       </div>
 
       <div role="tabpanel" class="tab-pane" id="performances">
