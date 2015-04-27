@@ -52,33 +52,55 @@ $(document).ready(function() {
     }); 
 }); 
 
-/* Delete confirm popup and ajax post delete handling */
-$(".confirm").confirm({
-    confirm: function(button) {
-        var href = button.attr('href');
-        var id = button.data('id');
 
-        ajaxDelete(href, id);
-    },
+/* Initiate jQuery drag sorter */
+$(document).ready(function() { 
+    // $("#available-list").dragsort();   
+
+    function saveOrder() {
+        var data = $("#chosen-list li").map(function() { 
+            return $(this).data('itemidx'); 
+        }).get();
+        $("input[name=chosen_list_order]").val(data.join(" "));
+    };
+
+    $("#chosen-list, #available-list").dragsort({ 
+        dragSelector: "div", 
+        dragBetween: true, 
+        dragEnd: saveOrder, 
+        placeHolderTemplate: "<li class='placeHolder'><div></div></li>"
+    });
 });
 
-function getCookie(name) {
-    var cookieValue = null;
-    if (document.cookie && document.cookie != '') {
-        var cookies = document.cookie.split(';');
-        for (var i = 0; i < cookies.length; i++) {
-            var cookie = jQuery.trim(cookies[i]);
-            // Does this cookie string begin with the name we want?
-            if (cookie.substring(0, name.length + 1) == (name + '=')) {
-                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-                break;
-            }
-        }
-    }
-    return cookieValue;
-}
+/* Delete confirm popup and ajax post delete handling */
+$(document).ready(function() { 
+    $(".confirm").confirm({
+        confirm: function(button) {
+            var href = button.attr('href');
+            var id = button.data('id');
+
+            ajaxDelete(href, id);
+        },
+    });
+});
 
 $(document).ready(function() {
+    function getCookie(name) {
+        var cookieValue = null;
+        if (document.cookie && document.cookie != '') {
+            var cookies = document.cookie.split(';');
+            for (var i = 0; i < cookies.length; i++) {
+                var cookie = jQuery.trim(cookies[i]);
+                // Does this cookie string begin with the name we want?
+                if (cookie.substring(0, name.length + 1) == (name + '=')) {
+                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                    break;
+                }
+            }
+        }
+        return cookieValue;
+    };
+
     var csrftoken = getCookie('csrftoken');
 
     function csrfSafeMethod(method) {
@@ -118,7 +140,7 @@ function ajaxDelete(href, id) {
     });
 
     return false;
-}
+};
 
 $(document).ready(function() {
     function scrollTransformResponse(element, tranform_value) {

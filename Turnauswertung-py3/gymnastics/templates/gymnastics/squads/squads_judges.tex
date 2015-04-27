@@ -8,14 +8,20 @@
     {% load custom_template_tags %}
 
 
-    \documentclass[a4paper,13pt,margin=0.75cm]{article}
+    \documentclass[13pt]{article}
+    \usepackage[a5paper,margin=0.5cm]{geometry}
     \usepackage[utf8]{inputenc}
+    \usepackage[none]{hyphenat}
     \pagestyle{empty}
+
+    % \renewcommand{\arraystretch}{1.7}
+    \newcommand{\lineheight}{\\[20pt]}
+
 
     \begin{document}
         {% for squad in squads %}
             {% for discipline in squad_disciplines|get_item:squad.id %}
-                \begin{tabular}[t]{|p{5cm}|*{3}{|p{4cm}}||p{4cm}|}
+                \begin{tabular}[t]{|p{3cm}|*{3}{|p{1.9cm}}||p{1.9cm}|}
                     \hline\multicolumn{5}{|c|}{ {{ squad }}: {{ discipline }} }\\
                     \hline&\multicolumn{3}{|c||}{\bfseries{ {% trans 'Judge' %} }}&\\
                     \hline\bfseries{ {% trans 'Name' %} }&\multicolumn{1}{|c}{\bfseries{1}}&\multicolumn{1}{|c}{\bfseries{2}}&\multicolumn{1}{|c||}{\bfseries{3}}&\multicolumn{1}{c|}{\bfseries{ {% trans 'Overall' %} }}\\
@@ -23,6 +29,8 @@
                     {% for athlete in squad.athlete_set.all %}
                         \hline {{ athlete }} &&&&\\
                     {% endfor %}
+                        \hline &&&&\\
+                        \hline &&&&\\
                         \hline &&&&\\
                         \hline &&&&\\
                         \hline &&&&\\

@@ -37,7 +37,7 @@ def detail(request, id):
 
     ### Streams ###
     streams_distinct = set([athlete.stream for athlete in athletes])
-    stream_athletes_disciplines = { stream.id: {'athletes': [], 'disciplines': stream.discipline_set.all()} for stream in streams_distinct }
+    stream_athletes_disciplines = { stream.id: {'athletes': [], 'disciplines': stream.ordered_disciplines.all()} for stream in streams_distinct }
     for athlete in athletes:
         stream_athletes_disciplines[athlete.stream.id]['athletes'].append(athlete)
 
@@ -69,7 +69,7 @@ def enter_performances(request, id):
 
     ### Streams ###
     streams_distinct = set([athlete.stream for athlete in athletes])
-    stream_athletes_disciplines = { stream.id: {'athletes': [], 'disciplines': stream.discipline_set.all()} for stream in streams_distinct }
+    stream_athletes_disciplines = { stream.id: {'athletes': [], 'disciplines': stream.ordered_disciplines.all()} for stream in streams_distinct }
     discipline_list = []
 
     for athlete in athletes:
@@ -136,7 +136,7 @@ def judge_pdf(request):
         squad_disciplines[squad.id] = []
         athletes = squad.athlete_set.all().select_related('stream')
         for athlete in athletes:
-            squad_disciplines[squad.id].extend([ discipline for discipline in athlete.stream.discipline_set.all() ])
+            squad_disciplines[squad.id].extend([ discipline for discipline in athlete.stream.ordered_disciplines.all() ])
         squad_disciplines[squad.id] = set(squad_disciplines[squad.id])
 
     context = Context({
