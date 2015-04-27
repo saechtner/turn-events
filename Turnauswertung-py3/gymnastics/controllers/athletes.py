@@ -28,7 +28,7 @@ def detail(request, id):
         .select_related('squad') \
         .get(id=id)
 
-    disciplines = athlete.stream.discipline_set.all()
+    disciplines = athlete.stream.ordered_disciplines.all()
 
     athletes_disciplines_result_dict = athlete.stream.get_athletes_disciplines_result_dict()
     athletes_disciplines_rank_dict = athlete.stream.get_athletes_disciplines_rank_dict(athletes_disciplines_result_dict)
