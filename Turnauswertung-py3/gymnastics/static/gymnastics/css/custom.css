@@ -3,9 +3,203 @@
 /* Padding below the footer and lighter body text */
 
 body {
-  padding-bottom: 40px;
+  color: #5a5a5a;
+  background-color: #F5F5FA;
+}
+
+.page-container {
+  padding-top: 40px;
+  position: relative;
+}
+
+.page-header {
+  margin: 0;
+  position: relative;
+  padding-bottom: 50px;
+  height: 250px;
+  border: none;
+}
+
+.page-header-inner {
+  position: relative;
+  z-index: 4;
+}
+
+.page-header.is-locked .page-header-inner {
+  position: fixed;
+  top: 0;
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
+  width: 100%;
+}
+
+.page-header-headline {
+  position: relative; 
+  left: 330px;;
+  top: 107px;
+  z-index: 4;
+
+  color: #333333;
+}
+
+.page-header-headline > small {
   color: #5a5a5a;
 }
+
+.page-header-bg {
+  position: relative;
+  height: 200px;
+  z-index: 3;
+}
+
+/* put here negative value of scroll_limit - static-navbar height as margin-top  */
+.page-header.is-locked .page-header-inner .page-header-bg {
+  margin-top: -120px;
+}
+
+.page-header-bg-img {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  overflow: hidden;
+}
+
+.page-header-bg-img img {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: -9999px;
+  bottom: -9999px;
+  margin: auto 0;
+  width: 100%;
+}
+
+.page-body {
+  padding-top: 10px;
+}
+
+
+/* CUSTOMIZE NAVBARS AND HEADER
+-------------------------------------------------- */
+
+.static-navbar {
+  height: 40px;
+  min-height: 40px;
+
+  -webkit-box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.6);
+  -moz-box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.6);
+  box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.6);
+}
+
+.static-navbar .navbar-brand {
+  padding: 5px 10px 0px 10px;
+  margin-right: 40px;
+}
+
+.static-navbar .navbar-nav > li > a {
+  padding-top: 10px;
+  padding-bottom: 10px;
+
+  text-transform: uppercase;
+  font-weight: 400;
+}
+
+.static-navbar .navbar-nav > li > a:hover {
+  background-image: -webkit-linear-gradient(top, #080808 0%, #0f0f0f 100%);
+  background-image: -o-linear-gradient(top, #080808 0%, #0f0f0f 100%);
+  background-image: -webkit-gradient(linear, left top, left bottom, from(#080808), to(#0f0f0f));
+  background-image: linear-gradient(to bottom, #080808 0%, #0f0f0f 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff080808', endColorstr='#ff0f0f0f', GradientType=0);
+  background-repeat: repeat-x;
+  -webkit-box-shadow: inset 0 3px 9px rgba(0, 0, 0, 0.25);
+  box-shadow: inset 0 3px 9px rgba(0, 0, 0, 0.25);
+  
+  background-color: #080808;
+
+  -o-transition: background 0.15s ease-in-out;
+  -ms-transition: background 0.15s ease-in-out;
+  -moz-transition: background 0.15s ease-in-out;
+  -webkit-transition: background 0.15s ease-in-out;
+  transition: background 0.15s ease-in-out; 
+}
+
+.static-navbar .navbar-nav > li > a:active {
+  background-color: #080808;
+}
+
+.static-navbar .navbar-right {
+  margin-right: 15px;
+}
+
+.static-navbar .navbar-right .navbar-btn {
+  margin-top: 4px;
+}
+
+.static-navbar .navbar-right .lang-menu {
+  margin: -3px 14px 0 0;
+}
+
+.dynamic-navbar {
+  -webkit-box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.6);
+  -moz-box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.6);
+  box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.6);
+  border-bottom: 0;
+}
+
+.dynamic-navbar .nav_main {
+  margin: 0 40px 0 0;
+  color: #fff;
+}
+
+.dynamic-navbar .navbar-nav > li > a {
+  text-transform: uppercase;
+  font-weight: 400;
+}
+
+.dynamic-navbar .navbar-nav > li > a:hover, .dynamic-navbar .navbar-nav > li.active > a {
+  background-image: -webkit-linear-gradient(top, #080808 0%, #0f0f0f 100%);
+  background-image: -o-linear-gradient(top, #080808 0%, #0f0f0f 100%);
+  background-image: -webkit-gradient(linear, left top, left bottom, from(#080808), to(#0f0f0f));
+  background-image: linear-gradient(to bottom, #080808 0%, #0f0f0f 100%);
+  filter: progid: DXImageTransform.Microsoft.gradient(startColorstr='#ff080808', endColorstr='#ff0f0f0f', GradientType=0);
+  background-repeat: repeat-x;
+  -webkit-box-shadow: inset 0 3px 9px rgba(0, 0, 0, 0.25);
+  box-shadow: inset 0 3px 9px rgba(0, 0, 0, 0.25);
+  
+  background-color: #080808;
+
+  border-bottom-color: #fff;
+  border-bottom-style: solid;
+  border-bottom-width: 4px;
+  color: #fff;
+  height: 50px;
+
+  -o-transition: all 0.15s ease-in-out;
+  -ms-transition: all 0.15s ease-in-out;
+  -moz-transition: all 0.15s ease-in-out;
+  -webkit-transition: all 0.15s ease-in-out;
+  transition: all 0.15s ease-in-out;
+}
+
+/* TODO:: fix for new navbars */
+/* Flip around the padding for proper display in narrow viewports */
+.navbar-wrapper > .container {
+  padding-right: 0;
+  padding-left: 0;
+}
+
+.navbar-wrapper .navbar {
+  padding-right: 15px;
+  padding-left: 15px;
+}
+
+.navbar-wrapper .navbar .container {
+  width: auto;
+}
+
+
 
 /* CUSTOMIZE TABLES
 -------------------------------------------------- */
@@ -38,28 +232,6 @@ th.headerSortUp {
 
 th.headerSortDown { 
   background-image: url(../images/tables/desc.gif);
-}
-
-/* CUSTOMIZE THE NAVBAR
--------------------------------------------------- */
-
-.navbar-brand {
-  padding: 10px 5px 0px 10px;
-}
-
-/* Flip around the padding for proper display in narrow viewports */
-.navbar-wrapper > .container {
-  padding-right: 0;
-  padding-left: 0;
-}
-
-.navbar-wrapper .navbar {
-  padding-right: 15px;
-  padding-left: 15px;
-}
-
-.navbar-wrapper .navbar .container {
-  width: auto;
 }
 
 
@@ -99,6 +271,14 @@ th.headerSortDown {
 }
 
 
+/* CUSTOMIZE PANELS
+-------------------------------------------------- */
+
+.panel-list-group-item {
+  height: 50px;
+}
+
+
 /* RESPONSIVE CSS
 -------------------------------------------------- */
 
@@ -114,11 +294,6 @@ th.headerSortDown {
   .navbar-wrapper .navbar {
     padding-right: 0;
     padding-left: 0;
-  }
-
-  /* The navbar becomes detached from the top, so we round the corners */
-  .navbar-wrapper .navbar {
-    border-radius: 4px;
   }
 
   /* Bump up size of carousel content */

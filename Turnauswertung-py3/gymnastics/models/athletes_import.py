@@ -13,4 +13,4 @@ class AthletesImport(models.Model):
         db_table = 'gymnastics_athletes_imports'
 
     def __str__(self):
-        return 'Import #{}'.format(self.id)
+        return 'Athletes Import #{}'.format(self.id)

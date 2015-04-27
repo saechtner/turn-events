@@ -1,39 +1,80 @@
 {% extends "gymnastics/athletes_imports/base.html" %}
+
 {% load i18n %}
 
-{% load custom_template_tags %}
-                  
-{% block nav_level_2 %}
-  {% render_nav_item name='new' active=True %}
-{% endblock nav_level_2 %}
-
+{% block headline %}{% trans 'Import Athletes' %}{% endblock headline %}
+{% block nav_main %}{% trans 'Athletes Imports' %}{% endblock nav_main %}
+{% block nav_main_url %}{% url 'athletes_imports.index' %}{% endblock nav_main_url %}
+{% block nav_links %}
+{% endblock nav_links %}
+{% block nav_regular_buttons %}
+  <a type="button" class="btn btn-info navbar-btn" data-toggle="collapse" href="#help-panel" aria-expanded="false" aria-controls="help-panel">Help</a>
+{% endblock nav_regular_buttons %}
 
 {% block content %}
-  <form action="{% url 'athletes_imports.new' %}" method="post" class="form-horizontal">
-    {% csrf_token %}
-
-    <div class="form-group">
-      <label for="input_club" class="col-md-2 col-md-offset-1 control-label">Club:</label>
-      <div class="col-md-6">
-        <select class="form-control" id="input_club" name="club_id">
-          <option value=""></option>
-          {% for club in clubs %}
-            <option value="{{ club.id }}" {% if selected_club_id == club.id %}selected{% endif %}>{{ club.name }}</option>
-          {% endfor %}
-        </select>
-      </div>
-    </div>    
-
-    <div class="form-group">
-      <label for="input_last_name" class="col-md-2 col-md-offset-1 control-label">Import Data:</label>
-      <div class="col-md-6">
-        <textarea class="form-control" id="input_last_name" rows="5" name="import_data" type="text" value=""></textarea>
-      </div>
+  <div class="collapse panel panel-info" id="help-panel">
+    <div class="panel-heading">
+      {% trans 'Import Requirements' %}
     </div>
+    <div class="panel-body">
+      <dl>
+        <dt>{% trans 'Column order' %}</dt>
+        <dd>
+          <ul class="list-inline">
+            <li>{% trans 'First name' %}</li>
+            <li>{% trans 'Last name' %}</li>
+            <li>{% trans 'Date of birth' %}</li>
+            <li>{% trans 'Stream' %}</li>
+            <li>{% trans 'Team' %}</li>
+            <li>{% trans 'male' %}</li>
+            <li>{% trans 'female' %}</li>
+          </ul>
+        </dd>
 
-    <div class="col-md-4 col-md-offset-3 btn-group">
-      <input class="btn btn-primary" type="submit" value="Import"/>
-      <button class="btn btn-default" type="button" onClick="javascript:history.go(-1);">Cancel</button>
+        <dt>{% trans 'Sex' %}</dt>
+        <dd>
+          {% trans 'Put an <em>x</em> in only one of the columns. (male / female)' %}
+        </dd>
+
+        <dt>{% trans 'Year of birth' %}</dt>
+        <dd>
+          {% trans 'Add all four numbers of the year.' %}
+        </dd>
+      </dl>
     </div>
-  </form>
+  </div>
+
+  <div class="panel panel-default">
+    <div class="panel-body">
+    
+      <form action="{% url 'athletes_imports.new' %}" method="post" class="form-horizontal">
+        {% csrf_token %}
+
+        <div class="form-group">
+          <label for="input_club" class="col-md-2 col-md-offset-1 control-label">Club:</label>
+          <div class="col-md-6">
+            <select class="form-control" id="input_club" name="club_id">
+              <option value=""></option>
+              {% for club in clubs %}
+                <option value="{{ club.id }}" {% if selected_club_id == club.id %}selected{% endif %}>{{ club.name }}</option>
+              {% endfor %}
+            </select>
+          </div>
+        </div>    
+
+        <div class="form-group">
+          <label for="input_last_name" class="col-md-2 col-md-offset-1 control-label">Import Data:</label>
+          <div class="col-md-6">
+            <textarea class="form-control" id="input_last_name" rows="5" name="import_data" type="text" value=""></textarea>
+          </div>
+        </div>
+
+        <div class="col-md-4 col-md-offset-3 btn-group">
+          <input class="btn btn-primary" type="submit" value="Import"/>
+          <button class="btn btn-default" type="button" onClick="javascript:history.go(-1);">Cancel</button>
+        </div>
+      </form>
+
+    </div>
+  </div>
 {% endblock content %}

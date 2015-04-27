@@ -3,40 +3,27 @@
 {% load i18n %}
 {% load custom_template_tags %}
 
-{% block nav_level_2 %}
-  {% render_nav_item name=athlete active=True %}
-{% endblock nav_level_2 %}
+{% block headline %}{{ athlete }} <small>{{ athlete.club }}</small>{% endblock headline %}
+{% block nav_main %}{{ athlete }}{% endblock nav_main %}
+{% block nav_main_url %}{% url 'athletes.detail' athlete.id %}{% endblock nav_main_url %}
+{% block nav_links %}
+  <li role="presentation" class="active">
+    <a href="#base" aria-controls="home" role="tab" data-toggle="tab">{% trans "General" %}</a>
+  </li>
+  <li role="presentation">
+    <a href="#performances" aria-controls="profile" role="tab" data-toggle="tab">{% trans "Results" %}</a>
+  </li>
+{% endblock nav_links %}
+{% block nav_regular_buttons %}
+  <a type="button" class="btn btn-warning navbar-btn" href="{% url 'athletes.edit' athlete.id %}">{% trans "Edit" %}</a>
+  <a type="button" class="btn btn-danger navbar-btn athlete-detail-delete" href="{% url 'athletes.delete' athlete.id %}">{% trans "Delete" %}</a>
+{% endblock nav_regular_buttons %}
 
 {% block content %}
 
-  <div class="row row-relative">
-    <div class="col-md-8">
-      <h1>
-        {{ athlete }} <small>{{ athlete.club }}</small>
-      </h1>
-    </div>
-    <div class="col-md-4 div-pos-bottom-right text-right">
-      <div class="btn-group">
-        <a type="button" class="btn btn-warning" href="{% url 'athletes.edit' athlete.id %}">{% trans "Edit" %}</a>
-        <a type="button" class="btn btn-danger athlete-detail-delete" href="{% url 'athletes.delete' athlete.id %}">{% trans "Delete" %}</a>
-        <button type="button" class="btn btn-default" onClick="javascript:history.go(-1);">{% trans "Previous Page" %}</button>
-      </div>
-    </div>
-  </div>
+  <div class="panel panel-default" role="tabpanel">
 
-  <div role="tabpanel">
-    <!-- Nav tabs -->
-    <ul class="nav nav-tabs" role="tablist">
-      <li role="presentation" class="active">
-        <a href="#base" aria-controls="home" role="tab" data-toggle="tab">{% trans "General" %}</a>
-      </li>
-      <li role="presentation">
-        <a href="#performances" aria-controls="profile" role="tab" data-toggle="tab">{% trans "Results" %}</a>
-      </li>
-    </ul>
-
-    <!-- Tab panes -->
-    <div class="tab-content">
+    <div class="panel-body tab-content">
       <div role="tabpanel" class="tab-pane active" id="base">
         <p>{% trans "Sex" %}:
           {% if athlete.sex == 'f' %}
@@ -104,6 +91,7 @@
         </table>
       </div>
     </div>
+    
   </div>
 
 {% endblock content %}
