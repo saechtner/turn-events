@@ -4,7 +4,7 @@ from django.core.urlresolvers import reverse, reverse_lazy
 from django.shortcuts import redirect, render
 from django.views import generic
 
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import ugettext_lazy
 
 from gymnastics.models import Stream, Discipline, StreamDisciplineJoin
 
@@ -59,40 +59,36 @@ def _abort_stream_creation(request, error_message):
     context = { 'disciplines': Discipline.objects.all() }
     return render(request, 'gymnastics/streams/new.html', context)
 
+def build_stream_from_post(stream=Stream(), post_dict={}, method='create'):
+    disciplines = Discipline.objects.all()
 
-def new(request):
-    if request.method == 'GET':
-        context = { 'disciplines': Discipline.objects.all() }
-        return render(request, 'gymnastics/streams/new.html', context)
+    # check if selected disciplines exist
+    try:
+        selected_disciplines = [disciplines.get(id=discipline_id) for discipline_id in post_dict['chosen_list_order'].split()]
+    except:
+        return _abort_stream_creation(request, ugettext_lazy('Error: At least one discipline was not found.'))
 
-    elif request.method == 'POST':
-        disciplines = Discipline.objects.all()
+    # check if difficulty was given (necessary)
+    try:
+        difficulty=post_dict['difficulty']
+    except:
+        return _abort_stream_creation(request, ugettext_lazy('Error: There is no difficulty given.'))
 
-        # check if selected disciplines exist
-        try:
-            selected_disciplines = [disciplines.get(id=discipline_id) for discipline_id in request.POST['chosen_list_order'].split()]
-        except:
-            return _abort_stream_creation(request, _('Error: At least one discipline was not found.'))
+    # set values from 
+    stream.difficulty = difficulty
+    stream.sex=post_dict.get('sex', 'f')
+    stream.minimum_year_of_birth=int(post_dict.get('minimum_year_of_birth', 2000))
+    stream.all_around_individual=post_dict.get('all_around_individual', False)
+    stream.all_around_individual_counting_events=int(post_dict.get('all_around_individual_counting_events', 0))
+    stream.all_around_team=post_dict.get('all_around_team', False)
+    stream.all_around_team_counting_athletes=int(post_dict.get('all_around_team_counting_athletes', 0))
+    stream.discipline_finals=post_dict.get('discipline_finals', False)
+    stream.discipline_finals_max_participants=int(post_dict.get('discipline_finals_max_participants', 0))
+    stream.discipline_finals_both_values_count=post_dict.get('discipline_finals_both_values_count', False)
 
-        try:
-            difficulty=request.POST['difficulty']
-        except:
-            return _abort_stream_creation(request, _('Error: There is no difficulty given.'))
+    stream.save()
 
-        stream = Stream( \
-            difficulty = difficulty,
-            sex = request.POST.get('sex', 'f'),
-            minimum_year_of_birth = int(request.POST.get('minimum_year_of_birth', '2000')),
-            all_around_individual = request.POST.get('all_around_individual', False),
-            all_around_individual_counting_events = int(request.POST.get('all_around_individual_counting_events', 0)),
-            all_around_team = request.POST.get('all_around_team', False),
-            all_around_team_counting_athletes = int(request.POST.get('all_around_team_counting_athletes', 0)),
-            discipline_finals = request.POST.get('discipline_finals', False),
-            discipline_finals_max_participants = int(request.POST.get('discipline_finals_max_participants', 0)),
-            discipline_finals_both_values_count = request.POST.get('discipline_finals_both_values_count', False),
-        )
-        stream.save()
-
+    if method == 'create':
         for position, discipline in enumerate(selected_disciplines):
             stream_discipline_join = StreamDisciplineJoin( \
                 stream=stream,
@@ -100,7 +96,26 @@ def new(request):
                 position=position
             )
             stream_discipline_join.save()
-        
+    elif method == 'update':
+        stream_discipline_old_positions = stream.streamdisciplinejoin_set.all()
+        for position, discipline in enumerate(selected_disciplines):
+            stream_discipline_join = stream_discipline_old_positions.get(discipline=discipline)
+            stream_discipline_join.position = position
+            stream_discipline_join.save()
+    else:
+        return _abort_stream_creation(request, ugettext_lazy('Error: Unknown method.'))
+
+
+    return stream
+
+
+def new(request):
+    if request.method == 'GET':
+        context = { 'disciplines': Discipline.objects.all() }
+        return render(request, 'gymnastics/streams/new.html', context)
+
+    elif request.method == 'POST':
+        stream = build_stream_from_post(post_dict=request.POST);
         return redirect(reverse('streams.detail', kwargs={ 'id': stream.id }))
 
 
@@ -118,49 +133,8 @@ def edit(request,id):
         return render(request, 'gymnastics/streams/edit.html', context)
 
     elif request.method == 'POST':
-        all_disciplines = Discipline.objects.all()
-
-        # check if selected disciplines exist
-        try:
-            disciplines = [all_disciplines.get(id=discipline_id) for discipline_id in request.POST['chosen_list_order'].split()]
-        except:
-            return _abort_stream_creation(request, _('Error: At least one discipline was not found.'))
-
-        try:
-            difficulty=request.POST['difficulty']
-        except:
-            return _abort_stream_creation(request, _('Error: There is no difficulty given.'))
-
         stream = Stream.objects.get(id=id)
-
-        stream.difficulty = difficulty
-        stream.sex=request.POST.get('sex', 'f')
-        stream.minimum_year_of_birth=int(request.POST.get('minimum_year_of_birth', '2000'))
-        stream.all_around_individual=request.POST.get('all_around_individual', False)
-        stream.all_around_individual_counting_events=int(request.POST.get('all_around_individual_counting_events', 0))
-        stream.all_around_team=request.POST.get('all_around_team', False)
-        stream.all_around_team_counting_athletes=int(request.POST.get('all_around_team_counting_athletes', 0))
-        stream.discipline_finals=request.POST.get('discipline_finals', False)
-        stream.discipline_finals_max_participants=int(request.POST.get('discipline_finals_max_participants', 0))
-        stream.discipline_finals_both_values_count=request.POST.get('discipline_finals_both_values_count', False)
-
-        stream.save()
-
-        position = 1
-        stream_discipline_joins = StreamDisciplineJoin.objects.filter(stream=stream)
-        for discipline in disciplines:
-            stream_discipline_join = stream_discipline_joins.get(discipline=discipline)
-            if stream_discipline_join:
-                stream_discipline_join.position = position
-            else:
-                stream_discipline_join = StreamDisciplineJoin( \
-                    stream=stream,
-                    discipline=discipline,
-                    position=position
-                )
-            stream_discipline_join.save()
-            position += 1
-        
+        build_stream_from_post(stream=Stream.objects.get(id=id), post_dict=request.POST, method='update')
         return redirect(reverse('streams.detail', kwargs={ 'id': stream.id }))
 
 

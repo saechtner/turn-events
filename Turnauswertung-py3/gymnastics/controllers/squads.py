@@ -6,7 +6,7 @@ from django.views import generic
 
 from django.db.models import Sum
 
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import ugettext_lazy
 from django.http import HttpResponse
 from django.template import Context
 from django.template.loader import get_template

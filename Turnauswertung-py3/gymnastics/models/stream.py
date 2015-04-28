@@ -1,14 +1,14 @@
 import operator
 
 from django.db import models
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import ugettext_lazy
 
 from gymnastics.models.discipline import Discipline
 
 class Stream(models.Model):
   
     difficulty = models.CharField(max_length=10, null=False)
-    sex = models.CharField(max_length=1, null=False, choices=(('m', _('male')), ('f', _('female'))), default='f')
+    sex = models.CharField(max_length=1, null=False, choices=(('m', ugettext_lazy('male')), ('f', ugettext_lazy('female'))), default='f')
     minimum_year_of_birth = models.IntegerField(default=2000, null=False)
     
     all_around_individual = models.BooleanField(default=True)
