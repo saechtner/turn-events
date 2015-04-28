@@ -79,11 +79,14 @@ def build_stream_from_post(stream=Stream(), post_dict={}, method='create'):
     stream.sex=post_dict.get('sex', 'f')
     stream.minimum_year_of_birth=int(post_dict.get('minimum_year_of_birth', 2000))
     stream.all_around_individual=post_dict.get('all_around_individual', False)
-    stream.all_around_individual_counting_events=int(post_dict.get('all_around_individual_counting_events', 0))
+    stream.all_around_individual_counting_events=int(post_dict.get('all_around_individual_counting_events', 0)) \
+        if stream.all_around_individual else 0
     stream.all_around_team=post_dict.get('all_around_team', False)
-    stream.all_around_team_counting_athletes=int(post_dict.get('all_around_team_counting_athletes', 0))
+    stream.all_around_team_counting_athletes=int(post_dict.get('all_around_team_counting_athletes', 0)) \
+        if stream.all_around_team else 0
     stream.discipline_finals=post_dict.get('discipline_finals', False)
-    stream.discipline_finals_max_participants=int(post_dict.get('discipline_finals_max_participants', 0))
+    stream.discipline_finals_max_participants=int(post_dict.get('discipline_finals_max_participants', 0)) \
+        if stream.discipline_finals else 0
     stream.discipline_finals_both_values_count=post_dict.get('discipline_finals_both_values_count', False)
 
     stream.save()
