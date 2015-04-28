@@ -149,8 +149,6 @@ msgstr "Vorname"
 
 #: gymnastics/templates/gymnastics/athletes/detail.html:33
 #: gymnastics/templates/gymnastics/athletes_imports/new.html:25
-#, fuzzy
-#| msgid "Last Name"
 msgid "Last name"
 msgstr "Nachname"
 
@@ -215,14 +213,10 @@ msgid "New athlete"
 msgstr "Neuer Sportler"
 
 #: gymnastics/templates/gymnastics/athletes/index.html:23
-#, fuzzy
-#| msgid "No athletes imports available in the database."
 msgid "No athletes available in the database."
 msgstr "Es sind keine Sportler Importe vorhanden."
 
 #: gymnastics/templates/gymnastics/athletes/new.html:5
-#, fuzzy
-#| msgid "New athlete"
 msgid "Create New Athlete"
 msgstr "Neuer Sportler"
 
@@ -282,14 +276,10 @@ msgid "Imported Athletes"
 msgstr "Importierte Sportler"
 
 #: gymnastics/templates/gymnastics/athletes_imports/detail.html:19
-#, fuzzy
-#| msgid "Athletes Imports"
 msgid "Delete Import"
-msgstr "Sportler Importe"
+msgstr "Sportler Import löschen"
 
 #: gymnastics/templates/gymnastics/athletes_imports/index.html:10
-#, fuzzy
-#| msgid "New Athletes Import"
 msgid "New Import"
 msgstr "Neue Sportler importieren"
 
@@ -329,7 +319,7 @@ msgstr "Vorname"
 #, fuzzy
 #| msgid "Year of Birth"
 msgid "Date of birth"
-msgstr "Geburtsjahr"
+msgstr "Geburtsdatum"
 
 #: gymnastics/templates/gymnastics/athletes_imports/new.html:27
 #: gymnastics/templates/gymnastics/includes/athletes_list.html:8
@@ -609,7 +599,7 @@ msgid "Performances are compared in"
 msgstr "Wertungen werden verglichen in"
 
 #: gymnastics/templates/gymnastics/streams/detail.html:67
-msgid "all around individual"
+msgid "All around individual"
 msgstr "Einzel-Mehrkampf"
 
 #: gymnastics/templates/gymnastics/streams/detail.html:67
@@ -648,11 +638,11 @@ msgstr "Platz"
 
 #: gymnastics/templates/gymnastics/streams/detail.html:101
 msgid "All Around"
-msgstr ""
+msgstr "Einzelwertung"
 
 #: gymnastics/templates/gymnastics/streams/detail.html:148
 msgid "Team Total"
-msgstr ""
+msgstr "Mannschaftswertung"
 
 #: gymnastics/templates/gymnastics/streams/detail.html:149
 msgid "Team Rank"
@@ -661,22 +651,12 @@ msgstr "Mannschaftsplatz"
 #: gymnastics/templates/gymnastics/streams/edit.html:40
 #: gymnastics/templates/gymnastics/streams/new.html:40
 #, fuzzy
-#| msgid "all around individual"
-msgid "All around individual"
+msgid "all around individual"
 msgstr "Einzel-Mehrkampf"
 
 #: gymnastics/templates/gymnastics/streams/edit.html:47
 #: gymnastics/templates/gymnastics/streams/new.html:47
-#, fuzzy
-#| msgid "all around individual"
 msgid "All around individual counting events"
-msgstr "Einzel-Mehrkampf"
-
-#: gymnastics/templates/gymnastics/streams/edit.html:54
-#: gymnastics/templates/gymnastics/streams/new.html:54
-#, fuzzy
-#| msgid "all around individual"
-msgid "All around team"
 msgstr "Einzel-Mehrkampf"
 
 #: gymnastics/templates/gymnastics/streams/edit.html:61
@@ -686,22 +666,16 @@ msgstr ""
 
 #: gymnastics/templates/gymnastics/streams/edit.html:68
 #: gymnastics/templates/gymnastics/streams/new.html:68
-#, fuzzy
-#| msgid "discipline finals"
 msgid "Discipline finals"
 msgstr "Gerätfinals"
 
 #: gymnastics/templates/gymnastics/streams/edit.html:75
 #: gymnastics/templates/gymnastics/streams/new.html:75
-#, fuzzy
-#| msgid "discipline finals"
 msgid "Discipline finals max participants"
-msgstr "Gerätfinals"
+msgstr "Anzahl Teilnehmer Gerätfinals"
 
 #: gymnastics/templates/gymnastics/streams/edit.html:82
 #: gymnastics/templates/gymnastics/streams/new.html:82
-#, fuzzy
-#| msgid "only final values counting"
 msgid "Discipline finals both values count"
 msgstr "nur Finalwerte zählen"
 
@@ -744,3 +718,9 @@ msgstr "Gesamt"
 
 msgid "Signature"
 msgstr "Unterschrift"
+
+msgid "new"
+msgstr "neu"
+
+msgid "enter values"
+msgstr "Wertung eingeben"
