@@ -14,6 +14,9 @@
       <table class="table table-hover" id="clubs-table">
         <thead>
           <th>{% trans "Name" %}</th>
+          <th>{% trans "Contact name" %}</th>
+          <th>{% trans "Contact mail" %}</th>
+          <th>{% trans "Contact address" %}</th>
           <th>#{% trans "Athletes" %}</th>
           <th></th>
         </thead>
@@ -21,6 +24,9 @@
           {% for club in clubs %}
             <tr id="club_{{ club.id }}">
               <td>{{ club.name }}</td>
+              <td>{{ club.contact_name|default:'' }}</td>
+              <td>{{ club.contact_mail|default:'' }}</td>
+              <td>{{ club.contact_address|default:'' }}</td>
               <td>{{ club.athlete_set.all.count }}</td>
               <td class="text-right">
                 <div class="btn-group" role="group">

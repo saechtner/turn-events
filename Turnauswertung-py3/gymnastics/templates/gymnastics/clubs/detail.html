@@ -28,19 +28,51 @@
   <div role="tabpanel">
     <!-- Nav tabs -->
     <ul class="nav nav-tabs" role="tablist">
-      <li role="presentation" class="active"><a href="#athletes" aria-controls="home" role="tab" data-toggle="tab">{% trans "Athletes" %}</a></li>
+      {% if club.contact_name or club.contact_mail or club.contact_address %}
+        <li role="presentation" class="active"><a href="#base" aria-controls="home" role="tab" data-toggle="tab">{% trans "General" %}</a></li>
+        <li role="presentation"><a href="#athletes" aria-controls="home" role="tab" data-toggle="tab">{% trans "Athletes" %}</a></li>
+      {% else %}
+        <li role="presentation" class="active"><a href="#athletes" aria-controls="home" role="tab" data-toggle="tab">{% trans "Athletes" %}</a></li>
+      {% endif %}
       <li role="presentation"><a href="#performances" aria-controls="messages" role="tab" data-toggle="tab">{% trans "Performances" %}</a></li>
     </ul>
 
     <!-- Tab panes -->
     <div class="tab-content">
-      <div role="tabpanel" class="tab-pane active" id="athletes">
-        <table class="table table-hover table-condensed" id="athletes-table">
-          {% include "gymnastics/includes/athletes_list.html" with athletes_set=athletes only %}
-        </table>
-      </div>
+      {% if club.contact_name or club.contact_mail or club.contact_address %}
+        <div role="tabpanel" class="tab-pane active" id="base">
+          <dl class="dl-horizontal dl-detail">
+            {% if club.contact_name %}
+              <dt>{% trans "Contact name" %}</dt>
+              <dd>{{ club.contact_name }}</dd>
+            {% endif %}
 
-      <div role="tabpanel" class="tab-pane active" id="performances">
+            {% if club.contact_name %}
+              <dt>{% trans "Contact mail" %}</dt>
+              <dd>{{ club.contact_mail }}</dd>
+            {% endif %}
+
+            {% if club.contact_name %}
+              <dt>{% trans "Contact address" %}</dt>
+              <dd>{{ club.contact_address }}</dd>
+            {% endif %}
+          </dl>
+        </div>
+
+        <div role="tabpanel" class="tab-pane" id="athletes">
+          <table class="table table-hover table-condensed" id="athletes-table">
+            {% include "gymnastics/includes/athletes_list.html" with athletes_set=athletes only %}
+          </table>
+        </div>
+      {% else %}
+        <div role="tabpanel" class="tab-pane active" id="athletes">
+          <table class="table table-hover table-condensed" id="athletes-table">
+            {% include "gymnastics/includes/athletes_list.html" with athletes_set=athletes only %}
+          </table>
+        </div>
+      {% endif %}
+
+      <div role="tabpanel" class="tab-pane" id="performances">
       </div>
     </div>
   </div>

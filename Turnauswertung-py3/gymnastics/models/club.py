@@ -6,9 +6,9 @@ from gymnastics.models.athlete import Athlete
 class Club(models.Model):
   
     name = models.CharField(max_length=50, null=False)
-    contact_name = models.CharField(max_length=50, null=True)
-    contact_adress = models.TextField(max_length=50, null=True)
-    contact_mail = models.EmailField(null=True)
+    contact_name = models.CharField(max_length=50, null=True, blank=True)
+    contact_mail = models.EmailField(null=True, blank=True)
+    contact_address = models.TextField(max_length=50, null=True, blank=True)
 
 
     class Meta:

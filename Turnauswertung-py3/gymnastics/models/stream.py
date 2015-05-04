@@ -14,6 +14,7 @@ class Stream(models.Model):
     all_around_individual = models.BooleanField(default=True)
     all_around_individual_counting_events = models.IntegerField(null=True, blank=True, default=4)
     all_around_team = models.BooleanField(default=True)
+    all_around_team_size = models.IntegerField(null=True, blank=True, default=4)
     all_around_team_counting_athletes = models.IntegerField(null=True, blank=True, default=4)
     discipline_finals = models.BooleanField(default=False)
     discipline_finals_max_participants = models.IntegerField(null=True, blank=True)
