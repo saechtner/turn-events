@@ -38,7 +38,7 @@
                     {% for discipline in disciplines %}
                       <td>
                         <div class="col-md-6 col-md-offset-3">
-                          <input class="form-control" type="number" min="0.00" max="20.00" step="0.001" name="{{ athlete.id }}-{{ discipline.id }}" placeholder="{{ athlete_performances|get_item:discipline.id }}" tabindex="{{ discipline_tabindex_dict|get_item:discipline|default:0 }}">
+                          <input class="form-control" type="number" min="0.000" max="20.000" step="0.001" name="{{ athlete.id }}-{{ discipline.id }}" placeholder="{{ athlete_performances|get_item:discipline.id }}" tabindex="{{ discipline_tabindex_dict|get_item:discipline|default:0 }}">
                         </div>
                       </td>
                     {% endfor %}

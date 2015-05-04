@@ -1,0 +1,54 @@
+{% extends "gymnastics/tournaments/base.html" %}
+
+{% load i18n %}
+{% load custom_template_tags %}
+
+{% block headline %}{{ tournament }}{% endblock headline %}
+{% block nav_main %}{{ tournament }}{% endblock nav_main %}
+{% block nav_main_url %}{% url 'tournaments.detail' tournament.id %}{% endblock nav_main_url %}
+{% block nav_links %}
+  <li role="presentation" class="active">
+    <a href="#base" aria-controls="home" role="tab" data-toggle="tab">{% trans "General" %}</a>
+  </li>
+  <li role="presentation">
+    <a href="#tab1" aria-controls="profile" role="tab" data-toggle="tab">{% trans "Tab1" %}</a>
+  </li>
+{% endblock nav_links %}
+{% block nav_regular_buttons %}
+  <a type="button" class="btn btn-warning navbar-btn" href="{% url 'tournaments.edit' tournament.id %}">{% trans "Edit" %}</a>
+  <a type="button" class="btn btn-danger navbar-btn tournament-detail-delete" href="{% url 'tournaments.delete' tournament.id %}">{% trans "Delete" %}</a>
+{% endblock nav_regular_buttons %}
+
+{% block content %}
+
+  <div class="panel panel-default" role="tabpanel">
+
+    <div class="panel-body tab-content">
+      <div role="tabpanel" class="tab-pane active" id="base">
+
+        <dl class="dl-horizontal dl-detail">
+          <dt>{% trans "Name" %}</dt>
+          <dd>{{ tournament.name }}</dd>
+
+          <dt>{% trans "Date" %}</dt>
+          <dd>{{ tournament.date|date:'SHORT_DATE_FORMAT' }}</dd>
+
+          <dt>{% trans "Location" %}</dt>
+          <dd>{{ tournament.location }}</dd>
+
+          <dt>{% trans "Club" %}</dt>
+          <dd>
+            {% if tournament.club %}
+              <a href="{% url 'clubs.detail' tournament.club.id %}">{{ tournament.club }}</a>
+            {% endif %}
+          </dd>
+        </dl>
+
+      </div>
+
+      <div role="tabpanel" class="tab-pane" id="tab1">
+      </div>
+    </div>
+  </div>
+
+{% endblock content %}

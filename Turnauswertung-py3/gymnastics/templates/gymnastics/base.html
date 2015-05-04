@@ -54,6 +54,7 @@
                 <li><a href="{% url 'streams.index' %}">{% trans "Streams" %}</a></li>
                 <li><a href="{% url 'squads.index' %}">{% trans "Squads" %}</a></li>
                 <li><a href="{% url 'teams.index' %}">{% trans "Teams" %}</a></li>
+                <li><a href="{% url 'tournaments.index' %}">{% trans "Tournaments" %}</a></li>
                 <li class="divider"></li>
                 <li><a href="{% url 'squads.overview_pdf' %}" target="_blank">{% trans "Generate Overview PDF" %}</a></li>
                 <li><a href="{% url 'squads.judge_pdf' %}" target="_blank">{% trans "Generate Judge PDF" %}</a></li>
@@ -74,9 +75,7 @@
               {% get_language_info_list for LANGUAGES as languages %}
 
               {% for lan in languages %}
-                  {% language lan.code %}
-                    <li><a href="{% url 'home' %}">{% trans lan.name %} ({{ lan.name_local }})</a></li>
-                  {% endlanguage %}
+                <li><a href="{% url 'home' %}">{% trans lan.name %} ({{ lan.name_local }})</a></li>
               {% endfor %}
             </ul>
 

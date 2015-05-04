@@ -1,0 +1,51 @@
+{% extends "gymnastics/tournaments/base.html" %}
+
+{% load i18n %}
+
+{% block headline %}{% trans 'Tournaments' %}{% endblock headline %}
+{% block nav_main %}{% trans 'Tournaments' %}{% endblock nav_main %}
+{% block nav_main_url %}{% url 'tournaments.index' %}{% endblock nav_main_url %}
+{% block nav_links %}
+{% endblock nav_links %}
+{% block nav_regular_buttons %}
+  <a type="button" class="btn btn-default navbar-btn" href="{% url 'tournaments.new' %}">{% trans "New tournament" %}</a>
+{% endblock nav_regular_buttons %}
+
+{% block content %}
+  <div class="panel panel-default">
+    <div class="panel-body">
+      {% if tournaments %}
+
+      <table class="table table-hover" id="tournaments-table">
+        <thead>
+          <th>{% trans "Name" %}</th>
+          <th>{% trans "Date" %}</th>
+          <th>{% trans "Location" %}</th>
+          <th>{% trans "Club" %}</th>
+          <th></th>
+        </thead>
+        <tbody>
+          {% for tournament in tournaments %}
+            <tr id="tournament_{{ tournament.id }}">
+              <td>{{ tournament.name }}</td>
+              <td>{{ tournament.date }}</td>
+              <td>{{ tournament.location }}</td>
+              <td><a href="{% url 'clubs.detail' tournament.club.id %}">{{ tournament.club }}</td>
+              <td class="text-right">
+                <div class="btn-group" role="group">
+                  <a  type="button" class="btn btn-xs btn-success"href="{% url 'tournaments.detail' tournament.id %}"><span class="glyphicon glyphicon-search"></span> {% trans "detail" %}</a>
+                  <a  type="button" class="btn btn-xs btn-warning"href="{% url 'tournaments.edit' tournament.id %}"><span class="glyphicon glyphicon-edit"></span> {% trans "edit" %}</a>
+                  <a  type="button" class="btn btn-xs btn-danger"href="{% url 'tournaments.delete' tournament.id %}"><span class="glyphicon glyphicon-remove"></span> {% trans "delete" %}</a>
+                </div>
+              </td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+
+      {% else %}
+          <div class="alert alert-info">{% trans "No tournaments available in the database." %}</div>
+      {% endif %}
+    </div>
+  </div>
+{% endblock content %}

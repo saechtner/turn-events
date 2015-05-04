@@ -13,7 +13,7 @@
   <div class="panel panel-default">
 
     <div class="panel-body">
-      <h4>Progress</h4>
+      <h4>{% trans 'Progress' %}</h4>
 
       <div class="progress">
         <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="1" aria-valuemin="0" aria-valuemax="4" style="width: 25%;">
@@ -31,12 +31,12 @@
 
   <div class="panel panel-default">
     <div class="panel-body">
-      <h4>Tasks</h4>
+      <h4>{% trans 'Tasks' %}</h4>
     </div>
 
     <ul class="list-group text-center">
       <a href="#" class="list-group-item list-group-item-success" type="button" data-toggle="collapse" data-target="#collapsePreparation" data-parent="#accordion" aria-expanded="false" aria-controls="collapsePreparation">
-      Preparation
+      {% trans 'Preparation' %}
       </a>
     </ul>
 
@@ -44,11 +44,11 @@
       <li class="list-group-item panel-list-group-item">
         <div class="col-md-6">
           <a type="button" class="btn btn-xs btn-success" href="#"><span class="glyphicon glyphicon-flag"></span></a>
-          Start a new tournament:
+          {% trans 'Start a new tournament:' %}
         </div>
         <div class="col-md-4 col-md-offset-2 text-right">
           <!-- <div class="btn-group" role="group"> -->
-            <a type="button" class="btn btn-sm btn-default btn-block" href="#">New tournament</a>
+            <a type="button" class="btn btn-sm btn-default btn-block" href="#">{% trans 'New tournament' %}</a>
           <!-- </div> -->
         </div>
       </li>
@@ -56,11 +56,11 @@
       <li class="list-group-item panel-list-group-item">
         <div class="col-md-6">
           <a type="button" class="btn btn-xs btn-success" href="#"><span class="glyphicon glyphicon-flag"></span></a>
-          Manage disciplines:
+          {% trans 'Manage disciplines:' %}
         </div>
         <div class="col-md-4 col-md-offset-2 text-right">
           <!-- <div class="btn-group" role="group"> -->
-            <a type="button" class="btn btn-sm btn-default btn-block" href="{% url 'disciplines.index' %}">Disciplines</a>
+            <a type="button" class="btn btn-sm btn-default btn-block" href="{% url 'disciplines.index' %}">{% trans 'Disciplines' %}</a>
           <!-- </div> -->
         </div>
       </li>
@@ -68,11 +68,11 @@
       <li class="list-group-item panel-list-group-item">
         <div class="col-md-6">
           <a type="button" class="btn btn-xs btn-success" href="#"><span class="glyphicon glyphicon-flag"></span></a>
-          Manage streams:
+          {% trans 'Manage streams:' %}
         </div>
         <div class="col-md-4 col-md-offset-2 text-right">
           <!-- <div class="btn-group" role="group"> -->
-            <a type="button" class="btn btn-sm btn-default btn-block" href="{% url 'streams.index' %}">Streams</a>
+            <a type="button" class="btn btn-sm btn-default btn-block" href="{% url 'streams.index' %}">{% trans 'Streams' %}</a>
           <!-- </div> -->
         </div>
       </li>
@@ -80,7 +80,7 @@
 
     <ul class="list-group text-center">
       <a href="#" class="list-group-item list-group-item-warning" type="button" data-toggle="collapse" data-target="#collapseRSVPs" data-parent="#accordion" aria-expanded="true" aria-controls="collapseRSVPs">
-      RSVPs
+      {% trans 'RSVPs' %}
       </a>
     </ul>
 
@@ -88,11 +88,11 @@
       <li class="list-group-item panel-list-group-item">
         <div class="col-md-6">
           <a type="button" class="btn btn-xs btn-success" href="#"><span class="glyphicon glyphicon-flag"></span></a>
-          Add clubs:
+          {% trans 'Add clubs:' %}
         </div>
         <div class="col-md-4 col-md-offset-2 text-right">
           <!-- <div class="btn-group" role="group"> -->
-            <a type="button" class="btn btn-sm btn-default btn-block" href="{% url 'clubs.new' %}">New Club</a>
+            <a type="button" class="btn btn-sm btn-default btn-block" href="{% url 'clubs.new' %}">{% trans 'New Club' %}</a>
           <!-- </div> -->
         </div>
       </li>
@@ -100,11 +100,11 @@
       <li class="list-group-item panel-list-group-item">
         <div class="col-md-6">
           <a type="button" class="btn btn-xs btn-danger" href="#"><span class="glyphicon glyphicon-ok"></span></a>
-          Import athletes:
+          {% trans 'Import athletes:' %}
         </div>
         <div class="col-md-4 col-md-offset-2 text-right">
           <!-- <div class="btn-group" role="group"> -->
-            <a type="button" class="btn btn-sm btn-default btn-block" href="{% url 'athletes_imports.new' %}">Import Athletes</a>
+            <a type="button" class="btn btn-sm btn-default btn-block" href="{% url 'athletes_imports.new' %}">{% trans 'Import Athletes' %}</a>
           <!-- </div> -->
         </div>
       </li>
@@ -112,11 +112,11 @@
       <li class="list-group-item panel-list-group-item">
         <div class="col-md-6">
           <a type="button" class="btn btn-xs btn-danger" href="#"><span class="glyphicon glyphicon-ok"></span></a>
-          Add remaining athletes:
+          {% trans 'Add remaining athletes:' %}
         </div>
         <div class="col-md-4 col-md-offset-2 text-right">
           <!-- <div class="btn-group" role="group"> -->
-            <a type="button" class="btn btn-sm btn-default btn-block" href="{% url 'athletes_imports.new' %}">New athlete</a>
+            <a type="button" class="btn btn-sm btn-default btn-block" href="{% url 'athletes_imports.new' %}">{% trans 'New athlete' %}</a>
           <!-- </div> -->
         </div>
       </li>
@@ -124,7 +124,7 @@
 
     <ul class="list-group text-center">
       <a href="#" class="list-group-item list-group-item-danger" type="button" data-toggle="collapse" data-target="#collapseResults" data-parent="#accordion" aria-expanded="false" aria-controls="collapseResults">
-      Results
+      {% trans 'Results' %}
       </a>
     </ul>
 
@@ -132,11 +132,11 @@
       <li class="list-group-item panel-list-group-item">
         <div class="col-md-6">
           <a type="button" class="btn btn-xs btn-danger" href="#"><span class="glyphicon glyphicon-ok"></span></a>
-          Add results for all performing squads:
+          {% trans 'Add results for all performing squads:' %}
         </div>
         <div class="col-md-4 col-md-offset-2 text-right">
           <!-- <div class="btn-group" role="group"> -->
-            <a type="button" class="btn btn-sm btn-default btn-block" href="{% url 'squads.new' %}">Squads</a>
+            <a type="button" class="btn btn-sm btn-default btn-block" href="{% url 'squads.index' %}">{% trans 'Squads' %}</a>
           <!-- </div> -->
         </div>
       </li>
@@ -144,7 +144,7 @@
 
     <ul class="list-group text-center">
       <a href="#" class="list-group-item list-group-item-danger" type="button" data-toggle="collapse" data-target="#collapseEvaluation" data-parent="#accordion" aria-expanded="false" aria-controls="collapseEvaluation">
-      Evaluation
+      {% trans 'Evaluation' %}
       </a>
     </ul>
 
@@ -152,11 +152,11 @@
       <li class="list-group-item panel-list-group-item">
         <div class="col-md-6">
           <a type="button" class="btn btn-xs btn-danger" href="#"><span class="glyphicon glyphicon-ok"></span></a>
-          Print tournament statistics:
+          {% trans 'Print tournament statistics:' %}
         </div>
         <div class="col-md-4 col-md-offset-2 text-right">
           <!-- <div class="btn-group" role="group"> -->
-            <a type="button" class="btn btn-sm btn-default btn-block" href="#">Tournament</a>
+            <a type="button" class="btn btn-sm btn-default btn-block" href="#">{% trans 'Tournament' %}</a>
           <!-- </div> -->
         </div>
       </li>
@@ -164,11 +164,11 @@
       <li class="list-group-item panel-list-group-item">
         <div class="col-md-6">
           <a type="button" class="btn btn-xs btn-danger" href="#"><span class="glyphicon glyphicon-ok"></span></a>
-          Print results per stream (standings):
+          {% trans 'Print results per stream (standings):
         </div>
         <div class="col-md-4 col-md-offset-2 text-right">
           <!-- <div class="btn-group" role="group"> -->
-            <a type="button" class="btn btn-sm btn-default btn-block" href="{% url 'streams.new' %}">Streams</a>
+            <a type="button" class="btn btn-sm btn-default btn-block" href="{% url 'streams.new' %}">{% trans 'Streams' %}</a>
           <!-- </div> -->
         </div>
       </li>
@@ -176,11 +176,11 @@
       <li class="list-group-item panel-list-group-item">
         <div class="col-md-6">
           <a type="button" class="btn btn-xs btn-danger" href="#"><span class="glyphicon glyphicon-ok"></span></a>
-          Print results per athlete (certificate):
+          {% trans 'Print results per athlete (certificate):' %}
         </div>
         <div class="col-md-4 col-md-offset-2 text-right">
           <!-- <div class="btn-group" role="group"> -->
-            <a type="button" class="btn btn-sm btn-default btn-block" href="{% url 'athletes.index' %}">Athletes</a>
+            <a type="button" class="btn btn-sm btn-default btn-block" href="{% url 'athletes.index' %}">{% trans 'Athletes' %}</a>
           <!-- </div> -->
         </div>
       </li>

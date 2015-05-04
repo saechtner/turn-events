@@ -1,0 +1,22 @@
+{% extends "gymnastics/tournaments/base.html" %}
+
+{% load i18n %}
+
+{% block headline %}{% trans 'Create New Tournament' %}{% endblock headline %}
+{% block nav_main %}{% trans 'Tournaments' %}{% endblock nav_main %}
+{% block nav_main_url %}
+  {% url 'tournaments.index' %}
+{% endblock nav_main_url %}
+{% block nav_links %}{% endblock nav_links %}
+{% block nav_regular_buttons %}{% endblock nav_regular_buttons %}
+
+{% block content %}
+  <div class="panel panel-default">
+    <div class="panel-body">
+      <form action="" method="post" class="form-horizontal">
+        {% csrf_token %}
+        {% include "gymnastics/includes/form.html" with form=form mode='new' only %}
+      </form>
+    </div>
+  </div>
+{% endblock content %}

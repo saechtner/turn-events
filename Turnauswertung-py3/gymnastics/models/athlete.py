@@ -8,6 +8,7 @@ class Athlete(models.Model):
     last_name = models.CharField(max_length=50, null=False)
     sex = models.CharField(max_length=1, null=False, choices=(('m', 'male'), ('f', 'female')), default='f')
     year_of_birth = models.IntegerField(default=2000)
+    # date_of_birth = models.DateField()
 
     club = models.ForeignKey('Club', null=True, blank=True)
     stream = models.ForeignKey('Stream')
