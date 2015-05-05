@@ -1,19 +1,15 @@
 import re
-
-from django.shortcuts import redirect, render
-from django.core.urlresolvers import reverse, reverse_lazy
-from django.views import generic
+from subprocess import Popen, PIPE
+import tempfile
 
 from django.db.models import Sum
-
-from django.utils.translation import ugettext_lazy
+from django.core.urlresolvers import reverse, reverse_lazy
 from django.http import HttpResponse
+from django.shortcuts import redirect, render
 from django.template import Context
 from django.template.loader import get_template
-
-from subprocess import Popen, PIPE
-
-import tempfile
+from django.utils.translation import ugettext_lazy
+from django.views import generic
 
 from gymnastics.models.athlete import Athlete
 from gymnastics.models.discipline import Discipline
@@ -25,7 +21,6 @@ from gymnastics.models.stream import Stream
 def index(request):
     context = { 'squads': Squad.objects.all() }
     return render(request, 'gymnastics/squads/index.html', context)
-
 
 def detail(request, id):
     squad = Squad.objects.get(id=id)
@@ -57,7 +52,6 @@ def detail(request, id):
         'stream_athletes_disciplines': stream_athletes_disciplines
     }
     return render(request, 'gymnastics/squads/detail.html', context)
-
 
 def enter_performances(request, id):        
     squad = Squad.objects.get(id=id)
@@ -98,13 +92,13 @@ def enter_performances(request, id):
     return render(request, 'gymnastics/squads/enter_performances.html', context)
 
 def handle_entered_performances(request):
-    performanceDict = request.POST
+    performance_dict = request.POST
 
     athletes = Athlete.objects.all()
     disciplines = Discipline.objects.all()
     performances = Performance.objects.all()
 
-    for key, value in performanceDict.items():
+    for key, value in performance_dict.items():
         if '-' in key and value:
             athlete_id, performance_id = re.split(r'-+', key.rstrip())
 
@@ -142,7 +136,6 @@ def judge_pdf(request):
     template = get_template('gymnastics/squads/squads_judges.tex')
     rendered_tpl = template.render(context).encode('utf-8')
 
-    import os
     with tempfile.TemporaryDirectory() as tempdir:
         # Create subprocess, supress output with PIPE and 
         # run latex twice to generate the TOC properly. 
@@ -173,7 +166,6 @@ def overview_pdf(request):
     template = get_template('gymnastics/squads/squads_athletes.tex')
     rendered_tpl = template.render(context).encode('utf-8')
 
-    import os
     with tempfile.TemporaryDirectory() as tempdir:
         # Create subprocess, supress output with PIPE and 
         # run latex twice to generate the TOC properly. 
