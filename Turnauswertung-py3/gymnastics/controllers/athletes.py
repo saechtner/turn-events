@@ -20,13 +20,7 @@ def index(request):
 
 def detail(request, id):
     athlete = Athlete.objects \
-        .select_related('stream') \
-            .prefetch_related('stream__discipline_set') \
-            .prefetch_related('stream__athlete_set') \
-                .prefetch_related('stream__athlete_set__performance_set') \
-        .select_related('team') \
-        .select_related('club') \
-        .select_related('squad') \
+        .select_related('stream').select_related('team').select_related('club').select_related('squad') \
         .get(id=id)
 
     disciplines = athlete.stream.get_ordered_disciplines()
