@@ -23,7 +23,7 @@ def detail(request, id):
 class TournamentCreateView(SuccessMessageMixin, generic.CreateView):
 
     model = Tournament
-    fields = ['name', 'date', 'location', 'club']
+    fields = ['name', 'date', 'street', 'zip_code', 'city', 'club']
     template_name = 'gymnastics/tournaments/new.html'
     success_url = reverse_lazy('tournaments.index')
     success_message = "%(name)s was created successfully"
@@ -32,7 +32,7 @@ class TournamentCreateView(SuccessMessageMixin, generic.CreateView):
 class TournamentUpdateView(SuccessMessageMixin, generic.UpdateView):
 
     model = Tournament
-    fields = ['name', 'date', 'location', 'club']
+    fields = ['name', 'date', 'street', 'zip_code', 'city', 'club']
     template_name = 'gymnastics/tournaments/edit.html'
     success_message = "%(name)s was edited successfully"
 

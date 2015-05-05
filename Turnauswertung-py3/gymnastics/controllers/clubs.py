@@ -29,7 +29,7 @@ def detail(request, id):
 class ClubCreateView(SuccessMessageMixin, generic.CreateView):
 
     model = Club
-    fields = ['name', 'contact_name', 'contact_address', 'contact_mail']
+    fields = ['name', 'contact_name', 'contact_mail', 'contact_phone', 'contact_street', 'contact_zip_code', 'contact_city']
     template_name = 'gymnastics/clubs/new.html'
     success_url = reverse_lazy('clubs.index')
     success_message = "%(name)s was created successfully"
@@ -38,7 +38,7 @@ class ClubCreateView(SuccessMessageMixin, generic.CreateView):
 class ClubUpdateView(generic.UpdateView):
 
     model = Club
-    fields = ['name', 'contact_name', 'contact_address', 'contact_mail']
+    fields = ['name', 'contact_name', 'contact_mail', 'contact_phone', 'contact_street', 'contact_zip_code', 'contact_city']
     template_name = 'gymnastics/clubs/edit.html'
 
     def get_success_url(self):

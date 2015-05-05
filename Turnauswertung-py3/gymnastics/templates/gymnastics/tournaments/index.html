@@ -29,7 +29,7 @@
             <tr id="tournament_{{ tournament.id }}">
               <td>{{ tournament.name }}</td>
               <td>{{ tournament.date }}</td>
-              <td>{{ tournament.location }}</td>
+              <td>{{ tournament.street }}<br/>{{ tournament.zip_code }} {{ tournament.city }}</td>
               <td><a href="{% url 'clubs.detail' tournament.club.id %}">{{ tournament.club }}</td>
               <td class="text-right">
                 <div class="btn-group" role="group">

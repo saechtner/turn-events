@@ -34,7 +34,7 @@
           <dd>{{ tournament.date|date:'SHORT_DATE_FORMAT' }}</dd>
 
           <dt>{% trans "Location" %}</dt>
-          <dd>{{ tournament.location }}</dd>
+          <dd>{{ tournament.street }}<br/>{{ tournament.zip_code }} {{ tournament.city }}</dd>
 
           <dt>{% trans "Club" %}</dt>
           <dd>

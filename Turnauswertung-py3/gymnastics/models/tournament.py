@@ -9,7 +9,9 @@ class Tournament(models.Model):
   
     name = models.CharField(max_length=50, null=False)
     date = models.DateField(null=False, default=date.today)
-    location = models.TextField(null=False)
+    street = models.CharField(max_length=50, null=False)
+    zip_code = models.CharField(max_length=10, null=False)
+    city = models.CharField(max_length=50, null=False)
 
     club = models.ForeignKey('Club', verbose_name=ugettext_lazy('Host'), null=True, blank=True)
 
@@ -19,6 +21,6 @@ class Tournament(models.Model):
     def __str__(self):
         return '{0}'.format(self.name)
 
-
+        
 class MyForm(forms.Form):
     date = forms.DateField(widget=AdminDateWidget)
