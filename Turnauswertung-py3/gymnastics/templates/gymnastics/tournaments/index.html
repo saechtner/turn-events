@@ -30,7 +30,11 @@
               <td>{{ tournament.name }}</td>
               <td>{{ tournament.date }}</td>
               <td>{{ tournament.street }}<br/>{{ tournament.zip_code }} {{ tournament.city }}</td>
-              <td><a href="{% url 'clubs.detail' tournament.club.id %}">{{ tournament.club }}</td>
+              <td>
+                {% if tournament.hosting_club %}
+                  <a href="{% url 'clubs.detail' tournament.hosting_club.id %}">{{ tournament.hosting_club }}</a>
+                {% endif %}
+              </td>
               <td class="text-right">
                 <div class="btn-group" role="group">
                   <a  type="button" class="btn btn-xs btn-success"href="{% url 'tournaments.detail' tournament.id %}"><span class="glyphicon glyphicon-search"></span> {% trans "detail" %}</a>

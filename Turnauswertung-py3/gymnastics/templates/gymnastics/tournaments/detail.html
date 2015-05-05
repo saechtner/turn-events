@@ -11,7 +11,7 @@
     <a href="#base" aria-controls="home" role="tab" data-toggle="tab">{% trans "General" %}</a>
   </li>
   <li role="presentation">
-    <a href="#tab1" aria-controls="profile" role="tab" data-toggle="tab">{% trans "Tab1" %}</a>
+    <a href="#evaluation" aria-controls="profile" role="tab" data-toggle="tab">{% trans "Evaluation" %}</a>
   </li>
 {% endblock nav_links %}
 {% block nav_regular_buttons %}
@@ -39,14 +39,15 @@
           <dt>{% trans "Club" %}</dt>
           <dd>
             {% if tournament.club %}
-              <a href="{% url 'clubs.detail' tournament.club.id %}">{{ tournament.club }}</a>
+              <a href="{% url 'clubs.detail' tournament.club.id %}">{{ tournament.hosting_club }}</a>
             {% endif %}
           </dd>
         </dl>
 
       </div>
 
-      <div role="tabpanel" class="tab-pane" id="tab1">
+      <div role="tabpanel" class="tab-pane" id="evaluation">
+      <a href="{% url 'tournaments.create_certificates_pdf' %}">{% trans 'Generate certificates' %}</a>
       </div>
     </div>
   </div>

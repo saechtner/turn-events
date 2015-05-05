@@ -56,6 +56,7 @@ urlpatterns = patterns('',
     url(r'^teams/(?P<pk>\d+)/delete$', teams.TeamDeleteView.as_view(), name='teams.delete'),
 
     url(r'^tournaments$', tournaments.index, name='tournaments.index'),
+    url(r'^tournaments/certificates\.pdf$', tournaments.create_certificates_pdf, name='tournaments.create_certificates_pdf'),
     url(r'^tournaments/new$', tournaments.TournamentCreateView.as_view(), name='tournaments.new'),
     url(r'^tournaments/(?P<id>\d+)$', tournaments.detail, name='tournaments.detail'),
     url(r'^tournaments/(?P<pk>\d+)/edit$', tournaments.TournamentUpdateView.as_view(), name='tournaments.edit'),

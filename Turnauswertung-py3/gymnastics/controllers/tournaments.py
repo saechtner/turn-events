@@ -5,10 +5,12 @@ from django.contrib.messages.views import SuccessMessageMixin
 from django.core.urlresolvers import reverse, reverse_lazy
 from django.forms import ModelForm
 from django.http import HttpResponse, HttpResponseNotAllowed
+from django.utils.translation import ugettext_lazy
 from django.shortcuts import render
 from django.views import generic
 
 from gymnastics.models import Club, Tournament
+from gymnastics.utils import pdf
 
 
 def index(request):
@@ -20,10 +22,21 @@ def detail(request, id):
     context = {'tournament': tournament}
     return render(request, 'gymnastics/tournaments/detail.html', context)
 
+def create_certificates_pdf(request):
+    # squads = Squad.objects.all().prefetch_related('athlete_set').select_related('athlete_set__club')
+
+    context = {
+        'squads': [],
+    }
+    template_location = 'gymnastics/tournaments/certificates.tex'
+    file_name = 'filename={0}.pdf'.format(ugettext_lazy('Certificates'))
+
+    return pdf.create(template_location, context, file_name)
+
 class TournamentCreateView(SuccessMessageMixin, generic.CreateView):
 
     model = Tournament
-    fields = ['name', 'date', 'street', 'zip_code', 'city', 'club']
+    fields = ['name', 'date', 'street', 'zip_code', 'city', 'hosting_club']
     template_name = 'gymnastics/tournaments/new.html'
     success_url = reverse_lazy('tournaments.index')
     success_message = "%(name)s was created successfully"
@@ -32,7 +45,7 @@ class TournamentCreateView(SuccessMessageMixin, generic.CreateView):
 class TournamentUpdateView(SuccessMessageMixin, generic.UpdateView):
 
     model = Tournament
-    fields = ['name', 'date', 'street', 'zip_code', 'city', 'club']
+    fields = ['name', 'date', 'street', 'zip_code', 'city', 'hosting_club']
     template_name = 'gymnastics/tournaments/edit.html'
     success_message = "%(name)s was edited successfully"
 

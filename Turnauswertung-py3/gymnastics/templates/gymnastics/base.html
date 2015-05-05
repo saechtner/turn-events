@@ -75,7 +75,9 @@
               {% get_language_info_list for LANGUAGES as languages %}
 
               {% for lan in languages %}
-                <li><a href="{% language lan.code %}{% url 'home' %}{% endlanguage %}">{% trans lan.name %} ({{ lan.name_local }})</a></li>
+                {% language lan.code %}
+                  <li><a href="{% url 'home' %}">{{ lan.name }} ({{ lan.name_local }})</a></li>
+                {% endlanguage %}
               {% endfor %}
             </ul>
 
