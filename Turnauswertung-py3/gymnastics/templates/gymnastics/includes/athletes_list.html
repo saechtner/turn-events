@@ -3,7 +3,7 @@
   <th>{% trans "First Name" %}</th>
   <th>{% trans "Last Name" %}</th>
   <th>{% trans "Sex" %}</th>
-  <th>{% trans "Year of Birth" %}</th>
+  <th>{% trans "Date of Birth" %}</th>
   <th>{% trans "Club" %}</th>
   <th>{% trans "Stream" %}</th>
   <th>{% trans "Team" %}</th>
@@ -22,7 +22,7 @@
       {% else %}
         <td class="gend gend-male"><i class="fa fa-mars fa-fw"></i></td>
       {% endif %}
-      <td>{{ athlete.year_of_birth }}</td>
+      <td>{{ athlete.date_of_birth }}</td>
       <td><a href="{% url 'clubs.detail' athlete.club.id %}">{{ athlete.club }}</a></td>
       <td><a href="{% url 'streams.detail' athlete.stream.id %}">{{ athlete.stream }}</a></td>
       <td>

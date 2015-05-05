@@ -1,3 +1,4 @@
+import datetime
 import re
 
 from django.contrib import messages
@@ -18,15 +19,6 @@ def detail(request, id):
     return render(request, 'gymnastics/athletes_imports/detail.html', context)
 
 
-class DeleteView(generic.DeleteView):
-
-    model = AthletesImport
-    template_name = 'gymnastics/athletes_imports/delete.html'
-    success_url = reverse_lazy('athletes_imports.index')
-
-
-# line: Vorname      Name       Geb.    AK  Mannschaft  männlich    weiblich
-# m/w in einer Spalte und männlich/weiblich als mögliche Werte ...
 def _parse_athlete_line(line, club, athletes_import):
     # TODO: idea - remove all return none and catch everything one level below
 
@@ -37,25 +29,21 @@ def _parse_athlete_line(line, club, athletes_import):
 
     sex = 'm' if elements[5].lower().startswith('x') else Athlete._meta.get_field('sex').default
 
-    # date regex: 
-    # ^\d{1,2}\/\d{1,2}\/\d{4}$
-    # american date regex with lots of alternatives: 
-    # ^[0,1]?\d{1}\/(([0-2]?\d{1})|([3][0,1]{1}))\/(([1]{1}[9]{1}[9]{1}\d{1})|([2-9]{1}\d{3}))$
+    date_of_birth_input = elements[2]
+    if re.match(r"^[0-9]{4}-[0-9]{2}-[0-9]{2}$", date_of_birth_input): # English
+        date_of_birth = datetime.date(int(date_of_birth_input[0:4]), int(date_of_birth_input[5:7]), int(date_of_birth_input[8:10]))
+    elif re.match(r"^[0-9]{2}\.[0-9]{2}\.[0-9]{4}$", date_of_birth_input): # German
+        date_of_birth = datetime.date(int(date_of_birth_input[6:10]), int(date_of_birth_input[3:5]), int(date_of_birth_input[0:2]))
+    else:
+        return None
 
-    year_of_birth = elements[2]
-    if not year_of_birth.isdigit():
-        return None
-    if len(year_of_birth) == 2:
-        century_string = '20' if int(year_of_birth) < 60 else '19'
-        year_of_birth = '{0}{1}'.format(century_string, year_of_birth)
-    elif len(year_of_birth) != 4:
-        return None
+    print(date_of_birth)
 
     stream_name = ''.join(elements[3].split()).upper() # remove all whitespace
     stream = None
     try:
         stream = Stream.objects.get(difficulty=stream_name, sex=sex)
-        if int(year_of_birth) < stream.minimum_year_of_birth:
+        if date_of_birth.year < stream.minimum_year_of_birth:
             return None
     except:
         return None
@@ -72,7 +60,7 @@ def _parse_athlete_line(line, club, athletes_import):
             first_name=elements[0],
             last_name=elements[1],
             sex=sex,
-            year_of_birth=year_of_birth,
+            date_of_birth=date_of_birth,
             club=club,
             stream=stream,
             athletes_import=athletes_import)
@@ -82,7 +70,7 @@ def _parse_athlete_line(line, club, athletes_import):
     except:
         return None
 
-    # Don't allow duplicates!!
+    # TODO: Don't allow duplicates!!
 
     return athlete
 
@@ -103,14 +91,7 @@ def new(request):
     # TODO: clean this up before it's too late
 
     if request.method == 'GET':
-        messages.info(request, 'Keep in mind the following data structure: \
-            First Name | Last Name | Sex | Year of Birth | Stream | Team.')
-
-        try:
-            selected_club_id = int(request.GET['club_id'])
-        except: 
-            selected_club_id = None
-
+        selected_club_id = int(request.GET.get('club_id', -1))
         context = { 
             'clubs': Club.objects.all(),
             'selected_club_id': selected_club_id }
@@ -120,7 +101,7 @@ def new(request):
         athletes_import = AthletesImport()
         athletes_list = []
 
-        # check if a club was selected and thus it exists in the datbase
+        # check if a club was selected and thus exists in the database
         try:
             club = Club.objects.get(id=request.POST['club_id'])
             athletes_import.club = club
@@ -133,9 +114,6 @@ def new(request):
             return _abort_athletes_import(request, athletes_import, 'Error: No import data added.')
 
         lines = request.POST['import_data'].splitlines()
-
-        print(lines)
-
         if lines[0].startswith('Vorname\tN'):
             lines = lines[1:]
         for line in lines:
@@ -148,3 +126,10 @@ def new(request):
         return redirect(reverse('athletes_imports.detail', kwargs={ 'id': athletes_import.id }))
 
     return  HttpResponseNotAllowed(['GET', 'POST'])
+
+
+class DeleteView(generic.DeleteView):
+
+    model = AthletesImport
+    template_name = 'gymnastics/athletes_imports/delete.html'
+    success_url = reverse_lazy('athletes_imports.index')
