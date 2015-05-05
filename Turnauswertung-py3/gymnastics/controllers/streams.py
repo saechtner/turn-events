@@ -1,6 +1,7 @@
 from django.contrib import messages
 
 from django.core.urlresolvers import reverse, reverse_lazy
+from django.http import HttpResponseNotAllowed
 from django.shortcuts import redirect, render
 from django.views import generic
 
@@ -16,26 +17,22 @@ def index(request):
 def detail(request, id):
     stream = Stream.objects \
         .prefetch_related('discipline_set') \
-        .prefetch_related('team_set') \
-            .prefetch_related('team_set__athlete_set') \
-            .prefetch_related('team_set__athlete_set__performance_set') \
-        .prefetch_related('athlete_set') \
-            .prefetch_related('athlete_set__performance_set') \
+        .prefetch_related('team_set__athlete_set__performance_set') \
         .get(id=id)
 
-    disciplines = stream.ordered_disciplines.all()
+    disciplines = stream.get_ordered_disciplines()
 
     athletes = stream.athlete_set.all() \
         .select_related('club').select_related('stream').select_related('team__stream').select_related('squad') \
         .prefetch_related('performance_set') \
         .prefetch_related('stream__discipline_set')
 
-    athletes_disciplines_result_dict = stream.get_athletes_disciplines_result_dict()
+    athletes_disciplines_result_dict = athletes.get_athletes_disciplines_result_dict()
     athletes_disciplines_rank_dict = stream.get_athletes_disciplines_rank_dict(athletes_disciplines_result_dict)
 
     teams = stream.team_set.all() \
         .select_related('stream').select_related('club') \
-        .prefetch_related('athlete_set')
+        .prefetch_related('athlete_set__performance_set')
 
     teams_disciplines_result_dict = stream.get_teams_disciplines_result_dict()
     teams_disciplines_rank_dict = stream.get_teams_disciplines_rank_dict(teams_disciplines_result_dict)
@@ -59,7 +56,7 @@ def _abort_stream_creation(request, error_message):
     context = { 'disciplines': Discipline.objects.all() }
     return render(request, 'gymnastics/streams/new.html', context)
 
-def build_stream_from_post(stream=Stream(), post_dict={}, method='create'):
+def _build_stream_from_post(stream=Stream(), post_dict={}, method='create'):
     disciplines = Discipline.objects.all()
 
     # check if selected disciplines exist
@@ -108,9 +105,7 @@ def build_stream_from_post(stream=Stream(), post_dict={}, method='create'):
     else:
         return _abort_stream_creation(request, ugettext_lazy('Error: Unknown method.'))
 
-
     return stream
-
 
 def new(request):
     if request.method == 'GET':
@@ -118,27 +113,29 @@ def new(request):
         return render(request, 'gymnastics/streams/new.html', context)
 
     elif request.method == 'POST':
-        stream = build_stream_from_post(post_dict=request.POST);
+        stream = _build_stream_from_post(post_dict=request.POST);
         return redirect(reverse('streams.detail', kwargs={ 'id': stream.id }))
 
+    return HttpResponseNotAllowed(['GET', 'POST'])
 
 def edit(request,id):
     if request.method == 'GET':
         stream = Stream.objects.get(id=id)
+        disciplines = stream.discipline_set.all()
 
         context = { 
             'stream': stream,
-            'stream_disciplines': stream.ordered_disciplines.all(),
-            'disciplines': [discipline\
-                            for discipline in Discipline.objects.all()\
-                            if discipline not in stream.discipline_set.all()],
+            'stream_disciplines': stream.get_ordered_disciplines(),
+            'disciplines': [discipline for discipline in Discipline.objects.all() if discipline not in disciplines],
         }
         return render(request, 'gymnastics/streams/edit.html', context)
 
     elif request.method == 'POST':
         stream = Stream.objects.get(id=id)
-        build_stream_from_post(stream=Stream.objects.get(id=id), post_dict=request.POST, method='update')
+        _build_stream_from_post(stream=stream, post_dict=request.POST, method='update')
         return redirect(reverse('streams.detail', kwargs={ 'id': stream.id }))
+
+    return HttpResponseNotAllowed(['GET', 'POST'])
 
 
 class StreamDeleteView(generic.DeleteView):

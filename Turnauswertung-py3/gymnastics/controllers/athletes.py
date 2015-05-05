@@ -3,18 +3,19 @@ import json
 from django.contrib import messages
 from django.contrib.messages.views import SuccessMessageMixin
 from django.core.urlresolvers import reverse, reverse_lazy
-from django.forms import ModelForm
+# from django.forms import ModelForm
 from django.http import HttpResponse, HttpResponseNotAllowed
 from django.shortcuts import render
 from django.views import generic
 
-from gymnastics.models import Athlete, Club, Stream, Team
-from gymnastics.models import AthletesImport
+from gymnastics.models import Athlete, AthletesImport, Club, Stream, Team
 
 
 def index(request):
-    context = { 'athletes': Athlete.objects.all() \
-        .select_related('club').select_related('stream').select_related('team__stream').select_related('squad') }
+    context = { 
+        'athletes': Athlete.objects.all() \
+            .select_related('club').select_related('stream').select_related('team__stream').select_related('squad') 
+    }
     return render(request, 'gymnastics/athletes/index.html', context)
 
 def detail(request, id):
@@ -28,7 +29,7 @@ def detail(request, id):
         .select_related('squad') \
         .get(id=id)
 
-    disciplines = athlete.stream.ordered_disciplines.all()
+    disciplines = athlete.stream.get_ordered_disciplines()
 
     athletes_disciplines_result_dict = athlete.stream.get_athletes_disciplines_result_dict()
     athletes_disciplines_rank_dict = athlete.stream.get_athletes_disciplines_rank_dict(athletes_disciplines_result_dict)

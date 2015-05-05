@@ -21,23 +21,14 @@ def index(request):
 def detail(request, id):
     squad = Squad.objects.get(id=id)
 
-    #### Athletes ###
     athletes = squad.athlete_set.all() \
         .select_related('club').select_related('stream').select_related('team__stream').select_related('squad') \
         .prefetch_related('performance_set')
+    athletes_disciplines_result_dict = athletes.get_athletes_disciplines_result_dict()
 
-    ### Streams ###
-    streams_distinct = set([athlete.stream for athlete in athletes])
+    streams_distinct = athletes.get_distinct_stream_set()
     stream_athletes_dict = squad.get_stream_athletes_dict(athletes)
     stream_disciplines_dict = squad.get_stream_disciplines_dict(athletes)
-
-    # Results Athletes: disciplines results
-    athletes_discipline_results = squad.athlete_set.all() \
-        .values('id', 'performance__discipline_id') \
-        .annotate(performance_result=Sum('performance__value'))
-    athletes_disciplines_result_dict = { athlete.id: {} for athlete in athletes }
-    for result in athletes_discipline_results:
-        athletes_disciplines_result_dict[result['id']][result['performance__discipline_id']] = result['performance_result']
 
     context = { 
         'squad': squad,
@@ -59,14 +50,14 @@ def enter_performances(request, id):
         .prefetch_related('performance_set')
 
     ### Streams ###
-    streams_distinct = set([athlete.stream for athlete in athletes])
+    streams_distinct = athletes.get_distinct_stream_set()
     stream_athletes_dict = squad.get_stream_athletes_dict(athletes)
     stream_disciplines_dict = squad.get_stream_disciplines_dict(athletes)
 
     stream_discipline_tabindex_dict = { 
         stream.id: { 
             discipline.id: 10 * stream_index + discipline_index \
-                for discipline_index, discipline in enumerate(stream.ordered_disciplines.all()) 
+                for discipline_index, discipline in enumerate(stream.get_ordered_disciplines()) 
         } for stream_index, stream in enumerate(streams_distinct, start=1) 
     }
 

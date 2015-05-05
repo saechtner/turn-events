@@ -1,6 +1,26 @@
 from django.db import models
 
 
+class AthleteQuerySet(models.QuerySet):
+
+    def get_distinct_stream_set(self):
+        return set((athlete.stream for athlete in self))
+
+    def get_athletes_disciplines_result_dict(self):
+        athletes_disciplines_result_dict = { athlete.id: athlete.get_disciplines_result_dict() for athlete in self }
+        
+        for athlete in self:
+            athletes_disciplines_result_dict[athlete.id]['total'] = athlete.get_all_around_result()
+
+        return athletes_disciplines_result_dict
+
+
+class AthleteManager(models.Manager):
+
+    def get_queryset(self):
+        return AthleteQuerySet(self.model, using=self._db)
+
+
 class Athlete(models.Model):
   
     first_name = models.CharField(max_length=50, null=False)
@@ -16,6 +36,7 @@ class Athlete(models.Model):
 
     athletes_import = models.ForeignKey('AthletesImport', null=True, blank=True)
 
+    objects = AthleteManager()
 
     class Meta:
         db_table = 'gymnastics_athletes'

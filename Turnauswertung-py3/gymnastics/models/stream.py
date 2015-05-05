@@ -29,29 +29,26 @@ class Stream(models.Model):
     def __str__(self):
         return "{0} {1}".format(self.difficulty, self.get_sex_display())
 
-    @property
-    def ordered_disciplines(self):
-        return self.discipline_set.select_related('discipline').order_by('streamdisciplinejoin__position')
-    
-    def get_athletes_disciplines_result_dict(self):
-        athletes_disciplines_result_dict = { a.id: a.get_disciplines_result_dict() for a in self.athlete_set.all() }
+    def get_ordered_disciplines(self):
+        return self.discipline_set.select_related('discipline').order_by('streamdisciplinejoin__position').all()
 
-        for athlete in self.athlete_set.all():
-            athletes_disciplines_result_dict[athlete.id]['total'] = athlete.get_all_around_result()
-
-        return athletes_disciplines_result_dict
+    def get_athletes_disciplines_result_dict(self, athletes=None):
+        if not athletes:
+            athletes = self.athlete_set.all() \
+                .prefetch_related('performance_set')
+        return athletes.get_athletes_disciplines_result_dict()
 
     def get_athletes_disciplines_rank_dict(self, athletes_disciplines_result_dict=None):
         if not athletes_disciplines_result_dict:
-            athletes_disciplines_result_dict = self.get_athletes_disciplines_result_dict()
+            athletes_disciplines_result_dict = self.get_athletes_disciplines_result_dict
         return self._rank_results(self.athlete_set.all(), athletes_disciplines_result_dict)
 
     def get_teams_disciplines_result_dict(self):
-        teams_disciplines_result_dict = { t.id: t.get_disciplines_result_dict() for t in self.team_set.all() }
-
+        teams_disciplines_result_dict = {}
         for team in self.team_set.all():
-            teams_disciplines_result_dict[team.id]['total'] = team.get_all_around_result(teams_disciplines_result_dict[team.id])
-
+            team_dict = team.get_disciplines_result_dict()
+            teams_disciplines_result_dict[team.id] = team_dict
+            teams_disciplines_result_dict[team.id]['total'] = team.get_all_around_result(team_dict)
         return teams_disciplines_result_dict
 
     def get_teams_disciplines_rank_dict(self, teams_disciplines_result_dict=None):

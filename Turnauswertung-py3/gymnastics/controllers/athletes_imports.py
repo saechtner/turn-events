@@ -3,6 +3,7 @@ import re
 
 from django.contrib import messages
 from django.core.urlresolvers import reverse, reverse_lazy
+from django.http import HttpResponseNotAllowed
 from django.shortcuts import redirect, render
 from django.views import generic
 
@@ -125,7 +126,7 @@ def new(request):
         
         return redirect(reverse('athletes_imports.detail', kwargs={ 'id': athletes_import.id }))
 
-    return  HttpResponseNotAllowed(['GET', 'POST'])
+    return HttpResponseNotAllowed(['GET', 'POST'])
 
 
 class DeleteView(generic.DeleteView):
