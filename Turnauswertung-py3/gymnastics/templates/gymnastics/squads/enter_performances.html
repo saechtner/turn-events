@@ -38,7 +38,7 @@
                     {% for discipline in disciplines %}
                       <td>
                         <div class="col-md-6 col-md-offset-3">
-                          <input class="form-control" type="number" min="0.000" max="20.000" step="0.001" name="{{ athlete.id }}-{{ discipline.id }}" placeholder="{{ athlete_performances|get_item:discipline.id }}" tabindex="{{ discipline_tabindex_dict|get_item:discipline|default:0 }}">
+                          <input class="form-control" onkeydown="ModifyEnterKeyPressAsTab(event);" type="number" min="0.000" max="20.000" step="0.001" name="{{ athlete.id }}-{{ discipline.id }}" placeholder="{{ athlete_performances|get_item:discipline.id }}" tabindex="{{ stream_discipline_tabindex_dict|get_item:stream.id|get_item:discipline.id|default:0 }}">
                         </div>
                       </td>
                     {% endfor %}
@@ -52,7 +52,7 @@
     </div>
   {% endfor %}
   <div class="col-md-5 col-md-offset-4 btn-group">
-    <input class="btn btn-primary" type="submit" value="{% trans "Submit" %}"/>
+    <input class="btn btn-primary" type="submit" value="{% trans "Submit" %}" tabindex="150"/>
     <button class="btn btn-default" type="button" onClick="javascript:history.go(-1);">{% trans "Cancel" %}</button>
   </div>
 </form>

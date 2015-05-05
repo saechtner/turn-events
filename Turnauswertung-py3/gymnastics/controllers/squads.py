@@ -70,16 +70,11 @@ def enter_performances(request, id):
     ### Streams ###
     streams_distinct = set([athlete.stream for athlete in athletes])
     stream_athletes_disciplines = { stream.id: {'athletes': [], 'disciplines': stream.ordered_disciplines.all()} for stream in streams_distinct }
-    discipline_list = []
 
     for athlete in athletes:
         stream_athletes_disciplines[athlete.stream.id]['athletes'].append(athlete)
 
-    ### Tabindex ###
-    for stream in streams_distinct:
-        discipline_list.extend(stream_athletes_disciplines[stream.id]['disciplines'])
-
-    discipline_tabindex_dict = { discipline: index for index, discipline in enumerate(set(discipline_list)) }
+    stream_discipline_tabindex_dict = { stream.id: { discipline.id: int('{0}{1}'.format(stream_index+1, discipline_index)) for discipline_index, discipline in enumerate(stream.ordered_disciplines.all()) } for stream_index, stream in enumerate(streams_distinct) }
 
     # Results Athletes: disciplines results
     athletes_discipline_results = squad.athlete_set.all() \
@@ -97,7 +92,7 @@ def enter_performances(request, id):
         'athletes_disciplines_result_dict': athletes_disciplines_result_dict,
         'streams': streams_distinct,
         'stream_athletes_disciplines': stream_athletes_disciplines,
-        'discipline_tabindex_dict': discipline_tabindex_dict
+        'stream_discipline_tabindex_dict': stream_discipline_tabindex_dict
     }
 
     return render(request, 'gymnastics/squads/enter_performances.html', context)
