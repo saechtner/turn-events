@@ -21,7 +21,7 @@
           <h3 class="panel-title">{{ stream }}</h3>
         </a>
       </div>
-      {% with disciplines=stream_athletes_disciplines|get_item:stream.id|get_item:'disciplines' stream_athletes=stream_athletes_disciplines|get_item:stream.id|get_item:'athletes' %}
+      {% with disciplines=stream_athletes_and_disciplines_dict|get_item:stream.id|get_item:'disciplines' stream_athletes=stream_athletes_and_disciplines_dict|get_item:stream.id|get_item:'athletes' %}
         <div id="collapse_{{ stream_id }}" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
           <table class="table table-hover table-condensed" id="stream-{{ stream }}-table">
             <thead>

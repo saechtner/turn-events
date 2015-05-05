@@ -1,13 +1,8 @@
 import re
-from subprocess import Popen, PIPE
-import tempfile
 
 from django.db.models import Sum
 from django.core.urlresolvers import reverse, reverse_lazy
-from django.http import HttpResponse
 from django.shortcuts import redirect, render
-from django.template import Context
-from django.template.loader import get_template
 from django.utils.translation import ugettext_lazy
 from django.views import generic
 
@@ -16,6 +11,7 @@ from gymnastics.models.discipline import Discipline
 from gymnastics.models.performance import Performance
 from gymnastics.models.squad import Squad
 from gymnastics.models.stream import Stream
+from gymnastics.utils import pdf
 
 
 def index(request):
@@ -32,9 +28,7 @@ def detail(request, id):
 
     ### Streams ###
     streams_distinct = set([athlete.stream for athlete in athletes])
-    stream_athletes_disciplines = { stream.id: {'athletes': [], 'disciplines': stream.ordered_disciplines.all()} for stream in streams_distinct }
-    for athlete in athletes:
-        stream_athletes_disciplines[athlete.stream.id]['athletes'].append(athlete)
+    stream_athletes_and_disciplines_dict = squad.get_stream_athletes_and_disciplines_dict(athletes)
 
     # Results Athletes: disciplines results
     athletes_discipline_results = squad.athlete_set.all() \
@@ -43,13 +37,14 @@ def detail(request, id):
     athletes_disciplines_result_dict = { athlete.id: {} for athlete in athletes }
     for result in athletes_discipline_results:
         athletes_disciplines_result_dict[result['id']][result['performance__discipline_id']] = result['performance_result']
+
     context = { 
         'squad': squad,
         'athletes': athletes,
         'athletes_count': len(athletes),
         'athletes_disciplines_result_dict': athletes_disciplines_result_dict,
         'streams': streams_distinct,
-        'stream_athletes_disciplines': stream_athletes_disciplines
+        'stream_athletes_and_disciplines_dict': stream_athletes_and_disciplines_dict
     }
     return render(request, 'gymnastics/squads/detail.html', context)
 
@@ -63,19 +58,20 @@ def enter_performances(request, id):
 
     ### Streams ###
     streams_distinct = set([athlete.stream for athlete in athletes])
-    stream_athletes_disciplines = { stream.id: {'athletes': [], 'disciplines': stream.ordered_disciplines.all()} for stream in streams_distinct }
+    stream_athletes_and_disciplines_dict = squad.get_stream_athletes_and_disciplines_dict(athletes)
 
-    for athlete in athletes:
-        stream_athletes_disciplines[athlete.stream.id]['athletes'].append(athlete)
-
-    stream_discipline_tabindex_dict = { stream.id: { discipline.id: int('{0}{1}'.format(stream_index+1, discipline_index)) for discipline_index, discipline in enumerate(stream.ordered_disciplines.all()) } for stream_index, stream in enumerate(streams_distinct) }
+    stream_discipline_tabindex_dict = { 
+        stream.id: { 
+            discipline.id: 10 * stream_index + discipline_index \
+                for discipline_index, discipline in enumerate(stream.ordered_disciplines.all()) 
+        } for stream_index, stream in enumerate(streams_distinct, start=1) 
+    }
 
     # Results Athletes: disciplines results
     athletes_discipline_results = squad.athlete_set.all() \
         .values('id', 'performance__discipline_id') \
         .annotate(performance_result=Sum('performance__value'))
     athletes_disciplines_result_dict = { athlete.id: {} for athlete in athletes }
-
     for result in athletes_discipline_results:
         athletes_disciplines_result_dict[result['id']][result['performance__discipline_id']] = result['performance_result']
 
@@ -85,25 +81,23 @@ def enter_performances(request, id):
         'athletes_count': len(athletes),
         'athletes_disciplines_result_dict': athletes_disciplines_result_dict,
         'streams': streams_distinct,
-        'stream_athletes_disciplines': stream_athletes_disciplines,
+        'stream_athletes_and_disciplines_dict': stream_athletes_and_disciplines_dict,
         'stream_discipline_tabindex_dict': stream_discipline_tabindex_dict
     }
 
     return render(request, 'gymnastics/squads/enter_performances.html', context)
 
 def handle_entered_performances(request):
-    performance_dict = request.POST
-
     athletes = Athlete.objects.all()
     disciplines = Discipline.objects.all()
     performances = Performance.objects.all()
 
-    for key, value in performance_dict.items():
+    for key, value in request.POST.items():
         if '-' in key and value:
-            athlete_id, performance_id = re.split(r'-+', key.rstrip())
+            athlete_id, discipline_id = re.split('-', key.rstrip())
 
             athlete = athletes.get(id=athlete_id)
-            discipline = disciplines.get(id=performance_id)
+            discipline = disciplines.get(id=discipline_id)
 
             try:
                 performance = performances.get(athlete=athlete, discipline=discipline)
@@ -118,7 +112,7 @@ def handle_entered_performances(request):
 
     return redirect(reverse('squads.index'))
 
-def judge_pdf(request):
+def create_judge_pdf(request):
     squads = Squad.objects.all().prefetch_related('athlete_set')
     squad_disciplines = {}
     for squad in squads:
@@ -128,63 +122,25 @@ def judge_pdf(request):
             squad_disciplines[squad.id].extend([ discipline for discipline in athlete.stream.ordered_disciplines.all() ])
         squad_disciplines[squad.id] = set(squad_disciplines[squad.id])
 
-    context = Context({
-            'squads': squads,
-            'squad_disciplines': squad_disciplines,
-        })
+    context = {
+        'squads': squads,
+        'squad_disciplines': squad_disciplines,
+    }
+    template_location = 'gymnastics/squads/squads_judges.tex'
+    file_name = 'filename={0}_{1}_{2}.pdf'.format(ugettext_lazy('Squads'), ugettext_lazy('Judge'), ugettext_lazy('Lists'))
 
-    template = get_template('gymnastics/squads/squads_judges.tex')
-    rendered_tpl = template.render(context).encode('utf-8')
+    return pdf.create(template_location, context, file_name)
 
-    with tempfile.TemporaryDirectory() as tempdir:
-        # Create subprocess, supress output with PIPE and 
-        # run latex twice to generate the TOC properly. 
-        # Finally read the generated pdf.
-        for i in range(2):
-            process = Popen(
-                ['pdflatex', '-output-directory', tempdir],
-                stdin=PIPE,
-                stdout=PIPE,
-            )
-            process.communicate(rendered_tpl)
-        with open(os.path.join(tempdir, 'texput.pdf'), 'rb') as f:
-            pdf = f.read()
-
-    r = HttpResponse(content_type='application/pdf')
-    # r['Content-Disposition'] = 'attachment; filename={0}_{1}_{2}.pdf'.format(ugettext_lazy('Squads'), ugettext_lazy('Judge'), ugettext_lazy('Lists'))
-    r['Content-Disposition'] = 'filename={0}_{1}_{2}.pdf'.format(ugettext_lazy('Squads'), ugettext_lazy('Judge'), ugettext_lazy('Lists'))
-    r.write(pdf)
-    return r
-
-def overview_pdf(request):
+def create_overview_pdf(request):
     squads = Squad.objects.all().prefetch_related('athlete_set').select_related('athlete_set__club')
 
-    context = Context({
-            'squads': squads,
-        })
+    context = {
+        'squads': squads,
+    }
+    template_location = 'gymnastics/squads/squads_athletes.tex'
+    file_name = 'filename={0}_{1}.pdf'.format(ugettext_lazy('Squads'), ugettext_lazy('Overview'))
 
-    template = get_template('gymnastics/squads/squads_athletes.tex')
-    rendered_tpl = template.render(context).encode('utf-8')
-
-    with tempfile.TemporaryDirectory() as tempdir:
-        # Create subprocess, supress output with PIPE and 
-        # run latex twice to generate the TOC properly. 
-        # Finally read the generated pdf.
-        for i in range(2):
-            process = Popen(
-                ['pdflatex', '-output-directory', tempdir],
-                stdin=PIPE,
-                stdout=PIPE,
-            )
-            process.communicate(rendered_tpl)
-        with open(os.path.join(tempdir, 'texput.pdf'), 'rb') as f:
-            pdf = f.read()
-
-    r = HttpResponse(content_type='application/pdf')
-    # r['Content-Disposition'] = 'attachment; filename={0}_{1}.pdf'.format(ugettext_lazy('Squads'), ugettext_lazy('Overview'))
-    r['Content-Disposition'] = 'filename={0}_{1}.pdf'.format(ugettext_lazy('Squads'), ugettext_lazy('Overview'))
-    r.write(pdf)
-    return r
+    return pdf.create(template_location, context, file_name)
 
 
 class SquadCreateView(generic.CreateView):
