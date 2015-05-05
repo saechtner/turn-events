@@ -1,14 +1,16 @@
-from django.db import models
+import datetime
+
 from django import forms
-from django.utils.translation import ugettext_lazy
 from django.contrib.admin.widgets import AdminDateWidget 
-from datetime import date
+from django.db import models
+from django.utils.translation import ugettext_lazy
 
 
 class Tournament(models.Model):
   
     name = models.CharField(max_length=50, null=False)
-    date = models.DateField(null=False, default=date.today)
+    date = models.DateField(null=False, default=datetime.date.today)
+
     street = models.CharField(max_length=50, null=False)
     zip_code = models.CharField(max_length=10, null=False)
     city = models.CharField(max_length=50, null=False)
@@ -22,5 +24,6 @@ class Tournament(models.Model):
         return '{0}'.format(self.name)
 
         
-class MyForm(forms.Form):
-    date = forms.DateField(widget=AdminDateWidget)
+# TODO: add datepicker
+# class MyForm(forms.Form):
+#     date = forms.DateField(widget=AdminDateWidget)
