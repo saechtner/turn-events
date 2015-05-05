@@ -8,14 +8,14 @@ from django.utils.translation import ugettext_lazy
 
 class Tournament(models.Model):
   
-    name = models.CharField(max_length=50, null=False)
-    date = models.DateField(null=False, default=datetime.date.today)
+    name = models.CharField(max_length=50)
+    date = models.DateField(default=datetime.date.today)
 
-    street = models.CharField(max_length=50, null=False)
-    zip_code = models.CharField(max_length=10, null=False)
-    city = models.CharField(max_length=50, null=False)
+    street = models.CharField(max_length=50, null=True, blank=True)
+    zip_code = models.CharField(max_length=10, null=True, blank=True)
+    city = models.CharField(max_length=50, null=True, blank=True)
 
-    club = models.ForeignKey('Club', verbose_name=ugettext_lazy('Host'), null=True, blank=True)
+    hosting_club = models.ForeignKey('Club', null=True, blank=True)
 
     class Meta:
         db_table = 'gymnastics_tournaments'

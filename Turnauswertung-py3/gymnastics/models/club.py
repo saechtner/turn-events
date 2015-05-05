@@ -3,7 +3,7 @@ from django.db import models
 
 class Club(models.Model):
   
-    name = models.CharField(max_length=50, null=False)
+    name = models.CharField(max_length=50)
 
     contact_name = models.CharField(max_length=50, null=True, blank=True)
     contact_mail = models.EmailField(null=True, blank=True)
