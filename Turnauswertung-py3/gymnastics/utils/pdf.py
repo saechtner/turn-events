@@ -26,6 +26,6 @@ def create(template_location, context, file_name):
             pdf = f.read()
 
     response = HttpResponse(content_type='application/pdf')
-    response['Content-Disposition'] = file_name
+    response['Content-Disposition'] = "filename={}".format(file_name)
     response.write(pdf)
     return response

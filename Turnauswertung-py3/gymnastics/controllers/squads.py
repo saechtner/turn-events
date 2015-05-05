@@ -28,7 +28,8 @@ def detail(request, id):
 
     ### Streams ###
     streams_distinct = set([athlete.stream for athlete in athletes])
-    stream_athletes_and_disciplines_dict = squad.get_stream_athletes_and_disciplines_dict(athletes)
+    stream_athletes_dict = squad.get_stream_athletes_dict(athletes)
+    stream_disciplines_dict = squad.get_stream_disciplines_dict(athletes)
 
     # Results Athletes: disciplines results
     athletes_discipline_results = squad.athlete_set.all() \
@@ -42,9 +43,10 @@ def detail(request, id):
         'squad': squad,
         'athletes': athletes,
         'athletes_count': len(athletes),
-        'athletes_disciplines_result_dict': athletes_disciplines_result_dict,
         'streams': streams_distinct,
-        'stream_athletes_and_disciplines_dict': stream_athletes_and_disciplines_dict
+        'stream_athletes_dict': stream_athletes_dict,
+        'stream_disciplines_dict': stream_disciplines_dict,
+        'athletes_disciplines_result_dict': athletes_disciplines_result_dict,
     }
     return render(request, 'gymnastics/squads/detail.html', context)
 
@@ -58,7 +60,8 @@ def enter_performances(request, id):
 
     ### Streams ###
     streams_distinct = set([athlete.stream for athlete in athletes])
-    stream_athletes_and_disciplines_dict = squad.get_stream_athletes_and_disciplines_dict(athletes)
+    stream_athletes_dict = squad.get_stream_athletes_dict(athletes)
+    stream_disciplines_dict = squad.get_stream_disciplines_dict(athletes)
 
     stream_discipline_tabindex_dict = { 
         stream.id: { 
@@ -77,68 +80,64 @@ def enter_performances(request, id):
 
     context = { 
         'squad': squad,
-        'athletes': athletes,
-        'athletes_count': len(athletes),
-        'athletes_disciplines_result_dict': athletes_disciplines_result_dict,
         'streams': streams_distinct,
-        'stream_athletes_and_disciplines_dict': stream_athletes_and_disciplines_dict,
-        'stream_discipline_tabindex_dict': stream_discipline_tabindex_dict
+        'stream_athletes_dict': stream_athletes_dict,
+        'stream_disciplines_dict': stream_disciplines_dict,
+        'stream_discipline_tabindex_dict': stream_discipline_tabindex_dict,
+        'athletes_disciplines_result_dict': athletes_disciplines_result_dict,
     }
 
     return render(request, 'gymnastics/squads/enter_performances.html', context)
 
 def handle_entered_performances(request):
-    athletes = Athlete.objects.all()
-    disciplines = Discipline.objects.all()
     performances = Performance.objects.all()
 
     for key, value in request.POST.items():
         if '-' in key and value:
             athlete_id, discipline_id = re.split('-', key.rstrip())
 
-            athlete = athletes.get(id=athlete_id)
-            discipline = disciplines.get(id=discipline_id)
-
             try:
-                performance = performances.get(athlete=athlete, discipline=discipline)
-                performance.value = value
+                performance = performances.get(athlete_id=athlete_id, discipline_id=discipline_id)
             except:
-                performance = Performance( \
-                    value=value,
-                    athlete=athlete,
-                    discipline=discipline)
+                performance = Performance(athlete_id=athlete_id, discipline_id=discipline_id)
 
+            performance.value = value
             performance.save()
 
     return redirect(reverse('squads.index'))
 
 def create_judge_pdf(request):
-    squads = Squad.objects.all().prefetch_related('athlete_set')
-    squad_disciplines = {}
+    squads = Squad.objects.all() \
+        .prefetch_related('athlete_set') \
+        .select_related('athlete_set__stream')
+    
+    squad_athletes_dict = {}
+    squad_disciplines_dict = {}
     for squad in squads:
-        squad_disciplines[squad.id] = []
-        athletes = squad.athlete_set.all().select_related('stream')
-        for athlete in athletes:
-            squad_disciplines[squad.id].extend([ discipline for discipline in athlete.stream.ordered_disciplines.all() ])
-        squad_disciplines[squad.id] = set(squad_disciplines[squad.id])
+        athletes = squad.athlete_set.all()
+        squad_athletes_dict[squad.id] = athletes
+        squad_disciplines_dict[squad.id] = squad.get_disciplines(athletes)
 
     context = {
         'squads': squads,
-        'squad_disciplines': squad_disciplines,
+        'squad_disciplines_dict': squad_disciplines_dict,
+        'squad_athletes_dict': squad_athletes_dict,
     }
     template_location = 'gymnastics/squads/squads_judges.tex'
-    file_name = 'filename={0}_{1}_{2}.pdf'.format(ugettext_lazy('Squads'), ugettext_lazy('Judge'), ugettext_lazy('Lists'))
+    file_name = '{0}_{1}_{2}.pdf'.format(ugettext_lazy('Squads'), ugettext_lazy('Judge'), ugettext_lazy('Lists'))
 
     return pdf.create(template_location, context, file_name)
 
 def create_overview_pdf(request):
-    squads = Squad.objects.all().prefetch_related('athlete_set').select_related('athlete_set__club')
+    squads = Squad.objects.all() \
+        .prefetch_related('athlete_set') \
+        .select_related('athlete_set__club')
 
     context = {
         'squads': squads,
     }
     template_location = 'gymnastics/squads/squads_athletes.tex'
-    file_name = 'filename={0}_{1}.pdf'.format(ugettext_lazy('Squads'), ugettext_lazy('Overview'))
+    file_name = '{0}_{1}.pdf'.format(ugettext_lazy('Squads'), ugettext_lazy('Overview'))
 
     return pdf.create(template_location, context, file_name)
 

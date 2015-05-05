@@ -20,13 +20,13 @@
 
     \begin{document}
         {% for squad in squads %}
-            {% for discipline in squad_disciplines|get_item:squad.id %}
+            {% for discipline in squad_disciplines_dict|get_item:squad.id %}
                 \begin{tabular}[t]{|p{3cm}|*{3}{|p{1.9cm}}||p{1.9cm}|}
                     \hline\multicolumn{5}{|c|}{ {{ squad }}: {{ discipline }} }\\
                     \hline&\multicolumn{3}{|c||}{\bfseries{ {% trans 'Judge' %} }}&\\
                     \hline\bfseries{ {% trans 'Name' %} }&\multicolumn{1}{|c}{\bfseries{1}}&\multicolumn{1}{|c}{\bfseries{2}}&\multicolumn{1}{|c||}{\bfseries{3}}&\multicolumn{1}{c|}{\bfseries{ {% trans 'Overall' %} }}\\
                     \hline
-                    {% for athlete in squad.athlete_set.all %}
+                    {% for athlete in squad_athletes_dict|get_item:squad.id %}
                         \hline {{ athlete }} &&&&\\
                     {% endfor %}
                         \hline &&&&\\

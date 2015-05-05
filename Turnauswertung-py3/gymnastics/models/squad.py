@@ -1,3 +1,5 @@
+import itertools
+
 from django.db import models
 
 class Squad(models.Model):
@@ -11,20 +13,34 @@ class Squad(models.Model):
     def __str__(self):
         return self.name
 
-    def get_stream_athletes_and_disciplines_dict(self, athletes=None):
+    def get_disciplines(self, athletes=None):
+        if not athletes:
+            athletes = self.athlete_set.all() \
+                .select_related('stream') \
+                .prefetch_related('stream__discipline_set')
+
+        streams_distinct = set((athlete.stream for athlete in athletes))
+        streams_disciplines = itertools.chain.from_iterable((stream.discipline_set.all() for stream in streams_distinct))
+        return list(set(streams_disciplines))
+
+    def get_stream_disciplines_dict(self, athletes=None):
+        if not athletes:
+            athletes = self.athlete_set.all() \
+                .select_related('stream') \
+                .prefetch_related('stream__discipline_set')
+
+        streams_distinct = set((athlete.stream for athlete in athletes))
+        return { stream.id: stream.ordered_disciplines.all() for stream in streams_distinct }
+
+    def get_stream_athletes_dict(self, athletes=None):
         if not athletes:
             athletes = self.athlete_set.all() \
                 .select_related('club').select_related('stream').select_related('team__stream').select_related('squad') \
                 .prefetch_related('performance_set')
 
         streams_distinct = set([athlete.stream for athlete in athletes])
-        stream_athletes_and_disciplines_dict = { 
-            stream.id: {
-                'athletes': [], 
-                'disciplines': stream.ordered_disciplines.all()
-            } for stream in streams_distinct 
-        }
+        stream_athletes_dict = { stream.id: [] for stream in streams_distinct }
         for athlete in athletes:
-            stream_athletes_and_disciplines_dict[athlete.stream.id]['athletes'].append(athlete)
+            stream_athletes_dict[athlete.stream.id].append(athlete)
 
-        return stream_athletes_and_disciplines_dict
+        return stream_athletes_dict
