@@ -19,6 +19,7 @@
           <thead>
             <th>{% trans "Name" %}</th>
             <th>{% trans "Club" %}</th>
+            <th>{% trans "#Athletes" %}</th>
             <th></th>
           </thead>
           <tbody>
@@ -29,6 +30,9 @@
                   {% if athletes_import.club %}
                     <a href="{% url 'clubs.detail' athletes_import.club.id %}">{{ athletes_import.club }}</a>
                   {% endif %}
+                </td>
+                <td>
+                  {{ athletes_import.athlete_set.count }}
                 </td>
                 <td class="text-right">
                   <div class="btn-group" role="group">

@@ -7,8 +7,10 @@ from gymnastics.models.club import Club
 
 
 def index(request):
-    context = { 'clubs': Club.objects.all() \
-        .prefetch_related('athlete_set') }
+    context = { 
+        'clubs': Club.objects.all() \
+            .prefetch_related('athlete_set') 
+    }
     return render(request, 'gymnastics/clubs/index.html', context)
 
 def detail(request, id):

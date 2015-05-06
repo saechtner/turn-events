@@ -16,7 +16,18 @@ def index(request):
     return render(request, 'gymnastics/athletes_imports/index.html', context)
 
 def detail(request, id):
-    context = { 'athletes_import': AthletesImport.objects.get(id=id) }
+    athletes_import = AthletesImport.objects \
+        .select_related('club') \
+        .get(id=id)
+
+    athletes = athletes_import.athlete_set.all() \
+        .select_related('club').select_related('stream').select_related('team__stream').select_related('squad')
+
+    context = { 
+        'athletes_import': athletes_import,
+        'athletes': athletes,
+        'athletes_count': len(athletes),
+    }
     return render(request, 'gymnastics/athletes_imports/detail.html', context)
 
 

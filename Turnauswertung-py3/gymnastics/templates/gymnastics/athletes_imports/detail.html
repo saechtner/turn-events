@@ -3,15 +3,15 @@
 {% load i18n %}
 
 {% block headline %}
-  {{ athletes_import }} <small>{{ athletes_import.athlete_set.count }} {% trans 'Athletes' %}</small>
+  {{ athletes_import }} <small>{{ athletes_import.club }}</small>
 {% endblock headline %}
 {% block nav_main %}{{ athletes_import }}{% endblock nav_main %}
 {% block nav_main_url %}{% url 'athletes_imports.detail' athletes_import.id %}{% endblock nav_main_url %}
 {% block nav_links %}
-  <li role="presentation" class="active">
+  <li role="presentation">
     <a href="#base" aria-controls="home" role="tab" data-toggle="tab">{% trans "General" %}</a>
   </li>
-  <li role="presentation">
+  <li role="presentation" class="active">
     <a href="#athletes" aria-controls="profile" role="tab" data-toggle="tab">{% trans "Imported Athletes" %}</a>
   </li>
 {% endblock nav_links %}
@@ -25,15 +25,24 @@
       <div role="tabpanel">
         <!-- Tab panes -->
         <div class="tab-content">
-          <div role="tabpanel" class="tab-pane active" id="base">
-            {% if athletes_import.club %}
-              <p>{% trans "Club" %}: <a href="{% url 'clubs.detail' athletes_import.club.id %}">{{ athletes_import.club }}</a></p>
-            {% endif %}
+          <div role="tabpanel" class="tab-pane" id="base">
+
+            <dl class="dl-horizontal dl-detail">
+              <dt>{% trans "Club" %}</dt>
+              <dd>
+                {% if athletes_import.club %}
+                  <a href="{% url 'clubs.detail' athletes_import.club.id %}">{{ athletes_import.club }}</a>
+                {% endif %}
+              </dd>
+
+              <dt>{% trans "#Athletes" %}</dt>
+              <dd>{{ athletes_count }}</dd>
+            </dl>
           </div>
 
-          <div role="tabpanel" class="tab-pane" id="athletes">
+          <div role="tabpanel" class="tab-pane active" id="athletes">
             <table class="table table-hover table-condensed" id="athletes-table">
-              {% include "gymnastics/includes/athletes_list.html" with athletes_set=athletes_import.athlete_set.all only %}
+              {% include "gymnastics/includes/athletes_list.html" with athletes_set=athletes only %}
             </table>
           </div>
         </div>
