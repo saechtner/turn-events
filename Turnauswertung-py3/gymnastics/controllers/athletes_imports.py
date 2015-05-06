@@ -49,24 +49,13 @@ def _parse_athlete_line(line, club, athletes_import):
     else:
         return None
 
-    print(date_of_birth)
-
     stream_name = ''.join(elements[3].split()).upper() # remove all whitespace
-    stream = None
     try:
         stream = Stream.objects.get(difficulty=stream_name, sex=sex)
         if date_of_birth.year < stream.minimum_year_of_birth:
             return None
     except:
         return None
-
-    # TODO: handle teams during athletes import ... =/
-    # team_name = elements[4])
-    # teams = Team.objects.filter(club=club, stream=stream)
-    # if teams:
-    #     # search if the correct one is among them and use it, otherwise error or generate new one anyways
-    # else:
-    #     # generate them
 
     athlete = Athlete( \
             first_name=elements[0],
@@ -76,6 +65,16 @@ def _parse_athlete_line(line, club, athletes_import):
             club=club,
             stream=stream,
             athletes_import=athletes_import)
+
+    team_name = elements[4]
+    if team_name:
+        try:
+            team = club.team_set.get(stream=stream, name=team_name)
+        except:
+            team = Team(club=club, stream=stream, name=team_name)
+            team.save()
+        if team and team.athlete_set.count() < stream.all_around_team_size:
+            athlete.team = team
 
     try:
         athlete.save()
@@ -121,7 +120,6 @@ def new(request):
         except:
             return _abort_athletes_import(request, athletes_import, 'Error: No club selected.')
 
-        # TODO: make sure there actually are lines
         if not request.POST['import_data']:
             return _abort_athletes_import(request, athletes_import, 'Error: No import data added.')
 
