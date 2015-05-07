@@ -1,25 +1,37 @@
 import json
 
 from django.contrib import messages
-from django.contrib.messages.views import SuccessMessageMixin
 from django.core.urlresolvers import reverse, reverse_lazy
-from django.forms import ModelForm
-from django.http import HttpResponse, HttpResponseNotAllowed
+from django.http import HttpResponse
 from django.utils.translation import ugettext_lazy
-from django.shortcuts import render
+from django.shortcuts import redirect, render
 from django.views import generic
 
 from gymnastics.models import Club, Tournament
 from gymnastics.utils import pdf
 
 
+# TODO: find better solution to handle static constants such as this one
+main_tournament_name = 'KJSS 2015'
+
 def index(request):
     context = { 'tournaments': Tournament.objects.all().select_related('club')}
     return render(request, 'gymnastics/tournaments/index.html', context)
 
+def main(request):
+    try:
+        tournament = Tournament.objects.filter(name=main_tournament_name)[0]
+        context = { 'tournament': tournament }
+        # return render(request, 'gymnastics/tournaments/detail.html', context)
+        return redirect(reverse('tournaments.detail', kwargs={ 'id': tournament.id }))
+    except:
+        return redirect(reverse('tournaments.new'))
+
+    return redirect(reverse('tournaments.index'))
+
 def detail(request, id):
     tournament = Tournament.objects.get(id=id)
-    context = {'tournament': tournament}
+    context = { 'tournament': tournament }
     return render(request, 'gymnastics/tournaments/detail.html', context)
 
 def create_certificates_pdf(request):
@@ -33,42 +45,20 @@ def create_certificates_pdf(request):
 
     return pdf.create(template_location, context, file_name)
 
-class TournamentCreateView(SuccessMessageMixin, generic.CreateView):
+
+class TournamentCreateView(generic.CreateView):
 
     model = Tournament
-    fields = ['name', 'date', 'street', 'zip_code', 'city', 'hosting_club']
+    fields = ['name', 'name_full', 'date', 'street', 'zip_code', 'city', 'hosting_club']
     template_name = 'gymnastics/tournaments/new.html'
-    success_url = reverse_lazy('tournaments.index')
-    success_message = "%(name)s was created successfully"
 
 
-class TournamentUpdateView(SuccessMessageMixin, generic.UpdateView):
+class TournamentUpdateView(generic.UpdateView):
 
     model = Tournament
-    fields = ['name', 'date', 'street', 'zip_code', 'city', 'hosting_club']
+    fields = ['name', 'name_full', 'date', 'street', 'zip_code', 'city', 'hosting_club']
     template_name = 'gymnastics/tournaments/edit.html'
-    success_message = "%(name)s was edited successfully"
 
-    def get_success_url(self):
-        return reverse('tournaments.detail', kwargs = { 'id' : self.kwargs['pk'] })
-
-    def form_invalid(self, form):
-        if form.non_field_errors():
-            error_message = "The provided combination of fields is not accepted and thus the object can't be saved."
-            messages.error(self.request, error_message)
-
-        # TODO: check 'striptags' django template tag to easily render generated errors from ModelForms
-
-        # TODO: give more details about those errors from the ErrorLists 
-        # ErrorLists: (field.errors['field_name']) and field.non_field_errors
-        if form.errors:
-            error_fields_labels = [form[field_with_error].label for field_with_error in form.errors]
-            error_message_base = 'There are errors in the following fields:'
-            error_fields_message = ', '.join(error_fields_labels)
-            error_message = '{0} {1}'.format(error_message_base, error_fields_message)
-            messages.error(self.request, error_message)
-
-        return super().form_invalid(form)
 
 class TournamentDeleteView(generic.DeleteView):
 

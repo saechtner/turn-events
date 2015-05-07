@@ -17,6 +17,7 @@
 {% block nav_regular_buttons %}
   <a type="button" class="btn btn-warning navbar-btn" href="{% url 'tournaments.edit' tournament.id %}">{% trans "Edit" %}</a>
   <a type="button" class="btn btn-danger navbar-btn tournament-detail-delete" href="{% url 'tournaments.delete' tournament.id %}">{% trans "Delete" %}</a>
+  <a type="button" class="btn btn-default navbar-btn" href="{% url 'tournaments.index' %}">{% trans "All tournaments" %}</a>
 {% endblock nav_regular_buttons %}
 
 {% block content %}
@@ -30,16 +31,23 @@
           <dt>{% trans "Name" %}</dt>
           <dd>{{ tournament.name }}</dd>
 
+          <dt>{% trans "Full name" %}</dt>
+          <dd>{{ tournament.name_full }}</dd>
+
           <dt>{% trans "Date" %}</dt>
-          <dd>{{ tournament.date|date:'SHORT_DATE_FORMAT' }}</dd>
+          <dd>{{ tournament.date }}</dd>
 
           <dt>{% trans "Location" %}</dt>
-          <dd>{{ tournament.street }}<br/>{{ tournament.zip_code }} {{ tournament.city }}</dd>
-
-          <dt>{% trans "Club" %}</dt>
           <dd>
-            {% if tournament.club %}
-              <a href="{% url 'clubs.detail' tournament.club.id %}">{{ tournament.hosting_club }}</a>
+            {{ tournament.street|default:'' }}
+            <br/>
+            {{ tournament.zip_code|default:'' }} {{ tournament.city|default:'' }}
+          </dd>
+
+          <dt>{% trans "Hosting club" %}</dt>
+          <dd>
+            {% if tournament.hosting_club %}
+              <a href="{% url 'clubs.detail' tournament.hosting_club.id %}">{{ tournament.hosting_club }}</a>
             {% endif %}
           </dd>
         </dl>

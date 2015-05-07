@@ -22,7 +22,7 @@
       {% else %}
         <td class="gend gend-male"><i class="fa fa-mars fa-fw"></i></td>
       {% endif %}
-      <td>{{ athlete.date_of_birth }}</td>
+      <td>{{ athlete.date_of_birth|date:'SHORT_DATE_FORMAT' }}</td>
       <td>
         {% if athlete.club %}
           <a href="{% url 'clubs.detail' athlete.club.id %}">{{ athlete.club }}</a>
