@@ -71,7 +71,7 @@ class TournamentDeleteView(generic.DeleteView):
 
         resp = super().dispatch(*args, **kwargs)
         if self.request.is_ajax():
-            response_data = {"result": "ok"}
+            response_data = { "result": "ok" }
             return HttpResponse(json.dumps(response_data), content_type="application/json")
         else:
             # POST request (not ajax) will do a redirect to success_url

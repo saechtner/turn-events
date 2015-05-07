@@ -16,7 +16,11 @@
 {% endblock nav_links %}
 {% block nav_regular_buttons %}
   <a type="button" class="btn btn-warning navbar-btn" href="{% url 'athletes.edit' athlete.id %}">{% trans "Edit" %}</a>
-  <a type="button" class="btn btn-danger navbar-btn athlete-detail-delete" href="{% url 'athletes.delete' athlete.id %}">{% trans "Delete" %}</a>
+  <a  type="button" 
+      class="btn btn-danger navbar-btn" 
+      href="{% url 'athletes.delete' athlete.id %}" >
+    {% trans "Delete" %}
+  </a>
 {% endblock nav_regular_buttons %}
 
 {% block content %}

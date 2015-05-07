@@ -57,3 +57,9 @@
   </div>
 </form>
 {% endblock content %}
+
+{% block javascript %}
+  {% load staticfiles %}
+  
+  <script src="{% static 'gymnastics/js/turnen.key-changes.js' %}"></script>
+{% endblock javascript %}

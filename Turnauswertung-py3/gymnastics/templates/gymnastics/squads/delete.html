@@ -13,7 +13,7 @@
 {% block content %}
   <form action="" method="post">
   {% csrf_token %}
-      <p>{% trans "Are you sure you want to delete" %} "{{ object }}"?</p>
+    <p>{% trans "Are you sure you want to delete" %} "{{ object }}"?</p>
     <input class="btn btn-danger" type="submit" value="{% trans "Confirm" %}"/>
     <button class="btn btn-default" type="button" onClick="javascript:history.go(-1);">{% trans "Cancel" %}</button>
   </form>
