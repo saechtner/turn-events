@@ -23,7 +23,11 @@
         <td class="gend gend-male"><i class="fa fa-mars fa-fw"></i></td>
       {% endif %}
       <td>{{ athlete.date_of_birth }}</td>
-      <td><a href="{% url 'clubs.detail' athlete.club.id %}">{{ athlete.club }}</a></td>
+      <td>
+        {% if athlete.club %}
+          <a href="{% url 'clubs.detail' athlete.club.id %}">{{ athlete.club }}</a>
+        {% endif %}
+      </td>
       <td><a href="{% url 'streams.detail' athlete.stream.id %}">{{ athlete.stream }}</a></td>
       <td>
         {% if athlete.team %}

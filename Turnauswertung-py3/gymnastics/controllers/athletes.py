@@ -43,7 +43,7 @@ def results(request):
 class AthleteCreateView(SuccessMessageMixin, generic.CreateView):
 
     model = Athlete
-    fields = ['first_name', 'last_name', 'sex', 'year_of_birth', 'date_of_birth', 'club', 'squad', 'stream', 'team']
+    fields = ['first_name', 'last_name', 'sex', 'year_of_birth', 'date_of_birth', 'stream', 'club', 'team', 'squad']
     template_name = 'gymnastics/athletes/new.html'
     success_url = reverse_lazy('athletes.index')
     success_message = "%(first_name)s %(last_name)s was created successfully"
@@ -52,7 +52,7 @@ class AthleteCreateView(SuccessMessageMixin, generic.CreateView):
 class AthleteUpdateView(SuccessMessageMixin, generic.UpdateView):
 
     model = Athlete
-    fields = ['first_name', 'last_name', 'sex', 'year_of_birth', 'date_of_birth', 'club', 'squad', 'stream', 'team']
+    fields = ['first_name', 'last_name', 'sex', 'year_of_birth', 'date_of_birth', 'stream', 'club', 'team', 'squad']
     template_name = 'gymnastics/athletes/edit.html'
     success_message = "%(first_name)s %(last_name)s was edited successfully"
 

@@ -216,9 +216,9 @@ function ModifyEnterKeyPressAsTab(event)
 }
 
 $(document).ready(function() {
-    function scrollTransformResponse(element, tranform_value) {
-        if (tranform_value) {
-            element.css("transform", "translate3d(0px, " + tranform_value + "px, 0px)");
+    function scrollResponse(element, transform_value) {
+        if (transform_value) {
+            element.css("transform", "translate3d(0px, " + transform_value + "px, 0px)");
         } else {
             element.css("transform", "none");
         }
@@ -234,15 +234,15 @@ $(document).ready(function() {
         var page_header_bg_img = page_header_div.find(".page-header-bg-img:first");
 
         if (scroll_top == 0) {
-            scrollTransformResponse(page_header_bg_img, null);
+            scrollResponse(page_header_bg_img, null);
         } else if (scroll_top < scroll_limit) {
             if (is_locked) {
                 page_header_div.removeClass("is-locked");
             }
-            scrollTransformResponse(page_header_bg_img, scroll_top/5);
+            scrollResponse(page_header_bg_img, scroll_top/5);
         } else if (scroll_top >= scroll_limit && !is_locked) {
             page_header_div.addClass("is-locked");
-            scrollTransformResponse(page_header_bg_img, scroll_limit/5);
+            scrollResponse(page_header_bg_img, scroll_limit/5);
         }
     });
 });

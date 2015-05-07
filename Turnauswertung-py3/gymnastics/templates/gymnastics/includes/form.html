@@ -1,18 +1,23 @@
-{% load widget_tweaks %}
+{% load bootstrap3 %}
 {% load i18n %}
 
-{% load custom_template_tags %}
+{% bootstrap_form_errors form type='non_fields' %}
 
-{% for field in form %}
-  <div class="form-group row text-right {% if form.errors|get_item:field.name %} has-error{% endif %}">
-    <label class="col-md-2 col-md-offset-2 control-label" for="id_{{ field.name }}">{% trans field.label %}</label>
-    <div class="col-md-4">
-      {{ field|add_class:"form-control" }}
+<div class="col-md-6 col-md-offset-2">
+  {% bootstrap_form form layout='horizontal' %}
+
+  {% buttons layout='horizontal' %}
+    <div class="btn-group">
+      <button type="submit" class="btn btn-primary">
+        {% if mode == 'new' %}
+          {% trans "Create" %}
+        {% else %}
+          {% trans "Update" %}
+        {% endif %}
+      </button>
+      <button class="btn btn-default" type="button" onClick="javascript:history.go(-1);">
+        {% trans "Cancel" %}
+      </button>
     </div>
-  </div>
-{% endfor %}
-
-<div class="col-md-5 col-md-offset-4 btn-group">
-  <input class="btn btn-primary" type="submit" value="{% if mode == 'new' %}{% trans "Create" %}{% else %}{% trans "Update" %}{% endif %}"/>
-  <button class="btn btn-default" type="button" onClick="javascript:history.go(-1);">{% trans "Cancel" %}</button>
+  {% endbuttons %}
 </div>
