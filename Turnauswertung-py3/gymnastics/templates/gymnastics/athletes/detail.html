@@ -3,7 +3,12 @@
 {% load i18n %}
 {% load custom_template_tags %}
 
-{% block headline %}{{ athlete }} <small>{{ athlete.club }}</small>{% endblock headline %}
+{% block headline %}
+  {{ athlete }} 
+  {% if athlete.club %}
+    <small>{{ athlete.club }}</small>
+  {% endif %}
+{% endblock headline %}
 {% block nav_main %}{{ athlete }}{% endblock nav_main %}
 {% block nav_main_url %}{% url 'athletes.detail' athlete.id athlete.slug %}{% endblock nav_main_url %}
 {% block nav_links %}

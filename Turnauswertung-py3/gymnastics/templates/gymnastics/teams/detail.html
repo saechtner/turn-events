@@ -35,7 +35,7 @@
     <div class="tab-content">
       <div role="tabpanel" class="tab-pane active" id="base">
         <p>{% trans "Club" %}: <a href="{% url 'clubs.detail' club.id %}">{{ club }}</a></p>
-        <p>{% trans "Stream" %}: <a href="{% url 'streams.detail' stream.id %}">{{ stream }}</a></p>
+        <p>{% trans "Stream" %}: <a href="{{ stream.get_absolute_url }}">{{ stream }}</a></p>
       </div>
       <div role="tabpanel" class="tab-pane active" id="performances">
       </div>

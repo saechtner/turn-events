@@ -17,8 +17,8 @@
     </div>
     <div class="col-md-4 div-pos-bottom-right text-right">
       <div class="btn-group">
-        <a type="button" class="btn btn-warning" href="{% url 'streams.edit' stream.id %}">{% trans "Edit" %}</a>
-        <a type="button" class="btn btn-danger" href="{% url 'streams.delete' stream.id %}">{% trans "Delete" %}</a>
+        <a type="button" class="btn btn-warning" href="{{ stream.get_edit_url }}">{% trans "Edit" %}</a>
+        <a type="button" class="btn btn-danger" href="{{ stream.get_delete_url }}">{% trans "Delete" %}</a>
         <button type="button" class="btn btn-default" onClick="javascript:history.go(-1);">{% trans "Previous Page" %}</button>
       </div>
     </div>

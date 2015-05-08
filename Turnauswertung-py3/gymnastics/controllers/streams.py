@@ -14,7 +14,7 @@ def index(request):
     context = { 'streams': Stream.objects.all() }
     return render(request, 'gymnastics/streams/index.html', context)
 
-def detail(request, id):
+def detail(request, id, slug):
     stream = Stream.objects \
         .prefetch_related('discipline_set') \
         .prefetch_related('athlete_set') \
@@ -114,11 +114,11 @@ def new(request):
 
     elif request.method == 'POST':
         stream = _build_stream_from_post(post_dict=request.POST);
-        return redirect(reverse('streams.detail', kwargs={ 'id': stream.id }))
+        return redirect(stream.get_absolute_url())
 
     return HttpResponseNotAllowed(['GET', 'POST'])
 
-def edit(request,id):
+def edit(request, id, slug):
     if request.method == 'GET':
         stream = Stream.objects.get(id=id)
         disciplines = stream.discipline_set.all()
@@ -133,7 +133,7 @@ def edit(request,id):
     elif request.method == 'POST':
         stream = Stream.objects.get(id=id)
         _build_stream_from_post(stream=stream, post_dict=request.POST, method='update')
-        return redirect(reverse('streams.detail', kwargs={ 'id': stream.id }))
+        return redirect(stream.get_absolute_url())
 
     return HttpResponseNotAllowed(['GET', 'POST'])
 

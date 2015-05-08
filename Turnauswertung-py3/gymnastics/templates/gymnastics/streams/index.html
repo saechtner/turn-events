@@ -33,9 +33,15 @@
               <div class="btn-group" role="group">
               <td class="text-right">
                 <div class="btn-group" role="group">
-                  <a  type="button" class="btn btn-xs btn-success" href="{% url 'streams.detail' stream.id %}"><span class="glyphicon glyphicon-search"></span> {% trans "detail" %}</a>
-                  <a  type="button" class="btn btn-xs btn-warning" href="{% url 'streams.edit' stream.id %}"><span class="glyphicon glyphicon-edit"></span> {% trans "edit" %}</a>
-                  <a  type="button" class="btn btn-xs btn-danger" href="{% url 'streams.delete' stream.id %}"><span class="glyphicon glyphicon-remove"></span> {% trans "delete" %}</a>
+                  <a  type="button" class="btn btn-xs btn-success" href="{{ stream.get_absolute_url }}">
+                    <span class="glyphicon glyphicon-search"></span> {% trans "detail" %}
+                  </a>
+                  <a  type="button" class="btn btn-xs btn-warning" href="{{ stream.get_edit_url }}">
+                    <span class="glyphicon glyphicon-edit"></span> {% trans "edit" %}
+                  </a>
+                  <a  type="button" class="btn btn-xs btn-danger" href="{{ stream.get_delete_url }}">
+                    <span class="glyphicon glyphicon-remove"></span> {% trans "delete" %}
+                  </a>
                 </div>
               </td>
               </div>

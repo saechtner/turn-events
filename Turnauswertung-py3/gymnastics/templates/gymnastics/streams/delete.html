@@ -4,7 +4,6 @@
 {% load custom_template_tags %}
                   
 {% block nav_level_2 %}
-  {% render_nav_item name=object url_name='streams.detail' url_id=object.id %}
 {% endblock nav_level_2 %}
 {% block nav_level_3 %}
   {% render_nav_item name='delete' active=True %}

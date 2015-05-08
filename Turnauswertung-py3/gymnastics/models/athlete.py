@@ -53,7 +53,7 @@ class Athlete(models.Model):
 
     def save(self, *args, **kwargs):
         if not self.id:
-            self.slug = str(slugify(self))
+            self.slug = str(slugify(str(self)))
         return super(Athlete, self).save(*args, **kwargs)
 
     def get_absolute_url(self):

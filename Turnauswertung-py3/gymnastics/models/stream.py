@@ -1,9 +1,12 @@
 import operator
 
+from django.core.urlresolvers import reverse
 from django.db import models
+from django.utils.text import slugify
 from django.utils.translation import ugettext_lazy
 
 from gymnastics.models.discipline import Discipline
+
 
 class Stream(models.Model):
   
@@ -13,14 +16,18 @@ class Stream(models.Model):
     
     all_around_individual = models.BooleanField(default=True)
     all_around_individual_counting_events = models.IntegerField(null=True, blank=True, default=4)
+
     all_around_team = models.BooleanField(default=True)
     all_around_team_size = models.IntegerField(null=True, blank=True, default=4)
     all_around_team_counting_athletes = models.IntegerField(null=True, blank=True, default=4)
+
     discipline_finals = models.BooleanField(default=False)
     discipline_finals_max_participants = models.IntegerField(null=True, blank=True)
     discipline_finals_both_values_count = models.BooleanField(blank=True, default=True)
 
     discipline_set = models.ManyToManyField('Discipline', through='StreamDisciplineJoin')
+
+    slug = models.SlugField(max_length=127, blank=True) #firstname-lastname
 
 
     class Meta:
@@ -28,6 +35,20 @@ class Stream(models.Model):
         
     def __str__(self):
         return "{0} {1}".format(self.difficulty, self.get_sex_display())
+
+    def save(self, *args, **kwargs):
+        if not self.id:
+            self.slug = str(slugify(str(self)))
+        return super(Stream, self).save(*args, **kwargs)
+
+    def get_absolute_url(self):
+        return reverse('streams.detail', kwargs={ 'id': self.id, 'slug': self.slug })
+
+    def get_edit_url(self):
+        return reverse('streams.edit', kwargs={ 'id': self.id, 'slug': self.slug })
+
+    def get_delete_url(self):
+        return reverse('streams.delete', kwargs={ 'pk': self.id, 'slug': self.slug })
 
     def get_ordered_disciplines(self):
         return self.discipline_set.select_related('discipline').order_by('streamdisciplinejoin__position').all()
@@ -39,8 +60,8 @@ class Stream(models.Model):
         return athletes.get_athletes_disciplines_result_dict()
 
     def get_athletes_disciplines_rank_dict(self, athletes_disciplines_result_dict=None):
-        if not athletes_disciplines_result_dict:
-            athletes_disciplines_result_dict = self.get_athletes_disciplines_result_dict
+        if athletes_disciplines_result_dict is None:
+            athletes_disciplines_result_dict = self.get_athletes_disciplines_result_dict()
         return self._rank_results(self.athlete_set.all(), athletes_disciplines_result_dict)
 
     def get_teams_disciplines_result_dict(self):
@@ -52,7 +73,7 @@ class Stream(models.Model):
         return teams_disciplines_result_dict
 
     def get_teams_disciplines_rank_dict(self, teams_disciplines_result_dict=None):
-        if not teams_disciplines_result_dict:
+        if teams_disciplines_result_dict is None:
             teams_disciplines_result_dict = self.get_teams_disciplines_result_dict()
         return self._rank_results(self.team_set.all(), teams_disciplines_result_dict)
 

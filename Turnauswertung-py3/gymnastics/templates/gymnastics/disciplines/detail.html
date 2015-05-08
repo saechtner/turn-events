@@ -40,7 +40,7 @@
           {% trans "This discipline is competed in following streams:" %}
           <ul>
             {% for stream in streams %}
-              <li><a href="{% url 'streams.detail' stream.id %}">{{ stream }}</a></li>
+              <li><a href="{{ stream.get_absolute_url }}">{{ stream }}</a></li>
             {% endfor %}
           </ul>
         </div>
