@@ -1,7 +1,6 @@
 import json
 
 from django.contrib import messages
-from django.contrib.messages.views import SuccessMessageMixin
 from django.core.urlresolvers import reverse, reverse_lazy
 # from django.forms import ModelForm
 from django.http import HttpResponse, HttpResponseNotAllowed
@@ -18,7 +17,7 @@ def index(request):
     }
     return render(request, 'gymnastics/athletes/index.html', context)
 
-def detail(request, id):
+def detail(request, id, slug):
     athlete = Athlete.objects \
         .select_related('stream').select_related('team').select_related('club').select_related('squad') \
         .get(id=id)
@@ -40,50 +39,47 @@ def results(request):
     return render(request, 'gymnastics/athletes/results.html', context)
 
 
-class AthleteCreateView(SuccessMessageMixin, generic.CreateView):
+class AthleteCreateView(generic.CreateView):
 
     model = Athlete
     fields = ['first_name', 'last_name', 'sex', 'year_of_birth', 'date_of_birth', 'stream', 'club', 'team', 'squad']
     template_name = 'gymnastics/athletes/new.html'
-    success_url = reverse_lazy('athletes.index')
-    success_message = "%(first_name)s %(last_name)s was created successfully"
 
 
-class AthleteUpdateView(SuccessMessageMixin, generic.UpdateView):
+class AthleteUpdateView(generic.UpdateView):
 
     model = Athlete
     fields = ['first_name', 'last_name', 'sex', 'year_of_birth', 'date_of_birth', 'stream', 'club', 'team', 'squad']
     template_name = 'gymnastics/athletes/edit.html'
-    success_message = "%(first_name)s %(last_name)s was edited successfully"
 
     # context_object_name = 'athlete' # should be available as well as object because of model = Athlete
     # form_class = AthleteForm
 
-    def get_success_url(self):
-        return reverse('athletes.detail', kwargs = { 'id' : self.kwargs['pk'] })
+    # def get_success_url(self):
+    #     return reverse('athletes.detail', kwargs = { 'id' : self.kwargs['pk'] })
 
     # def get_context_data(self, **kwargs):
     #     context = super(AthleteUpdateView, self).get_context_data(**kwargs)
     #     context['latest_articles'] = Article.objects.all()[:5]
     #     return context
 
-    def form_invalid(self, form):
-        if form.non_field_errors():
-            error_message = "The provided combination of fields is not accepted and thus the object can't be saved."
-            messages.error(self.request, error_message)
+    # def form_invalid(self, form):
+    #     if form.non_field_errors():
+    #         error_message = "The provided combination of fields is not accepted and thus the object can't be saved."
+    #         messages.error(self.request, error_message)
 
-        # TODO: check 'striptags' django template tag to easily render generated errors from ModelForms
+    #     # TODO: check 'striptags' django template tag to easily render generated errors from ModelForms
 
-        # TODO: give more details about those errors from the ErrorLists 
-        # ErrorLists: (field.errors['field_name']) and field.non_field_errors
-        if form.errors:
-            error_fields_labels = [form[field_with_error].label for field_with_error in form.errors]
-            error_message_base = 'There are errors in the following fields:'
-            error_fields_message = ', '.join(error_fields_labels)
-            error_message = '{0} {1}'.format(error_message_base, error_fields_message)
-            messages.error(self.request, error_message)
+    #     # TODO: give more details about those errors from the ErrorLists 
+    #     # ErrorLists: (field.errors['field_name']) and field.non_field_errors
+    #     if form.errors:
+    #         error_fields_labels = [form[field_with_error].label for field_with_error in form.errors]
+    #         error_message_base = 'There are errors in the following fields:'
+    #         error_fields_message = ', '.join(error_fields_labels)
+    #         error_message = '{0} {1}'.format(error_message_base, error_fields_message)
+    #         messages.error(self.request, error_message)
 
-        return super().form_invalid(form)
+    #     return super().form_invalid(form)
 
     # def get(self, request, *args, **kwargs):
     #     view = AthleteUpdateView.as_view()

@@ -42,15 +42,15 @@
       </td>
       <td class="text-right">
         <div class="btn-group" role="group">
-          <a type="button" class="btn btn-xs btn-success" href="{% url 'athletes.detail' athlete.id %}">
+          <a type="button" class="btn btn-xs btn-success" href="{% url 'athletes.detail' athlete.id athlete.slug %}">
             <span class="glyphicon glyphicon-search"></span> {% trans "detail" %}
           </a>
-          <a type="button" class="btn btn-xs btn-warning" href="{% url 'athletes.edit' athlete.id %}">
+          <a type="button" class="btn btn-xs btn-warning" href="{% url 'athletes.edit' athlete.id athlete.slug %}">
             <span class="glyphicon glyphicon-edit"></span> {% trans "edit" %}
           </a>
           <a  type="button" 
               class="btn btn-xs btn-danger btn-confirm-delete" 
-              href="{% url 'athletes.delete' athlete.id %}"
+              href="{% url 'athletes.delete' athlete.id athlete.slug %}"
               data-title="Confirm Delete" 
               data-text="{% trans 'Do you really want to delete' %} <strong>{{ athlete }}</strong>?" 
               data-confirm-button="Delete" 

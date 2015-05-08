@@ -62,7 +62,7 @@
                         {% for athlete in stream_athletes %}
                           <tr id="athlete_{{ athlete.id }}">
                             {% with athlete_performances=athletes_disciplines_result_dict|get_item:athlete.id %}
-                              <td><a href="{% url 'athletes.detail' athlete.id %}">{{ athlete }}</a></td>
+                              <td><a href="{% url 'athletes.detail' athlete.id athlete.slug %}">{{ athlete }}</a></td>
                               {% for discipline in stream_disciplines %}
                                 <td>
                                   {{ athlete_performances|get_item:discipline.id }}

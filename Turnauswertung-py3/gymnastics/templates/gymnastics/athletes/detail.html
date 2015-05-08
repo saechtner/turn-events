@@ -5,7 +5,7 @@
 
 {% block headline %}{{ athlete }} <small>{{ athlete.club }}</small>{% endblock headline %}
 {% block nav_main %}{{ athlete }}{% endblock nav_main %}
-{% block nav_main_url %}{% url 'athletes.detail' athlete.id %}{% endblock nav_main_url %}
+{% block nav_main_url %}{% url 'athletes.detail' athlete.id athlete.slug %}{% endblock nav_main_url %}
 {% block nav_links %}
   <li role="presentation" class="active">
     <a href="#base" aria-controls="home" role="tab" data-toggle="tab">{% trans "General" %}</a>
@@ -15,10 +15,10 @@
   </li>
 {% endblock nav_links %}
 {% block nav_regular_buttons %}
-  <a type="button" class="btn btn-warning navbar-btn" href="{% url 'athletes.edit' athlete.id %}">{% trans "Edit" %}</a>
+  <a type="button" class="btn btn-warning navbar-btn" href="{% url 'athletes.edit' athlete.id athlete.slug %}">{% trans "Edit" %}</a>
   <a  type="button" 
       class="btn btn-danger navbar-btn" 
-      href="{% url 'athletes.delete' athlete.id %}" >
+      href="{% url 'athletes.delete' athlete.id athlete.slug %}" >
     {% trans "Delete" %}
   </a>
 {% endblock nav_regular_buttons %}

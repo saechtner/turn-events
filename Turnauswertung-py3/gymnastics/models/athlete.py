@@ -1,4 +1,6 @@
+from django.core.urlresolvers import reverse
 from django.db import models
+from django.utils.text import slugify
 
 
 class AthleteQuerySet(models.QuerySet):
@@ -36,6 +38,8 @@ class Athlete(models.Model):
 
     athletes_import = models.ForeignKey('AthletesImport', null=True, blank=True)
 
+    slug = models.SlugField(max_length=127) #firstname-lastname
+
     objects = AthleteManager()
 
     class Meta:
@@ -46,6 +50,14 @@ class Athlete(models.Model):
         # return 'Athlete: [name: {0} {1}, sex: {2}, year_of_birth: {3}, club; {4}, stream: {5}]'.format( \
         #     self.first_name, self.last_name, self.sex, self.year_of_birth, self.club, self.stream)
         return '{0} {1}'.format(self.first_name, self.last_name)
+
+    def save(self, *args, **kwargs):
+        if not self.id:
+            self.slug = str(slugify(self))
+        return super(Athlete, self).save(*args, **kwargs)
+
+    def get_absolute_url(self):
+        return reverse('athletes.detail', kwargs={ 'id': self.id, 'slug': self.slug })
 
     def get_disciplines_result_dict(self):
         return { perf.discipline_id: perf.value for perf in self.performance_set.all() }

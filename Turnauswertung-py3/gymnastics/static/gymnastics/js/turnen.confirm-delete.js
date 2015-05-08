@@ -1,6 +1,6 @@
 /* Delete confirm popup */
 $(document).ready(function() { 
-    $(".confirm").confirm({
+    $(".btn-confirm-delete").confirm({
         confirm: function(button) {
             var href = button.attr('href');
             var id = button.data('id');
