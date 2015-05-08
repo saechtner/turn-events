@@ -1,3 +1,4 @@
+from gymnastics.models.address import Address
 from gymnastics.models.athlete import Athlete
 from gymnastics.models.club import Club
 from gymnastics.models.discipline import Discipline
