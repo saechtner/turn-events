@@ -59,6 +59,12 @@ class Athlete(models.Model):
     def get_absolute_url(self):
         return reverse('athletes.detail', kwargs={ 'id': self.id, 'slug': self.slug })
 
+    def get_edit_url(self):
+        return reverse('athletes.edit', kwargs={ 'pk': self.id, 'slug': self.slug })
+
+    def get_delete_url(self):
+        return reverse('athletes.delete', kwargs={ 'pk': self.id, 'slug': self.slug })
+
     def get_disciplines_result_dict(self):
         return { perf.discipline_id: perf.value for perf in self.performance_set.all() }
 
