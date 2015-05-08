@@ -38,7 +38,7 @@ class Athlete(models.Model):
 
     athletes_import = models.ForeignKey('AthletesImport', null=True, blank=True)
 
-    slug = models.SlugField(max_length=127) #firstname-lastname
+    slug = models.SlugField(max_length=128, blank=True)
 
     objects = AthleteManager()
 

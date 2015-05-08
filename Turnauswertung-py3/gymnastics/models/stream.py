@@ -27,7 +27,7 @@ class Stream(models.Model):
 
     discipline_set = models.ManyToManyField('Discipline', through='StreamDisciplineJoin')
 
-    slug = models.SlugField(max_length=127, blank=True) #firstname-lastname
+    slug = models.SlugField(max_length=127, blank=True)
 
 
     class Meta:

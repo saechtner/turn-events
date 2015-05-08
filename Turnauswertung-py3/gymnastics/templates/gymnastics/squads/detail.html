@@ -17,9 +17,9 @@
     </div>
     <div class="col-md-5 div-pos-bottom-right text-right">
       <div class="btn-group">
-        <a type="button" class="btn btn-primary" href="{% url 'squads.enter_performances' squad.id %}">{% trans "Enter performances" %}</a>
-        <a type="button" class="btn btn-warning" href="{% url 'squads.edit' squad.id %}">{% trans "Edit" %}</a>
-        <a type="button" class="btn btn-danger" href="{% url 'squads.delete' squad.id %}">{% trans "Delete" %}</a>
+        <a type="button" class="btn btn-primary" href="{% url 'squads.enter_performances' squad.slug squad.id %}">{% trans "Enter performances" %}</a>
+        <a type="button" class="btn btn-warning" href="{{ squad.get_edit_url }}">{% trans "Edit" %}</a>
+        <a type="button" class="btn btn-danger" href="{{ squad.get_delete_url }}">{% trans "Delete" %}</a>
         <button type="button" class="btn btn-default" onClick="javascript:history.go(-1);">{% trans "Previous Page" %}</button>
       </div>
     </div>

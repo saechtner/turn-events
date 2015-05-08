@@ -9,34 +9,39 @@
 
 {% block content %}
 
-    {% if squads %}
+  {% if squads %}
+    <table class="table table-hover" id="squads-table">
+      <thead>
+        <th>{% trans "Squad" %}</th>
+        <th></th>
+      </thead>
+      <tbody>
+        {% for squad in squads %}
+          <tr id="squad_{{ squad.id }}">
+            <td>{{ squad.name }}</td>
+            <td class="text-right">
+              <div class="btn-group" role="group">
+                <a type="button" class="btn btn-xs btn-primary" href="{% url 'squads.enter_performances' squad.slug squad.id %}">
+                  {% trans "Enter performances" %}
+                </a>
+                <a type="button" class="btn btn-xs btn-success" href="{{ squad.get_absolute_url }}">
+                  <span class="glyphicon glyphicon-search"></span> {% trans "Detail" %}
+                </a>
+                <a type="button" class="btn btn-xs btn-warning" href="{{ squad.get_edit_url }}">
+                  <span class="glyphicon glyphicon-edit"></span> {% trans "Edit" %}
+                </a>
+                <a type="button" class="btn btn-xs btn-danger" href="{{ squad.get_delete_url }}">
+                  <span class="glyphicon glyphicon-remove"></span> {% trans "Delete" %}
+                </a>
+              </div>
+            </td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
 
-      <table class="table table-hover" id="squads-table">
-        <thead>
-          <th>{% trans "Name" %}</th>
-          <th></th>
-        </thead>
-        <tbody>
-          {% for squad in squads %}
-            <tr id="squad_{{ squad.id }}">
-              <td>{{ squad.name }}</td>
-              <td class="text-right">
-                <div class="btn-group" role="group">
-                  <a type="button" class="btn btn-xs btn-primary" href="{% url 'squads.enter_performances' squad.id %}">{% trans "Enter performances" %}</a>
-                  <a  type="button" class="btn btn-xs btn-success"href="{% url 'squads.detail' squad.id %}"><span class="glyphicon glyphicon-search"></span> {% trans "detail" %}</a>
-                  <a  type="button" class="btn btn-xs btn-warning"href="{% url 'squads.edit' squad.id %}"><span class="glyphicon glyphicon-edit"></span> {% trans "edit" %}</a>
-                  <a  type="button" class="btn btn-xs btn-danger"href="{% url 'squads.delete' squad.id %}"><span class="glyphicon glyphicon-remove"></span> {% trans "delete" %}</a>
-                </div>
-              </td>
-            </tr>
-          {% endfor %}
-        </tbody>
-      </table>
+  {% else %}
+    <div class="alert alert-info">{% trans "No squads available in the database." %}</div>
+  {% endif %}
 
-    {% else %}
-
-      <div class="alert alert-info">{% trans "No squads available in the database." %}</div>
-
-    {% endif %}
-  </div>
 {% endblock content %}

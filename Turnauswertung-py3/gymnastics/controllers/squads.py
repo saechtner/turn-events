@@ -6,11 +6,7 @@ from django.shortcuts import redirect, render
 from django.utils.translation import ugettext_lazy
 from django.views import generic
 
-from gymnastics.models.athlete import Athlete
-from gymnastics.models.discipline import Discipline
-from gymnastics.models.performance import Performance
-from gymnastics.models.squad import Squad
-from gymnastics.models.stream import Stream
+from gymnastics.models import Athlete, Discipline, Performance, Squad, Stream
 from gymnastics.utils import pdf
 
 
@@ -18,7 +14,7 @@ def index(request):
     context = { 'squads': Squad.objects.all() }
     return render(request, 'gymnastics/squads/index.html', context)
 
-def detail(request, id):
+def detail(request, id, slug):
     squad = Squad.objects.get(id=id)
 
     athletes = squad.athlete_set.all() \
@@ -41,7 +37,7 @@ def detail(request, id):
     }
     return render(request, 'gymnastics/squads/detail.html', context)
 
-def enter_performances(request, id):        
+def enter_performances(request, id, slug):        
     squad = Squad.objects.get(id=id)
 
     #### Athletes ###
@@ -91,7 +87,6 @@ def handle_entered_performances(request):
                 performance = performances.get(athlete_id=athlete_id, discipline_id=discipline_id)
             except:
                 performance = Performance(athlete_id=athlete_id, discipline_id=discipline_id)
-
             performance.value = value
             performance.save()
 
@@ -101,13 +96,9 @@ def create_judge_pdf(request):
     squads = Squad.objects.all() \
         .prefetch_related('athlete_set') \
         .select_related('athlete_set__stream')
-    
-    squad_athletes_dict = {}
-    squad_disciplines_dict = {}
-    for squad in squads:
-        athletes = squad.athlete_set.all()
-        squad_athletes_dict[squad.id] = athletes
-        squad_disciplines_dict[squad.id] = squad.get_disciplines(athletes)
+
+    squad_athletes_dict = { squad.id: squad.athlete_set.all() for squad in squads }
+    squad_disciplines_dict = { squad.id: squad.get_disciplines(squad.athlete_set.all()) for squad in squads }
 
     context = {
         'squads': squads,
@@ -138,7 +129,6 @@ class SquadCreateView(generic.CreateView):
     model = Squad
     fields = ['name']
     template_name = 'gymnastics/squads/new.html'
-    success_url = reverse_lazy('squads.index')
 
 
 class SquadUpdateView(generic.UpdateView):
@@ -146,9 +136,6 @@ class SquadUpdateView(generic.UpdateView):
     model = Squad
     fields = ['name']
     template_name = 'gymnastics/squads/edit.html'
-
-    def get_success_url(self):
-        return reverse('squads.detail', kwargs = { 'id' : self.kwargs['pk'] })
 
 
 class SquadDeleteView(generic.DeleteView):

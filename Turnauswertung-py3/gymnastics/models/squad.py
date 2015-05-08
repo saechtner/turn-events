@@ -1,17 +1,36 @@
 import itertools
 
+from django.core.urlresolvers import reverse
 from django.db import models
+from django.utils.text import slugify
+from django.utils.translation import ugettext_lazy
 
 
 class Squad(models.Model):
   
-    name = models.CharField(max_length=50, null=False)
+    name = models.CharField(ugettext_lazy('Squad'), max_length=50, null=False)
+
+    slug = models.SlugField(max_length=128, blank=True)
 
     class Meta:
         db_table = 'gymnastics_squads'
 
     def __str__(self):
         return self.name
+
+    def save(self, *args, **kwargs):
+        if not self.id:
+            self.slug = str(slugify(str(self)))
+        return super(Squad, self).save(*args, **kwargs)
+
+    def get_absolute_url(self):
+        return reverse('squads.detail', kwargs={ 'id': self.id, 'slug': self.slug })
+
+    def get_edit_url(self):
+        return reverse('squads.edit', kwargs={ 'pk': self.id, 'slug': self.slug })
+
+    def get_delete_url(self):
+        return reverse('squads.delete', kwargs={ 'pk': self.id, 'slug': self.slug })
 
     def get_disciplines(self, athletes=None):
         if not athletes:
