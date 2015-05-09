@@ -14,10 +14,8 @@ class Tournament(models.Model):
     name_full = models.CharField(max_length=255)
     date = models.DateField(default=datetime.date.today)
 
-    street = models.CharField(max_length=50, null=True, blank=True)
-    zip_code = models.CharField(max_length=10, null=True, blank=True)
-    city = models.CharField(max_length=50, null=True, blank=True)
-
+    
+    host = models.ForeignKey('Address')
     hosting_club = models.ForeignKey('Club', null=True, blank=True)
 
     class Meta:
