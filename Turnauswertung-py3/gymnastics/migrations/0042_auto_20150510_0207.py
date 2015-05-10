@@ -7,7 +7,7 @@ from django.db import models, migrations
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('gymnastics', '0037_auto_20150508_1804'),
+        ('gymnastics', '0041_auto_20150508_2156'),
     ]
 
     operations = [
@@ -50,25 +50,25 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='address',
             name='contact_email',
-            field=models.EmailField(blank=True, max_length=75, null=True, verbose_name='Contact email'),
+            field=models.EmailField(blank=True, null=True, verbose_name='Contact email', max_length=75),
             preserve_default=True,
         ),
         migrations.AddField(
             model_name='address',
             name='contact_phone',
-            field=models.CharField(blank=True, max_length=15, null=True, verbose_name='Contact phone'),
+            field=models.CharField(blank=True, null=True, verbose_name='Contact phone', max_length=15),
             preserve_default=True,
         ),
         migrations.AddField(
             model_name='club',
-            name='host',
-            field=models.ForeignKey(null=True, blank=True, to='gymnastics.Address'),
+            name='address',
+            field=models.ForeignKey(blank=True, null=True, to='gymnastics.Address'),
             preserve_default=True,
         ),
         migrations.AddField(
             model_name='tournament',
-            name='host',
-            field=models.ForeignKey(default='test', to='gymnastics.Address'),
-            preserve_default=False,
+            name='address',
+            field=models.ForeignKey(blank=True, null=True, to='gymnastics.Address'),
+            preserve_default=True,
         ),
     ]

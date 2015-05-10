@@ -13,9 +13,8 @@ class Tournament(models.Model):
     name = models.CharField(max_length=50, default='KJSS 2015')
     name_full = models.CharField(max_length=255)
     date = models.DateField(default=datetime.date.today)
-
     
-    host = models.ForeignKey('Address')
+    address = models.ForeignKey('Address', null=True, blank=True)
     hosting_club = models.ForeignKey('Club', null=True, blank=True)
 
     class Meta:

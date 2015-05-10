@@ -5,7 +5,7 @@ class Club(models.Model):
   
     name = models.CharField(max_length=50)
 
-    host = models.ForeignKey('Address', null=True, blank=True)
+    address = models.ForeignKey('Address', null=True, blank=True)
 
 
     class Meta:
