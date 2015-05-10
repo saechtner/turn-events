@@ -17,8 +17,8 @@
     </div>
     <div class="col-md-4 div-pos-bottom-right text-right">
       <div class="btn-group">
-        <a type="button" class="btn btn-warning" href="{% url 'teams.edit' team.id %}">{% trans "Edit" %}</a>
-        <a type="button" class="btn btn-danger" href="{% url 'teams.delete' team.id %}">{% trans "Delete" %}</a>
+        <a type="button" class="btn btn-warning" href="{{ team.get_edit_url }}">{% trans "Edit" %}</a>
+        <a type="button" class="btn btn-danger" href="{{ team.get_delete_url }}">{% trans "Delete" %}</a>
         <button type="button" class="btn btn-default" onClick="javascript:history.go(-1);">{% trans "Previous Page" %}</button>
       </div>
     </div>
@@ -34,7 +34,7 @@
     <!-- Tab panes -->
     <div class="tab-content">
       <div role="tabpanel" class="tab-pane active" id="base">
-        <p>{% trans "Club" %}: <a href="{% url 'clubs.detail' club.id %}">{{ club }}</a></p>
+        <p>{% trans "Club" %}: <a href="{{ club.get_absolute_url }}">{{ club }}</a></p>
         <p>{% trans "Stream" %}: <a href="{{ stream.get_absolute_url }}">{{ stream }}</a></p>
       </div>
       <div role="tabpanel" class="tab-pane active" id="performances">

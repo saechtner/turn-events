@@ -53,10 +53,24 @@
           <dt>{% trans "Date of Birth" %}</dt>
           <dd>{{ athlete.date_of_birth }}</dd>
 
+          <dt>{% trans "Stream" %}</dt>
+          <dd>
+            {% if athlete.stream %}
+              <a href="{{ athlete.stream.get_absolute_url }}">{{ athlete.stream }}</a>
+            {% endif %}
+          </dd>
+
           <dt>{% trans "Club" %}</dt>
           <dd>
             {% if athlete.club %}
-              <a href="{% url 'clubs.detail' athlete.club.id %}">{{ athlete.club }}</a>
+              <a href="{{ athlete.club.get_absolute_url }}">{{ athlete.club }}</a>
+            {% endif %}
+          </dd>
+
+          <dt>{% trans "Team" %}</dt>
+          <dd>
+            {% if athlete.team %}
+              <a href="{{ athlete.team.get_absolute_url }}">{{ athlete.team }}</a>
             {% endif %}
           </dd>
 
@@ -64,13 +78,6 @@
           <dd>
             {% if athlete.squad %}
               <a href="{{ athlete.squad.get_absolute_url }}">{{ athlete.squad }}</a>
-            {% endif %}
-          </dd>
-
-          <dt>{% trans "Team" %}</dt>
-          <dd>
-            {% if athlete.team %}
-              <a href="{% url 'teams.detail' athlete.team.id %}">{{ athlete.team }}</a>
             {% endif %}
           </dd>
         </dl>
@@ -90,7 +97,7 @@
           <tbody>
             {% for discipline in disciplines %}
               <tr id="discipline_{{ discipline.id }}">
-                <td><a href="{% url 'disciplines.detail' discipline.id %}">{{ discipline }}</a></td>
+                <td><a href="{{ discipline.get_absolute_url }}">{{ discipline }}</a></td>
                 <td>{{ athlete_disciplines_result_dict|get_item:discipline.id|default:'' }}</td>
                 <td>
                   {% if athlete_disciplines_result_dict|get_item:discipline.id %}

@@ -15,7 +15,7 @@
       </td>
       <td>
         {% if team.club %}
-          <a href="{% url 'clubs.detail' team.club.id %}">{{ team.club }}</a>
+          <a href="{{ team.club.get_absolute_url }}">{{ team.club }}</a>
         {% endif %}
       </td>
       <td>
@@ -23,9 +23,15 @@
       </td>
       <td class="text-right">
         <div class="btn-group" role="group">
-          <a  type="button" class="btn btn-xs btn-success"href="{% url 'teams.detail' team.id %}"><span class="glyphicon glyphicon-search"></span> {% trans "detail" %}</a>
-          <a  type="button" class="btn btn-xs btn-warning"href="{% url 'teams.edit' team.id %}"><span class="glyphicon glyphicon-edit"></span> {% trans "edit" %}</a>
-          <a  type="button" class="btn btn-xs btn-danger"href="{% url 'teams.delete' team.id %}"><span class="glyphicon glyphicon-remove"></span> {% trans "delete" %}</a>
+          <a  type="button" class="btn btn-xs btn-success" href="{{ team.get_absolute_url }}">
+            <span class="glyphicon glyphicon-search"></span> {% trans "detail" %}
+          </a>
+          <a  type="button" class="btn btn-xs btn-warning" href="{{ team.get_edit_url }}">
+            <span class="glyphicon glyphicon-edit"></span> {% trans "edit" %}
+          </a>
+          <a  type="button" class="btn btn-xs btn-danger" href="{{ team.get_delete_url }}">
+            <span class="glyphicon glyphicon-remove"></span> {% trans "delete" %}
+          </a>
         </div>
       </td>
     </tr>

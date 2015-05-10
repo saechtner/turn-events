@@ -31,7 +31,7 @@
               <dt>{% trans "Club" %}</dt>
               <dd>
                 {% if athletes_import.club %}
-                  <a href="{% url 'clubs.detail' athletes_import.club.id %}">{{ athletes_import.club }}</a>
+                  <a href="{{ athletes_import.club.get_absolute_url }}">{{ athletes_import.club }}</a>
                 {% endif %}
               </dd>
 

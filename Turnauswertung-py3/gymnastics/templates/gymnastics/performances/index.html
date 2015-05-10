@@ -25,7 +25,7 @@
           {% for performance in performances %}
             <tr id="performance_{{ performance.id }}">
               <td><a href="{{ performance.athlete.get_absolute_url }}">{{ performance.athlete }}</a></td>
-              <td><a href="{% url 'disciplines.detail' performance.discipline.id %}">{{ performance.discipline }}</a></td>
+              <td><a href="{{ performance.discipline.get_absolute_url }}">{{ performance.discipline }}</a></td>
               <td>{{ performance.value }}</td>
               <td>{{ performance.value_final|default:"" }}</td>
               <td class="text-right">

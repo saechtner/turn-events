@@ -24,10 +24,18 @@
               <td>{{ club.athlete_set.all.count }}</td>
               <td class="text-right">
                 <div class="btn-group" role="group">
-                  <a type="button" class="btn btn-xs btn-primary" href="{% url 'athletes_imports.new' %}?club_id={{ club.id }}">{% trans "Import Athletes" %}</a>
-                  <a  type="button" class="btn btn-xs btn-success"href="{% url 'clubs.detail' club.id %}"><span class="glyphicon glyphicon-search"></span> {% trans "detail" %}</a>
-                  <a  type="button" class="btn btn-xs btn-warning"href="{% url 'clubs.edit' club.id %}"><span class="glyphicon glyphicon-edit"></span> {% trans "edit" %}</a>
-                  <a  type="button" class="btn btn-xs btn-danger"href="{% url 'clubs.delete' club.id %}"><span class="glyphicon glyphicon-remove"></span> {% trans "delete" %}</a>
+                  <a type="button" class="btn btn-xs btn-primary" href="{% url 'athletes_imports.new' %}?club_id={{ club.id }}">
+                    {% trans "Import Athletes" %}
+                  </a>
+                  <a  type="button" class="btn btn-xs btn-success"href="{{ club.get_absolute_url }}">
+                    <span class="glyphicon glyphicon-search"></span> {% trans "detail" %}
+                  </a>
+                  <a  type="button" class="btn btn-xs btn-warning"href="{{ club.get_edit_url }}">
+                    <span class="glyphicon glyphicon-edit"></span> {% trans "edit" %}
+                  </a>
+                  <a  type="button" class="btn btn-xs btn-danger"href="{{ club.get_delete_url }}">
+                    <span class="glyphicon glyphicon-remove"></span> {% trans "delete" %}
+                  </a>
                 </div>
               </td>
             </tr>

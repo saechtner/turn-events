@@ -1,5 +1,6 @@
 from django.core.urlresolvers import reverse
 from django.db import models
+from django.utils.text import slugify
 
 
 class Club(models.Model):
@@ -8,6 +9,7 @@ class Club(models.Model):
 
     address = models.ForeignKey('Address', null=True, blank=True)
 
+    slug = models.SlugField(max_length=128, blank=True)
 
     class Meta:
         db_table = 'gymnastics_clubs'
@@ -15,5 +17,16 @@ class Club(models.Model):
     def __str__(self):
         return self.name
 
+    def save(self, *args, **kwargs):
+        if not self.id:
+            self.slug = str(slugify(str(self)))
+        return super(Club, self).save(*args, **kwargs)
+
     def get_absolute_url(self):
-        return reverse('clubs.detail', kwargs={ 'id': self.id })
+        return reverse('clubs.detail', kwargs={ 'id': self.id, 'slug': self.slug })
+
+    def get_edit_url(self):
+        return reverse('clubs.edit', kwargs={ 'pk': self.id, 'slug': self.slug })
+
+    def get_delete_url(self):
+        return reverse('clubs.delete', kwargs={ 'pk': self.id, 'slug': self.slug })

@@ -89,7 +89,7 @@
           <dd>
             <ul class="list-inline">
               {% for discipline in disciplines %}
-                <li><a href="{% url 'disciplines.detail' discipline.id %}">{{ discipline }}</a></li>
+                <li><a href="{{ discipline.get_absolute_url }}">{{ discipline }}</a></li>
               {% endfor %}
             </ul>
           </dd>
@@ -197,7 +197,7 @@
               {% for team in teams %}
                 <tr id="team_{{ team.id }}">
                   {% with team_performances=teams_disciplines_result_dict|get_item:team.id team_ranks=teams_disciplines_rank_dict|get_item:team.id %}
-                    <td><a href="{% url 'teams.detail' team.id %}">{{ team.name }}</a></td>
+                    <td><a href="{{ team.get_absolute_url }}">{{ team.name }}</a></td>
                     <td>
                       {% if team.club %}
                         <a href="{{ team.club.get_absolute_url }}">{{ team.club }}</a>

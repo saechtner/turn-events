@@ -1,118 +1,126 @@
 {% extends "gymnastics/streams/base.html" %}
-{% load widget_tweaks %}
-{% load i18n %}
 
+{% load i18n %}
 {% load custom_template_tags %}
-                  
-{% block nav_level_2 %}
-  {% render_nav_item name='new' active=True %}
-{% endblock nav_level_2 %}
+
+{% block headline %}{% trans 'Create New Stream' %}{% endblock headline %}
+{% block nav_main %}{% trans 'Streams' %}{% endblock nav_main %}
+{% block nav_main_url %}
+  {% url 'streams.index' %}
+{% endblock nav_main_url %}
+{% block nav_links %}{% endblock nav_links %}
+{% block nav_regular_buttons %}{% endblock nav_regular_buttons %}
 
 
 {% block content %}
-<form action="" method="post" class="form-horizontal">
-  {% csrf_token %}
-  <div class="form-group row text-right {% if form.errors|get_item:field.name %} has-error{% endif %}">
-    <label class="col-md-2 col-md-offset-2 control-label" for="id_{{ field.name }}">{% trans 'Difficulty' %}</label>
-    <div class="col-md-4">
-      <input class="form-control" type="text" name="difficulty" required="required">
-    </div>
-  </div>
+<div class="panel panel-default">
+  <div class="panel-body">
+    <form action="" method="post" class="form-horizontal">
+      {% csrf_token %}
 
-  <div class="form-group row text-right {% if form.errors|get_item:field.name %} has-error{% endif %}">
-    <label class="col-md-2 col-md-offset-2 control-label" for="id_{{ field.name }}">{% trans 'Sex' %}</label>
-    <div class="col-md-4">
-      <select class="form-control" name="sex">
-        <option value="m">{% trans 'male' %}</option>
-        <option value="f" selected="selected">{% trans 'female' %}</option>
-      </select>
-    </div>
-  </div>
+      <div class="form-group row text-right {% if form.errors|get_item:field.name %} has-error{% endif %}">
+        <label class="col-md-2 col-md-offset-2 control-label" for="id_{{ field.name }}">{% trans 'Difficulty' %}</label>
+        <div class="col-md-4">
+          <input class="form-control" type="text" name="difficulty" required="required">
+        </div>
+      </div>
 
-  <div class="form-group row text-right {% if form.errors|get_item:field.name %} has-error{% endif %}">
-    <label class="col-md-2 col-md-offset-2 control-label" for="id_{{ field.name }}">{% trans 'Minimum Year of Birth' %}</label>
-    <div class="col-md-4">
-      <input class="form-control" type="number" name="minimum_year_of_birth" value="2000" required="required">
-    </div>
-  </div>
+      <div class="form-group row text-right {% if form.errors|get_item:field.name %} has-error{% endif %}">
+        <label class="col-md-2 col-md-offset-2 control-label" for="id_{{ field.name }}">{% trans 'Sex' %}</label>
+        <div class="col-md-4">
+          <select class="form-control" name="sex">
+            <option value="m">{% trans 'male' %}</option>
+            <option value="f" selected="selected">{% trans 'female' %}</option>
+          </select>
+        </div>
+      </div>
 
-  <div class="form-group row text-right {% if form.errors|get_item:field.name %} has-error{% endif %}">
-    <label class="col-md-2 col-md-offset-2 control-label" for="id_{{ field.name }}">{% trans 'All around individual' %}</label>
-    <div class="col-md-4">
-      <input class="form-control" type="checkbox" name="all_around_individual" checked="checked">
-    </div>
-  </div>
+      <div class="form-group row text-right {% if form.errors|get_item:field.name %} has-error{% endif %}">
+        <label class="col-md-2 col-md-offset-2 control-label" for="id_{{ field.name }}">{% trans 'Minimum Year of Birth' %}</label>
+        <div class="col-md-4">
+          <input class="form-control" type="number" name="minimum_year_of_birth" value="2000" required="required">
+        </div>
+      </div>
 
-  <div class="form-group row text-right {% if form.errors|get_item:field.name %} has-error{% endif %}">
-    <label class="col-md-2 col-md-offset-2 control-label" for="id_{{ field.name }}">{% trans 'All around individual counting events' %}</label>
-    <div class="col-md-4">
-      <input class="form-control" type="number" name="all_around_individual_counting_events" value="4">
-    </div>
-  </div>
+      <div class="form-group row text-right {% if form.errors|get_item:field.name %} has-error{% endif %}">
+        <label class="col-md-2 col-md-offset-2 control-label" for="id_{{ field.name }}">{% trans 'All around individual' %}</label>
+        <div class="col-md-4">
+          <input class="form-control" type="checkbox" name="all_around_individual" checked="checked">
+        </div>
+      </div>
 
-  <div class="form-group row text-right {% if form.errors|get_item:field.name %} has-error{% endif %}">
-    <label class="col-md-2 col-md-offset-2 control-label" for="id_{{ field.name }}">{% trans 'All around team' %}</label>
-    <div class="col-md-4">
-      <input class="form-control" type="checkbox" name="all_around_team" checked="checked">
-    </div>
-  </div>
+      <div class="form-group row text-right {% if form.errors|get_item:field.name %} has-error{% endif %}">
+        <label class="col-md-2 col-md-offset-2 control-label" for="id_{{ field.name }}">{% trans 'All around individual counting events' %}</label>
+        <div class="col-md-4">
+          <input class="form-control" type="number" name="all_around_individual_counting_events" value="4">
+        </div>
+      </div>
 
-  <div class="form-group row text-right {% if form.errors|get_item:field.name %} has-error{% endif %}">
-    <label class="col-md-2 col-md-offset-2 control-label" for="id_{{ field.name }}">{% trans 'All around team counting athletes' %}</label>
-    <div class="col-md-4">
-      <input class="form-control" type="number" name="all_around_team_counting_athletes" value="3">
-    </div>
-  </div>
+      <div class="form-group row text-right {% if form.errors|get_item:field.name %} has-error{% endif %}">
+        <label class="col-md-2 col-md-offset-2 control-label" for="id_{{ field.name }}">{% trans 'All around team' %}</label>
+        <div class="col-md-4">
+          <input class="form-control" type="checkbox" name="all_around_team" checked="checked">
+        </div>
+      </div>
 
-  <div class="form-group row text-right {% if form.errors|get_item:field.name %} has-error{% endif %}">
-    <label class="col-md-2 col-md-offset-2 control-label" for="id_{{ field.name }}">{% trans 'Discipline finals' %}</label>
-    <div class="col-md-4">
-      <input class="form-control" type="checkbox" name="discipline_finals">
-    </div>
-  </div>
+      <div class="form-group row text-right {% if form.errors|get_item:field.name %} has-error{% endif %}">
+        <label class="col-md-2 col-md-offset-2 control-label" for="id_{{ field.name }}">{% trans 'All around team counting athletes' %}</label>
+        <div class="col-md-4">
+          <input class="form-control" type="number" name="all_around_team_counting_athletes" value="3">
+        </div>
+      </div>
 
-  <div class="form-group row text-right {% if form.errors|get_item:field.name %} has-error{% endif %}">
-    <label class="col-md-2 col-md-offset-2 control-label" for="id_{{ field.name }}">{% trans 'Discipline finals max participants' %}</label>
-    <div class="col-md-4">
-      <input class="form-control" type="number" name="discipline_finals_max_participants" value="5">
-    </div>
-  </div>
+      <div class="form-group row text-right {% if form.errors|get_item:field.name %} has-error{% endif %}">
+        <label class="col-md-2 col-md-offset-2 control-label" for="id_{{ field.name }}">{% trans 'Discipline finals' %}</label>
+        <div class="col-md-4">
+          <input class="form-control" type="checkbox" name="discipline_finals">
+        </div>
+      </div>
 
-  <div class="form-group row text-right {% if form.errors|get_item:field.name %} has-error{% endif %}">
-    <label class="col-md-2 col-md-offset-2 control-label" for="id_{{ field.name }}">{% trans 'Discipline finals both values count' %}</label>
-    <div class="col-md-4">
-      <input class="form-control" type="checkbox" name="discipline_finals_both_values_count" checked="checked">
-    </div>
-  </div>
+      <div class="form-group row text-right {% if form.errors|get_item:field.name %} has-error{% endif %}">
+        <label class="col-md-2 col-md-offset-2 control-label" for="id_{{ field.name }}">{% trans 'Discipline finals max participants' %}</label>
+        <div class="col-md-4">
+          <input class="form-control" type="number" name="discipline_finals_max_participants" value="5">
+        </div>
+      </div>
 
-  <div class="form-group row text-right {% if form.errors|get_item:field.name %} has-error{% endif %}">
-    <label class="col-md-2 col-md-offset-2 control-label" for="id_{{ field.name }}">{% trans 'Disciplines' %}</label>
-    <div class="col-md-4">
-      <ul class="list-group text-left">
-        <li class="list-group-item">
-          <ul id="chosen-list" class="list-inline">
-            <li><h5>Selected:<small></small></h5></li>
+      <div class="form-group row text-right {% if form.errors|get_item:field.name %} has-error{% endif %}">
+        <label class="col-md-2 col-md-offset-2 control-label" for="id_{{ field.name }}">{% trans 'Discipline finals both values count' %}</label>
+        <div class="col-md-4">
+          <input class="form-control" type="checkbox" name="discipline_finals_both_values_count" checked="checked">
+        </div>
+      </div>
+
+      <div class="form-group row text-right {% if form.errors|get_item:field.name %} has-error{% endif %}">
+        <label class="col-md-2 col-md-offset-2 control-label" for="id_{{ field.name }}">{% trans 'Disciplines' %}</label>
+        <div class="col-md-4">
+          <ul class="list-group text-left">
+            <li class="list-group-item">
+              <ul id="chosen-list" class="list-inline">
+                <li><h5>Selected:<small></small></h5></li>
+              </ul>
+            </li>
+            <li class="list-group-item">
+              <ul id="available-list" class="list-inline">
+                <li><h5>Available:<small></small></h5></li>
+                {% for discipline in disciplines %}
+                  <li data-itemidx="{{ discipline.id }}" class="label label-default">
+                    <h5><div name="discipline_{{ discipline.id }}" style="cursor: pointer;">{{ discipline }}</div></h5>
+                  </li>
+                {% endfor %}
+              </ul>
+            </li>
           </ul>
-        </li>
-        <li class="list-group-item">
-          <ul id="available-list" class="list-inline">
-            <li><h5>Available:<small></small></h5></li>
-            {% for discipline in disciplines %}
-              <li data-itemidx="{{ discipline.id }}" class="label label-default">
-                <h5><div name="discipline_{{ discipline.id }}" style="cursor: pointer;">{{ discipline }}</div></h5>
-              </li>
-            {% endfor %}
-          </ul>
-        </li>
-      </ul>
-      <input name="chosen_list_order" hidden="hidden">
-    </div>
-  </div>
+          <input name="chosen_list_order" hidden="hidden">
+        </div>
+      </div>
 
-  <div class="col-md-5 col-md-offset-4 btn-group">
-    <input class="btn btn-primary" type="submit" value="{% trans "Create" %}"/>
-    <button class="btn btn-default" type="button" onClick="javascript:history.go(-1);">{% trans "Cancel" %}</button>
-  </div>
-</form>
+      <div class="col-md-5 col-md-offset-4 btn-group">
+        <input class="btn btn-primary" type="submit" value="{% trans "Create" %}"/>
+        <button class="btn btn-default" type="button" onClick="javascript:history.go(-1);">{% trans "Cancel" %}</button>
+      </div>
 
+    </form>
+  </div>
+</div>
 {% endblock content %}

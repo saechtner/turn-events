@@ -5,7 +5,9 @@
 
 {% block headline %}{{ tournament }}{% endblock headline %}
 {% block nav_main %}{{ tournament }}{% endblock nav_main %}
-{% block nav_main_url %}{% url 'tournaments.detail' tournament.id %}{% endblock nav_main_url %}
+{% block nav_main_url %}
+  {{ tournament.get_absolute_url }}
+{% endblock nav_main_url %}
 {% block nav_links %}
   <li role="presentation" class="active">
     <a href="#base" aria-controls="home" role="tab" data-toggle="tab">{% trans "General" %}</a>
@@ -15,8 +17,8 @@
   </li>
 {% endblock nav_links %}
 {% block nav_regular_buttons %}
-  <a type="button" class="btn btn-warning navbar-btn" href="{% url 'tournaments.edit' tournament.id %}">{% trans "Edit" %}</a>
-  <a type="button" class="btn btn-danger navbar-btn tournament-detail-delete" href="{% url 'tournaments.delete' tournament.id %}">{% trans "Delete" %}</a>
+  <a type="button" class="btn btn-warning navbar-btn" href="{{ tournament.get_edit_url }}">{% trans "Edit" %}</a>
+  <a type="button" class="btn btn-danger navbar-btn tournament-detail-delete" href="{{ tournament.get_delete_url }}">{% trans "Delete" %}</a>
   <a type="button" class="btn btn-default navbar-btn" href="{% url 'tournaments.index' %}">{% trans "All tournaments" %}</a>
 {% endblock nav_regular_buttons %}
 
@@ -40,7 +42,7 @@
           {% if tournament.hosting_club %}
             <dt>{% trans "Hosting club" %}</dt>
             <dd>
-                <a href="{% url 'clubs.detail' tournament.hosting_club.id %}">{{ tournament.hosting_club }}</a>
+                <a href="{{ tournament.hosting_club.get_absolute_url }}">{{ tournament.hosting_club }}</a>
             </dd>
           {% endif %}
 

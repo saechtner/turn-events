@@ -29,7 +29,7 @@ def main(request):
 
     return redirect(reverse('tournaments.index'))
 
-def detail(request, id):
+def detail(request, id, slug):
     tournament = Tournament.objects.get(id=id)
     context = { 'tournament': tournament }
     return render(request, 'gymnastics/tournaments/detail.html', context)

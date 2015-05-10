@@ -9,8 +9,8 @@
      <span class="gend-male"><i class="fa fa-mars fa-fw"></i></span>
   </th>
   <th>{% trans "Date of Birth" %}</th>
-  <th>{% trans "Club" %}</th>
   <th>{% trans "Stream" %}</th>
+  <th>{% trans "Club" %}</th>
   <th>{% trans "Team" %}</th>
   <th>{% trans "Squad" %}</th>
   <th></th>
@@ -28,15 +28,15 @@
         {% endif %}
       </td>
       <td>{{ athlete.date_of_birth|date:'SHORT_DATE_FORMAT' }}</td>
-      <td>
-        {% if athlete.club %}
-          <a href="{% url 'clubs.detail' athlete.club.id %}">{{ athlete.club }}</a>
-        {% endif %}
-      </td>
       <td><a href="{{ athlete.stream.get_absolute_url }}">{{ athlete.stream }}</a></td>
       <td>
+        {% if athlete.club %}
+          <a href="{{ athlete.club.get_absolute_url }}">{{ athlete.club }}</a>
+        {% endif %}
+      </td>
+      <td>
         {% if athlete.team %}
-          <a href="{% url 'teams.detail' athlete.team.id %}">{{ athlete.team }}</a>
+          <a href="{{ athlete.team.get_absolute_url }}">{{ athlete.team }}</a>
         {% endif %}
       </td>
       <td>

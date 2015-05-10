@@ -22,9 +22,9 @@
               <td>{{ discipline.name }}</td>
               <td class="text-right">
                 <div class="btn-group" role="group">
-                  <a  type="button" class="btn btn-xs btn-success"href="{% url 'disciplines.detail' discipline.id %}"><span class="glyphicon glyphicon-search"></span> {% trans "detail" %}</a>
-                  <a  type="button" class="btn btn-xs btn-warning"href="{% url 'disciplines.edit' discipline.id %}"><span class="glyphicon glyphicon-edit"></span> {% trans "edit" %}</a>
-                  <a  type="button" class="btn btn-xs btn-danger"href="{% url 'disciplines.delete' discipline.id %}"><span class="glyphicon glyphicon-remove"></span> {% trans "delete" %}</a>
+                  <a  type="button" class="btn btn-xs btn-success"href="{{ discipline.get_absolute_url }}"><span class="glyphicon glyphicon-search"></span> {% trans "detail" %}</a>
+                  <a  type="button" class="btn btn-xs btn-warning"href="{{ discipline.get_edit_url }}"><span class="glyphicon glyphicon-edit"></span> {% trans "edit" %}</a>
+                  <a  type="button" class="btn btn-xs btn-danger"href="{{ discipline.get_delete_url }}"><span class="glyphicon glyphicon-remove"></span> {% trans "delete" %}</a>
                 </div>
               </td>
             </tr>

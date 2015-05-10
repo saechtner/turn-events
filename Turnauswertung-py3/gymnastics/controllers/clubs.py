@@ -13,7 +13,7 @@ def index(request):
     }
     return render(request, 'gymnastics/clubs/index.html', context)
 
-def detail(request, id):
+def detail(request, id, slug):
     # Club
     club = Club.objects.select_related().get(id=id)
 
@@ -33,7 +33,6 @@ class ClubCreateView(SuccessMessageMixin, generic.CreateView):
     model = Club
     fields = ['name', 'address']
     template_name = 'gymnastics/clubs/new.html'
-    success_url = reverse_lazy('clubs.index')
     success_message = "%(name)s was created successfully"
 
 
@@ -42,10 +41,6 @@ class ClubUpdateView(generic.UpdateView):
     model = Club
     fields = ['name', 'address']
     template_name = 'gymnastics/clubs/edit.html'
-
-    def get_success_url(self):
-        some_kwargs = self.kwargs
-        return reverse('clubs.detail', kwargs = { 'id' : self.kwargs['pk'] })
 
 
 class ClubDeleteView(generic.DeleteView):

@@ -10,7 +10,7 @@ def index(request):
     return render(request, 'gymnastics/disciplines/index.html', context)
 
 
-def detail(request, id):
+def detail(request, id, slug):
     discipline = Discipline.objects.get(id=id)
     streams = discipline.stream_set.all()
     performances = discipline.performance_set.all().select_related('athlete')
@@ -28,7 +28,6 @@ class DisciplineCreateView(generic.CreateView):
     model = Discipline
     fields = ['name']
     template_name = 'gymnastics/disciplines/new.html'
-    success_url = reverse_lazy('disciplines.index')
 
 
 class DisciplineUpdateView(generic.UpdateView):
@@ -36,10 +35,6 @@ class DisciplineUpdateView(generic.UpdateView):
     model = Discipline
     fields = ['name']
     template_name = 'gymnastics/disciplines/edit.html'
-
-    def get_success_url(self):
-        some_kwargs = self.kwargs
-        return reverse('disciplines.detail', kwargs = { 'pk' : self.kwargs['pk'] })
 
 
 class DisciplineDeleteView(generic.DeleteView):

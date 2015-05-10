@@ -4,7 +4,9 @@
 
 {% block headline %}<small>{% trans 'Edit' %}</small> {{ tournament }}{% endblock headline %}
 {% block nav_main %}{{ tournament }}{% endblock nav_main %}
-{% block nav_main_url %}{% url 'tournaments.detail' tournament.id %}{% endblock nav_main_url %}
+{% block nav_main_url %}
+  {{ tournament.get_absolute_url }}
+{% endblock nav_main_url %}
 {% block nav_links %}{% endblock nav_links %}
 {% block nav_regular_buttons %}{% endblock nav_regular_buttons %}
 

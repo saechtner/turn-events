@@ -18,8 +18,8 @@
     <div class="col-md-5 div-pos-bottom-right text-right">
       <div class="btn-group">
         <a type="button" class="btn btn-primary" href="{% url 'athletes_imports.new' %}?club_id={{ club.id }}">{% trans "Import Athletes" %}</a>
-        <a type="button" class="btn btn-warning" href="{% url 'clubs.edit' club.id %}">{% trans "Edit" %}</a>
-        <a type="button" class="btn btn-danger" href="{% url 'clubs.delete' club.id %}">{% trans "Delete" %}</a>
+        <a type="button" class="btn btn-warning" href="{{ club.get_edit_url }}">{% trans "Edit" %}</a>
+        <a type="button" class="btn btn-danger" href="{{ club.get_delete_url }}">{% trans "Delete" %}</a>
         <button type="button" class="btn btn-default" onClick="javascript:history.go(-1);">{% trans "Previous Page" %}</button>
       </div>
     </div>

@@ -1,3 +1,4 @@
+from django.core.urlresolvers import reverse
 from django.db import models
 
 
@@ -13,6 +14,15 @@ class Team(models.Model):
 
     def __str__(self):
         return self.name
+
+    def get_absolute_url(self):
+        return reverse('teams.detail', kwargs={ 'id': self.id })
+
+    def get_edit_url(self):
+        return reverse('teams.edit', kwargs={ 'pk': self.id })
+
+    def get_delete_url(self):
+        return reverse('teams.delete', kwargs={ 'pk': self.id })
 
     def get_disciplines_result_dict(self):
         disciplines_results_dict = { disc.id: [] for disc in self.stream.discipline_set.all() }
