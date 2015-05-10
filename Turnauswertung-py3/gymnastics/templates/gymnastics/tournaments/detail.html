@@ -37,19 +37,35 @@
           <dt>{% trans "Date" %}</dt>
           <dd>{{ tournament.date }}</dd>
 
-          <dt>{% trans "Location" %}</dt>
-          <dd>
-            {{ tournament.street|default:'' }}
-            <br/>
-            {{ tournament.zip_code|default:'' }} {{ tournament.city|default:'' }}
-          </dd>
+          {% if tournament.hosting_club %}
+            <dt>{% trans "Hosting club" %}</dt>
+            <dd>
+                <a href="{% url 'clubs.detail' tournament.hosting_club.id %}">{{ tournament.hosting_club }}</a>
+            </dd>
+          {% endif %}
 
-          <dt>{% trans "Hosting club" %}</dt>
-          <dd>
-            {% if tournament.hosting_club %}
-              <a href="{% url 'clubs.detail' tournament.hosting_club.id %}">{{ tournament.hosting_club }}</a>
+          {% if tournament.address %}
+            {% if tournament.address.contact_name %}
+              <dt>{% trans "Contact name" %}</dt>
+              <dd>{{ tournament.address.contact_name }}</dd>
             {% endif %}
-          </dd>
+
+            {% if tournament.address.email %}
+              <dt>{% trans "Contact e-mail" %}</dt>
+              <dd>{{ tournament.address.email }}</dd>
+            {% endif %}
+
+            {% if tournament.address.phone %}
+              <dt>{% trans "Contact phone" %}</dt>
+              <dd>{{ tournament.address.phone }}</dd>
+            {% endif %}
+
+            {% if tournament.address.address_formatted %}
+              <dt>{% trans "Location" %}</dt>
+              <dd>{{ tournament.address.address_formatted|linebreaksbr }}</dd>
+            {% endif %}
+          {% endif %}
+
         </dl>
 
       </div>

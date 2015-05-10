@@ -40,7 +40,7 @@ def create_certificates_pdf(request):
     context = {
         'squads': [],
     }
-    template_location = 'gymnastics/tournaments/certificates.tex'
+    template_location = 'gymnastics/pdfs/certificates.tex'
     file_name = 'filename={0}.pdf'.format(ugettext_lazy('Certificates'))
 
     return pdf.create(template_location, context, file_name)
@@ -49,14 +49,14 @@ def create_certificates_pdf(request):
 class TournamentCreateView(generic.CreateView):
 
     model = Tournament
-    fields = ['name', 'name_full', 'date', 'street', 'zip_code', 'city', 'hosting_club']
+    fields = ['name', 'name_full', 'date', 'address']
     template_name = 'gymnastics/tournaments/new.html'
 
 
 class TournamentUpdateView(generic.UpdateView):
 
     model = Tournament
-    fields = ['name', 'name_full', 'date', 'street', 'zip_code', 'city', 'hosting_club']
+    fields = ['name', 'name_full', 'date', 'address']
     template_name = 'gymnastics/tournaments/edit.html'
 
 
