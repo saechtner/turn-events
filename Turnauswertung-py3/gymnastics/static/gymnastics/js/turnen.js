@@ -81,7 +81,7 @@ $(document).ready(function() {
     }
 
     $(window).scroll(function() {
-        var scroll_limit = 160;
+        var scroll_limit = 150;
 
         var scroll_top = $(window).scrollTop();
 

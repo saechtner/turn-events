@@ -3,84 +3,118 @@
 {% load i18n %}
 {% load custom_template_tags %}
 
-{% block nav_level_2 %}
-  {% render_nav_item name=stream active=True %}
-{% endblock nav_level_2 %}
+{% block headline %}
+  {{ stream }} <small>{{ athletes_count }} {% trans "Athletes" %}</small>
+{% endblock headline %}
+{% block nav_main %}{{ stream }}{% endblock nav_main %}
+{% block nav_main_url %}{{ stream.get_absolute_url }}{% endblock nav_main_url %}
+{% block nav_links %}
+  <li role="presentation" class="active">
+    <a href="#general" aria-controls="general" role="tab" data-toggle="tab">{% trans "General" %}</a>
+  </li>
+  <li role="presentation">
+    <a href="#athletes" aria-controls="athletes" role="tab" data-toggle="tab">{% trans "Athletes" %}</a>
+  </li>
+  {% if stream.all_around_individual %}
+    <li role="presentation">
+      <a href="#results-athletes" aria-controls="results-athletes" role="tab" data-toggle="tab">{% trans "Results Athletes" %}</a>
+    </li>
+  {% endif %}
+  {% if stream.all_around_team %}
+    <li role="presentation">
+      <a href="#teams" aria-controls="teams" role="tab" data-toggle="tab">{% trans "Teams" %}</a>
+    </li>
+    <li role="presentation">
+      <a href="#results-teams" aria-controls="results-teams" role="tab" data-toggle="tab">{% trans "Results Teams" %}</a>
+    </li>
+  {% endif %}
+  {% if stream.discipline_finals %}
+    <li role="presentation">
+      <a href="#athletes-finals" aria-controls="athletes-finals" role="tab" data-toggle="tab">{% trans "Athletes Finals" %}</a>
+    </li>
+    <li role="presentation">
+      <a href="#results-finals" aria-controls="results-finals" role="tab" data-toggle="tab">{% trans "Results Finals" %}</a>
+    </li>
+  {% endif %}
+{% endblock nav_links %}
+{% block nav_regular_buttons %}
+  <form class="navbar-form" role="search">
+    <input type="search" class="light-table-filter form-control" data-table="athletes-table" name="table_filter">
+  </form>
+  <a type="button" class="btn btn-warning navbar-btn" href="{{ stream.get_edit_url }}">{% trans "Edit" %}</a>
+  <a  type="button" 
+      class="btn btn-danger navbar-btn" 
+      href="{{ stream.get_delete_url }}">
+    {% trans "Delete" %}
+  </a>
+{% endblock nav_regular_buttons %}
 
 {% block content %}
-
-  <div class="row row-relative">
-    <div class="col-md-8">
-      <h1>
-        {{ stream }} <small> {{ athletes_count }} {% trans "Athletes" %}</small>
-      </h1>
-    </div>
-    <div class="col-md-4 div-pos-bottom-right text-right">
-      <div class="btn-group">
-        <a type="button" class="btn btn-warning" href="{{ stream.get_edit_url }}">{% trans "Edit" %}</a>
-        <a type="button" class="btn btn-danger" href="{{ stream.get_delete_url }}">{% trans "Delete" %}</a>
-        <button type="button" class="btn btn-default" onClick="javascript:history.go(-1);">{% trans "Previous Page" %}</button>
-      </div>
-    </div>
-  </div>
-
-  <div role="tabpanel">
-    <!-- Nav tabs -->
-    <ul class="nav nav-tabs" role="tablist">
-      <li role="presentation" class="active"><a href="#general" aria-controls="home" role="tab" data-toggle="tab">{% trans "General" %}</a></li>
-      <li role="presentation"><a href="#athletes" aria-controls="messages" role="tab" data-toggle="tab">{% trans "Athletes" %}</a></li>
-      {% if stream.all_around_individual %}
-        <li role="presentation"><a href="#results-athletes" aria-controls="profile" role="tab" data-toggle="tab">{% trans "Results Athletes" %}</a></li>
-      {% endif %}
-      {% if stream.all_around_team %}
-        <li role="presentation"><a href="#teams" aria-controls="profile" role="tab" data-toggle="tab">{% trans "Teams" %}</a></li>
-        <li role="presentation"><a href="#results-teams" aria-controls="profile" role="tab" data-toggle="tab">{% trans "Results Teams" %}</a></li>
-      {% endif %}
-      {% if stream.discipline_finals %}
-        <li role="presentation"><a href="#athletes-finals" aria-controls="profile" role="tab" data-toggle="tab">{% trans "Athletes Finals" %}</a></li>
-        <li role="presentation"><a href="#results-finals" aria-controls="profile" role="tab" data-toggle="tab">{% trans "Results Finals" %}</a></li>
-      {% endif %}
-    </ul>
+  <div class="panel panel-default" role="tabpanel">
 
     <!-- Tab panes -->
-    <div class="tab-content">
+    <div class="panel-body tab-content">
       <div role="tabpanel" class="tab-pane active" id="general">
-        <p>{% trans "Difficulty" %}: {{ stream.difficulty }}</p>
-        <p>{% trans "Sex" %}:
-          {% if stream.sex == 'f' %}
-            <span class="gend gend-female"><i class="fa fa-venus fa-fw" alt="{% trans 'female' %}"></i></span>
-          {% else %}
-            <span class="gend gend-male"><i class="fa fa-mars fa-fw" alt="{% trans 'male' %}"></i></span>
+        <dl class="dl-horizontal dl-detail">
+          <dt>{% trans "Difficulty" %}</dt>
+          <dd>{{ stream.difficulty }}</dd>
+
+          <dt>{% trans "Sex" %}</dt>
+          <dd>
+            {% if stream.sex == 'f' %}
+              <span class="gend gend-female"><i class="fa fa-venus fa-fw" alt="{% trans 'female' %}"></i></span>
+            {% else %}
+              <span class="gend gend-male"><i class="fa fa-mars fa-fw" alt="{% trans 'male' %}"></i></span>
+            {% endif %}
+          </dd>
+
+          <dt>{% trans "Minimum Year of Birth" %}</dt>
+          <dd>{{ stream.minimum_year_of_birth }}</dd>
+
+          <dt>{% trans "Disciplines" %}</dt>
+          <dd>
+            <ul class="list-inline">
+              {% for discipline in disciplines %}
+                <li><a href="{% url 'disciplines.detail' discipline.id %}">{{ discipline }}</a></li>
+              {% endfor %}
+            </ul>
+          </dd>
+
+          {% if stream.all_around_individual %}
+            <dt>{% trans "All around individual" %}</dt>
+            <dd>
+              {{ stream.all_around_individual_counting_events }} {% trans "counting disciplines" %}
+            </dd>
           {% endif %}
-        </p>
-        <p>{% trans "Minimum Year of Birth" %}: {{ stream.minimum_year_of_birth }}</p>
-        <p>{% trans "Disciplines" %}:
-        <ul>
-          {% for discipline in disciplines %}
-            <li><a href="{% url 'disciplines.detail' discipline.id %}">{{ discipline }}</a></li>
-          {% endfor %}
-        </ul>
-        </p>
-        <p>{% trans "Performances are compared in" %}:
-          <ul>
-            {% if stream.all_around_individual %}
-              <li>{% trans "all around individual" %}: {{ stream.all_around_individual_counting_events }} {% trans "counting disciplines" %}</li>
-            {% endif %}
-            {% if stream.all_around_team %}
-              <li>{% trans "team performances" %}: {{ stream.all_around_team_counting_athletes }} {% trans "counting events per discipline" %}</li>
-            {% endif %}
-            {% if stream.discipline_finals %}
-              <li>
-                {% trans "discipline finals" %}: {{ stream.discipline_finals_max_participants }} {% trans "participants and" %} 
-                {% if stream.discipline_finals_both_values_count %}
-                  {% trans "both values counting" %}
-                {% else %}
-                  {% trans "only final values counting" %}
-                {% endif %}
-              </li>
-            {% endif %}
-          </ul>
-        </p>
+
+          {% if stream.all_around_team %}
+            <dt>{% trans "Team performances" %}</dt>
+            <dd>
+              <ul class="list-unstyled">
+                <li>
+                  {{ stream.all_around_team_counting_athletes }} {% trans "counting events per discipline" %}
+                </li>
+              </ul>
+            </dd>
+          {% endif %}
+
+          {% if stream.discipline_finals %}
+            <dt>{% trans "Discipline finals" %}</dt>
+            <dd>
+              <ul class="list-unstyled">
+                <li>
+                  {{ stream.discipline_finals_max_participants }} {% trans "participants and" %} 
+                  {% if stream.discipline_finals_both_values_count %}
+                    {% trans "both values counting" %}
+                  {% else %}
+                    {% trans "only final values counting" %}
+                  {% endif %}
+                </li>
+              </ul>
+            </dd>
+          {% endif %}
+
+        </dl>
       </div>
 
       <div role="tabpanel" class="tab-pane" id="athletes">

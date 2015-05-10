@@ -13,10 +13,10 @@
 {% block nav_main_url %}{{ athlete.get_absolute_url }}{% endblock nav_main_url %}
 {% block nav_links %}
   <li role="presentation" class="active">
-    <a href="#base" aria-controls="home" role="tab" data-toggle="tab">{% trans "General" %}</a>
+    <a href="#base" aria-controls="base" role="tab" data-toggle="tab">{% trans "General" %}</a>
   </li>
   <li role="presentation">
-    <a href="#performances" aria-controls="profile" role="tab" data-toggle="tab">{% trans "Results" %}</a>
+    <a href="#performances" aria-controls="performances" role="tab" data-toggle="tab">{% trans "Results" %}</a>
   </li>
 {% endblock nav_links %}
 {% block nav_regular_buttons %}
@@ -34,7 +34,6 @@
 
     <div class="panel-body tab-content">
       <div role="tabpanel" class="tab-pane active" id="base">
-
         <dl class="dl-horizontal dl-detail">
           <dt>{% trans "First Name" %}</dt>
           <dd>{{ athlete.first_name }}</dd>
@@ -75,7 +74,6 @@
             {% endif %}
           </dd>
         </dl>
-
       </div>
 
       <div role="tabpanel" class="tab-pane" id="performances">

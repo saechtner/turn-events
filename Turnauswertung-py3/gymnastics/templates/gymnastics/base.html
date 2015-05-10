@@ -42,9 +42,8 @@
 
             <!-- All menu item. Kinda legacy. -->
             <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">{% trans "All" %}<span class="caret"></span></a>
+              <a href="{% url 'home' %}" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">{% trans "All" %}<span class="caret"></span></a>
               <ul class="dropdown-menu" role="menu">
-                <li><a href="{% url 'process' %}">Process</a></li>
                 <li><a href="{% url 'athletes_imports.index' %}">{% trans "Athletes Imports" %}</a></li>
                 <li class="divider"></li>
                 <li><a href="{% url 'athletes.index' %}">{% trans "Athletes" %}</a></li>
@@ -120,11 +119,11 @@
                           {% block nav_main %}{% endblock nav_main %}
                         </a>
 
-                        <ul class="nav navbar-nav">
+                        <ul class="nav navbar-nav nav-tabs">
                           {% block nav_links %}{% endblock nav_links %}
                         </ul>
 
-                        <div class="nav navbar-nav navbar-right btn-group">
+                        <div class="nav navbar-nav navbar-right">
                           {% block nav_regular_buttons %}{% endblock nav_regular_buttons %}
                         </div>
                       </div>

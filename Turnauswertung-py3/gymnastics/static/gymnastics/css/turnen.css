@@ -36,7 +36,7 @@ body {
 .page-header-headline {
   position: relative; 
   left: 330px;;
-  top: 107px;
+  top: 110px;
   z-index: 4;
 
   color: #333333;
@@ -54,7 +54,7 @@ body {
 
 /* put here negative value of scroll_limit - static-navbar height as margin-top  */
 .page-header.is-locked .page-header-inner .page-header-bg {
-  margin-top: -120px;
+  margin-top: -110px;
 }
 
 .page-header-bg-img {
@@ -92,6 +92,11 @@ body {
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
+}
+
+/* Display dropdown menu on hover */
+.navbar ul.nav li.dropdown:hover ul.dropdown-menu{
+  display: block;    
 }
 
 .static-navbar {
@@ -160,12 +165,21 @@ body {
 
 .dynamic-navbar .nav_main {
   margin: 0 40px 0 0;
-  color: #fff;
+  color: #ddd;
+}
+
+.dynamic-navbar .nav-tabs {
+  border-bottom: none;
 }
 
 .dynamic-navbar .navbar-nav > li > a {
   text-transform: uppercase;
   font-weight: 400;
+  border: none;
+  height: 50px;
+
+  border: 1px solid transparent;
+  border-radius: 4px 4px 4px 4px;
 }
 
 .dynamic-navbar .navbar-nav > li > a:hover, .dynamic-navbar .navbar-nav > li.active > a {
@@ -180,10 +194,9 @@ body {
   
   background-color: #080808;
 
-  border-bottom-color: #fff;
-  border-bottom-style: solid;
-  border-bottom-width: 4px;
-  color: #fff;
+  border-color: #ddd;
+
+  color: #ddd;
   height: 50px;
 
   -o-transition: all 0.15s ease-in-out;
@@ -191,6 +204,15 @@ body {
   -moz-transition: all 0.15s ease-in-out;
   -webkit-transition: all 0.15s ease-in-out;
   transition: all 0.15s ease-in-out;
+}
+
+.dynamic-navbar .navbar-form {
+  display: inline-block;
+  float: none !important;
+}
+
+.dynamic-navbar .navbar-form > input {
+  width: 140px;
 }
 
 /* TODO:: fix for new navbars */

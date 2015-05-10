@@ -50,7 +50,7 @@
             {% trans "Following scores has been achieved in this discipline:" %}
             <ul>
               {% for performance in performances %}
-                <li><a href="{{ performance.athlete.get_absolute_url }">{{ performance.athlete }}</a>: {{performance.value}}
+                <li><a href="{{ performance.athlete.get_absolute_url }}">{{ performance.athlete }}</a>: {{performance.value}}
                 {% if performance.value_final %}
                   ({ % trans "Final" %}: {{ performance.value_final }})
                 {% endif %}</li>

@@ -34,7 +34,7 @@
     <!-- Tab panes -->
     <div class="tab-content">
       <div role="tabpanel" class="tab-pane active" id="base"> 
-        <p>{% trans "Athlete" %}: <a href="{{ performance.athlete.get_absolute_url }">{{ performance.athlete }}</a></p>
+        <p>{% trans "Athlete" %}: <a href="{{ performance.athlete.get_absolute_url }}">{{ performance.athlete }}</a></p>
         <p>{% trans "Discipline" %}: <a href="{% url 'disciplines.detail' performance.discipline.id %}">{{ performance.discipline }}</a></p>
         <p>{% trans "Value" %}: {{ performance.value }}</p>
         {% if performance.value_final %}
