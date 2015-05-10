@@ -63,7 +63,7 @@
             <!-- Process menu if you can not find the correct items in previous nav elements. -->
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">{% trans "Process" %} <span class="caret"></span></a>
-              <ul class="dropdown-menu" role="menu">
+              <ul class="dropdown-menu dropdown-scrollable" role="menu">
                 <li role="presentation" class="dropdown-header">{% trans "Preparation" %}</li>
                 <li><a href="{% url 'clubs.new' %}">{% trans "New hosting club" %}</a></li>
                 <li><a href="{% url 'tournaments.new' %}">{% trans "New tournament" %}</a></li>

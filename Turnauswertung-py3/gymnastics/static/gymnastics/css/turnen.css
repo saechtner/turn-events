@@ -99,6 +99,12 @@ body {
   display: block;    
 }
 
+li.dropdown > ul.dropdown-scrollable {
+  height: auto;
+  max-height: 370px;
+  overflow-x: hidden;
+}
+
 .static-navbar {
   height: 40px;
   min-height: 40px;
@@ -121,7 +127,8 @@ body {
   font-weight: 400;
 }
 
-.static-navbar .navbar-nav > li > a:hover {
+.static-navbar .navbar-nav > li > a:hover,
+.static-navbar .navbar-nav > li > a:active {
   background-image: -webkit-linear-gradient(top, #080808 0%, #0f0f0f 100%);
   background-image: -o-linear-gradient(top, #080808 0%, #0f0f0f 100%);
   background-image: -webkit-gradient(linear, left top, left bottom, from(#080808), to(#0f0f0f));
@@ -138,10 +145,6 @@ body {
   -moz-transition: background 0.15s ease-in-out;
   -webkit-transition: background 0.15s ease-in-out;
   transition: background 0.15s ease-in-out; 
-}
-
-.static-navbar .navbar-nav > li > a:active {
-  background-color: #080808;
 }
 
 .static-navbar .navbar-right {
@@ -174,15 +177,18 @@ body {
 
 .dynamic-navbar .navbar-nav > li > a {
   text-transform: uppercase;
-  font-weight: 400;
-  border: none;
-  height: 50px;
 
-  border: 1px solid transparent;
-  border-radius: 4px 4px 4px 4px;
+  height: 50px;
+  padding: 9px 15px 7px 15px;
+  margin: 0px;
+
+  border: none;
+  /*border: 2px solid transparent;*/
+  /*border-radius: 3px;*/
 }
 
-.dynamic-navbar .navbar-nav > li > a:hover, .dynamic-navbar .navbar-nav > li.active > a {
+.dynamic-navbar .navbar-nav > li > a:hover, 
+.dynamic-navbar .navbar-nav > li.active > a {
   background-image: -webkit-linear-gradient(top, #080808 0%, #0f0f0f 100%);
   background-image: -o-linear-gradient(top, #080808 0%, #0f0f0f 100%);
   background-image: -webkit-gradient(linear, left top, left bottom, from(#080808), to(#0f0f0f));
@@ -191,10 +197,10 @@ body {
   background-repeat: repeat-x;
   -webkit-box-shadow: inset 0 3px 9px rgba(0, 0, 0, 0.25);
   box-shadow: inset 0 3px 9px rgba(0, 0, 0, 0.25);
-  
   background-color: #080808;
 
-  border-color: #ddd;
+  border: none;
+  border-bottom: 4px solid #ddd;
 
   color: #ddd;
   height: 50px;
@@ -206,31 +212,52 @@ body {
   transition: all 0.15s ease-in-out;
 }
 
+/*.dynamic-navbar .nav-link-single {
+  padding: 14px 15px 7px 15px;
+}*/
+
+.dynamic-navbar .nav-link-label {
+  font-size: 11px;
+  line-height: 11px;
+  letter-spacing: .02em;
+  font-weight: 400;
+
+  display: block;
+}
+
+.dynamic-navbar .nav-link-value {
+  font-size: 18px;
+  padding-top: 3px;
+  font-weight: 500;
+  text-align: center;
+
+  display: block;
+}
+
 .dynamic-navbar .navbar-form {
   display: inline-block;
   float: none !important;
 }
 
 .dynamic-navbar .navbar-form > input {
-  width: 140px;
+  width: 150px;
 }
 
-/* TODO:: fix for new navbars */
 /* Flip around the padding for proper display in narrow viewports */
+/*
 .navbar-wrapper > .container {
   padding-right: 0;
   padding-left: 0;
-}
 
 .navbar-wrapper .navbar {
   padding-right: 15px;
   padding-left: 15px;
 }
+*/
 
 .navbar-wrapper .navbar .container {
   width: auto;
 }
-
 
 
 /* CUSTOMIZE TABLES
@@ -266,6 +293,7 @@ th.headerSortDown {
   background-image: url(../images/tables/desc.gif);
 }
 
+
 /* CUSTOMIZE OTHER BASIC ELEMENTS
 -------------------------------------------------- */
 
@@ -281,6 +309,7 @@ th.headerSortDown {
 .dl-detail > dd {
   margin-left: 220px;
 }
+
 
 /* CUSTOMIZE THE CAROUSEL
 -------------------------------------------------- */
@@ -330,43 +359,32 @@ th.headerSortDown {
 -------------------------------------------------- */
 
 @media (min-width: 768px) {
-  /* Navbar positioning foo */
-  .navbar-wrapper {
-    margin-top: 20px;
-  }
-  .navbar-wrapper .container {
-    padding-right: 15px;
-    padding-left: 15px;
-  }
-  .navbar-wrapper .navbar {
-    padding-right: 0;
-    padding-left: 0;
-  }
-
-  /* Bump up size of carousel content */
-  .carousel-caption p {
-    margin-bottom: 20px;
-    font-size: 21px;
-    line-height: 1.4;
-  }
+  
 }
 
 
-/* Gender Icon Colors
+/* Gender Icons
 -------------------------------------------------- */
 
-.gend {
-  font-weight: bolder;
+th.gend,
+td.gend {
   text-align: center;
 }
 
-.gend.gend-female {
-  color: red;
+.gend > span > i {
+  font-weight: bolder;
 }
 
-.gend.gend-male {
-  color: blue;
+.gend .gend-female {
+  color: red;
+  font-size: 16px;
 }
+
+.gend .gend-male {
+  color: blue;
+  font-size: 14px
+}
+
 
 /* Inside Div Positioning 
 -------------------------------------------------- */

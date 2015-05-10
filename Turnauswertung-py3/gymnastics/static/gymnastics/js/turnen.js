@@ -27,8 +27,8 @@ $(document).ready(function() {
     var column_count = $("#table-results-athletes").find("tr:first th").length;
     var last_column_index = column_count - 1;
     var headers = {} 
-    for (i = 1; i < column_count; i += 1) {
-        headers[i] = (i % 2 == 0) ? { sorter: 'ranks' } : { sorter: false }
+    for (i = 2; i < column_count; i += 1) {
+        headers[i] = (i % 2 == 1) ? { sorter: 'ranks' } : { sorter: false }
     }
 
     $("#table-results-athletes").tablesorter({
@@ -41,8 +41,8 @@ $(document).ready(function() {
     var column_count = $("#table-results-teams").find("tr:first th").length;
     var last_column_index = column_count - 1;
     var headers = {} 
-    for (i = 1; i < column_count; i += 1) {
-        headers[i] = (i % 2 == 0) ? { sorter: 'ranks' } : { sorter: false }
+    for (i = 2; i < column_count; i += 1) {
+        headers[i] = (i % 2 == 1) ? { sorter: 'ranks' } : { sorter: false }
     }
 
     $("#table-results-teams").tablesorter({

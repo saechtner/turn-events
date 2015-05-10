@@ -1,8 +1,9 @@
-from django.shortcuts import render
+from django.core.urlresolvers import reverse
+from django.shortcuts import redirect, render
 
 # renders index / home page
 def index(request):
-    return render(request, 'gymnastics/index.html', None)
+    return redirect(reverse('tournaments.main'))
 
 # renders todo page
 def process(request):

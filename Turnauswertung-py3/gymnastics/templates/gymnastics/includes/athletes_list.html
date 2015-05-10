@@ -3,7 +3,11 @@
 <thead>
   <th>{% trans "First Name" %}</th>
   <th>{% trans "Last Name" %}</th>
-  <th>{% trans "Sex" %}</th>
+  <th class="gend">
+    <span class="gend-female"><i class="fa fa-venus fa-fw"></i></span>
+     / 
+     <span class="gend-male"><i class="fa fa-mars fa-fw"></i></span>
+  </th>
   <th>{% trans "Date of Birth" %}</th>
   <th>{% trans "Club" %}</th>
   <th>{% trans "Stream" %}</th>
@@ -16,11 +20,13 @@
     <tr id="athletes_row_{{ athlete.id }}">
       <td>{{ athlete.first_name }}</td>
       <td>{{ athlete.last_name }}</td>
-      {% if athlete.sex == 'f' %}
-        <td class="gend gend-female"><i class="fa fa-venus fa-fw"></i></td>
-      {% else %}
-        <td class="gend gend-male"><i class="fa fa-mars fa-fw"></i></td>
-      {% endif %}
+      <td class="gend">
+        {% if athlete.sex == 'f' %}
+          <span class="gend-female"><i class="fa fa-venus fa-fw" alt="{% trans 'female' %}"></i></span>
+        {% else %}
+          <span class="gend-male"><i class="fa fa-mars fa-fw" alt="{% trans 'male' %}"></i></span>
+        {% endif %}
+      </td>
       <td>{{ athlete.date_of_birth|date:'SHORT_DATE_FORMAT' }}</td>
       <td>
         {% if athlete.club %}

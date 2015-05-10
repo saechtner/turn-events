@@ -10,36 +10,50 @@
 {% block nav_main_url %}{{ stream.get_absolute_url }}{% endblock nav_main_url %}
 {% block nav_links %}
   <li role="presentation" class="active">
-    <a href="#general" aria-controls="general" role="tab" data-toggle="tab">{% trans "General" %}</a>
+    <a href="#general" aria-controls="general" role="tab" data-toggle="tab">
+      {% trans "General" %}
+    </a>
   </li>
   <li role="presentation">
-    <a href="#athletes" aria-controls="athletes" role="tab" data-toggle="tab">{% trans "Athletes" %}</a>
+    <a href="#athletes" aria-controls="athletes" role="tab" data-toggle="tab">
+      <span class="nav-link-label">{% trans "Athletes" %}</span>
+      <span class="nav-link-value">{{ athletes_count }}</span>
+    </a>
   </li>
   {% if stream.all_around_individual %}
     <li role="presentation">
-      <a href="#results-athletes" aria-controls="results-athletes" role="tab" data-toggle="tab">{% trans "Results Athletes" %}</a>
+      <a href="#results-athletes" aria-controls="results-athletes" role="tab" data-toggle="tab">
+        <span class="nav-link-label">{% trans "Results Athletes" %}</span>
+        <span class="nav-link-value">{{ athlete_performances_completed }}</span>
+      </a>
     </li>
   {% endif %}
   {% if stream.all_around_team %}
     <li role="presentation">
-      <a href="#teams" aria-controls="teams" role="tab" data-toggle="tab">{% trans "Teams" %}</a>
-    </li>
-    <li role="presentation">
-      <a href="#results-teams" aria-controls="results-teams" role="tab" data-toggle="tab">{% trans "Results Teams" %}</a>
+      <a href="#results-teams" aria-controls="results-teams" role="tab" data-toggle="tab">
+        <span class="nav-link-label">{% trans "Results Teams" %}</span>
+        <span class="nav-link-value">{{ team_performances_completed }}</span>
+      </a>
     </li>
   {% endif %}
   {% if stream.discipline_finals %}
     <li role="presentation">
-      <a href="#athletes-finals" aria-controls="athletes-finals" role="tab" data-toggle="tab">{% trans "Athletes Finals" %}</a>
+      <a href="#athletes-finals" aria-controls="athletes-finals" role="tab" data-toggle="tab">
+        <span class="nav-link-label">{% trans "Athletes Finals" %}</span>
+        <span class="nav-link-value"></span>
+      </a>
     </li>
     <li role="presentation">
-      <a href="#results-finals" aria-controls="results-finals" role="tab" data-toggle="tab">{% trans "Results Finals" %}</a>
+      <a href="#results-finals" aria-controls="results-finals" role="tab" data-toggle="tab">
+        <span class="nav-link-label">{% trans "Results Finals" %}</span>
+        <span class="nav-link-value"></span>
+      </a>
     </li>
   {% endif %}
 {% endblock nav_links %}
 {% block nav_regular_buttons %}
   <form class="navbar-form" role="search">
-    <input type="search" class="light-table-filter form-control" data-table="athletes-table" name="table_filter">
+    <input type="search" class="light-table-filter form-control" data-table="tablefilter" name="table_filter">
   </form>
   <a type="button" class="btn btn-warning navbar-btn" href="{{ stream.get_edit_url }}">{% trans "Edit" %}</a>
   <a  type="button" 
@@ -60,11 +74,11 @@
           <dd>{{ stream.difficulty }}</dd>
 
           <dt>{% trans "Sex" %}</dt>
-          <dd>
+          <dd class="gend">
             {% if stream.sex == 'f' %}
-              <span class="gend gend-female"><i class="fa fa-venus fa-fw" alt="{% trans 'female' %}"></i></span>
+              <span class="gend-female"><i class="fa fa-venus fa-fw" alt="{% trans 'female' %}"></i></span>
             {% else %}
-              <span class="gend gend-male"><i class="fa fa-mars fa-fw" alt="{% trans 'male' %}"></i></span>
+              <span class="gend-male"><i class="fa fa-mars fa-fw" alt="{% trans 'male' %}"></i></span>
             {% endif %}
           </dd>
 
@@ -118,16 +132,17 @@
       </div>
 
       <div role="tabpanel" class="tab-pane" id="athletes">
-        <table class="table table-hover table-condensed athletes-table" id="athletes-table">
+        <table id="athletes-table" class="table table-hover table-condensed tablefilter">
           {% include "gymnastics/includes/athletes_list.html" with athletes_set=athletes only %}
         </table>
       </div>
 
       {% if stream.all_around_individual %}
         <div role="tabpanel" class="tab-pane" id="results-athletes">
-          <table id="table-results-athletes" class="table table-hover table-condensed tablesorter">
+          <table id="table-results-athletes" class="table table-hover table-condensed tablesorter tablefilter">
             <thead>
               <th>{% trans "Athlete" %}</th>
+              <th>{% trans "Club" %}</th>
               {% for discipline in disciplines %}
                 <th class="text-right">{{ discipline }}</th>
                 <th class="text-center">{% trans "Rank" %}</th>
@@ -140,6 +155,7 @@
                 <tr id="athlete_{{ athlete.id }}">
                   {% with athlete_performances=athletes_disciplines_result_dict|get_item:athlete.id athlete_ranks=athletes_disciplines_rank_dict|get_item:athlete.id %}
                     <td><a href="{{ athlete.get_absolute_url }}" data-name="{{ athlete }}">{{ athlete }}</a></td>
+                    <td><a href="{{ athlete.club.get_absolute_url }}" data-name="{{ club }}">{{ athlete.club }}</a></td>
                     {% for discipline in disciplines %}
                       <td class="text-right">
                         {{ athlete_performances|get_item:discipline.id }}
@@ -165,16 +181,11 @@
       {% endif %}
 
       {% if stream.all_around_team %}
-        <div role="tabpanel" class="tab-pane" id="teams">
-          <table class="table table-hover table-condensed" id="team-table">
-            {% include "gymnastics/includes/teams_list.html" with teams_set=teams only %}
-          </table>
-        </div>
-
         <div role="tabpanel" class="tab-pane" id="results-teams">
-          <table id="table-results-teams" class="table table-hover table-condensed tablesorter">
+          <table id="table-results-teams" class="table table-hover table-condensed tablesorter tablefilter">
             <thead>
               <th>{% trans "Team" %}</th>
+              <th>{% trans "Verein" %}</th>
               {% for discipline in disciplines %}
                 <th class="text-right">{{ discipline }}</th>
                 <th class="text-center">{% trans "Rank" %}</th>
@@ -187,6 +198,11 @@
                 <tr id="team_{{ team.id }}">
                   {% with team_performances=teams_disciplines_result_dict|get_item:team.id team_ranks=teams_disciplines_rank_dict|get_item:team.id %}
                     <td><a href="{% url 'teams.detail' team.id %}">{{ team.name }}</a></td>
+                    <td>
+                      {% if team.club %}
+                        <a href="{{ team.club.get_absolute_url }}">{{ team.club }}</a>
+                      {% endif %}
+                    </td>
                     {% for discipline in disciplines %}
                       <td class="text-right">{{ team_performances|get_item:discipline.id }}</td>
                       <td class="text-center">

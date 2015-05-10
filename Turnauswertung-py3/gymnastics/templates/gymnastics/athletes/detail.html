@@ -42,11 +42,11 @@
           <dd>{{ athlete.last_name }}</dd>
 
           <dt>{% trans "Sex" %}</dt>
-          <dd>
+          <dd class="gend">
             {% if athlete.sex == 'f' %}
-              <span class="gend gend-female"><i class="fa fa-venus fa-fw"></i></span>
+              <span class="gend-female"><i class="fa fa-venus fa-fw" alt="{% trans 'female' %}"></i></span>
             {% else %}
-              <span class="gend gend-male"><i class="fa fa-mars fa-fw"></i></span>
+              <span class="gend-male"><i class="fa fa-mars fa-fw" alt="{% trans 'male' %}"></i></span>
             {% endif %}
           </dd>
 

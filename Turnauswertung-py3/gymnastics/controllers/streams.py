@@ -1,11 +1,9 @@
 from django.contrib import messages
-
 from django.core.urlresolvers import reverse, reverse_lazy
 from django.http import HttpResponseNotAllowed
 from django.shortcuts import redirect, render
-from django.views import generic
-
 from django.utils.translation import ugettext_lazy
+from django.views import generic
 
 from gymnastics.models import Stream, Discipline, StreamDisciplineJoin
 
@@ -44,17 +42,35 @@ def detail(request, id, slug):
         'athletes_count': len(athletes),
         'athletes_disciplines_result_dict': athletes_disciplines_result_dict,
         'athletes_disciplines_rank_dict': athletes_disciplines_rank_dict,
+        'athlete_performances_completed': _calculate_completed_performances(disciplines, athletes_disciplines_result_dict),
         'teams': teams,
+        'teams_count': len(teams),
         'teams_disciplines_result_dict': teams_disciplines_result_dict,
-        'teams_disciplines_rank_dict': teams_disciplines_rank_dict,}
+        'teams_disciplines_rank_dict': teams_disciplines_rank_dict,
+        'team_performances_completed': _calculate_completed_performances(disciplines, teams_disciplines_result_dict),
+    }
     return render(request, 'gymnastics/streams/detail.html', context)
 
-def _abort_stream_creation(request, error_message):
-    if error_message:
-        messages.error(request, error_message)
+def _calculate_completed_performances(disciplines, disciplines_result_dict):
+    discipline_ids = [disc.id for disc in disciplines]
+    
+    results = 0
+    for model_object, disicpline_result_dict in disciplines_result_dict.items():
+        for discipline_id in discipline_ids:
+            if disicpline_result_dict[discipline_id]:
+                results += 1
+    return results
 
-    context = { 'disciplines': Discipline.objects.all() }
-    return render(request, 'gymnastics/streams/new.html', context)
+def new(request):
+    if request.method == 'GET':
+        context = { 'disciplines': Discipline.objects.all() }
+        return render(request, 'gymnastics/streams/new.html', context)
+
+    elif request.method == 'POST':
+        stream = _build_stream_from_post(post_dict=request.POST);
+        return redirect(stream.get_absolute_url())
+
+    return HttpResponseNotAllowed(['GET', 'POST'])
 
 def _build_stream_from_post(stream=Stream(), post_dict={}, method='create'):
     disciplines = Discipline.objects.all()
@@ -107,16 +123,12 @@ def _build_stream_from_post(stream=Stream(), post_dict={}, method='create'):
 
     return stream
 
-def new(request):
-    if request.method == 'GET':
-        context = { 'disciplines': Discipline.objects.all() }
-        return render(request, 'gymnastics/streams/new.html', context)
+def _abort_stream_creation(request, error_message):
+    if error_message:
+        messages.error(request, error_message)
 
-    elif request.method == 'POST':
-        stream = _build_stream_from_post(post_dict=request.POST);
-        return redirect(stream.get_absolute_url())
-
-    return HttpResponseNotAllowed(['GET', 'POST'])
+    context = { 'disciplines': Discipline.objects.all() }
+    return render(request, 'gymnastics/streams/new.html', context)
 
 def edit(request, id, slug):
     if request.method == 'GET':

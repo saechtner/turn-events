@@ -22,7 +22,11 @@
         <table class="table table-hover" id="stream-table">
           <thead>
             <th>{% trans "Difficulty" %}</th>
-            <th>{% trans "Sex" %}</th>
+            <th class="gend">
+              <span class="gend-female"><i class="fa fa-venus fa-fw"></i></span>
+               / 
+               <span class="gend-male"><i class="fa fa-mars fa-fw"></i></span>
+            </th>
             <th>#{% trans "Athletes" %}</th>
             <th>{% trans "Minimum Year of Birth" %}</th>
             <th></th>
@@ -31,11 +35,15 @@
             {% for stream in streams %}
               <tr id="streams_row_{{ stream.id }}">
                 <td>{{ stream.difficulty }}</td>
-                {% if stream.sex == 'f' %}
-                  <td class="gend gend-female"><i class="fa fa-venus fa-fw"></i></td>
-                {% else %}
-                  <td class="gend gend-male"><i class="fa fa-mars fa-fw"></i></td>
-                {% endif %}
+
+                <td class="gend">
+                  {% if stream.sex == 'f' %}
+                    <span class="gend-female"><i class="fa fa-venus fa-fw" alt="{% trans 'female' %}"></i></span>
+                  {% else %}
+                    <span class="gend-male"><i class="fa fa-mars fa-fw" alt="{% trans 'male' %}"></i></span>
+                  {% endif %}
+                </td>
+
                 <td> {{ stream.athlete_set.count }}</td>
                 <td>{{ stream.minimum_year_of_birth }}</td>
                 <td>
