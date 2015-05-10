@@ -42,7 +42,7 @@
 
             <!-- All menu item. Kinda legacy. -->
             <li class="dropdown">
-              <a href="{% url 'home' %}" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">{% trans "All" %}<span class="caret"></span></a>
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">{% trans "All" %} <span class="caret"></span></a>
               <ul class="dropdown-menu" role="menu">
                 <li><a href="{% url 'athletes_imports.index' %}">{% trans "Athletes Imports" %}</a></li>
                 <li class="divider"></li>
@@ -57,6 +57,43 @@
                 <li class="divider"></li>
                 <li><a href="{% url 'squads.create_overview_pdf' %}" target="_blank">{% trans "Create Overview PDF" %}</a></li>
                 <li><a href="{% url 'squads.create_judge_pdf' %}" target="_blank">{% trans "Create Judge PDF" %}</a></li>
+              </ul>
+            </li>
+
+            <!-- Process menu if you can not find the correct items in previous nav elements. -->
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">{% trans "Process" %} <span class="caret"></span></a>
+              <ul class="dropdown-menu" role="menu">
+                <li role="presentation" class="dropdown-header">{% trans "Preparation" %}</li>
+                <li><a href="{% url 'clubs.new' %}">{% trans "New hosting club" %}</a></li>
+                <li><a href="{% url 'tournaments.new' %}">{% trans "New tournament" %}</a></li>
+                <li><a href="{% url 'disciplines.new' %}">{% trans "New discipline" %}</a></li>
+                <li><a href="{% url 'streams.new' %}">{% trans "New stream" %}</a></li>
+                <li class="divider"></li>
+
+                <li role="presentation" class="dropdown-header">{% trans "RSVPs" %}</li>
+                <li><a href="{% url 'clubs.new' %}">{% trans "New club" %}</a></li>
+                <li><a href="{% url 'athletes.new' %}">{% trans "New athlete" %}</a></li>
+                <li><a href="{% url 'athletes_imports.new' %}">{% trans "New athletes import" %}</a></li>
+                <li><a href="{% url 'squads.new' %}">{% trans "New squad" %}</a></li>
+                <li><a href="#">{% trans "Add athletes to squad" %}</a></li>
+                <li><a href="{% url 'squads.create_overview_pdf' %}" target="_blank">{% trans "Squad overview PDF" %}</a></li>
+                <li><a href="{% url 'squads.create_judge_pdf' %}" target="_blank">{% trans "Squads for judges PDF" %}</a></li>
+                <li class="divider"></li>
+
+                <li role="presentation" class="dropdown-header">{% trans "Tournament Day" %}</li>
+                <li><a href="#">{% trans "Change RSVPs" %}</a></li>
+                <li><a href="{% url 'squads.create_overview_pdf' %}" target="_blank">{% trans "Squad overview PDF" %}</a></li>
+                <li><a href="{% url 'squads.index' %}">{% trans "Enter performances" %}</a></li>
+                <li><a href="{% url 'streams.index' %}">{% trans "Stream results" %}</a></li>
+                <li class="divider"></li>
+
+                <li role="presentation" class="dropdown-header">{% trans "Evaluation" %}</li>
+                <li><a href="#">{% trans "Logic checks" %}</a></li>
+                <li><a href="#" target="_blank">{% trans "Athlete results PDF" %}</a></li>
+                <li><a href="#" target="_blank">{% trans "Team results PDF" %}</a></li>
+                <li><a href="#" target="_blank">{% trans "Certificates PDF" %}</a></li>
+                <li><a href="#" target="_blank">{% trans "Complete PDF" %}</a></li>
               </ul>
             </li>
 
