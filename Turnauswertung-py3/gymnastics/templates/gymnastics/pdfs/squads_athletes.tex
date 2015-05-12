@@ -14,12 +14,19 @@
 
     \begin{document}
         {% for squad in squads %}
-            {{ squad }}
-            \begin{itemize}
+            \begin{tabular}{|l|l|l|}
+                \hline\multicolumn{3}{|c|}{{ squad }}\\
+                \hline&\multicolumn{1}{c|}{ {% trans 'Club' %} }&\multicolumn{1}{c|}{ {% trans 'Team' %} }\\
+                \hline
                 {% for athlete in squad.athlete_set.all %}
-                    \item {{ athlete }} {% if athlete.club %} - {{ athlete.club }} {% endif %}
+                    \hline {{ athlete }}&{{ athlete.club }}&{{ athlete.team|default:'' }}\\
                 {% endfor %}
-            \end{itemize}
+                \hline&&\\
+                \hline&&\\
+                \hline&&\\
+                \hline
+            \end{tabular}
+            \newpage
         {% endfor %}
     \end{document}
 {% endautoescape %}

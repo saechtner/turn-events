@@ -113,7 +113,8 @@ def create_judge_pdf(request):
 def create_overview_pdf(request):
     squads = Squad.objects.all() \
         .prefetch_related('athlete_set') \
-        .select_related('athlete_set__club')
+        .select_related('athlete_set__club') \
+        .select_related('athlete_set__team')
 
     context = {
         'squads': squads,
