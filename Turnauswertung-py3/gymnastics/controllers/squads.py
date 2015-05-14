@@ -8,6 +8,7 @@ from django.views import generic
 
 from gymnastics.models import Athlete, Discipline, Performance, Squad, Stream
 from gymnastics.utils import pdf
+from gymnastics.utils.dict_operations import completed_performances
 
 
 def index(request):
@@ -34,6 +35,7 @@ def detail(request, id, slug):
         'stream_athletes_dict': stream_athletes_dict,
         'stream_disciplines_dict': stream_disciplines_dict,
         'athletes_disciplines_result_dict': athletes_disciplines_result_dict,
+        'performances_completed': completed_performances(athletes_disciplines_result_dict),
     }
     return render(request, 'gymnastics/squads/detail.html', context)
 

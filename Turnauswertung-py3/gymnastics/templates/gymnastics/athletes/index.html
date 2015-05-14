@@ -9,9 +9,6 @@
   <!-- <li><a href="{% url 'athletes.results' %}">{% trans "Results" %}</a></li> -->
 {% endblock nav_links %}
 {% block nav_regular_buttons %}
-  <form class="navbar-form" role="search">
-    <input type="search" class="light-table-filter form-control" data-table="athletes-table" name="table_filter">
-  </form>
   <a type="button" class="btn btn-default navbar-btn" href="{% url 'athletes.new' %}">{% trans "New athlete" %}</a>
 {% endblock nav_regular_buttons %}
 

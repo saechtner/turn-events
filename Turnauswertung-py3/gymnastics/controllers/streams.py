@@ -6,6 +6,7 @@ from django.utils.translation import ugettext_lazy
 from django.views import generic
 
 from gymnastics.models import Stream, Discipline, StreamDisciplineJoin
+from gymnastics.utils.dict_operations import completed_performances
 
 
 def index(request):
@@ -42,24 +43,14 @@ def detail(request, id, slug):
         'athletes_count': len(athletes),
         'athletes_disciplines_result_dict': athletes_disciplines_result_dict,
         'athletes_disciplines_rank_dict': athletes_disciplines_rank_dict,
-        'athlete_performances_completed': _calculate_completed_performances(disciplines, athletes_disciplines_result_dict),
+        'athlete_performances_completed': completed_performances(athletes_disciplines_result_dict),
         'teams': teams,
         'teams_count': len(teams),
         'teams_disciplines_result_dict': teams_disciplines_result_dict,
         'teams_disciplines_rank_dict': teams_disciplines_rank_dict,
-        'team_performances_completed': _calculate_completed_performances(disciplines, teams_disciplines_result_dict),
+        'team_performances_completed': completed_performances(teams_disciplines_result_dict),
     }
     return render(request, 'gymnastics/streams/detail.html', context)
-
-def _calculate_completed_performances(disciplines, disciplines_result_dict):
-    discipline_ids = [disc.id for disc in disciplines]
-    
-    results = 0
-    for model_object, disicpline_result_dict in disciplines_result_dict.items():
-        for discipline_id in discipline_ids:
-            if disicpline_result_dict[discipline_id]:
-                results += 1
-    return results
 
 def new(request):
     if request.method == 'GET':

@@ -1,78 +1,78 @@
 {% extends "gymnastics/clubs/base.html" %}
-{% load i18n %}
 
+{% load i18n %}
 {% load custom_template_tags %}
 
-{% block nav_level_2 %}
-  {% render_nav_item name=club active=True %}
-{% endblock nav_level_2 %}
+{% block headline %}{{ club }}{% endblock headline %}
+{% block nav_main %}{{ club }}{% endblock nav_main %}
+{% block nav_main_url %}{{ club.get_absolute_url }}{% endblock nav_main_url %}
+{% block nav_links %}
+  <li role="presentation">
+    <a href="#general" aria-controls="general" role="tab" data-toggle="tab">
+      {% trans "General" %}
+    </a>
+  </li>
+  <li role="presentation" class="active">
+    <a href="#athletes" aria-controls="athletes" role="tab" data-toggle="tab">
+      <span class="nav-link-label">{% trans "Athletes" %}</span>
+      <span class="nav-link-value">{{ athletes.count }}</span>
+    </a>
+  </li>
+{% endblock nav_links %}
+{% block nav_regular_buttons %}
+  <a type="button" class="btn btn-primary navbar-btn" href="{% url 'athletes_imports.new' %}?club_id={{ club.id }}">
+    {% trans "Import Athletes" %}
+  </a>
+  <a type="button" class="btn btn-warning navbar-btn" href="{{ club.get_edit_url }}">
+    {% trans "Edit" %}
+  </a>
+  <a  type="button" 
+      class="btn btn-danger navbar-btn" 
+      href="{{ club.get_delete_url }}" >
+    {% trans "Delete" %}
+  </a>
+{% endblock nav_regular_buttons %}
 
 {% block content %}
+<div class="panel panel-default" role="tabpanel">
+  <div class="panel-body tab-content">
 
-  <div class="row row-relative">
-    <div class="col-md-7">
-      <h1>
-        {{ club }} <small>{{ athletes.count }} {% trans "Athletes" %}</small>
-      </h1>
+    <div id="general" class="tab-pane" role="tabpanel">
+      <dl class="dl-horizontal dl-detail">
+
+        <dt>{% trans "Name" %}</dt>
+        <dd>{{ club.name }}</dd>
+
+        {% if club.address %}
+          {% if club.address.contact_name %}
+            <dt>{% trans "Contact name" %}</dt>
+            <dd>{{ club.address.contact_name }}</dd>
+          {% endif %}
+
+          {% if club.address.email %}
+            <dt>{% trans "Email" %}</dt>
+            <dd>{{ club.address.email }}</dd>
+          {% endif %}
+
+          {% if club.address.phone %}
+            <dt>{% trans "Phone" %}</dt>
+            <dd>{{ club.address.phone }}</dd>
+          {% endif %}
+
+          {% if club.address.address_formatted %}
+            <dt>{% trans "Address" %}</dt>
+            <dd>{{ club.address.address_formatted|linebreaksbr }}</dd>
+          {% endif %}
+        {% endif %}
+      </dl>
     </div>
-    <div class="col-md-5 div-pos-bottom-right text-right">
-      <div class="btn-group">
-        <a type="button" class="btn btn-primary" href="{% url 'athletes_imports.new' %}?club_id={{ club.id }}">{% trans "Import Athletes" %}</a>
-        <a type="button" class="btn btn-warning" href="{{ club.get_edit_url }}">{% trans "Edit" %}</a>
-        <a type="button" class="btn btn-danger" href="{{ club.get_delete_url }}">{% trans "Delete" %}</a>
-        <button type="button" class="btn btn-default" onClick="javascript:history.go(-1);">{% trans "Previous Page" %}</button>
-      </div>
+
+    <div id="athletes" class="tab-pane active" role="tabpanel">
+      <table id="athletes-table" class="table table-hover table-condensed tablefilter">
+        {% include "gymnastics/includes/athletes_list.html" with athletes_set=athletes only %}
+      </table>
     </div>
+
   </div>
-
-  <div role="tabpanel">
-    <!-- Nav tabs -->
-    <ul class="nav nav-tabs" role="tablist">
-      <li role="presentation" class="active"><a href="#athletes" aria-controls="home" role="tab" data-toggle="tab">{% trans "Athletes" %}</a></li>
-      {% if club.address %}
-        <li role="presentation"><a href="#base" aria-controls="home" role="tab" data-toggle="tab">{% trans "General" %}</a></li>
-      {% endif %}
-      <li role="presentation"><a href="#performances" aria-controls="messages" role="tab" data-toggle="tab">{% trans "Performances" %}</a></li>
-    </ul>
-
-    <!-- Tab panes -->
-    <div class="tab-content">
-        <div role="tabpanel" class="tab-pane active" id="athletes">
-          <table class="table table-hover table-condensed" id="athletes-table">
-            {% include "gymnastics/includes/athletes_list.html" with athletes_set=athletes only %}
-          </table>
-        </div>
-
-      {% if club.address %}
-        <div role="tabpanel" class="tab-pane active" id="base">
-          <dl class="dl-horizontal dl-detail">
-            {% if club.address.contact_name %}
-              <dt>{% trans "Contact name" %}</dt>
-              <dd>{{ club.address.contact_name }}</dd>
-            {% endif %}
-
-            {% if club.address.email %}
-              <dt>{% trans "Email" %}</dt>
-              <dd>{{ club.address.email }}</dd>
-            {% endif %}
-
-            {% if club.address.phone %}
-              <dt>{% trans "Phone" %}</dt>
-              <dd>{{ club.address.phone }}</dd>
-            {% endif %}
-
-            {% if club.address.address_formatted %}
-              <dt>{% trans "Address" %}</dt>
-              <dd>{{ club.address.address_formatted|linebreaksbr }}</dd>
-            {% endif %}
-
-          </dl>
-        </div>
-      {% endif %}
-
-      <div role="tabpanel" class="tab-pane" id="performances">
-      </div>
-    </div>
-  </div>
-  
+</div>
 {% endblock content %}

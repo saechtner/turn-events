@@ -14,64 +14,63 @@
 {% endblock nav_regular_buttons %}
 
 {% block content %}
+<div class="panel panel-default">
+  <div class="panel-body">
 
-  <div class="panel panel-default">
-    <div class="panel-body">
+    {% if streams %}
+      <table class="table table-hover" id="stream-table">
+        <thead>
+          <th>{% trans "Difficulty" %}</th>
+          <th class="gend">
+            <span class="gend-female"><i class="fa fa-venus fa-fw"></i></span>
+             / 
+             <span class="gend-male"><i class="fa fa-mars fa-fw"></i></span>
+          </th>
+          <th>#{% trans "Athletes" %}</th>
+          <th>{% trans "Minimum Year of Birth" %}</th>
+          <th></th>
+        </thead>
+        <tbody>
+          {% for stream in streams %}
+            <tr id="streams_row_{{ stream.id }}">
+              <td>{{ stream.difficulty }}</td>
 
-      {% if streams %}
-        <table class="table table-hover" id="stream-table">
-          <thead>
-            <th>{% trans "Difficulty" %}</th>
-            <th class="gend">
-              <span class="gend-female"><i class="fa fa-venus fa-fw"></i></span>
-               / 
-               <span class="gend-male"><i class="fa fa-mars fa-fw"></i></span>
-            </th>
-            <th>#{% trans "Athletes" %}</th>
-            <th>{% trans "Minimum Year of Birth" %}</th>
-            <th></th>
-          </thead>
-          <tbody>
-            {% for stream in streams %}
-              <tr id="streams_row_{{ stream.id }}">
-                <td>{{ stream.difficulty }}</td>
+              <td class="gend">
+                {% if stream.sex == 'f' %}
+                  <span class="gend-female"><i class="fa fa-venus fa-fw" alt="{% trans 'female' %}"></i></span>
+                {% else %}
+                  <span class="gend-male"><i class="fa fa-mars fa-fw" alt="{% trans 'male' %}"></i></span>
+                {% endif %}
+              </td>
 
-                <td class="gend">
-                  {% if stream.sex == 'f' %}
-                    <span class="gend-female"><i class="fa fa-venus fa-fw" alt="{% trans 'female' %}"></i></span>
-                  {% else %}
-                    <span class="gend-male"><i class="fa fa-mars fa-fw" alt="{% trans 'male' %}"></i></span>
-                  {% endif %}
-                </td>
-
-                <td> {{ stream.athlete_set.count }}</td>
-                <td>{{ stream.minimum_year_of_birth }}</td>
-                <td>
+              <td> {{ stream.athlete_set.count }}</td>
+              <td>{{ stream.minimum_year_of_birth }}</td>
+              <td>
+                <div class="btn-group" role="group">
+                <td class="text-right">
                   <div class="btn-group" role="group">
-                  <td class="text-right">
-                    <div class="btn-group" role="group">
-                      <a  type="button" class="btn btn-xs btn-success" href="{{ stream.get_absolute_url }}">
-                        <span class="glyphicon glyphicon-search"></span> {% trans "detail" %}
-                      </a>
-                      <a  type="button" class="btn btn-xs btn-warning" href="{{ stream.get_edit_url }}">
-                        <span class="glyphicon glyphicon-edit"></span> {% trans "edit" %}
-                      </a>
-                      <a  type="button" class="btn btn-xs btn-danger" href="{{ stream.get_delete_url }}">
-                        <span class="glyphicon glyphicon-remove"></span> {% trans "delete" %}
-                      </a>
-                    </div>
-                  </td>
+                    <a  type="button" class="btn btn-xs btn-success" href="{{ stream.get_absolute_url }}">
+                      <span class="glyphicon glyphicon-search"></span> {% trans "detail" %}
+                    </a>
+                    <a  type="button" class="btn btn-xs btn-warning" href="{{ stream.get_edit_url }}">
+                      <span class="glyphicon glyphicon-edit"></span> {% trans "edit" %}
+                    </a>
+                    <a  type="button" class="btn btn-xs btn-danger" href="{{ stream.get_delete_url }}">
+                      <span class="glyphicon glyphicon-remove"></span> {% trans "delete" %}
+                    </a>
                   </div>
                 </td>
-              </tr>
-            {% endfor %}
-          </tbody>
-        </table>
-      {% else %}
-        <div class="alert alert-info">{% trans "No stream available in the database." %}</div>
-      {% endif %}
+                </div>
+              </td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+      
+    {% else %}
+      <div class="alert alert-info">{% trans "No stream available in the database." %}</div>
+    {% endif %}
 
-    </div>
   </div>
-  
+</div>
 {% endblock content %}

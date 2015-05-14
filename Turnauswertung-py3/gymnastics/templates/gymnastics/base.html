@@ -161,7 +161,14 @@
                         </ul>
 
                         <div class="nav navbar-nav navbar-right">
-                          {% block nav_regular_buttons %}{% endblock nav_regular_buttons %}
+                          <div class="btn-group">
+                            {% block nav_regular_buttons %}{% endblock nav_regular_buttons %}
+                          </div>
+                          {% block nav_search %}
+                            <form class="navbar-form" role="search">
+                              <input type="search" class="light-table-filter form-control" data-table="tablefilter" name="table_filter">
+                            </form>
+                          {% endblock nav_search %}
                         </div>
                       </div>
                       

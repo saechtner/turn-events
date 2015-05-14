@@ -1,16 +1,21 @@
 {% extends "gymnastics/clubs/base.html" %}
-{% load i18n %}
 
+{% load i18n %}
 {% load custom_template_tags %}
 
-{% block nav_level_1 %}
-  {% render_nav_item name='Clubs' url_name='clubs.index' url_id=None active=True %}
-{% endblock nav_level_1 %}
+{% block headline %}{% trans 'Clubs' %}{% endblock headline %}
+{% block nav_main %}{% trans 'Clubs' %}{% endblock nav_main %}
+{% block nav_main_url %}{% url 'clubs.index' %}{% endblock nav_main_url %}
+{% block nav_links %}{% endblock nav_links %}
+{% block nav_regular_buttons %}
+  <a type="button" class="btn btn-default navbar-btn" href="{% url 'clubs.new' %}">{% trans "New club" %}</a>
+{% endblock nav_regular_buttons %}
 
 {% block content %}
+  <div class="panel panel-default">
+    <div class="panel-body">
 
     {% if clubs %}
-
       <table class="table table-hover" id="clubs-table">
         <thead>
           <th>{% trans "Name" %}</th>
@@ -44,9 +49,9 @@
       </table>
 
     {% else %}
-
       <div class="alert alert-info">{% trans "No clubs available in the database." %}</div>
-
     {% endif %}
+
   </div>
+</div>
 {% endblock content %}

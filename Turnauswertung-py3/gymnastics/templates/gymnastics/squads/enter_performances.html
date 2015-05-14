@@ -1,61 +1,64 @@
 {% extends "gymnastics/squads/base.html" %}
-{% load i18n %}
 
+{% load i18n %}
 {% load custom_template_tags %}
-                  
-{% block nav_level_2 %}
-  {% render_nav_item name=squad url_name='squads.detail' url_id=squad.id %}
-{% endblock nav_level_2 %}
-{% block nav_level_3 %}
-  {% render_nav_item name='enter values' active=True %}
-{% endblock nav_level_3 %}
+
+{% block headline %}<small>{% trans 'Enter performances' %}</small> {{ squad }}{% endblock headline %}
+{% block nav_main %}{{ squad }}{% endblock nav_main %}
+{% block nav_main_url %}{{ squad.get_absolute_url }}{% endblock nav_main_url %}
+{% block nav_links %}{% endblock nav_links %}
+{% block nav_regular_buttons %}{% endblock nav_regular_buttons %}
 
 
 {% block content %}
-<form action="{% url 'squads.handle_entered_performances' %}" method="post" class="form-horizontal">
-  {% csrf_token %}
-  {% for stream in streams %}
-    <div class="panel panel-default">
-      <div class="panel-heading text-center">
-        <a data-toggle="collapse" href="#collapse_{{ stream_id }}" aria-expanded="true" aria-controls="collapse_{{ stream_id }}">
-          <h3 class="panel-title">{{ stream }}</h3>
-        </a>
-      </div>
-      {% with stream_disciplines=stream_disciplines_dict|get_item:stream.id stream_athletes=stream_athletes_dict|get_item:stream.id %}
-        <div id="collapse_{{ stream_id }}" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
-          <table class="table table-hover table-condensed" id="stream-{{ stream }}-table">
-            <thead>
-              <th>{% trans "Athlete" %}</th>
-              {% for discipline in stream_disciplines %}
-                <th class="text-center">{{ discipline }}</th>
-              {% endfor %}
-            </thead>
-            <tbody>
-              {% for athlete in stream_athletes %}
-                <tr id="athlete_{{ athlete.id }}">
-                  {% with athlete_performances=athletes_disciplines_result_dict|get_item:athlete.id %}
-                    <td><a href="{{ athlete.get_absolute_url }}" >{{ athlete }}</a></td>
-                    {% for discipline in stream_disciplines %}
-                      <td>
-                        <div class="col-md-6 col-md-offset-3">
-                          <input class="form-control" onkeydown="ModifyEnterKeyPressAsTab(event);" type="number" min="0.000" max="20.000" step="0.001" name="{{ athlete.id }}-{{ discipline.id }}" placeholder="{{ athlete_performances|get_item:discipline.id }}" tabindex="{{ stream_discipline_tabindex_dict|get_item:stream.id|get_item:discipline.id|default:0 }}">
-                        </div>
-                      </td>
-                    {% endfor %}
-                  {% endwith %}
-                </tr>
-              {% endfor %}
-            </tbody>
-          </table>
+<div class="panel panel-default">
+  <div class="panel-body">
+    <form action="{% url 'squads.handle_entered_performances' %}" method="post" class="form-horizontal">
+      {% csrf_token %}
+      {% for stream in streams %}
+        <div class="panel panel-default">
+          <div class="panel-heading text-center">
+            <a data-toggle="collapse" href="#collapse_{{ stream_id }}" aria-expanded="true" aria-controls="collapse_{{ stream_id }}">
+              <h3 class="panel-title">{{ stream }}</h3>
+            </a>
+          </div>
+          {% with stream_disciplines=stream_disciplines_dict|get_item:stream.id stream_athletes=stream_athletes_dict|get_item:stream.id %}
+            <div id="collapse_{{ stream_id }}" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+              <table class="table table-hover table-condensed" id="stream-{{ stream }}-table">
+                <thead>
+                  <th>{% trans "Athlete" %}</th>
+                  {% for discipline in stream_disciplines %}
+                    <th class="text-center">{{ discipline }}</th>
+                  {% endfor %}
+                </thead>
+                <tbody>
+                  {% for athlete in stream_athletes %}
+                    <tr id="athlete_{{ athlete.id }}">
+                      {% with athlete_performances=athletes_disciplines_result_dict|get_item:athlete.id %}
+                        <td><a href="{{ athlete.get_absolute_url }}" >{{ athlete }}</a></td>
+                        {% for discipline in stream_disciplines %}
+                          <td>
+                            <div class="col-md-6 col-md-offset-3">
+                              <input class="form-control" onkeydown="ModifyEnterKeyPressAsTab(event);" type="number" min="0.000" max="20.000" step="0.001" name="{{ athlete.id }}-{{ discipline.id }}" placeholder="{{ athlete_performances|get_item:discipline.id }}" tabindex="{{ stream_discipline_tabindex_dict|get_item:stream.id|get_item:discipline.id|default:0 }}">
+                            </div>
+                          </td>
+                        {% endfor %}
+                      {% endwith %}
+                    </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+            </div>
+          {% endwith %}
         </div>
-      {% endwith %}
-    </div>
-  {% endfor %}
-  <div class="col-md-5 col-md-offset-4 btn-group">
-    <input class="btn btn-primary" type="submit" value="{% trans "Submit" %}" tabindex="150"/>
-    <button class="btn btn-default" type="button" onClick="javascript:history.go(-1);">{% trans "Cancel" %}</button>
+      {% endfor %}
+      <div class="col-md-5 col-md-offset-4 btn-group">
+        <input class="btn btn-primary" type="submit" value="{% trans "Submit" %}" tabindex="150"/>
+        <button class="btn btn-default" type="button" onClick="javascript:history.go(-1);">{% trans "Cancel" %}</button>
+      </div>
+    </form>
   </div>
-</form>
+</div>
 {% endblock content %}
 
 {% block javascript %}
