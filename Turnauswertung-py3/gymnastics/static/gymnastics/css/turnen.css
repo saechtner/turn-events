@@ -128,7 +128,7 @@ li.dropdown > ul.dropdown-scrollable {
 }
 
 .static-navbar .navbar-nav > li > a:hover,
-.static-navbar .navbar-nav > li > a:active {
+.static-navbar .navbar-nav > li > a.active {
   background-image: -webkit-linear-gradient(top, #080808 0%, #0f0f0f 100%);
   background-image: -o-linear-gradient(top, #080808 0%, #0f0f0f 100%);
   background-image: -webkit-gradient(linear, left top, left bottom, from(#080808), to(#0f0f0f));
