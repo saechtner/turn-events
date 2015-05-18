@@ -35,19 +35,19 @@
 
         <div class="collapse navbar-collapse" id="static-navbar-collapse">
           <ul class="nav navbar-nav">
-            <li {% if request.path|is_domain_in_url:'tournaments' %}class="active"{% endif %}>
+            <li {% if request.path|url_contains_domain:'tournaments' %}class="active"{% endif %}>
               <a href="{% url 'tournaments.main' %}">KJSS 2015</a>
             </li>
-            <li {% if request.path|is_domain_in_url:'streams' %}class="active"{% endif %}>
+            <li {% if request.path|url_contains_domain:'streams' %}class="active"{% endif %}>
               <a href="{% url 'streams.index' %}">{% trans "Streams" %}</a>
             </li>
-            <li {% if request.path|is_domain_in_url:'clubs' %}class="active"{% endif %}>
+            <li {% if request.path|url_contains_domain:'clubs' %}class="active"{% endif %}>
               <a href="{% url 'clubs.index' %}">{% trans "Clubs" %}</a>
             </li>
-            <li {% if request.path|is_domain_in_url:'athletes' %}class="active"{% endif %}>
+            <li {% if request.path|url_contains_domain:'athletes' %}class="active"{% endif %}>
               <a href="{% url 'athletes.index' %}">{% trans "Athletes" %}</a>
             </li>
-            <li {% if request.path|is_domain_in_url:'squads' %}class="active"{% endif %}>
+            <li {% if request.path|url_contains_domain:'squads' %}class="active"{% endif %}>
               <a href="{% url 'squads.index' %}">{% trans "Squads" %}</a>
             </li>
 
@@ -177,7 +177,7 @@
                           </div>
                           {% block nav_search %}
                             <form class="navbar-form" role="search">
-                              <input type="search" class="light-table-filter form-control" data-table="tablefilter" name="table_filter">
+                              <input type="search" placeholder="{% trans 'Search' %}" class="light-table-filter form-control" data-table="tablefilter" name="table_filter">
                             </form>
                           {% endblock nav_search %}
                         </div>

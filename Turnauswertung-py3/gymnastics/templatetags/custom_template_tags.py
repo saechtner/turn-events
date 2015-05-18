@@ -20,7 +20,7 @@ def get_final_total(athlete, discipline):
     return athlete.final_total(discipline)
 
 @register.filter
-def is_domain_in_url(url, domain):
+def url_contains_domain(url, domain):
     try:
         return domain == url.split('/')[3]
     except:

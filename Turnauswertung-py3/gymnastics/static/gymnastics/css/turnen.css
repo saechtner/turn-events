@@ -127,7 +127,7 @@ li.dropdown > ul.dropdown-scrollable {
   font-weight: 400;
 }
 
-.static-navbar .navbar-nav > li > a:hover,
+/*.static-navbar .navbar-nav > li > a:hover,*/
 .static-navbar .navbar-nav > li > a.active {
   background-image: -webkit-linear-gradient(top, #080808 0%, #0f0f0f 100%);
   background-image: -o-linear-gradient(top, #080808 0%, #0f0f0f 100%);
@@ -310,6 +310,21 @@ th.headerSortDown {
   margin-left: 220px;
 }
 
+.list-dragsort > li > div {
+  cursor: pointer;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.list-dragsort > li > div.placeholder {
+  min-height: 40px!important;
+  padding: 5px;
+  margin: 5px;
+}
 
 /* CUSTOMIZE THE CAROUSEL
 -------------------------------------------------- */

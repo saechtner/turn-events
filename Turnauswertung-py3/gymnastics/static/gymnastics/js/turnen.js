@@ -52,7 +52,7 @@ $(document).ready(function() {
     }); 
 }); 
 
-/* Initiate jQuery drag sorter */
+/* Initiate jquery.dragsort */
 $(document).ready(function() { 
     // $("#available-list").dragsort();   
 
@@ -64,13 +64,23 @@ $(document).ready(function() {
     };
 
     $("#chosen-list, #available-list").dragsort({ 
-        dragSelector: "div", 
+        dragSelector: "li", 
         dragBetween: true, 
         dragEnd: saveOrder, 
-        placeHolderTemplate: "<li class='placeHolder'><div></div></li>"
+        placeHolderTemplate: "<li class='label label-default'><div class='placeholder'></div></li>"
     });
 });
 
+/* Add jquery.dragsort extending click handlers */
+$('#available-list').on('click', 'li', function() {
+    $('#chosen-list').append($(this));
+});
+
+$('#chosen-list').on('click', 'li', function() {
+    $('#available-list').append($(this));
+});
+
+/* Vertical scroll handling */
 $(document).ready(function() {
     function scrollResponse(element, transform_value) {
         if (transform_value) {
