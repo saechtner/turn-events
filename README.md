@@ -1,14 +1,13 @@
-# Introduction
-This is the turn-events webapp to manage artistic gymnastic tournaments.
+This is the turn-events web app to manage artistic gymnastics tournaments.
 
 
-# Needed Software
+## Needed Software
 - [Python3](https://www.python.org/downloads/) (recomended Version: 3.4.3)
 - [MySQL server](http://dev.mysql.com/downloads/mysql/)
 - Python3 plugins as specified [here](https://github.com/saechtner/turn-events/blob/master/Turnauswertung-py3/requirements.txt)
 
 
-# Installation
+## Installation
 1. Install [Python3](https://www.python.org/downloads/) and [MySQL](http://dev.mysql.com/downloads/mysql/) in case you haven't done yet.
 2. Install the Python plugins specified [here](https://github.com/saechtner/turn-events/blob/master/Turnauswertung-py3/requirements.txt).
 3. Adjust database settings in [settings.py](https://github.com/saechtner/turn-events/blob/master/Turnauswertung-py3/Turnauswertung/settings.py)
