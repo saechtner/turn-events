@@ -1,12 +1,21 @@
 from django.core.urlresolvers import reverse
 from django.db import models
+from django.utils.translation import ugettext_lazy
 
 
 class CertificateRule(models.Model):
   
-    content = models.CharField(max_length=128)# might be a choice field ()
-    vertical_position = models.CharField(max_length=50, null=True, blank=True)# center or x mm / x cm / x m has to be parsed (better option?)
-    horizontal_position = models.CharField('Horizontal position (in mm/cm)', max_length=50, default='150 mm')# center or x mm / x cm / x m has to be parsed (better option?)
+    content = models.CharField(max_length=128, null=False, 
+        choices=(
+            ('{{ athlete }}', ugettext_lazy('Athlete Name')),
+            ('{{ athlete_performance }}', ugettext_lazy('Athlete Performance')),
+            ('{{ athlete_rank }}', ugettext_lazy('Athlete Rank')),
+            ('{{ team }}', ugettext_lazy('Team Name')),
+            ('{{ team_performance }}', ugettext_lazy('Team Performance')),
+            ('{{ team_rank }}', ugettext_lazy('Team Rank')),
+            ('{{ team_Mitglieder? }}', ugettext_lazy('Team Mitglieder!?')))# might be a choice field ()
+    horizontal_position = models.DecimalField('Horizontal position in cm', decimal_places=1, null=True, blank=True)
+    vertical_position = models.DecimalField('Vertical position in cm', decimal_places=1, default=150.0)
 
     certificate = models.ForeignKey('Certificate')
 
