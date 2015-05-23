@@ -1028,7 +1028,7 @@
     "name": "KJSS 2015",
     "hosting_club": null,
     "address": null,
-    "name_full": "Kreis- und Jugendsportspiele 2015"
+    "name_full": "Kinder- und Jugendsportspiele 2015"
   },
   "pk": 1,
   "model": "gymnastics.tournament"
