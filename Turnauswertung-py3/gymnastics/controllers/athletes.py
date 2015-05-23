@@ -42,14 +42,14 @@ def results(request):
 class AthleteCreateView(generic.CreateView):
 
     model = Athlete
-    fields = ['first_name', 'last_name', 'sex', 'year_of_birth', 'date_of_birth', 'stream', 'club', 'team', 'squad']
+    fields = ['first_name', 'last_name', 'sex', 'date_of_birth', 'stream', 'club', 'team', 'squad']
     template_name = 'gymnastics/athletes/new.html'
 
 
 class AthleteUpdateView(generic.UpdateView):
 
     model = Athlete
-    fields = ['first_name', 'last_name', 'sex', 'year_of_birth', 'date_of_birth', 'stream', 'club', 'team', 'squad']
+    fields = ['first_name', 'last_name', 'sex', 'date_of_birth', 'stream', 'club', 'team', 'squad']
     template_name = 'gymnastics/athletes/edit.html'
 
     # context_object_name = 'athlete' # should be available as well as object because of model = Athlete

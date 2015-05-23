@@ -28,7 +28,6 @@ class Athlete(models.Model):
     first_name = models.CharField(max_length=50, null=False)
     last_name = models.CharField(max_length=50, null=False)
     sex = models.CharField(max_length=1, null=False, choices=(('m', 'male'), ('f', 'female')), default='f')
-    year_of_birth = models.IntegerField(default=2000) # deprecated. Gonna get removed soonish
     date_of_birth = models.DateField(default='1900-01-01')
 
     club = models.ForeignKey('Club', null=True, blank=True)
@@ -47,8 +46,8 @@ class Athlete(models.Model):
 
     def __str__(self):
         # Dev Output
-        # return 'Athlete: [name: {0} {1}, sex: {2}, year_of_birth: {3}, club; {4}, stream: {5}]'.format( \
-        #     self.first_name, self.last_name, self.sex, self.year_of_birth, self.club, self.stream)
+        # return 'Athlete: [name: {0} {1}, sex: {2}, date_of_birth: {3}, club; {4}, stream: {5}]'.format( \
+        #     self.first_name, self.last_name, self.sex, self.date_of_birth, self.club, self.stream)
         return '{0} {1}'.format(self.first_name, self.last_name)
 
     def save(self, *args, **kwargs):

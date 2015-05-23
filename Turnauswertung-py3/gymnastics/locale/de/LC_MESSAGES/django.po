@@ -943,12 +943,6 @@ msgstr "Es sind keine Turniere vorhanden."
 msgid "Create New Tournament"
 msgstr "Neues Turnier"
 
-msgid "Year of Birth"
-msgstr "Geburtsjahr"
-
-msgid "Year of birth"
-msgstr "Geburtsjahr"
-
 msgid "Performances are compared in"
 msgstr "Wertungen werden verglichen in"
 
