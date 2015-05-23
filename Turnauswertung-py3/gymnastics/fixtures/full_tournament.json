@@ -1,0 +1,1036 @@
+[
+{
+  "fields": {
+    "stream": 1,
+    "club": 1,
+    "slug": "nadja-bauer",
+    "first_name": "Nadja",
+    "athletes_import": null,
+    "squad": 1,
+    "team": 5,
+    "last_name": "Bauer",
+    "date_of_birth": "1997-01-01",
+    "sex": "f"
+  },
+  "pk": 1,
+  "model": "gymnastics.athlete"
+},
+{
+  "fields": {
+    "stream": 1,
+    "club": 1,
+    "first_name": "Crescentia",
+    "athletes_import": null,
+    "slug": "crescentia-cantrell",
+    "squad": 1,
+    "team": 5,
+    "last_name": "Cantrell",
+    "date_of_birth": "1997-01-01",
+    "sex": "f"
+  },
+  "pk": 2,
+  "model": "gymnastics.athlete"
+},
+{
+  "fields": {
+    "stream": 1,
+    "club": 1,
+    "first_name": "Ina",
+    "athletes_import": null,
+    "slug": "ina-attwater",
+    "squad": 1,
+    "team": 5,
+    "last_name": "Attwater",
+    "date_of_birth": "1996-01-01",
+    "sex": "f"
+  },
+  "pk": 3,
+  "model": "gymnastics.athlete"
+},
+{
+  "fields": {
+    "stream": 1,
+    "club": 2,
+    "first_name": "Dietlinde",
+    "athletes_import": null,
+    "slug": "dietlinde-andrewson",
+    "squad": 1,
+    "team": 7,
+    "last_name": "Andrewson",
+    "date_of_birth": "1998-01-01",
+    "sex": "f"
+  },
+  "pk": 4,
+  "model": "gymnastics.athlete"
+},
+{
+  "fields": {
+    "stream": 1,
+    "club": 2,
+    "first_name": "Amy",
+    "athletes_import": null,
+    "slug": "amy-danielson",
+    "squad": 1,
+    "team": 7,
+    "last_name": "Danielson",
+    "date_of_birth": "1998-01-01",
+    "sex": "f"
+  },
+  "pk": 5,
+  "model": "gymnastics.athlete"
+},
+{
+  "fields": {
+    "stream": 1,
+    "club": 2,
+    "first_name": "Brittany",
+    "athletes_import": null,
+    "slug": "brittany-low",
+    "squad": 1,
+    "team": 7,
+    "last_name": "Low",
+    "date_of_birth": "1997-01-01",
+    "sex": "f"
+  },
+  "pk": 6,
+  "model": "gymnastics.athlete"
+},
+{
+  "fields": {
+    "stream": 2,
+    "club": 1,
+    "first_name": "Ronny",
+    "athletes_import": null,
+    "slug": "ronny-banner",
+    "squad": 2,
+    "team": 6,
+    "last_name": "Banner",
+    "date_of_birth": "2006-01-01",
+    "sex": "m"
+  },
+  "pk": 7,
+  "model": "gymnastics.athlete"
+},
+{
+  "fields": {
+    "stream": 2,
+    "club": 1,
+    "first_name": "Thad",
+    "athletes_import": null,
+    "slug": "thad-gerstle",
+    "squad": 2,
+    "team": 6,
+    "last_name": "Gerstle",
+    "date_of_birth": "2006-01-01",
+    "sex": "m"
+  },
+  "pk": 8,
+  "model": "gymnastics.athlete"
+},
+{
+  "fields": {
+    "stream": 2,
+    "club": 1,
+    "first_name": "Wes",
+    "athletes_import": null,
+    "slug": "wes-ingram",
+    "squad": 2,
+    "team": 6,
+    "last_name": "Ingram",
+    "date_of_birth": "2006-01-01",
+    "sex": "m"
+  },
+  "pk": 9,
+  "model": "gymnastics.athlete"
+},
+{
+  "fields": {
+    "stream": 2,
+    "club": 3,
+    "first_name": "Berry",
+    "athletes_import": null,
+    "slug": "berry-kraus",
+    "squad": 2,
+    "team": 9,
+    "last_name": "Kraus",
+    "date_of_birth": "2005-01-01",
+    "sex": "m"
+  },
+  "pk": 10,
+  "model": "gymnastics.athlete"
+},
+{
+  "fields": {
+    "stream": 2,
+    "club": 3,
+    "first_name": "Ivo",
+    "athletes_import": null,
+    "slug": "ivo-treloar",
+    "squad": 2,
+    "team": 9,
+    "last_name": "Treloar",
+    "date_of_birth": "2006-01-01",
+    "sex": "m"
+  },
+  "pk": 11,
+  "model": "gymnastics.athlete"
+},
+{
+  "fields": {
+    "stream": 2,
+    "club": 2,
+    "first_name": "Bennie",
+    "athletes_import": null,
+    "slug": "bennie-brown",
+    "squad": 2,
+    "team": 8,
+    "last_name": "Brown",
+    "date_of_birth": "2006-01-01",
+    "sex": "m"
+  },
+  "pk": 12,
+  "model": "gymnastics.athlete"
+},
+{
+  "fields": {
+    "stream": 2,
+    "club": 2,
+    "first_name": "Farrell",
+    "athletes_import": null,
+    "slug": "farrell-beckert",
+    "squad": 2,
+    "team": 8,
+    "last_name": "Beckert",
+    "date_of_birth": "2005-01-01",
+    "sex": "m"
+  },
+  "pk": 13,
+  "model": "gymnastics.athlete"
+},
+{
+  "fields": {
+    "stream": 2,
+    "club": 4,
+    "first_name": "Topher",
+    "athletes_import": null,
+    "slug": "topher-essert",
+    "squad": 2,
+    "team": 10,
+    "last_name": "Essert",
+    "date_of_birth": "2005-01-01",
+    "sex": "m"
+  },
+  "pk": 14,
+  "model": "gymnastics.athlete"
+},
+{
+  "fields": {
+    "stream": 2,
+    "club": 4,
+    "first_name": "Benno",
+    "athletes_import": null,
+    "slug": "benno-lowe",
+    "squad": 2,
+    "team": 10,
+    "last_name": "Lowe",
+    "date_of_birth": "2005-01-01",
+    "sex": "m"
+  },
+  "pk": 15,
+  "model": "gymnastics.athlete"
+},
+{
+  "fields": {
+    "slug": "asv-stuttgart-ev",
+    "name": "ASV Stuttgart e.V.",
+    "address": null
+  },
+  "pk": 1,
+  "model": "gymnastics.club"
+},
+{
+  "fields": {
+    "slug": "rsv-hamburg-1847-ev",
+    "name": "RSV Hamburg 1847 e.V.",
+    "address": null
+  },
+  "pk": 2,
+  "model": "gymnastics.club"
+},
+{
+  "fields": {
+    "slug": "mtv-1532-dresden-ev",
+    "name": "MTV 1532 Dresden e.V.",
+    "address": null
+  },
+  "pk": 3,
+  "model": "gymnastics.club"
+},
+{
+  "fields": {
+    "slug": "berlin-ev",
+    "name": "Berlin e.V.",
+    "address": null
+  },
+  "pk": 4,
+  "model": "gymnastics.club"
+},
+{
+  "fields": {
+    "slug": "balken",
+    "name": "Balken"
+  },
+  "pk": 1,
+  "model": "gymnastics.discipline"
+},
+{
+  "fields": {
+    "slug": "boden",
+    "name": "Boden"
+  },
+  "pk": 2,
+  "model": "gymnastics.discipline"
+},
+{
+  "fields": {
+    "slug": "parallelbarren",
+    "name": "Parallelbarren"
+  },
+  "pk": 3,
+  "model": "gymnastics.discipline"
+},
+{
+  "fields": {
+    "slug": "reck",
+    "name": "Reck"
+  },
+  "pk": 4,
+  "model": "gymnastics.discipline"
+},
+{
+  "fields": {
+    "slug": "sprung",
+    "name": "Sprung"
+  },
+  "pk": 5,
+  "model": "gymnastics.discipline"
+},
+{
+  "fields": {
+    "slug": "stufenbarren",
+    "name": "Stufenbarren"
+  },
+  "pk": 6,
+  "model": "gymnastics.discipline"
+},
+{
+  "fields": {
+    "value": "7.900",
+    "athlete": 1,
+    "discipline": 5,
+    "value_final": null
+  },
+  "pk": 1,
+  "model": "gymnastics.performance"
+},
+{
+  "fields": {
+    "value": "9.400",
+    "athlete": 1,
+    "discipline": 4,
+    "value_final": null
+  },
+  "pk": 2,
+  "model": "gymnastics.performance"
+},
+{
+  "fields": {
+    "value": "7.400",
+    "athlete": 1,
+    "discipline": 1,
+    "value_final": null
+  },
+  "pk": 3,
+  "model": "gymnastics.performance"
+},
+{
+  "fields": {
+    "value": "9.300",
+    "athlete": 1,
+    "discipline": 2,
+    "value_final": null
+  },
+  "pk": 4,
+  "model": "gymnastics.performance"
+},
+{
+  "fields": {
+    "value": "8.950",
+    "athlete": 3,
+    "discipline": 5,
+    "value_final": null
+  },
+  "pk": 5,
+  "model": "gymnastics.performance"
+},
+{
+  "fields": {
+    "value": "9.200",
+    "athlete": 3,
+    "discipline": 4,
+    "value_final": null
+  },
+  "pk": 6,
+  "model": "gymnastics.performance"
+},
+{
+  "fields": {
+    "value": "8.750",
+    "athlete": 3,
+    "discipline": 1,
+    "value_final": null
+  },
+  "pk": 7,
+  "model": "gymnastics.performance"
+},
+{
+  "fields": {
+    "value": "9.300",
+    "athlete": 3,
+    "discipline": 2,
+    "value_final": null
+  },
+  "pk": 8,
+  "model": "gymnastics.performance"
+},
+{
+  "fields": {
+    "value": "8.500",
+    "athlete": 6,
+    "discipline": 5,
+    "value_final": null
+  },
+  "pk": 9,
+  "model": "gymnastics.performance"
+},
+{
+  "fields": {
+    "value": "9.300",
+    "athlete": 6,
+    "discipline": 4,
+    "value_final": null
+  },
+  "pk": 10,
+  "model": "gymnastics.performance"
+},
+{
+  "fields": {
+    "value": "9.150",
+    "athlete": 6,
+    "discipline": 1,
+    "value_final": null
+  },
+  "pk": 11,
+  "model": "gymnastics.performance"
+},
+{
+  "fields": {
+    "value": "9.150",
+    "athlete": 6,
+    "discipline": 2,
+    "value_final": null
+  },
+  "pk": 12,
+  "model": "gymnastics.performance"
+},
+{
+  "fields": {
+    "value": "8.300",
+    "athlete": 5,
+    "discipline": 5,
+    "value_final": null
+  },
+  "pk": 13,
+  "model": "gymnastics.performance"
+},
+{
+  "fields": {
+    "value": "9.500",
+    "athlete": 5,
+    "discipline": 4,
+    "value_final": null
+  },
+  "pk": 14,
+  "model": "gymnastics.performance"
+},
+{
+  "fields": {
+    "value": "8.250",
+    "athlete": 5,
+    "discipline": 1,
+    "value_final": null
+  },
+  "pk": 15,
+  "model": "gymnastics.performance"
+},
+{
+  "fields": {
+    "value": "9.800",
+    "athlete": 5,
+    "discipline": 2,
+    "value_final": null
+  },
+  "pk": 16,
+  "model": "gymnastics.performance"
+},
+{
+  "fields": {
+    "value": "8.200",
+    "athlete": 4,
+    "discipline": 5,
+    "value_final": null
+  },
+  "pk": 17,
+  "model": "gymnastics.performance"
+},
+{
+  "fields": {
+    "value": "9.200",
+    "athlete": 4,
+    "discipline": 4,
+    "value_final": null
+  },
+  "pk": 18,
+  "model": "gymnastics.performance"
+},
+{
+  "fields": {
+    "value": "8.300",
+    "athlete": 4,
+    "discipline": 1,
+    "value_final": null
+  },
+  "pk": 19,
+  "model": "gymnastics.performance"
+},
+{
+  "fields": {
+    "value": "9.600",
+    "athlete": 4,
+    "discipline": 2,
+    "value_final": null
+  },
+  "pk": 20,
+  "model": "gymnastics.performance"
+},
+{
+  "fields": {
+    "value": "7.000",
+    "athlete": 2,
+    "discipline": 5,
+    "value_final": null
+  },
+  "pk": 21,
+  "model": "gymnastics.performance"
+},
+{
+  "fields": {
+    "value": "9.600",
+    "athlete": 2,
+    "discipline": 4,
+    "value_final": null
+  },
+  "pk": 22,
+  "model": "gymnastics.performance"
+},
+{
+  "fields": {
+    "value": "8.100",
+    "athlete": 2,
+    "discipline": 1,
+    "value_final": null
+  },
+  "pk": 23,
+  "model": "gymnastics.performance"
+},
+{
+  "fields": {
+    "value": "8.750",
+    "athlete": 2,
+    "discipline": 2,
+    "value_final": null
+  },
+  "pk": 24,
+  "model": "gymnastics.performance"
+},
+{
+  "fields": {
+    "value": "9.300",
+    "athlete": 10,
+    "discipline": 2,
+    "value_final": null
+  },
+  "pk": 25,
+  "model": "gymnastics.performance"
+},
+{
+  "fields": {
+    "value": "9.300",
+    "athlete": 10,
+    "discipline": 5,
+    "value_final": null
+  },
+  "pk": 26,
+  "model": "gymnastics.performance"
+},
+{
+  "fields": {
+    "value": "9.200",
+    "athlete": 10,
+    "discipline": 3,
+    "value_final": null
+  },
+  "pk": 27,
+  "model": "gymnastics.performance"
+},
+{
+  "fields": {
+    "value": "9.600",
+    "athlete": 10,
+    "discipline": 4,
+    "value_final": null
+  },
+  "pk": 28,
+  "model": "gymnastics.performance"
+},
+{
+  "fields": {
+    "value": "9.150",
+    "athlete": 11,
+    "discipline": 2,
+    "value_final": null
+  },
+  "pk": 29,
+  "model": "gymnastics.performance"
+},
+{
+  "fields": {
+    "value": "9.050",
+    "athlete": 11,
+    "discipline": 5,
+    "value_final": null
+  },
+  "pk": 30,
+  "model": "gymnastics.performance"
+},
+{
+  "fields": {
+    "value": "8.850",
+    "athlete": 11,
+    "discipline": 3,
+    "value_final": null
+  },
+  "pk": 31,
+  "model": "gymnastics.performance"
+},
+{
+  "fields": {
+    "value": "9.400",
+    "athlete": 11,
+    "discipline": 4,
+    "value_final": null
+  },
+  "pk": 32,
+  "model": "gymnastics.performance"
+},
+{
+  "fields": {
+    "value": "9.350",
+    "athlete": 15,
+    "discipline": 2,
+    "value_final": null
+  },
+  "pk": 33,
+  "model": "gymnastics.performance"
+},
+{
+  "fields": {
+    "value": "8.550",
+    "athlete": 15,
+    "discipline": 5,
+    "value_final": null
+  },
+  "pk": 34,
+  "model": "gymnastics.performance"
+},
+{
+  "fields": {
+    "value": "8.700",
+    "athlete": 15,
+    "discipline": 3,
+    "value_final": null
+  },
+  "pk": 35,
+  "model": "gymnastics.performance"
+},
+{
+  "fields": {
+    "value": "9.000",
+    "athlete": 15,
+    "discipline": 4,
+    "value_final": null
+  },
+  "pk": 36,
+  "model": "gymnastics.performance"
+},
+{
+  "fields": {
+    "value": "8.400",
+    "athlete": 12,
+    "discipline": 2,
+    "value_final": null
+  },
+  "pk": 37,
+  "model": "gymnastics.performance"
+},
+{
+  "fields": {
+    "value": "8.850",
+    "athlete": 12,
+    "discipline": 5,
+    "value_final": null
+  },
+  "pk": 38,
+  "model": "gymnastics.performance"
+},
+{
+  "fields": {
+    "value": "8.400",
+    "athlete": 12,
+    "discipline": 3,
+    "value_final": null
+  },
+  "pk": 39,
+  "model": "gymnastics.performance"
+},
+{
+  "fields": {
+    "value": "8.750",
+    "athlete": 12,
+    "discipline": 4,
+    "value_final": null
+  },
+  "pk": 40,
+  "model": "gymnastics.performance"
+},
+{
+  "fields": {
+    "value": "8.750",
+    "athlete": 14,
+    "discipline": 2,
+    "value_final": null
+  },
+  "pk": 41,
+  "model": "gymnastics.performance"
+},
+{
+  "fields": {
+    "value": "8.600",
+    "athlete": 14,
+    "discipline": 5,
+    "value_final": null
+  },
+  "pk": 42,
+  "model": "gymnastics.performance"
+},
+{
+  "fields": {
+    "value": "8.300",
+    "athlete": 14,
+    "discipline": 3,
+    "value_final": null
+  },
+  "pk": 43,
+  "model": "gymnastics.performance"
+},
+{
+  "fields": {
+    "value": "8.300",
+    "athlete": 14,
+    "discipline": 4,
+    "value_final": null
+  },
+  "pk": 44,
+  "model": "gymnastics.performance"
+},
+{
+  "fields": {
+    "value": "8.400",
+    "athlete": 7,
+    "discipline": 2,
+    "value_final": null
+  },
+  "pk": 45,
+  "model": "gymnastics.performance"
+},
+{
+  "fields": {
+    "value": "8.550",
+    "athlete": 7,
+    "discipline": 5,
+    "value_final": null
+  },
+  "pk": 46,
+  "model": "gymnastics.performance"
+},
+{
+  "fields": {
+    "value": "8.500",
+    "athlete": 7,
+    "discipline": 3,
+    "value_final": null
+  },
+  "pk": 47,
+  "model": "gymnastics.performance"
+},
+{
+  "fields": {
+    "value": "8.400",
+    "athlete": 7,
+    "discipline": 4,
+    "value_final": null
+  },
+  "pk": 48,
+  "model": "gymnastics.performance"
+},
+{
+  "fields": {
+    "value": "8.000",
+    "athlete": 8,
+    "discipline": 2,
+    "value_final": null
+  },
+  "pk": 49,
+  "model": "gymnastics.performance"
+},
+{
+  "fields": {
+    "value": "8.250",
+    "athlete": 8,
+    "discipline": 5,
+    "value_final": null
+  },
+  "pk": 50,
+  "model": "gymnastics.performance"
+},
+{
+  "fields": {
+    "value": "8.000",
+    "athlete": 8,
+    "discipline": 3,
+    "value_final": null
+  },
+  "pk": 51,
+  "model": "gymnastics.performance"
+},
+{
+  "fields": {
+    "value": "8.000",
+    "athlete": 8,
+    "discipline": 4,
+    "value_final": null
+  },
+  "pk": 52,
+  "model": "gymnastics.performance"
+},
+{
+  "fields": {
+    "slug": "riege-8",
+    "name": "Riege 8"
+  },
+  "pk": 1,
+  "model": "gymnastics.squad"
+},
+{
+  "fields": {
+    "slug": "riege-9",
+    "name": "Riege 9"
+  },
+  "pk": 2,
+  "model": "gymnastics.squad"
+},
+{
+  "fields": {
+    "minimum_year_of_birth": 1995,
+    "all_around_team": true,
+    "all_around_individual": true,
+    "difficulty": "KM4",
+    "sex": "f",
+    "all_around_team_size": 4,
+    "slug": "km4-female",
+    "discipline_finals_both_values_count": true,
+    "all_around_individual_counting_events": 4,
+    "all_around_team_counting_athletes": 4,
+    "discipline_finals": false,
+    "discipline_finals_max_participants": 0
+  },
+  "pk": 1,
+  "model": "gymnastics.stream"
+},
+{
+  "fields": {
+    "minimum_year_of_birth": 2004,
+    "all_around_team": true,
+    "all_around_individual": true,
+    "difficulty": "P2",
+    "sex": "m",
+    "all_around_team_size": 4,
+    "slug": "pm2-male",
+    "discipline_finals_both_values_count": true,
+    "all_around_individual_counting_events": 4,
+    "all_around_team_counting_athletes": 4,
+    "discipline_finals": false,
+    "discipline_finals_max_participants": 0
+  },
+  "pk": 2,
+  "model": "gymnastics.stream"
+},
+{
+  "fields": {
+    "stream": 1,
+    "club": 1,
+    "name": "Stuttgart 1"
+  },
+  "pk": 5,
+  "model": "gymnastics.team"
+},
+{
+  "fields": {
+    "stream": 2,
+    "club": 1,
+    "name": "Stuttgart 1"
+  },
+  "pk": 6,
+  "model": "gymnastics.team"
+},
+{
+  "fields": {
+    "stream": 1,
+    "club": 2,
+    "name": "Hamburg 1"
+  },
+  "pk": 7,
+  "model": "gymnastics.team"
+},
+{
+  "fields": {
+    "stream": 2,
+    "club": 2,
+    "name": "Hamburg 1"
+  },
+  "pk": 8,
+  "model": "gymnastics.team"
+},
+{
+  "fields": {
+    "stream": 2,
+    "club": 3,
+    "name": "Dresden 1"
+  },
+  "pk": 9,
+  "model": "gymnastics.team"
+},
+{
+  "fields": {
+    "stream": 2,
+    "club": 4,
+    "name": "Berlin 1"
+  },
+  "pk": 10,
+  "model": "gymnastics.team"
+},
+{
+  "fields": {
+    "stream": 1,
+    "position": 1,
+    "discipline": 4
+  },
+  "pk": 1,
+  "model": "gymnastics.streamdisciplinejoin"
+},
+{
+  "fields": {
+    "stream": 1,
+    "position": 2,
+    "discipline": 1
+  },
+  "pk": 2,
+  "model": "gymnastics.streamdisciplinejoin"
+},
+{
+  "fields": {
+    "stream": 1,
+    "position": 3,
+    "discipline": 2
+  },
+  "pk": 3,
+  "model": "gymnastics.streamdisciplinejoin"
+},
+{
+  "fields": {
+    "stream": 1,
+    "position": 4,
+    "discipline": 5
+  },
+  "pk": 4,
+  "model": "gymnastics.streamdisciplinejoin"
+},
+{
+  "fields": {
+    "stream": 2,
+    "position": 1,
+    "discipline": 2
+  },
+  "pk": 5,
+  "model": "gymnastics.streamdisciplinejoin"
+},
+{
+  "fields": {
+    "stream": 2,
+    "position": 2,
+    "discipline": 3
+  },
+  "pk": 6,
+  "model": "gymnastics.streamdisciplinejoin"
+},
+{
+  "fields": {
+    "stream": 2,
+    "position": 3,
+    "discipline": 4
+  },
+  "pk": 7,
+  "model": "gymnastics.streamdisciplinejoin"
+},
+{
+  "fields": {
+    "stream": 2,
+    "position": 4,
+    "discipline": 5
+  },
+  "pk": 8,
+  "model": "gymnastics.streamdisciplinejoin"
+},
+{
+  "fields": {
+    "date": "2015-05-23",
+    "slug": "kjss-2015",
+    "name": "KJSS 2015",
+    "hosting_club": null,
+    "address": null,
+    "name_full": "Kreis- und Jugendsportspiele 2015"
+  },
+  "pk": 1,
+  "model": "gymnastics.tournament"
+}
+]
