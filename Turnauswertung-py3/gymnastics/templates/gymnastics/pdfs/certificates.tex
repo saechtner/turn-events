@@ -1,31 +1,50 @@
 {% autoescape on %}
 
-    {% load i18n %}
-    {% load custom_template_tags %}
+  {% load i18n %}
+  {% load custom_template_tags %}
 
 
-    \documentclass[a4paper,14pt]{scrartcl}
-    \usepackage[utf8]{inputenc}
-    \usepackage{geometry}
-    \usepackage{textpos}
+  \documentclass[a4paper,14pt]{scrartcl}
+  \usepackage[utf8]{inputenc}
+  \usepackage{geometry}
+  \usepackage[absolute, showboxes, overlay]{textpos}
+  \usepackage{background}
+  \usepackage[T1]{fontenc}
+  \usepackage{lmodern}
 
-    \geometry{
-      left=0cm,
-      right=0cm,
-      top=0cm,
-      bottom=0cm
-    }
+  \geometry{
+    left=0cm,
+    right=0cm,
+    top=0cm,
+    bottom=0cm
+  }
 
-    \setlength{\TPHorizModule}{1cm}
-    \setlength{\TPVertModule}{1cm}
+  \setlength{\TPHorizModule}{1mm}
+  \setlength{\TPVertModule}{\TPHorizModule}
+  \textblockorigin{0mm}{0mm} % start everything near the top-left corner
+  \setlength{\parindent}{0pt}
 
-    \setlength{\parindent}{0pt}
-    \pagestyle{empty}
+  % \backgroundsetup{
+  %   scale=1,
+  %   opacity=0.4,
+  %   angle = 0,
+  %   contents={
+  %       \includegraphics[width=\paperwidth,height=\paperheight]{Urkunde.png}
+  %     }
+  % }
 
-    \begin{document}
-        \vspace*{10cm}
-        \begin{center}Much to do here\end{center}
-        \vfill
-        \hspace*{5cm}We might put some text here as well.
-    \end{document}
+  \begin{document}
+    % anzugeben sind untere und linke Kante
+    % hier eventuell noch auswahl dazu bauen: unten/oben & links/rechts
+    %{% for athlete in athletes %}
+        %{% for rule in certificate.rules %}
+            %\begin{textblock}{rule.width}[0, 1](rule.hPos, rule.vPos)
+                %\fontfamily{ {% rule.font %} }
+                %\fontsize{ {% rule.font_size %} }
+                %\selectfont
+                % {{ rule.prefix }} {{ rule.value }} {{ rule.suffix }}
+            % \end{textblock}
+        %{% endfor %}
+    %{% endfor %}
+  \end{document}
 {% endautoescape %}
