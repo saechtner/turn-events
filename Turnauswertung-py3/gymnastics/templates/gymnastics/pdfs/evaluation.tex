@@ -1,0 +1,165 @@
+{% comment %}
+    {% extends "base/base.tex" %}
+{% endcomment %}
+
+{% autoescape on %}
+
+    {% load i18n %}
+    {% load custom_template_tags %}
+
+
+    \documentclass[pagesize,paper=a4,10pt,DIV=18]{scrartcl}
+    \usepackage[utf8]{inputenc}
+    \usepackage{longtable,multicol,multirow}
+    \usepackage{caption,titlesec}
+    \usepackage{hyperref}
+    \usepackage[utf8]{inputenc}
+    \usepackage[table]{xcolor}
+    \usepackage{fancyhdr,lastpage}
+    \usepackage[top=2.5cm,bottom=2.5cm,left=1.75cm,right=1.75cm]{geometry}
+    \usepackage{tikz}
+    \usepackage{tocstyle}
+
+
+    \hypersetup{
+        pdftitle={ {% trans "Evaluation" %} },
+        % pdfkeywords={keyword1, keyword2},
+        % colorlinks=true,            
+        pdfpagemode=UseOutlines,    % this is the option you were lookin for
+        pdfpagelayout=TwoPageRight
+    }
+
+    % set language here
+    {% get_current_language as LANGUAGE_CODE %}
+    {% if LANGUAGE_CODE = 'de' %}
+        \usepackage[ngerman]{babel}
+    {% endif %}
+
+
+    \newcommand{\changefont}[3]{\fontfamily{#1} \fontseries{#2} \fontshape{#3} \selectfont}
+
+    \changefont{cmss}{m}{n}
+    \setkomafont{caption}{\changefont{cmss}{m}{n}\itshape}
+    \setkomafont{captionlabel}{\changefont{cmss}{m}{n}}
+    \usetocstyle[toc]{KOMAlike}
+
+
+    \addtokomafont{section}{\Large}
+    \addtokomafont{subsection}{\large}
+    \renewcommand\thesection{\arabic{section}.}
+    \renewcommand\thesubsection{\thesection\arabic{subsection}.}
+    
+    \definecolor{grey}{rgb}{0.60,0.60,0.60}
+    \definecolor{lightgrey}{rgb}{0.90,0.90,0.90}
+    \definecolor{yellow}{rgb}{1.0,1.0,0.80}
+
+    \pagestyle{fancy}
+    \fancyhf{} %eigener Seitenstil
+    \fancyhead[L]{ {{ tournament.name_full }} \\ {% if tournament.region %} {{ tournament.region }} \\ {% endif %} {% if tournament.address %} {{ tournament.address }},\ {% endif %} {{ tournament.date }} }
+    \fancyfoot[C]{- \thepage\ -}
+    \renewcommand{\headrulewidth}{0.5pt}
+    \renewcommand{\footrulewidth}{0.0pt}
+
+    \begin{document}
+        Intropage toDo\\ \\ \\
+        {% if tournament.management %} {% trans 'Management' %}: {{ tournament.management }} \\{% endif %}
+        {% if tournament.organisation %} {% trans 'Organisation' %}: {{ tournament.organisation }} \\{% endif %}
+        {% if tournament.calculation %} {% trans 'Calculation' %}: {{ tournament.calculation }} \\{% endif %}
+        {% if tournament.technology %} {% trans 'Technology' %}: {{ tournament.technology }} \\{% endif %}
+        \newpage\tableofcontents
+
+        \newpage\section{ {% trans 'All around individual' %} }
+        {% for stream in streams %}
+            {% if stream_athletes_dict|get_item:stream.id %}
+                {% with disciplines=stream_disciplines_dict|get_item:stream.id %}
+                    \subsection{ {{ stream }} ({% trans 'Year of Birth' %} {{ stream.minimum_year_of_birth }} {% trans 'and after' %}) }
+                    \rowcolors{2}{}{lightgrey}
+                    \begin{longtable}[c]{|l|l|*{ {{ disciplines|length }} }{r|}r|r|}
+                            \hline\hline\rowcolor{grey}
+                            \multicolumn{1}{|c|}{ {% trans 'Name' %} } &
+                            \multicolumn{1}{c|}{ {% trans 'Club' %} } &
+                             {% for discipline in disciplines %}\multicolumn{1}{c|}{ {{ discipline }} } & {% endfor %}
+                            \multicolumn{1}{c|}{ {% trans 'Overall' %} } &
+                            \multicolumn{1}{c|}{ {% trans 'Rank' %} }\\\hline
+                        \endfirsthead
+                            \hline\rowcolor{grey}
+                            \multicolumn{1}{c}{ {% trans 'Name' %} } &
+                            \multicolumn{1}{|c|}{ {% trans 'Club' %} } &
+                            {% for discipline in disciplines %}
+                                \multicolumn{1}{|c}{ {{ discipline }} } &
+                            {% endfor %}
+                            \multicolumn{1}{|c}{ {% trans 'Overall' %} } &
+                            \multicolumn{1}{|c}{ {% trans 'Rank' %} }\\\hline
+                        \endhead
+                            \hline
+                        \endfoot
+                            \hline\hline
+                        \endlastfoot
+                        {% with athlete_disciplines_result_dict=stream_athletes_disciplines_result_dict|get_item:stream.id athlete_disciplines_rank_dict=stream_athletes_disciplines_rank_dict|get_item:stream.id %}
+                            {% for athlete in stream_athletes_dict|get_item:stream.id %}
+                                {% with athlete_performances=athlete_disciplines_result_dict|get_item:athlete.id athlete_ranks=athlete_disciplines_rank_dict|get_item:athlete.id%}
+                                    {{ athlete }} &
+                                    {{ athlete.club }} &
+                                    {% for discipline in disciplines %} {{ athlete_performances|get_item:discipline.id }} &{% endfor %}
+                                    {{ athlete_performances|get_item:'total' }} &
+                                    {{ athlete_ranks|get_item:'total' }} \\
+                                {% endwith %}
+                            {% endfor %}
+                        {% endwith %}
+                    \end{longtable}
+                {% endwith %}
+                \newpage
+            {% endif %}
+        {% endfor %}
+        \section{ {% trans 'Team performances' %} }
+        {% for stream in streams %}
+            {% if stream_teams_dict|get_item:stream.id %}
+                {% with disciplines=stream_disciplines_dict|get_item:stream.id %}
+                    \subsection{ {{ stream }} ({% trans 'Year of Birth' %} {{ stream.minimum_year_of_birth }} {% trans 'and after' %}) }
+                    {% for team in stream_teams_dict|get_item:stream.id %}
+                        \rowcolors{2}{}{lightgrey}
+                        \begin{longtable}[c]{|l|*{ {{ disciplines|length }} }{r|}r|r|}
+                                \hline\hline\rowcolor{grey}
+                                \multicolumn{1}{|c|}{ {% trans 'Name' %} } &
+                                 {% for discipline in disciplines %}\multicolumn{1}{c|}{ {{ discipline }} } & {% endfor %}
+                                \multicolumn{1}{c|}{ {% trans 'Overall' %} } &
+                                \multicolumn{1}{c|}{ {% trans 'Rank' %} }\\\hline
+                            \endfirsthead
+                                \hline\rowcolor{grey}
+                                \multicolumn{1}{c}{ {% trans 'Name' %} } &
+                                {% for discipline in disciplines %}
+                                    \multicolumn{1}{|c}{ {{ discipline }} } &
+                                {% endfor %}
+                                \multicolumn{1}{|c}{ {% trans 'Overall' %} } &
+                                \multicolumn{1}{|c}{ {% trans 'Rank' %} }\\\hline
+                            \endhead
+                                \hline
+                            \endfoot
+                                \hline\hline
+                            \endlastfoot
+                            {% with athlete_disciplines_result_dict=stream_athletes_disciplines_result_dict|get_item:stream.id athlete_disciplines_rank_dict=stream_athletes_disciplines_rank_dict|get_item:stream.id team_disciplines_result_dict=stream_teams_disciplines_result_dict|get_item:stream.id  team_disciplines_rank_dict=stream_teams_disciplines_rank_dict|get_item:stream.id %}
+                                    {% with team_performances=team_disciplines_result_dict|get_item:team.id team_ranks=team_disciplines_rank_dict|get_item:team.id %}
+                                        \rowcolor{yellow}\textbf{ {{ team }} }&
+                                        {% for discipline in disciplines %}\textbf{ {{ team_performances|get_item:discipline.id }} }&{% endfor %}
+                                        \textbf{ {{ team_performances|get_item:'total' }} }&
+                                        \textbf{ {{ team_ranks|get_item:'total' }} }\hline\hline\hline
+                                    {% endwith %}
+                                {% for athlete in team.athlete_set.all %}
+                                    {% with athlete_performances=athlete_disciplines_result_dict|get_item:athlete.id athlete_ranks=athlete_disciplines_rank_dict|get_item:athlete.id %}
+                                        {% if athlete_performances|get_item:'total' %}
+                                            {{ athlete }} &
+                                            {% for discipline in disciplines %} {{ athlete_performances|get_item:discipline.id }} &{% endfor %}
+                                            {{ athlete_performances|get_item:'total' }} &
+                                            {{ athlete_ranks|get_item:'total' }} \\
+                                        {% endif %}
+                                    {% endwith %}
+                                {% endfor %}
+                            {% endwith %}
+                        \end{longtable}
+                    {% endfor %}
+                {% endwith %}
+            \newpage
+            {% endif %}
+        {% endfor %}
+    \end{document}
+{% endautoescape %}

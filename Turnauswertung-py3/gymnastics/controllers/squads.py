@@ -89,7 +89,9 @@ def handle_entered_performances(request):
                 performance = performances.get(athlete_id=athlete_id, discipline_id=discipline_id)
             except:
                 performance = Performance(athlete_id=athlete_id, discipline_id=discipline_id)
-            performance.value = value
+            val = float(value.replace(',', '.'))
+            if val <= 20.0 or val >= 0.0:
+                performance.value = val
             performance.save()
 
     return redirect(reverse('squads.index'))

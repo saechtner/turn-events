@@ -1,13 +1,14 @@
 from django.core.urlresolvers import reverse
 from django.db import models
 from django.utils.text import slugify
+from django.utils.translation import ugettext_lazy
 
 
 class Club(models.Model):
   
-    name = models.CharField(max_length=50)
+    name = models.CharField(ugettext_lazy('Name'), max_length=50)
 
-    address = models.ForeignKey('Address', null=True, blank=True)
+    address = models.ForeignKey('Address', null=True, blank=True, verbose_name=ugettext_lazy('Address'))
 
     slug = models.SlugField(max_length=128, blank=True)
 

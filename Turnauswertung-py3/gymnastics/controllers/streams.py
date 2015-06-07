@@ -63,7 +63,7 @@ def new(request):
 
     return HttpResponseNotAllowed(['GET', 'POST'])
 
-def _build_stream_from_post(stream=Stream(), post_dict={}, method='create'):
+def _build_stream_from_post(stream=None, post_dict={}, method='create'):
     disciplines = Discipline.objects.all()
 
     # check if selected disciplines exist
@@ -77,6 +77,9 @@ def _build_stream_from_post(stream=Stream(), post_dict={}, method='create'):
         difficulty=post_dict['difficulty']
     except:
         return _abort_stream_creation(request, ugettext_lazy('Error: There is no difficulty given.'))
+
+    if not stream:
+        stream = Stream()
 
     # set values from 
     stream.difficulty = difficulty
@@ -97,6 +100,8 @@ def _build_stream_from_post(stream=Stream(), post_dict={}, method='create'):
 
     if method == 'create':
         for position, discipline in enumerate(selected_disciplines):
+            if discipline in stream.discipline_set.all():
+                continue
             stream_discipline_join = StreamDisciplineJoin( \
                 stream=stream,
                 discipline=discipline,

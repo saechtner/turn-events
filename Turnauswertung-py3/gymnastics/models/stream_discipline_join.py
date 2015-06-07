@@ -5,6 +5,7 @@ from django.utils.translation import ugettext_lazy
 
 class StreamDisciplineJoin(models.Model):
     position = models.IntegerField(null=True)
+    
     stream = models.ForeignKey('Stream')
     discipline = models.ForeignKey('Discipline')
 

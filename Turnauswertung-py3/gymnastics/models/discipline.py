@@ -1,11 +1,12 @@
 from django.core.urlresolvers import reverse
 from django.db import models
 from django.utils.text import slugify
+from django.utils.translation import ugettext_lazy
 
 
 class Discipline(models.Model):
   
-    name = models.CharField(max_length=50, null=False)
+    name = models.CharField(ugettext_lazy('Name'), max_length=50, null=False)
 
     slug = models.SlugField(max_length=128, blank=True)
     

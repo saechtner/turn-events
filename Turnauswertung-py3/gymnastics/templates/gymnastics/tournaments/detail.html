@@ -68,12 +68,25 @@
             {% endif %}
           {% endif %}
 
+          <dt>{% trans "Management" %}</dt>
+          <dd>{{ tournament.management }}</dd>
+
+          <dt>{% trans "Organisation" %}</dt>
+          <dd>{{ tournament.organisation }}</dd>
+
+          <dt>{% trans "Calculation" %}</dt>
+          <dd>{{ tournament.calculation }}</dd>
+
+          <dt>{% trans "Technology" %}</dt>
+          <dd>{{ tournament.technology }}</dd>
+
         </dl>
 
       </div>
 
       <div role="tabpanel" class="tab-pane" id="evaluation">
-      <a href="{% url 'tournaments.create_certificates_pdf' %}">{% trans 'Generate certificates' %}</a>
+      <p><a href="{% url 'tournaments.create_certificates_pdf' %}">{% trans 'Generate certificates pdf' %}</a></p>
+      <p><a href="{{ tournament.get_evaluation_url }}">{% trans 'Generate evaluation pdf' %}</a></p>
       </div>
     </div>
   </div>

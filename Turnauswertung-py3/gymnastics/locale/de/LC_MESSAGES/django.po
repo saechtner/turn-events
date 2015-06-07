@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-05-10 16:18+0200\n"
+"POT-Creation-Date: 2015-06-08 00:00+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -25,50 +25,59 @@ msgstr "Englisch"
 msgid "German"
 msgstr "Deutsch"
 
-#: gymnastics/controllers/squads.py:109 gymnastics/controllers/squads.py:122
-#: gymnastics/templates/gymnastics/base.html:41
-#: gymnastics/templates/gymnastics/base.html:54
+#: gymnastics/controllers/squads.py:113 gymnastics/controllers/squads.py:127
+#: gymnastics/templates/gymnastics/base.html:51
+#: gymnastics/templates/gymnastics/base.html:65
 #: gymnastics/templates/gymnastics/process.html:139
-#: gymnastics/templates/gymnastics/squads/base.html:15
+#: gymnastics/templates/gymnastics/squads/index.html:6
+#: gymnastics/templates/gymnastics/squads/index.html:7
+#: gymnastics/templates/gymnastics/squads/new.html:6
 msgid "Squads"
 msgstr "Riegen"
 
-#: gymnastics/controllers/squads.py:109
+#: gymnastics/controllers/squads.py:113
 msgid "Judge"
 msgstr "Kampfrichter"
 
-#: gymnastics/controllers/squads.py:109
+#: gymnastics/controllers/squads.py:113
 msgid "Lists"
 msgstr "Listen"
 
-#: gymnastics/controllers/squads.py:122
+#: gymnastics/controllers/squads.py:127
 msgid "Overview"
 msgstr "Übersicht"
 
-#: gymnastics/controllers/streams.py:66
+#: gymnastics/controllers/streams.py:73
 msgid "Error: At least one discipline was not found."
 msgstr "Fehler: Wenigstens ein Gerät wurde nicht gefunden."
 
-#: gymnastics/controllers/streams.py:72
+#: gymnastics/controllers/streams.py:79
 msgid "Error: There is no difficulty given."
 msgstr "Fehler: Es wurde keine Schwierigkeit eingegeben."
 
-#: gymnastics/controllers/streams.py:106
+#: gymnastics/controllers/streams.py:118
 msgid "Error: Unknown method."
 msgstr "Fehler: Unbekannte Funktion"
 
-#: gymnastics/controllers/tournaments.py:44
+#: gymnastics/controllers/tournaments.py:43
 msgid "Certificates"
 msgstr "Urkunden"
 
+#: gymnastics/controllers/tournaments.py:100
+#: gymnastics/templates/gymnastics/base.html:102
+#: gymnastics/templates/gymnastics/process.html:147
+#: gymnastics/templates/gymnastics/tournaments/detail.html:16
+msgid "Evaluation"
+msgstr "Auswertung"
+
 #: gymnastics/models/address.py:7
-#: gymnastics/templates/gymnastics/clubs/detail.html:50
-#: gymnastics/templates/gymnastics/tournaments/detail.html:49
+#: gymnastics/templates/gymnastics/clubs/detail.html:48
+#: gymnastics/templates/gymnastics/tournaments/detail.html:51
 msgid "Contact name"
 msgstr "Kontakt"
 
 #: gymnastics/models/address.py:8
-#: gymnastics/templates/gymnastics/tournaments/detail.html:59
+#: gymnastics/templates/gymnastics/tournaments/detail.html:61
 msgid "Contact phone"
 msgstr "Telefonnr."
 
@@ -92,41 +101,222 @@ msgstr "Bundesland"
 msgid "Zip code"
 msgstr "PLZ"
 
-#: gymnastics/models/squad.py:11
-#: gymnastics/templates/gymnastics/athletes/detail.html:63
-#: gymnastics/templates/gymnastics/includes/athletes_list.html:11
-#: gymnastics/templates/gymnastics/squads/index.html:15
+#: gymnastics/models/athlete.py:29
+#: gymnastics/templates/gymnastics/athletes_imports/new.html:24
+msgid "First name"
+msgstr "Vorname"
+
+#: gymnastics/models/athlete.py:30
+#: gymnastics/templates/gymnastics/athletes/detail.html:40
+#: gymnastics/templates/gymnastics/athletes_imports/new.html:25
+msgid "Last name"
+msgstr "Nachname"
+
+#: gymnastics/models/athlete.py:31 gymnastics/models/stream.py:14
+#: gymnastics/templates/gymnastics/athletes/detail.html:43
+#: gymnastics/templates/gymnastics/athletes_imports/new.html:34
+#: gymnastics/templates/gymnastics/streams/detail.html:71
+#: gymnastics/templates/gymnastics/streams/edit.html:27
+#: gymnastics/templates/gymnastics/streams/new.html:29
+msgid "Sex"
+msgstr "Geschlecht"
+
+#: gymnastics/models/athlete.py:32
+#: gymnastics/templates/gymnastics/athletes_imports/new.html:26
+#: gymnastics/templates/gymnastics/athletes_imports/new.html:39
+msgid "Date of birth"
+msgstr "Geburtsdatum"
+
+#: gymnastics/models/athlete.py:34 gymnastics/models/athletes_import.py:11
+#: gymnastics/models/team.py:10
+#: gymnastics/templates/gymnastics/athletes/detail.html:62
+#: gymnastics/templates/gymnastics/athletes_imports/detail.html:34
+#: gymnastics/templates/gymnastics/athletes_imports/index.html:21
+#: gymnastics/templates/gymnastics/athletes_imports/new.html:59
+#: gymnastics/templates/gymnastics/includes/athletes_list.html:13
+#: gymnastics/templates/gymnastics/includes/teams_list.html:5
+#: gymnastics/templates/gymnastics/streams/detail.html:140
+#: gymnastics/templates/gymnastics/streams/detail.html:183
+#: gymnastics/templates/gymnastics/teams/detail.html:37
+#: gymnastics/templates/gymnastics/tournaments/index.html:24
+msgid "Club"
+msgstr "Verein"
+
+#: gymnastics/models/athlete.py:35 gymnastics/models/team.py:11
+#: gymnastics/templates/gymnastics/athletes/detail.html:55
+#: gymnastics/templates/gymnastics/athletes_imports/new.html:27
+#: gymnastics/templates/gymnastics/includes/athletes_list.html:12
+#: gymnastics/templates/gymnastics/includes/teams_list.html:4
+#: gymnastics/templates/gymnastics/teams/detail.html:38
+msgid "Stream"
+msgstr "Wertungsgruppe"
+
+#: gymnastics/models/athlete.py:36
+#: gymnastics/templates/gymnastics/athletes/detail.html:69
+#: gymnastics/templates/gymnastics/athletes_imports/new.html:28
+#: gymnastics/templates/gymnastics/athletes_imports/new.html:44
+#: gymnastics/templates/gymnastics/includes/athletes_list.html:14
+#: gymnastics/templates/gymnastics/streams/detail.html:182
+msgid "Team"
+msgstr "Mannschaft"
+
+#: gymnastics/models/athlete.py:37 gymnastics/models/squad.py:11
+#: gymnastics/templates/gymnastics/athletes/detail.html:76
+#: gymnastics/templates/gymnastics/includes/athletes_list.html:15
+#: gymnastics/templates/gymnastics/squads/index.html:21
 msgid "Squad"
 msgstr "Riege"
 
+#: gymnastics/models/athletes_import.py:17
+msgid "Athletes Import"
+msgstr "Sportler Import"
+
+#: gymnastics/models/club.py:9 gymnastics/models/discipline.py:9
+#: gymnastics/models/team.py:8 gymnastics/models/tournament.py:14
+#: gymnastics/templates/gymnastics/athletes_imports/index.html:20
+#: gymnastics/templates/gymnastics/clubs/detail.html:43
+#: gymnastics/templates/gymnastics/clubs/index.html:21
+#: gymnastics/templates/gymnastics/disciplines/index.html:16
+#: gymnastics/templates/gymnastics/includes/teams_list.html:3
+#: gymnastics/templates/gymnastics/tournaments/detail.html:33
+#: gymnastics/templates/gymnastics/tournaments/index.html:21
+msgid "Name"
+msgstr "Name"
+
+#: gymnastics/models/club.py:11 gymnastics/models/tournament.py:24
+#: gymnastics/templates/gymnastics/clubs/detail.html:63
+msgid "Address"
+msgstr "Adresse"
+
+#: gymnastics/models/performance.py:6
+#: gymnastics/templates/gymnastics/performances/detail.html:39
+#: gymnastics/templates/gymnastics/performances/index.html:18
+msgid "Value"
+msgstr "Wert"
+
+#: gymnastics/models/performance.py:7
+msgid "Final Value"
+msgstr "Finalwert"
+
+#: gymnastics/models/performance.py:9
+#: gymnastics/templates/gymnastics/performances/detail.html:37
+#: gymnastics/templates/gymnastics/performances/index.html:16
+#: gymnastics/templates/gymnastics/squads/detail.html:60
+#: gymnastics/templates/gymnastics/squads/enter_performances.html:29
+#: gymnastics/templates/gymnastics/streams/detail.html:139
+msgid "Athlete"
+msgstr "Sportler"
+
+#: gymnastics/models/performance.py:10
+#: gymnastics/templates/gymnastics/performances/detail.html:38
+#: gymnastics/templates/gymnastics/performances/index.html:17
+msgid "Discipline"
+msgstr "Gerät"
+
+#: gymnastics/models/stream.py:13
+#: gymnastics/templates/gymnastics/streams/detail.html:68
+#: gymnastics/templates/gymnastics/streams/edit.html:20
+#: gymnastics/templates/gymnastics/streams/index.html:23
+#: gymnastics/templates/gymnastics/streams/new.html:22
+msgid "Difficulty"
+msgstr "Schwierigkeit"
+
 #: gymnastics/models/stream.py:14
+#: gymnastics/templates/gymnastics/athletes/detail.html:48
 #: gymnastics/templates/gymnastics/athletes_imports/new.html:29
-#: gymnastics/templates/gymnastics/streams/detail.html:67
-#: gymnastics/templates/gymnastics/streams/edit.html:26
-#: gymnastics/templates/gymnastics/streams/new.html:26
+#: gymnastics/templates/gymnastics/includes/athletes_list.html:27
+#: gymnastics/templates/gymnastics/streams/detail.html:76
+#: gymnastics/templates/gymnastics/streams/edit.html:30
+#: gymnastics/templates/gymnastics/streams/index.html:42
+#: gymnastics/templates/gymnastics/streams/new.html:32
 msgid "male"
 msgstr "männlich"
 
 #: gymnastics/models/stream.py:14
+#: gymnastics/templates/gymnastics/athletes/detail.html:46
 #: gymnastics/templates/gymnastics/athletes_imports/new.html:30
-#: gymnastics/templates/gymnastics/streams/detail.html:65
-#: gymnastics/templates/gymnastics/streams/edit.html:27
-#: gymnastics/templates/gymnastics/streams/new.html:27
+#: gymnastics/templates/gymnastics/includes/athletes_list.html:25
+#: gymnastics/templates/gymnastics/streams/detail.html:74
+#: gymnastics/templates/gymnastics/streams/edit.html:31
+#: gymnastics/templates/gymnastics/streams/index.html:40
+#: gymnastics/templates/gymnastics/streams/new.html:33
 msgid "female"
 msgstr "weiblich"
+
+#: gymnastics/models/stream.py:17
+#: gymnastics/templates/gymnastics/streams/detail.html:93
+#: gymnastics/templates/gymnastics/streams/edit.html:44
+#: gymnastics/templates/gymnastics/streams/new.html:46
+msgid "All around individual"
+msgstr "Einzel-Mehrkampf"
+
+#: gymnastics/models/stream.py:20
+#: gymnastics/templates/gymnastics/streams/edit.html:58
+#: gymnastics/templates/gymnastics/streams/new.html:60
+msgid "All around team"
+msgstr "Mannschaftswertung"
+
+#: gymnastics/models/stream.py:24
+#: gymnastics/templates/gymnastics/streams/detail.html:111
+#: gymnastics/templates/gymnastics/streams/edit.html:72
+#: gymnastics/templates/gymnastics/streams/new.html:74
+msgid "Discipline finals"
+msgstr "Gerätfinals"
+
+#: gymnastics/models/tournament.py:15
+msgid "Full Name"
+msgstr "Kompletter Name"
+
+#: gymnastics/models/tournament.py:16
+#: gymnastics/templates/gymnastics/tournaments/detail.html:39
+#: gymnastics/templates/gymnastics/tournaments/index.html:22
+msgid "Date"
+msgstr "Datum"
+
+#: gymnastics/models/tournament.py:17
+msgid "Region"
+msgstr "Region"
+
+#: gymnastics/models/tournament.py:19
+#: gymnastics/templates/gymnastics/tournaments/detail.html:71
+msgid "Management"
+msgstr "Wettkampfleitung"
+
+#: gymnastics/models/tournament.py:20
+#: gymnastics/templates/gymnastics/tournaments/detail.html:74
+msgid "Organisation"
+msgstr "Organisation"
+
+#: gymnastics/models/tournament.py:21
+#: gymnastics/templates/gymnastics/tournaments/detail.html:77
+msgid "Calculation"
+msgstr "Berechnung"
+
+#: gymnastics/models/tournament.py:22
+#: gymnastics/templates/gymnastics/tournaments/detail.html:80
+msgid "Technology"
+msgstr "Technik"
+
+#: gymnastics/models/tournament.py:25
+#: gymnastics/templates/gymnastics/tournaments/detail.html:43
+msgid "Hosting club"
+msgstr "Ausrichter"
 
 #: gymnastics/templates/gymnastics/athletes/delete.html:5
 #: gymnastics/templates/gymnastics/athletes/detail.html:27
 #: gymnastics/templates/gymnastics/athletes_imports/delete.html:5
-#: gymnastics/templates/gymnastics/clubs/detail.html:22
+#: gymnastics/templates/gymnastics/clubs/delete.html:5
+#: gymnastics/templates/gymnastics/clubs/detail.html:32
 #: gymnastics/templates/gymnastics/disciplines/detail.html:21
 #: gymnastics/templates/gymnastics/performances/detail.html:21
-#: gymnastics/templates/gymnastics/squads/detail.html:22
-#: gymnastics/templates/gymnastics/squads/index.html:34
-#: gymnastics/templates/gymnastics/streams/detail.html:48
+#: gymnastics/templates/gymnastics/squads/delete.html:5
+#: gymnastics/templates/gymnastics/squads/detail.html:33
+#: gymnastics/templates/gymnastics/squads/index.html:40
+#: gymnastics/templates/gymnastics/streams/delete.html:5
+#: gymnastics/templates/gymnastics/streams/detail.html:57
 #: gymnastics/templates/gymnastics/teams/detail.html:21
 #: gymnastics/templates/gymnastics/tournaments/delete.html:5
-#: gymnastics/templates/gymnastics/tournaments/detail.html:19
+#: gymnastics/templates/gymnastics/tournaments/detail.html:21
 msgid "Delete"
 msgstr "Löschen"
 
@@ -136,7 +326,7 @@ msgstr "Löschen"
 #: gymnastics/templates/gymnastics/disciplines/delete.html:16
 #: gymnastics/templates/gymnastics/performances/delete.html:16
 #: gymnastics/templates/gymnastics/squads/delete.html:16
-#: gymnastics/templates/gymnastics/streams/delete.html:15
+#: gymnastics/templates/gymnastics/streams/delete.html:16
 #: gymnastics/templates/gymnastics/teams/delete.html:16
 #: gymnastics/templates/gymnastics/tournaments/delete.html:16
 msgid "Are you sure you want to delete"
@@ -148,7 +338,7 @@ msgstr "Sind Sie sicher, dass sie folgenden Datensatz löschen möchten"
 #: gymnastics/templates/gymnastics/disciplines/delete.html:17
 #: gymnastics/templates/gymnastics/performances/delete.html:17
 #: gymnastics/templates/gymnastics/squads/delete.html:17
-#: gymnastics/templates/gymnastics/streams/delete.html:16
+#: gymnastics/templates/gymnastics/streams/delete.html:17
 #: gymnastics/templates/gymnastics/teams/delete.html:17
 #: gymnastics/templates/gymnastics/tournaments/delete.html:17
 msgid "Confirm"
@@ -156,15 +346,16 @@ msgstr "Bestätigen"
 
 #: gymnastics/templates/gymnastics/athletes/delete.html:18
 #: gymnastics/templates/gymnastics/athletes_imports/delete.html:18
+#: gymnastics/templates/gymnastics/athletes_imports/new.html:79
 #: gymnastics/templates/gymnastics/clubs/delete.html:18
 #: gymnastics/templates/gymnastics/disciplines/delete.html:18
 #: gymnastics/templates/gymnastics/includes/form.html:15
 #: gymnastics/templates/gymnastics/performances/delete.html:18
 #: gymnastics/templates/gymnastics/squads/delete.html:18
-#: gymnastics/templates/gymnastics/squads/enter_performances.html:56
-#: gymnastics/templates/gymnastics/streams/delete.html:17
-#: gymnastics/templates/gymnastics/streams/edit.html:104
-#: gymnastics/templates/gymnastics/streams/new.html:114
+#: gymnastics/templates/gymnastics/squads/enter_performances.html:58
+#: gymnastics/templates/gymnastics/streams/delete.html:18
+#: gymnastics/templates/gymnastics/streams/edit.html:108
+#: gymnastics/templates/gymnastics/streams/new.html:120
 #: gymnastics/templates/gymnastics/teams/delete.html:18
 #: gymnastics/templates/gymnastics/tournaments/delete.html:18
 msgid "Cancel"
@@ -172,11 +363,11 @@ msgstr "Abbrechen"
 
 #: gymnastics/templates/gymnastics/athletes/detail.html:16
 #: gymnastics/templates/gymnastics/athletes_imports/detail.html:12
-#: gymnastics/templates/gymnastics/clubs/detail.html:33
+#: gymnastics/templates/gymnastics/clubs/detail.html:12
 #: gymnastics/templates/gymnastics/performances/detail.html:30
-#: gymnastics/templates/gymnastics/streams/detail.html:13
+#: gymnastics/templates/gymnastics/streams/detail.html:12
 #: gymnastics/templates/gymnastics/teams/detail.html:30
-#: gymnastics/templates/gymnastics/tournaments/detail.html:11
+#: gymnastics/templates/gymnastics/tournaments/detail.html:13
 msgid "General"
 msgstr "Allgemein"
 
@@ -191,87 +382,57 @@ msgstr "Ergebnisse"
 
 #: gymnastics/templates/gymnastics/athletes/detail.html:23
 #: gymnastics/templates/gymnastics/athletes/edit.html:5
-#: gymnastics/templates/gymnastics/clubs/detail.html:21
+#: gymnastics/templates/gymnastics/clubs/detail.html:27
+#: gymnastics/templates/gymnastics/clubs/edit.html:5
 #: gymnastics/templates/gymnastics/disciplines/detail.html:20
 #: gymnastics/templates/gymnastics/performances/detail.html:20
-#: gymnastics/templates/gymnastics/squads/detail.html:21
-#: gymnastics/templates/gymnastics/squads/index.html:31
-#: gymnastics/templates/gymnastics/streams/detail.html:44
+#: gymnastics/templates/gymnastics/squads/detail.html:28
+#: gymnastics/templates/gymnastics/squads/edit.html:5
+#: gymnastics/templates/gymnastics/squads/index.html:37
+#: gymnastics/templates/gymnastics/streams/detail.html:53
+#: gymnastics/templates/gymnastics/streams/edit.html:6
 #: gymnastics/templates/gymnastics/teams/detail.html:20
-#: gymnastics/templates/gymnastics/tournaments/detail.html:18
+#: gymnastics/templates/gymnastics/tournaments/detail.html:20
 #: gymnastics/templates/gymnastics/tournaments/edit.html:5
 msgid "Edit"
 msgstr "Bearbeiten"
 
-#: gymnastics/templates/gymnastics/athletes/detail.html:38
+#: gymnastics/templates/gymnastics/athletes/detail.html:37
 #: gymnastics/templates/gymnastics/includes/athletes_list.html:4
 msgid "First Name"
 msgstr "Vorname"
 
-#: gymnastics/templates/gymnastics/athletes/detail.html:41
-#: gymnastics/templates/gymnastics/athletes_imports/new.html:25
-msgid "Last name"
-msgstr "Nachname"
-
-#: gymnastics/templates/gymnastics/athletes/detail.html:44
-#: gymnastics/templates/gymnastics/athletes_imports/new.html:34
-#: gymnastics/templates/gymnastics/includes/athletes_list.html:6
-#: gymnastics/templates/gymnastics/streams/detail.html:62
-#: gymnastics/templates/gymnastics/streams/edit.html:23
-#: gymnastics/templates/gymnastics/streams/index.html:25
-#: gymnastics/templates/gymnastics/streams/new.html:23
-msgid "Sex"
-msgstr "Geschlecht"
-
-#: gymnastics/templates/gymnastics/athletes/detail.html:53
-#: gymnastics/templates/gymnastics/includes/athletes_list.html:7
+#: gymnastics/templates/gymnastics/athletes/detail.html:52
+#: gymnastics/templates/gymnastics/includes/athletes_list.html:11
 msgid "Date of Birth"
 msgstr "Geburtsdatum"
-
-#: gymnastics/templates/gymnastics/athletes/detail.html:56
-#: gymnastics/templates/gymnastics/athletes_imports/detail.html:31
-#: gymnastics/templates/gymnastics/athletes_imports/index.html:21
-#: gymnastics/templates/gymnastics/includes/athletes_list.html:8
-#: gymnastics/templates/gymnastics/includes/teams_list.html:5
-#: gymnastics/templates/gymnastics/teams/detail.html:37
-#: gymnastics/templates/gymnastics/tournaments/index.html:24
-msgid "Club"
-msgstr "Verein"
-
-#: gymnastics/templates/gymnastics/athletes/detail.html:70
-#: gymnastics/templates/gymnastics/athletes_imports/new.html:28
-#: gymnastics/templates/gymnastics/athletes_imports/new.html:44
-#: gymnastics/templates/gymnastics/includes/athletes_list.html:10
-#: gymnastics/templates/gymnastics/streams/detail.html:177
-msgid "Team"
-msgstr "Mannschaft"
 
 #: gymnastics/templates/gymnastics/athletes/index.html:5
 #: gymnastics/templates/gymnastics/athletes/index.html:6
 #: gymnastics/templates/gymnastics/athletes/new.html:6
-#: gymnastics/templates/gymnastics/base.html:40
-#: gymnastics/templates/gymnastics/base.html:49
-#: gymnastics/templates/gymnastics/clubs/detail.html:15
-#: gymnastics/templates/gymnastics/clubs/detail.html:31
-#: gymnastics/templates/gymnastics/clubs/index.html:17
+#: gymnastics/templates/gymnastics/athletes_imports/detail.html:41
+#: gymnastics/templates/gymnastics/athletes_imports/index.html:22
+#: gymnastics/templates/gymnastics/base.html:48
+#: gymnastics/templates/gymnastics/base.html:60
+#: gymnastics/templates/gymnastics/clubs/detail.html:17
+#: gymnastics/templates/gymnastics/clubs/index.html:22
 #: gymnastics/templates/gymnastics/includes/teams_list.html:6
 #: gymnastics/templates/gymnastics/index.html:48
 #: gymnastics/templates/gymnastics/process.html:183
-#: gymnastics/templates/gymnastics/squads/detail.html:15
-#: gymnastics/templates/gymnastics/squads/detail.html:31
-#: gymnastics/templates/gymnastics/streams/detail.html:7
-#: gymnastics/templates/gymnastics/streams/detail.html:16
+#: gymnastics/templates/gymnastics/squads/detail.html:12
+#: gymnastics/templates/gymnastics/streams/detail.html:17
+#: gymnastics/templates/gymnastics/streams/index.html:29
 #: gymnastics/templates/gymnastics/teams/detail.html:15
 msgid "Athletes"
 msgstr "Sportler"
 
-#: gymnastics/templates/gymnastics/athletes/index.html:15
-#: gymnastics/templates/gymnastics/base.html:76
+#: gymnastics/templates/gymnastics/athletes/index.html:12
+#: gymnastics/templates/gymnastics/base.html:87
 #: gymnastics/templates/gymnastics/process.html:119
 msgid "New athlete"
 msgstr "Neuer Sportler"
 
-#: gymnastics/templates/gymnastics/athletes/index.html:26
+#: gymnastics/templates/gymnastics/athletes/index.html:23
 msgid "No athletes available in the database."
 msgstr "Es sind keine Sportler Importe vorhanden."
 
@@ -281,36 +442,36 @@ msgstr "Neuer Sportler"
 
 #: gymnastics/templates/gymnastics/athletes/results.html:42
 #: gymnastics/templates/gymnastics/athletes_imports/index.html:39
-#: gymnastics/templates/gymnastics/clubs/index.html:28
+#: gymnastics/templates/gymnastics/clubs/index.html:36
 #: gymnastics/templates/gymnastics/disciplines/index.html:25
-#: gymnastics/templates/gymnastics/includes/athletes_list.html:44
-#: gymnastics/templates/gymnastics/includes/teams_list.html:26
+#: gymnastics/templates/gymnastics/includes/athletes_list.html:50
+#: gymnastics/templates/gymnastics/includes/teams_list.html:27
 #: gymnastics/templates/gymnastics/performances/index.html:33
-#: gymnastics/templates/gymnastics/streams/index.html:46
-#: gymnastics/templates/gymnastics/tournaments/index.html:40
+#: gymnastics/templates/gymnastics/streams/index.html:53
+#: gymnastics/templates/gymnastics/tournaments/index.html:41
 msgid "detail"
 msgstr "detail"
 
 #: gymnastics/templates/gymnastics/athletes/results.html:45
-#: gymnastics/templates/gymnastics/clubs/index.html:29
+#: gymnastics/templates/gymnastics/clubs/index.html:39
 #: gymnastics/templates/gymnastics/disciplines/index.html:26
-#: gymnastics/templates/gymnastics/includes/athletes_list.html:47
-#: gymnastics/templates/gymnastics/includes/teams_list.html:27
+#: gymnastics/templates/gymnastics/includes/athletes_list.html:53
+#: gymnastics/templates/gymnastics/includes/teams_list.html:30
 #: gymnastics/templates/gymnastics/performances/index.html:34
-#: gymnastics/templates/gymnastics/streams/index.html:49
-#: gymnastics/templates/gymnastics/tournaments/index.html:41
+#: gymnastics/templates/gymnastics/streams/index.html:56
+#: gymnastics/templates/gymnastics/tournaments/index.html:44
 msgid "edit"
 msgstr "bearbeiten"
 
 #: gymnastics/templates/gymnastics/athletes/results.html:48
 #: gymnastics/templates/gymnastics/athletes_imports/index.html:40
-#: gymnastics/templates/gymnastics/clubs/index.html:30
+#: gymnastics/templates/gymnastics/clubs/index.html:42
 #: gymnastics/templates/gymnastics/disciplines/index.html:27
-#: gymnastics/templates/gymnastics/includes/athletes_list.html:57
-#: gymnastics/templates/gymnastics/includes/teams_list.html:28
+#: gymnastics/templates/gymnastics/includes/athletes_list.html:63
+#: gymnastics/templates/gymnastics/includes/teams_list.html:33
 #: gymnastics/templates/gymnastics/performances/index.html:35
-#: gymnastics/templates/gymnastics/streams/index.html:52
-#: gymnastics/templates/gymnastics/tournaments/index.html:42
+#: gymnastics/templates/gymnastics/streams/index.html:59
+#: gymnastics/templates/gymnastics/tournaments/index.html:47
 msgid "delete"
 msgstr "löschen"
 
@@ -326,15 +487,15 @@ msgstr "hier"
 #: gymnastics/templates/gymnastics/athletes_imports/index.html:5
 #: gymnastics/templates/gymnastics/athletes_imports/index.html:6
 #: gymnastics/templates/gymnastics/athletes_imports/new.html:6
-#: gymnastics/templates/gymnastics/base.html:47
+#: gymnastics/templates/gymnastics/base.html:58
 msgid "Athletes Imports"
 msgstr "Sportler Importe"
 
-#: gymnastics/templates/gymnastics/athletes_imports/detail.html:15
+#: gymnastics/templates/gymnastics/athletes_imports/detail.html:16
 msgid "Imported Athletes"
 msgstr "Importierte Sportler"
 
-#: gymnastics/templates/gymnastics/athletes_imports/detail.html:19
+#: gymnastics/templates/gymnastics/athletes_imports/detail.html:22
 msgid "Delete Import"
 msgstr "Sportler Import löschen"
 
@@ -342,22 +503,13 @@ msgstr "Sportler Import löschen"
 msgid "New Import"
 msgstr "Neue Sportler importieren"
 
-#: gymnastics/templates/gymnastics/athletes_imports/index.html:20
-#: gymnastics/templates/gymnastics/clubs/index.html:16
-#: gymnastics/templates/gymnastics/disciplines/index.html:16
-#: gymnastics/templates/gymnastics/includes/teams_list.html:3
-#: gymnastics/templates/gymnastics/tournaments/detail.html:31
-#: gymnastics/templates/gymnastics/tournaments/index.html:21
-msgid "Name"
-msgstr "Name"
-
 #: gymnastics/templates/gymnastics/athletes_imports/index.html:48
 msgid "No athletes imports available in the database."
 msgstr "Es sind keine Sportler Importe vorhanden."
 
 #: gymnastics/templates/gymnastics/athletes_imports/new.html:5
-#: gymnastics/templates/gymnastics/clubs/detail.html:20
-#: gymnastics/templates/gymnastics/clubs/index.html:27
+#: gymnastics/templates/gymnastics/clubs/detail.html:24
+#: gymnastics/templates/gymnastics/clubs/index.html:33
 #: gymnastics/templates/gymnastics/process.html:107
 msgid "Import Athletes"
 msgstr "Sportler importieren"
@@ -369,22 +521,6 @@ msgstr "Anforderungen importieren"
 #: gymnastics/templates/gymnastics/athletes_imports/new.html:21
 msgid "Column order"
 msgstr "Reihenfolge der Spalten"
-
-#: gymnastics/templates/gymnastics/athletes_imports/new.html:24
-msgid "First name"
-msgstr "Vorname"
-
-#: gymnastics/templates/gymnastics/athletes_imports/new.html:26
-#: gymnastics/templates/gymnastics/athletes_imports/new.html:39
-msgid "Date of birth"
-msgstr "Geburtsdatum"
-
-#: gymnastics/templates/gymnastics/athletes_imports/new.html:27
-#: gymnastics/templates/gymnastics/includes/athletes_list.html:9
-#: gymnastics/templates/gymnastics/includes/teams_list.html:4
-#: gymnastics/templates/gymnastics/teams/detail.html:38
-msgid "Stream"
-msgstr "Wertungsgruppe"
 
 #: gymnastics/templates/gymnastics/athletes_imports/new.html:36
 msgid "Put an <em>x</em> in only one of the columns. (male / female)"
@@ -398,19 +534,29 @@ msgstr "Unterstützte Formate sind TT.MM.JJJJ und JJJJ.MM.TT"
 msgid ""
 "Specify the complete name. Can range from a single number to a club name and "
 "an identifier."
-msgstr "Geben sie den kompletten Namen ein, dieser kann von einer einzelnen Zahl bis zu einem Vereinsnamen und einem Identifikationselement reichen"
+msgstr ""
+"Geben sie den kompletten Namen ein, dieser kann von einer einzelnen Zahl bis "
+"zu einem Vereinsnamen und einem Identifikationselement reichen"
 
-#: gymnastics/templates/gymnastics/base.html:7
+#: gymnastics/templates/gymnastics/athletes_imports/new.html:71
+msgid "Import Data"
+msgstr "Daten importieren"
+
+#: gymnastics/templates/gymnastics/athletes_imports/new.html:78
+msgid "Import"
+msgstr "Importieren"
+
+#: gymnastics/templates/gymnastics/base.html:8
 msgid "Gymnastics"
 msgstr "Turnen"
 
-#: gymnastics/templates/gymnastics/base.html:24
-#: gymnastics/templates/gymnastics/base.html:146
+#: gymnastics/templates/gymnastics/base.html:25
+#: gymnastics/templates/gymnastics/base.html:157
 msgid "Toggle navigation"
 msgstr "Navigation wechseln"
 
-#: gymnastics/templates/gymnastics/base.html:38
-#: gymnastics/templates/gymnastics/base.html:53
+#: gymnastics/templates/gymnastics/base.html:42
+#: gymnastics/templates/gymnastics/base.html:64
 #: gymnastics/templates/gymnastics/disciplines/detail.html:31
 #: gymnastics/templates/gymnastics/index.html:32
 #: gymnastics/templates/gymnastics/index.html:64
@@ -418,195 +564,193 @@ msgstr "Navigation wechseln"
 #: gymnastics/templates/gymnastics/process.html:171
 #: gymnastics/templates/gymnastics/streams/index.html:6
 #: gymnastics/templates/gymnastics/streams/index.html:7
+#: gymnastics/templates/gymnastics/streams/new.html:7
 msgid "Streams"
 msgstr "Wertungsgruppen"
 
-#: gymnastics/templates/gymnastics/base.html:39
-#: gymnastics/templates/gymnastics/base.html:50
-#: gymnastics/templates/gymnastics/clubs/base.html:15
+#: gymnastics/templates/gymnastics/base.html:45
+#: gymnastics/templates/gymnastics/base.html:61
+#: gymnastics/templates/gymnastics/clubs/index.html:6
+#: gymnastics/templates/gymnastics/clubs/index.html:7
+#: gymnastics/templates/gymnastics/clubs/new.html:6
 #: gymnastics/templates/gymnastics/index.html:47
 msgid "Clubs"
 msgstr "Vereine"
 
-#: gymnastics/templates/gymnastics/base.html:45
+#: gymnastics/templates/gymnastics/base.html:56
 msgid "All"
 msgstr "Alle"
 
-#: gymnastics/templates/gymnastics/base.html:51
+#: gymnastics/templates/gymnastics/base.html:62
 #: gymnastics/templates/gymnastics/disciplines/base.html:15
 #: gymnastics/templates/gymnastics/index.html:31
 #: gymnastics/templates/gymnastics/process.html:63
-#: gymnastics/templates/gymnastics/streams/detail.html:74
-#: gymnastics/templates/gymnastics/streams/edit.html:89
-#: gymnastics/templates/gymnastics/streams/new.html:89
+#: gymnastics/templates/gymnastics/streams/detail.html:83
+#: gymnastics/templates/gymnastics/streams/edit.html:93
+#: gymnastics/templates/gymnastics/streams/new.html:95
 msgid "Disciplines"
 msgstr "Geräte"
 
-#: gymnastics/templates/gymnastics/base.html:52
-#: gymnastics/templates/gymnastics/clubs/detail.html:35
+#: gymnastics/templates/gymnastics/base.html:63
 #: gymnastics/templates/gymnastics/disciplines/detail.html:33
 #: gymnastics/templates/gymnastics/index.html:49
 #: gymnastics/templates/gymnastics/index.html:65
 #: gymnastics/templates/gymnastics/performances/base.html:15
-#: gymnastics/templates/gymnastics/squads/detail.html:32
+#: gymnastics/templates/gymnastics/squads/detail.html:18
 msgid "Performances"
 msgstr "Wertungen"
 
-#: gymnastics/templates/gymnastics/base.html:55
-#: gymnastics/templates/gymnastics/streams/detail.html:25
+#: gymnastics/templates/gymnastics/base.html:66
 #: gymnastics/templates/gymnastics/teams/base.html:15
 msgid "Teams"
 msgstr "Mannschaften"
 
-#: gymnastics/templates/gymnastics/base.html:56
+#: gymnastics/templates/gymnastics/base.html:67
 #: gymnastics/templates/gymnastics/tournaments/index.html:5
 #: gymnastics/templates/gymnastics/tournaments/index.html:6
 #: gymnastics/templates/gymnastics/tournaments/new.html:6
 msgid "Tournaments"
 msgstr "Turniere"
 
-#: gymnastics/templates/gymnastics/base.html:58
+#: gymnastics/templates/gymnastics/base.html:69
 msgid "Create Overview PDF"
 msgstr "Übersichts-PDF erstellen"
 
-#: gymnastics/templates/gymnastics/base.html:59
+#: gymnastics/templates/gymnastics/base.html:70
 msgid "Create Judge PDF"
 msgstr "Kampfrichter-PDF erstellen"
 
-#: gymnastics/templates/gymnastics/base.html:65
+#: gymnastics/templates/gymnastics/base.html:76
 #: gymnastics/templates/gymnastics/process.html:5
 #: gymnastics/templates/gymnastics/process.html:6
 msgid "Process"
 msgstr "Prozess"
 
-#: gymnastics/templates/gymnastics/base.html:67
+#: gymnastics/templates/gymnastics/base.html:78
 #: gymnastics/templates/gymnastics/process.html:39
 msgid "Preparation"
 msgstr "Vorbereitung"
 
-#: gymnastics/templates/gymnastics/base.html:68
+#: gymnastics/templates/gymnastics/base.html:79
 msgid "New hosting club"
 msgstr "Neuer Ausrichter"
 
-#: gymnastics/templates/gymnastics/base.html:69
+#: gymnastics/templates/gymnastics/base.html:80
 #: gymnastics/templates/gymnastics/process.html:51
 #: gymnastics/templates/gymnastics/tournaments/index.html:11
 msgid "New tournament"
 msgstr "Neues Turnier"
 
-#: gymnastics/templates/gymnastics/base.html:70
+#: gymnastics/templates/gymnastics/base.html:81
 #: gymnastics/templates/gymnastics/disciplines/base.html:17
 msgid "New discipline"
 msgstr "Neue Gerät"
 
-#: gymnastics/templates/gymnastics/base.html:71
+#: gymnastics/templates/gymnastics/base.html:82
 #: gymnastics/templates/gymnastics/streams/index.html:13
 msgid "New stream"
 msgstr "Neue Wertungsgruppe"
 
-#: gymnastics/templates/gymnastics/base.html:74
+#: gymnastics/templates/gymnastics/base.html:85
 #: gymnastics/templates/gymnastics/process.html:83
 msgid "RSVPs"
 msgstr ""
 
-#: gymnastics/templates/gymnastics/base.html:75
-#: gymnastics/templates/gymnastics/clubs/base.html:17
+#: gymnastics/templates/gymnastics/base.html:86
+#: gymnastics/templates/gymnastics/clubs/index.html:11
 msgid "New club"
 msgstr "Neuer Verein"
 
-#: gymnastics/templates/gymnastics/base.html:77
+#: gymnastics/templates/gymnastics/base.html:88
 msgid "New athletes import"
 msgstr "Neuer Sportlerimport"
 
-#: gymnastics/templates/gymnastics/base.html:78
-#: gymnastics/templates/gymnastics/squads/base.html:17
+#: gymnastics/templates/gymnastics/base.html:89
+#: gymnastics/templates/gymnastics/squads/index.html:11
 msgid "New squad"
 msgstr "Neue Riege"
 
-#: gymnastics/templates/gymnastics/base.html:79
+#: gymnastics/templates/gymnastics/base.html:90
 msgid "Add athletes to squad"
 msgstr "Sportler zu Riege hinzufügen"
 
-#: gymnastics/templates/gymnastics/base.html:80
-#: gymnastics/templates/gymnastics/base.html:86
+#: gymnastics/templates/gymnastics/base.html:91
+#: gymnastics/templates/gymnastics/base.html:97
 msgid "Squad overview PDF"
 msgstr "Übersichts-PDF erstellen"
 
-#: gymnastics/templates/gymnastics/base.html:81
+#: gymnastics/templates/gymnastics/base.html:92
 msgid "Squads for judges PDF"
 msgstr "Kampfrichter-PDF erstellen"
 
-#: gymnastics/templates/gymnastics/base.html:84
+#: gymnastics/templates/gymnastics/base.html:95
 msgid "Tournament Day"
 msgstr "Turniertag"
 
-#: gymnastics/templates/gymnastics/base.html:85
+#: gymnastics/templates/gymnastics/base.html:96
 msgid "Change RSVPs"
 msgstr "RSVPs ändern"
 
-#: gymnastics/templates/gymnastics/base.html:87
-#: gymnastics/templates/gymnastics/squads/detail.html:20
-#: gymnastics/templates/gymnastics/squads/index.html:25
+#: gymnastics/templates/gymnastics/base.html:98
+#: gymnastics/templates/gymnastics/squads/detail.html:25
+#: gymnastics/templates/gymnastics/squads/enter_performances.html:6
+#: gymnastics/templates/gymnastics/squads/index.html:31
 msgid "Enter performances"
 msgstr "Wertungen eingeben"
 
-#: gymnastics/templates/gymnastics/base.html:88
+#: gymnastics/templates/gymnastics/base.html:99
 msgid "Stream results"
 msgstr "Ergebnisse in den Wertungsgruppen"
 
-#: gymnastics/templates/gymnastics/base.html:91
-#: gymnastics/templates/gymnastics/process.html:147
-#: gymnastics/templates/gymnastics/tournaments/detail.html:14
-msgid "Evaluation"
-msgstr "Auswertung"
-
-#: gymnastics/templates/gymnastics/base.html:92
+#: gymnastics/templates/gymnastics/base.html:103
 msgid "Logic checks"
 msgstr "Logische Auswertung"
 
-#: gymnastics/templates/gymnastics/base.html:93
+#: gymnastics/templates/gymnastics/base.html:104
 msgid "Athlete results PDF"
 msgstr "PDF Sportlerauswertungen"
 
-#: gymnastics/templates/gymnastics/base.html:94
+#: gymnastics/templates/gymnastics/base.html:105
 msgid "Team results PDF"
 msgstr "PDF Teamauswertungen"
 
-#: gymnastics/templates/gymnastics/base.html:95
+#: gymnastics/templates/gymnastics/base.html:106
 msgid "Certificates PDF"
 msgstr "PDF Urkunden"
 
-#: gymnastics/templates/gymnastics/base.html:96
+#: gymnastics/templates/gymnastics/base.html:107
 msgid "Complete PDF"
 msgstr "PDF Komplett (wie beim Döner)"
 
-#: gymnastics/templates/gymnastics/base.html:106
+#: gymnastics/templates/gymnastics/base.html:117
 msgid "Language"
 msgstr "Sprache"
 
-#: gymnastics/templates/gymnastics/clubs/detail.html:23
-#: gymnastics/templates/gymnastics/disciplines/detail.html:22
-#: gymnastics/templates/gymnastics/performances/detail.html:22
-#: gymnastics/templates/gymnastics/squads/detail.html:23
-#: gymnastics/templates/gymnastics/teams/detail.html:22
-msgid "Previous Page"
-msgstr "Vorherige Seite"
+#: gymnastics/templates/gymnastics/base.html:180
+msgid "Search"
+msgstr "Suchen"
 
-#: gymnastics/templates/gymnastics/clubs/detail.html:55
+#: gymnastics/templates/gymnastics/clubs/detail.html:53
 msgid "Email"
 msgstr "E-Mail"
 
-#: gymnastics/templates/gymnastics/clubs/detail.html:60
+#: gymnastics/templates/gymnastics/clubs/detail.html:58
 msgid "Phone"
 msgstr "Telefonnr."
 
-#: gymnastics/templates/gymnastics/clubs/detail.html:65
-msgid "Address"
-msgstr "Adresse"
-
-#: gymnastics/templates/gymnastics/clubs/index.html:40
+#: gymnastics/templates/gymnastics/clubs/index.html:52
 msgid "No clubs available in the database."
 msgstr "Es sind keine Vereine vorhanden."
+
+#: gymnastics/templates/gymnastics/clubs/new.html:5
+msgid "Create New Club"
+msgstr "Neuer Verein"
+
+#: gymnastics/templates/gymnastics/disciplines/detail.html:22
+#: gymnastics/templates/gymnastics/performances/detail.html:22
+#: gymnastics/templates/gymnastics/teams/detail.html:22
+msgid "Previous Page"
+msgstr "Vorherige Seite"
 
 #: gymnastics/templates/gymnastics/disciplines/detail.html:40
 msgid "This discipline is competed in following streams:"
@@ -624,12 +768,12 @@ msgstr "Es sind keine Geräten vorhanden."
 msgid "Last Name"
 msgstr "Nachname"
 
-#: gymnastics/templates/gymnastics/includes/athletes_list.html:53
+#: gymnastics/templates/gymnastics/includes/athletes_list.html:59
 msgid "Do you really want to delete"
 msgstr "Möchten Sie folgenden Datensatz wirklich löschen?"
 
 #: gymnastics/templates/gymnastics/includes/form.html:12
-#: gymnastics/templates/gymnastics/squads/enter_performances.html:55
+#: gymnastics/templates/gymnastics/squads/enter_performances.html:57
 msgid "Submit"
 msgstr "Bestätigen"
 
@@ -680,24 +824,6 @@ msgstr "Nächstes"
 #: gymnastics/templates/gymnastics/performances/base.html:17
 msgid "New performance"
 msgstr "Neue Wertung"
-
-#: gymnastics/templates/gymnastics/performances/detail.html:37
-#: gymnastics/templates/gymnastics/performances/index.html:16
-#: gymnastics/templates/gymnastics/squads/detail.html:56
-#: gymnastics/templates/gymnastics/squads/enter_performances.html:28
-#: gymnastics/templates/gymnastics/streams/detail.html:130
-msgid "Athlete"
-msgstr "Sportler"
-
-#: gymnastics/templates/gymnastics/performances/detail.html:38
-#: gymnastics/templates/gymnastics/performances/index.html:17
-msgid "Discipline"
-msgstr "Gerät"
-
-#: gymnastics/templates/gymnastics/performances/detail.html:39
-#: gymnastics/templates/gymnastics/performances/index.html:18
-msgid "Value"
-msgstr "Wert"
 
 #: gymnastics/templates/gymnastics/performances/detail.html:41
 #: gymnastics/templates/gymnastics/performances/index.html:19
@@ -764,132 +890,124 @@ msgstr "Auswertung für jede Wertungsgruppe drucken"
 msgid "Print results per athlete (certificate):"
 msgstr "PDF für Urkunden erstellen:"
 
-#: gymnastics/templates/gymnastics/squads/index.html:28
+#: gymnastics/templates/gymnastics/squads/index.html:34
 msgid "Detail"
 msgstr "Detail"
 
-#: gymnastics/templates/gymnastics/squads/index.html:44
+#: gymnastics/templates/gymnastics/squads/index.html:50
 msgid "No squads available in the database."
 msgstr "Es sind keine Riegen vorhanden."
 
-#: gymnastics/templates/gymnastics/streams/detail.html:20
+#: gymnastics/templates/gymnastics/squads/new.html:5
+msgid "Create New Squad"
+msgstr "Neue Riege"
+
+#: gymnastics/templates/gymnastics/streams/detail.html:24
 msgid "Results Athletes"
 msgstr "Sportlerergebnisse"
 
-#: gymnastics/templates/gymnastics/streams/detail.html:28
+#: gymnastics/templates/gymnastics/streams/detail.html:32
 msgid "Results Teams"
 msgstr "Teamergebnisse"
 
-#: gymnastics/templates/gymnastics/streams/detail.html:33
+#: gymnastics/templates/gymnastics/streams/detail.html:40
 msgid "Athletes Finals"
 msgstr "Finalteilnehmer"
 
-#: gymnastics/templates/gymnastics/streams/detail.html:36
+#: gymnastics/templates/gymnastics/streams/detail.html:46
 msgid "Results Finals"
 msgstr "Finalergebnisse"
 
-#: gymnastics/templates/gymnastics/streams/detail.html:59
-#: gymnastics/templates/gymnastics/streams/edit.html:16
-#: gymnastics/templates/gymnastics/streams/index.html:24
-#: gymnastics/templates/gymnastics/streams/new.html:16
-msgid "Difficulty"
-msgstr "Schwierigkeit"
-
-#: gymnastics/templates/gymnastics/streams/detail.html:71
-#: gymnastics/templates/gymnastics/streams/edit.html:33
-#: gymnastics/templates/gymnastics/streams/index.html:27
-#: gymnastics/templates/gymnastics/streams/new.html:33
+#: gymnastics/templates/gymnastics/streams/detail.html:80
+#: gymnastics/templates/gymnastics/streams/edit.html:37
+#: gymnastics/templates/gymnastics/streams/index.html:30
+#: gymnastics/templates/gymnastics/streams/new.html:39
 msgid "Minimum Year of Birth"
 msgstr "Geburtsjahr (und jünger)"
 
-#: gymnastics/templates/gymnastics/streams/detail.html:84
-#: gymnastics/templates/gymnastics/streams/edit.html:40
-#: gymnastics/templates/gymnastics/streams/new.html:40
-msgid "All around individual"
-msgstr "Einzel-Mehrkampf"
-
-#: gymnastics/templates/gymnastics/streams/detail.html:86
+#: gymnastics/templates/gymnastics/streams/detail.html:95
 msgid "counting disciplines"
 msgstr "zählende Geräte"
 
-#: gymnastics/templates/gymnastics/streams/detail.html:91
+#: gymnastics/templates/gymnastics/streams/detail.html:100
 msgid "Team performances"
 msgstr "Mannschafts-Mehrkampf"
 
-#: gymnastics/templates/gymnastics/streams/detail.html:95
+#: gymnastics/templates/gymnastics/streams/detail.html:104
 msgid "counting events per discipline"
 msgstr "zählende Wertungen pro Gerät"
 
-#: gymnastics/templates/gymnastics/streams/detail.html:102
-#: gymnastics/templates/gymnastics/streams/edit.html:68
-#: gymnastics/templates/gymnastics/streams/new.html:68
-msgid "Discipline finals"
-msgstr "Gerätfinals"
-
-#: gymnastics/templates/gymnastics/streams/detail.html:106
+#: gymnastics/templates/gymnastics/streams/detail.html:115
 msgid "participants and"
 msgstr "Teilnehmer und"
 
-#: gymnastics/templates/gymnastics/streams/detail.html:108
+#: gymnastics/templates/gymnastics/streams/detail.html:117
 msgid "both values counting"
 msgstr "Qualifikations- und Finalwerte zählen"
 
-#: gymnastics/templates/gymnastics/streams/detail.html:110
+#: gymnastics/templates/gymnastics/streams/detail.html:119
 msgid "only final values counting"
 msgstr "nur Finalwerte zählen"
 
-#: gymnastics/templates/gymnastics/streams/detail.html:133
-#: gymnastics/templates/gymnastics/streams/detail.html:136
-#: gymnastics/templates/gymnastics/streams/detail.html:180
+#: gymnastics/templates/gymnastics/streams/detail.html:143
+#: gymnastics/templates/gymnastics/streams/detail.html:146
+#: gymnastics/templates/gymnastics/streams/detail.html:186
 msgid "Rank"
 msgstr "Platz"
 
-#: gymnastics/templates/gymnastics/streams/detail.html:135
+#: gymnastics/templates/gymnastics/streams/detail.html:145
 msgid "All Around"
 msgstr "Einzelwertung"
 
-#: gymnastics/templates/gymnastics/streams/detail.html:182
+#: gymnastics/templates/gymnastics/streams/detail.html:188
 msgid "Team Total"
 msgstr "Mannschaftswertung"
 
-#: gymnastics/templates/gymnastics/streams/detail.html:183
+#: gymnastics/templates/gymnastics/streams/detail.html:189
 msgid "Team Rank"
 msgstr "Mannschaftsplatz"
 
-#: gymnastics/templates/gymnastics/streams/edit.html:47
-#: gymnastics/templates/gymnastics/streams/new.html:47
+#: gymnastics/templates/gymnastics/streams/edit.html:51
+#: gymnastics/templates/gymnastics/streams/new.html:53
 msgid "All around individual counting events"
 msgstr "Einzel-Mehrkampf"
 
-#: gymnastics/templates/gymnastics/streams/edit.html:54
-#: gymnastics/templates/gymnastics/streams/new.html:54
-msgid "All around team"
-msgstr "Mannschaftswertung"
-
-#: gymnastics/templates/gymnastics/streams/edit.html:61
-#: gymnastics/templates/gymnastics/streams/new.html:61
+#: gymnastics/templates/gymnastics/streams/edit.html:65
+#: gymnastics/templates/gymnastics/streams/new.html:67
 msgid "All around team counting athletes"
 msgstr "zählende Teilnehmer für Mannschaft-Mehrkampf"
 
-#: gymnastics/templates/gymnastics/streams/edit.html:75
-#: gymnastics/templates/gymnastics/streams/new.html:75
+#: gymnastics/templates/gymnastics/streams/edit.html:79
+#: gymnastics/templates/gymnastics/streams/new.html:81
 msgid "Discipline finals max participants"
 msgstr "Anzahl Teilnehmer Gerätfinals"
 
-#: gymnastics/templates/gymnastics/streams/edit.html:82
-#: gymnastics/templates/gymnastics/streams/new.html:82
+#: gymnastics/templates/gymnastics/streams/edit.html:86
+#: gymnastics/templates/gymnastics/streams/new.html:88
 msgid "Discipline finals both values count"
 msgstr "nur Finalwerte zählen"
 
-#: gymnastics/templates/gymnastics/streams/edit.html:103
+#: gymnastics/templates/gymnastics/streams/edit.html:107
 msgid "Update"
 msgstr "Update"
 
-#: gymnastics/templates/gymnastics/streams/index.html:63
+#: gymnastics/templates/gymnastics/streams/index.html:71
 msgid "No stream available in the database."
 msgstr "Es sind keine Wertungsgruppen vorhanden."
 
-#: gymnastics/templates/gymnastics/streams/new.html:113
+#: gymnastics/templates/gymnastics/streams/new.html:6
+msgid "Create New Stream"
+msgstr "Neue Wertungsgruppe"
+
+#: gymnastics/templates/gymnastics/streams/new.html:99
+msgid "Available"
+msgstr "Vorhanden"
+
+#: gymnastics/templates/gymnastics/streams/new.html:109
+msgid "Selected"
+msgstr "Ausgewählt"
+
+#: gymnastics/templates/gymnastics/streams/new.html:119
 msgid "Create"
 msgstr "Erstellen"
 
@@ -905,43 +1023,41 @@ msgstr "Wertung"
 msgid "No team available in the database."
 msgstr "Es sind keine Mannschaften vorhanden."
 
-#: gymnastics/templates/gymnastics/tournaments/detail.html:20
+#: gymnastics/templates/gymnastics/tournaments/detail.html:22
 msgid "All tournaments"
 msgstr "Alle Turniere"
 
-#: gymnastics/templates/gymnastics/tournaments/detail.html:34
+#: gymnastics/templates/gymnastics/tournaments/detail.html:36
 msgid "Full name"
 msgstr "Kompletter Name"
 
-#: gymnastics/templates/gymnastics/tournaments/detail.html:37
-#: gymnastics/templates/gymnastics/tournaments/index.html:22
-msgid "Date"
-msgstr "Datum"
-
-#: gymnastics/templates/gymnastics/tournaments/detail.html:41
-msgid "Hosting club"
-msgstr "Ausrichter"
-
-#: gymnastics/templates/gymnastics/tournaments/detail.html:54
+#: gymnastics/templates/gymnastics/tournaments/detail.html:56
 msgid "Contact e-mail"
 msgstr "E-Mail des Kontaktes"
 
-#: gymnastics/templates/gymnastics/tournaments/detail.html:64
+#: gymnastics/templates/gymnastics/tournaments/detail.html:66
 #: gymnastics/templates/gymnastics/tournaments/index.html:23
 msgid "Location"
 msgstr "Ort"
 
-#: gymnastics/templates/gymnastics/tournaments/detail.html:74
-msgid "Generate certificates"
+#: gymnastics/templates/gymnastics/tournaments/detail.html:88
+msgid "Generate certificates pdf"
 msgstr "Urkunden-PDF erstellen"
 
-#: gymnastics/templates/gymnastics/tournaments/index.html:51
+#: gymnastics/templates/gymnastics/tournaments/detail.html:89
+msgid "Generate evaluation pdf"
+msgstr "Auswertungs-PDF erstellen"
+
+#: gymnastics/templates/gymnastics/tournaments/index.html:57
 msgid "No tournaments available in the database."
 msgstr "Es sind keine Turniere vorhanden."
 
 #: gymnastics/templates/gymnastics/tournaments/new.html:5
 msgid "Create New Tournament"
 msgstr "Neues Turnier"
+
+msgid "Wettkampfleitung"
+msgstr "Platzierungen"
 
 msgid "Performances are compared in"
 msgstr "Wertungen werden verglichen in"
@@ -957,9 +1073,6 @@ msgstr "Importierte Sportler löschen"
 
 msgid "Models"
 msgstr "Modelle"
-
-msgid "Placements"
-msgstr "Platzierungen"
 
 msgid "Overall"
 msgstr "Gesamt"

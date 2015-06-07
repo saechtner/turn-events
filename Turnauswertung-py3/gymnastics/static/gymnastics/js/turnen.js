@@ -69,15 +69,16 @@ $(document).ready(function() {
         dragEnd: saveOrder, 
         placeHolderTemplate: "<li class='label label-default'><div class='placeholder'></div></li>"
     });
-});
+    /* Add jquery.dragsort extending click handlers */
+    $('#available-list').on('click', 'li', function() {
+        $('#chosen-list').append($(this));
+        saveOrder();
+    });
 
-/* Add jquery.dragsort extending click handlers */
-$('#available-list').on('click', 'li', function() {
-    $('#chosen-list').append($(this));
-});
-
-$('#chosen-list').on('click', 'li', function() {
-    $('#available-list').append($(this));
+    $('#chosen-list').on('click', 'li', function() {
+        $('#available-list').append($(this));
+        saveOrder();
+    });
 });
 
 /* Vertical scroll handling */

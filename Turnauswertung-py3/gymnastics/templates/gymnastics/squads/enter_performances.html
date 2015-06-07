@@ -39,7 +39,8 @@
                         {% for discipline in stream_disciplines %}
                           <td>
                             <div class="col-md-6 col-md-offset-3">
-                              <input class="form-control" onkeydown="ModifyEnterKeyPressAsTab(event);" type="number" min="0.000" max="20.000" step="0.001" name="{{ athlete.id }}-{{ discipline.id }}" placeholder="{{ athlete_performances|get_item:discipline.id }}" tabindex="{{ stream_discipline_tabindex_dict|get_item:stream.id|get_item:discipline.id|default:0 }}">
+                              <input 
+                                class="form-control" pattern="[0]*(20([,\.]0)|1?[0-9]([,\.][0-9]{1,3}))[0]*" onkeydown="ModifyEnterKeyPressAsTab(event);" type="text" name="{{ athlete.id }}-{{ discipline.id }}" placeholder="{{ athlete_performances|get_item:discipline.id }}" tabindex="{{ stream_discipline_tabindex_dict|get_item:stream.id|get_item:discipline.id|default:0 }}">
                             </div>
                           </td>
                         {% endfor %}

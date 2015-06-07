@@ -36,6 +36,12 @@ def _parse_athlete_line(line, club, athletes_import):
 
     elements = re.split(r'\t', line.rstrip())
 
+    if(len(elements) > 6 and elements[3] == ''):
+        elements = elements[:3] + elements[4:]
+
+    if(len(elements) > 6 and elements[1] == ''):
+        elements = elements[:1] + elements[2:]
+
     if len(elements) != 6 and len(elements) != 7:
         return None
 
@@ -67,6 +73,7 @@ def _parse_athlete_line(line, club, athletes_import):
             athletes_import=athletes_import)
 
     team_name = elements[4]
+
     if team_name:
         try:
             team = club.team_set.get(stream=stream, name=team_name)
@@ -75,7 +82,6 @@ def _parse_athlete_line(line, club, athletes_import):
             team.save()
         if team and team.athlete_set.count() < stream.all_around_team_size:
             athlete.team = team
-
     try:
         athlete.save()
     except:
@@ -132,7 +138,7 @@ def new(request):
 
         if len(lines) > len(athletes_list):
             messages.warning(request, 'Warning: {0} objects were not created.'.format(len(lines) - len(athletes_list)))
-        
+
         return redirect(reverse('athletes_imports.detail', kwargs={ 'id': athletes_import.id }))
 
     return HttpResponseNotAllowed(['GET', 'POST'])

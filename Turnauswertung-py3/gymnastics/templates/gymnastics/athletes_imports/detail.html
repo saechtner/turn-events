@@ -12,7 +12,10 @@
     <a href="#base" aria-controls="home" role="tab" data-toggle="tab">{% trans "General" %}</a>
   </li>
   <li role="presentation" class="active">
-    <a href="#athletes" aria-controls="profile" role="tab" data-toggle="tab">{% trans "Imported Athletes" %}</a>
+    <a href="#athletes" aria-controls="profile" role="tab" data-toggle="tab">
+      <span class="nav-link-label">{% trans "Imported Athletes" %}</span>
+      <span class="nav-link-value">{{ athletes.count }}</span>
+    </a>
   </li>
 {% endblock nav_links %}
 {% block nav_regular_buttons %}

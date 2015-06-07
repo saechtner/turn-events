@@ -1,13 +1,14 @@
 from django.core.urlresolvers import reverse
 from django.db import models
+from django.utils.translation import ugettext_lazy
 
 
 class Team(models.Model):
   
-    name = models.CharField(max_length=50, null=False)
+    name = models.CharField(ugettext_lazy('Name') ,max_length=128, null=False)
 
-    club = models.ForeignKey('Club', null=True, blank=True)
-    stream = models.ForeignKey('Stream')
+    club = models.ForeignKey('Club', null=True, blank=True, verbose_name=ugettext_lazy('Club'))
+    stream = models.ForeignKey('Stream', verbose_name=ugettext_lazy('Stream'))
 
     class Meta:
         db_table = 'gymnastics_teams'    

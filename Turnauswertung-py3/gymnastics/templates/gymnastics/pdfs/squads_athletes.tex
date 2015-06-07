@@ -14,16 +14,16 @@
 
     \begin{document}
         {% for squad in squads %}
-            \begin{tabular}{|l|l|l|}
-                \hline\multicolumn{3}{|c|}{{ squad }}\\
-                \hline&\multicolumn{1}{c|}{ {% trans 'Club' %} }&\multicolumn{1}{c|}{ {% trans 'Team' %} }\\
+            \begin{tabular}{|l|l|}
+                \hline\multicolumn{2}{|c|}{ {{ squad }} }\\
+                \hline\multicolumn{1}{|c|}{ {% trans 'Name' %} }&\multicolumn{1}{c|}{ {% trans 'Club' %} }\\
                 \hline
                 {% for athlete in squad.athlete_set.all %}
-                    \hline {{ athlete }}&{{ athlete.club }}&{{ athlete.team|default:'' }}\\
+                    \hline {{ athlete }}&{{ athlete.club }}\\
                 {% endfor %}
-                \hline&&\\
-                \hline&&\\
-                \hline&&\\
+                \hline&\\
+                \hline&\\
+                \hline&\\
                 \hline
             \end{tabular}
             \newpage

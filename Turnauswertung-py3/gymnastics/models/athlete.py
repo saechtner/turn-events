@@ -1,6 +1,7 @@
 from django.core.urlresolvers import reverse
 from django.db import models
 from django.utils.text import slugify
+from django.utils.translation import ugettext_lazy
 
 
 class AthleteQuerySet(models.QuerySet):
@@ -25,15 +26,15 @@ class AthleteManager(models.Manager):
 
 class Athlete(models.Model):
   
-    first_name = models.CharField(max_length=50, null=False)
-    last_name = models.CharField(max_length=50, null=False)
-    sex = models.CharField(max_length=1, null=False, choices=(('m', 'male'), ('f', 'female')), default='f')
-    date_of_birth = models.DateField(default='1900-01-01')
+    first_name = models.CharField(ugettext_lazy('First name'), max_length=50, null=False)
+    last_name = models.CharField(ugettext_lazy('Last name'), max_length=50, null=False)
+    sex = models.CharField(ugettext_lazy('Sex'), max_length=1, null=False, choices=(('m', 'male'), ('f', 'female')), default='f')
+    date_of_birth = models.DateField(ugettext_lazy('Date of birth'), default='1900-01-01')
 
-    club = models.ForeignKey('Club', null=True, blank=True)
-    stream = models.ForeignKey('Stream')
-    team = models.ForeignKey('Team', null=True, blank=True, on_delete=models.SET_NULL)
-    squad = models.ForeignKey('Squad', null=True, blank=True, on_delete=models.SET_NULL)
+    club = models.ForeignKey('Club', null=True, blank=True, verbose_name=ugettext_lazy('Club'))
+    stream = models.ForeignKey('Stream', verbose_name=ugettext_lazy('Stream'))
+    team = models.ForeignKey('Team', null=True, blank=True, on_delete=models.SET_NULL, verbose_name=ugettext_lazy('Team'))
+    squad = models.ForeignKey('Squad', null=True, blank=True, on_delete=models.SET_NULL, verbose_name=ugettext_lazy('Squad'))
 
     athletes_import = models.ForeignKey('AthletesImport', null=True, blank=True)
 
