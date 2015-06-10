@@ -49,16 +49,31 @@ def create_evaluation_pdf(request, id, slug):
     streams = Stream.objects.all() \
         .prefetch_related('discipline_set') \
         .prefetch_related('athlete_set') \
-        .prefetch_related('team_set__athlete_set__performance_set')
+        .prefetch_related('team_set__athlete_set__performance_set') \
+        .order_by('sex', '-minimum_year_of_birth', 'difficulty')
 
-    stream_disciplines_dict = {}
+    clubs = Club.objects.all() \
+        .prefetch_related('athlete_set')
+    
+    athlete_disciplines_rank_dict = {}
+    athlete_disciplines_result_dict = {}
+    club_stream_athlete_number_dict = {}
     stream_athletes_dict = {}
-    stream_athletes_disciplines_result_dict = {}
-    stream_athletes_disciplines_rank_dict = {}
+    stream_disciplines_dict = {}
     stream_teams_dict = {}
+    team_athletes_dict = {}
+    team_disciplines_rank_dict = {}
+    team_disciplines_result_dict = {}
+
+    stream_athletes_disciplines_rank_dict = {}
+    stream_athletes_disciplines_result_dict = {}
     stream_teams_disciplines_result_dict = {}
     stream_teams_disciplines_rank_dict = {}
+    
 
+
+    # dict1.update(dict2)
+    # dict1.pop(key[, default])
     for stream in streams:
         stream_disciplines_dict[stream.id] = stream.get_ordered_disciplines()
 
@@ -76,24 +91,51 @@ def create_evaluation_pdf(request, id, slug):
         stream_teams_disciplines_result_dict[stream.id] = stream.get_teams_disciplines_result_dict()
         stream_teams_disciplines_rank_dict[stream.id] = stream.get_teams_disciplines_rank_dict(stream_teams_disciplines_result_dict.get(stream.id, {}))
 
-
-        stream_athletes_dict[stream.id] = [athlete for athlete in stream_athletes_dict[stream.id] if stream_athletes_disciplines_result_dict.get(stream.id).get(athlete.id).get('total') > 0.0]
-        stream_teams_dict[stream.id] = [team for team in stream_teams_dict[stream.id] if stream_teams_disciplines_result_dict.get(stream.id).get(team.id).get('total') > 0.0]
-
+        stream_athletes_dict[stream.id] = [athlete for athlete in stream_athletes_dict[stream.id] if stream_athletes_disciplines_result_dict.get(stream.id).get(athlete.id).get('total', 0.0) > 0.0]
+        stream_teams_dict[stream.id] = [team for team in stream_teams_dict[stream.id] if stream_teams_disciplines_result_dict.get(stream.id).get(team.id).get('total', 0.0) > 0.0]
 
         stream_athletes_dict[stream.id] = sorted(stream_athletes_dict.get(stream.id), key=lambda athlete: stream_athletes_disciplines_rank_dict.get(stream.id).get(athlete.id).get('total'))
         stream_teams_dict[stream.id] = sorted(stream_teams_dict.get(stream.id), key=lambda team: stream_teams_disciplines_rank_dict.get(stream.id).get(team.id).get('total'))
-        
+
+        athlete_disciplines_rank_dict.update(stream_athletes_disciplines_rank_dict[stream.id])
+        athlete_disciplines_result_dict.update(stream_athletes_disciplines_result_dict[stream.id])
+        team_disciplines_rank_dict.update(stream_teams_disciplines_rank_dict[stream.id])
+        team_disciplines_result_dict.update(stream_teams_disciplines_result_dict[stream.id])
+
+        team_athletes_dict.update({team.id: [athlete for athlete in team.athlete_set.all() if stream_athletes_disciplines_result_dict.get(stream.id).get(athlete.id).get('total') > 0.0] for team in stream_teams_dict[stream.id]})
+
+    streams = [stream for stream in streams if len(stream_athletes_dict.get(stream.id, [])) > 0]
+
+    club_stream_athlete_number_dict = { 
+        club.id: 
+            {stream.id: len(set(stream_athletes_dict.get(stream.id, [])) & set(club.athlete_set.all()))
+                for stream in streams}
+        for club in clubs}
+
+    for club in clubs:
+        club_stream_athlete_number_dict[club.id]['total'] = sum(club_stream_athlete_number_dict.get(club.id, {}).values())
+
+    statistics_format_dict = {
+        'start': len(streams),
+        'end': len(streams)+1,
+        'female_number': len([stream for stream in streams if stream.sex == 'f']),
+        'male_number': len([stream for stream in streams if stream.sex == 'm'])
+    }
+
     context = {
-        'clubs': Club.objects.all(),
+        'clubs': clubs,
+        'club_stream_athlete_number_dict': club_stream_athlete_number_dict,
+        'statistics_format_dict': statistics_format_dict,
         'streams': streams,
         'stream_athletes_dict': stream_athletes_dict,
-        'stream_athletes_disciplines_rank_dict': stream_athletes_disciplines_rank_dict,
-        'stream_athletes_disciplines_result_dict': stream_athletes_disciplines_result_dict,
+        'athlete_disciplines_rank_dict': athlete_disciplines_rank_dict,
+        'athlete_disciplines_result_dict': athlete_disciplines_result_dict,
         'stream_disciplines_dict': stream_disciplines_dict,
         'stream_teams_dict': stream_teams_dict,
-        'stream_teams_disciplines_rank_dict': stream_teams_disciplines_rank_dict,
-        'stream_teams_disciplines_result_dict': stream_teams_disciplines_result_dict,
+        'team_disciplines_rank_dict': team_disciplines_rank_dict,
+        'team_disciplines_result_dict': team_disciplines_result_dict,
+        'team_athletes_dict': team_athletes_dict,
+        'total_athletes': sum([len(athlete_list) for athlete_list in stream_athletes_dict.values()]),
         'tournament': Tournament.objects.get(id=id)
     }
     template_location = 'gymnastics/pdfs/evaluation.tex'

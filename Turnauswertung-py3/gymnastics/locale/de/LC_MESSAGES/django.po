@@ -1085,3 +1085,12 @@ msgstr "neu"
 
 msgid "enter values"
 msgstr "Wertung eingeben"
+
+msgid "born"
+msgstr "geboren"
+
+msgid "and after"
+msgstr "und danach"
+
+msgid "Participant statistics"
+msgstr "Teilnehmerstatisik"
