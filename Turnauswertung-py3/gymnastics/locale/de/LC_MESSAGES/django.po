@@ -1090,7 +1090,7 @@ msgid "born"
 msgstr "geboren"
 
 msgid "and after"
-msgstr "und danach"
+msgstr "und später"
 
 msgid "Participant statistics"
 msgstr "Teilnehmerstatisik"
