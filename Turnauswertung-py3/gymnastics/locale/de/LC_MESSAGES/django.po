@@ -1087,10 +1087,10 @@ msgid "enter values"
 msgstr "Wertung eingeben"
 
 msgid "born"
-msgstr "geboren"
+msgstr "Jahrgang"
 
 msgid "and after"
-msgstr "und später"
+msgstr "und jünger"
 
 msgid "Participant statistics"
 msgstr "Teilnehmerstatisik"

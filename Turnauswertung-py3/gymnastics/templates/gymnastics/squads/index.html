@@ -19,12 +19,14 @@
       <table class="table table-hover" id="squads-table">
         <thead>
           <th>{% trans "Squad" %}</th>
+          <th>#{% trans 'Athletes' %}</th>
           <th></th>
         </thead>
         <tbody>
           {% for squad in squads %}
             <tr id="squad_{{ squad.id }}">
               <td>{{ squad.name }}</td>
+              <td>{{ squad.athlete_set.all.count }}</td>
               <td class="text-right">
                 <div class="btn-group" role="group">
                   <a type="button" class="btn btn-xs btn-primary" href="{% url 'squads.enter_performances' squad.slug squad.id %}">

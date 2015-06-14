@@ -10,7 +10,7 @@ from gymnastics.utils.dict_operations import completed_performances
 
 
 def index(request):
-    context = { 'streams': Stream.objects.all() }
+    context = { 'streams': Stream.objects.prefetch_related('athlete_set').all() }
     return render(request, 'gymnastics/streams/index.html', context)
 
 def detail(request, id, slug):

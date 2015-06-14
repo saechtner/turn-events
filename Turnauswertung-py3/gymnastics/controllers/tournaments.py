@@ -100,7 +100,7 @@ def create_evaluation_pdf(request, id, slug):
         team_disciplines_result_dict.update(stream_teams_disciplines_result_dict[stream.id])
 
         team_athletes_dict.update({team.id: [athlete for athlete in team.athlete_set.all() if stream_athletes_disciplines_result_dict.get(stream.id).get(athlete.id).get('total') > 0.0] for team in stream_teams_dict[stream.id]})
-        team_format_dict.update({team.id: len(team_athletes_dict[team.id])+1 for team in stream_teams_dict[stream.id]})
+        team_format_dict.update({team.id: -(len(team_athletes_dict[team.id])+1) for team in stream_teams_dict[stream.id]})
 
     streams = [stream for stream in streams if len(stream_athletes_dict.get(stream.id, [])) > 0]
 

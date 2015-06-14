@@ -26,10 +26,11 @@ class AthleteManager(models.Manager):
 
 class Athlete(models.Model):
   
-    first_name = models.CharField(ugettext_lazy('First name'), max_length=50, null=False)
-    last_name = models.CharField(ugettext_lazy('Last name'), max_length=50, null=False)
-    sex = models.CharField(ugettext_lazy('Sex'), max_length=1, null=False, choices=(('m', 'male'), ('f', 'female')), default='f')
+    first_name = models.CharField(ugettext_lazy('First name'), max_length=50)
+    last_name = models.CharField(ugettext_lazy('Last name'), max_length=50)
+    sex = models.CharField(ugettext_lazy('Sex'), max_length=1, choices=(('m', 'male'), ('f', 'female')), default='f')
     date_of_birth = models.DateField(ugettext_lazy('Date of birth'), default='1900-01-01')
+    squad_position = models.IntegerField(default=0, null=True, blank=True)
 
     club = models.ForeignKey('Club', null=True, blank=True, verbose_name=ugettext_lazy('Club'))
     stream = models.ForeignKey('Stream', verbose_name=ugettext_lazy('Stream'))
