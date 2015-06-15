@@ -3,8 +3,9 @@ import json
 from django.contrib import messages
 from django.core.urlresolvers import reverse, reverse_lazy
 from django.http import HttpResponse
-from django.utils.translation import ugettext_lazy
 from django.shortcuts import redirect, render
+from django.template import loader, Context
+from django.utils.translation import ugettext_lazy
 from django.views import generic
 
 from gymnastics.models import Club, Tournament, Stream
@@ -39,70 +40,65 @@ def create_certificates_pdf(request):
     context = {
         'squads': [],
     }
-    template_location = 'gymnastics/pdfs/certificates.tex'
+    template_location = 'gymnastics/documents/certificates.tex'
     file_name = 'filename={0}.pdf'.format(ugettext_lazy('Certificates'))
 
     return pdf.create(template_location, context, file_name)
 
+def create_solo_data_txt(request, id, slug):
+    response = HttpResponse(content_type='text')
+    response['Content-Disposition'] = 'attachment; filename="{0}.txt"'.format(ugettext_lazy('solo_data'))
+
+    data = Tournament.objects.get(id=id).get_evaluation_data()
+
+    context = "{0}\t{1}\t{2}\t{3}\t{4}\t{5}".format(ugettext_lazy('Club'), ugettext_lazy('Total'), ugettext_lazy('Rank'), ugettext_lazy('Stream'), ugettext_lazy('Last Name'), ugettext_lazy('First Name'))
+    for stream in data.get('streams'):
+        for athlete in data.get('stream_athletes_dict').get(stream.id)[:3]:
+            first_name = athlete.first_name
+            last_name = athlete.last_name
+            club = str(athlete.club)
+            stream = str(stream)
+            total = str(data.get('athlete_disciplines_result_dict').get(athlete.id).get('total'))
+            rank = str(data.get('athlete_disciplines_rank_dict').get(athlete.id).get('total'))
+
+            athlete_line = "\t".join([club, total, rank, stream, last_name, first_name])
+            context = "\n".join([context, athlete_line])
+
+    response.write(context)
+    return response
+
+def create_team_data_txt(request, id, slug):
+    response = HttpResponse(content_type='text')
+    response['Content-Disposition'] = 'attachment; filename="{0}.txt"'.format(ugettext_lazy('team_data'))
+
+    data = Tournament.objects.get(id=id).get_evaluation_data()
+
+    context = "{0}\t{1}\t{2}\t{3}\t{4}".format(ugettext_lazy('Team'), ugettext_lazy('Total'), ugettext_lazy('Rank'), ugettext_lazy('Stream'), ugettext_lazy('Athletes'))
+    for stream in data.get('streams'):
+        for team in data.get('stream_teams_dict').get(stream.id)[:2]:
+            stream = str(stream)
+            total = str(data.get('team_disciplines_result_dict').get(team.id).get('total'))
+            rank = str(data.get('team_disciplines_rank_dict').get(team.id).get('total'))
+            athletes = ','.join([str(athlete) for athlete in data.get('team_athletes_dict').get(team.id)])
+
+            team_line = "\t".join([str(team), total, rank, stream, athletes])
+            context = "\n".join([context, team_line])
+
+    response.write(context)
+    return response
+
 def create_evaluation_pdf(request, id, slug):
 
-    streams = Stream.objects.all() \
-        .prefetch_related('discipline_set') \
-        .prefetch_related('athlete_set') \
-        .prefetch_related('team_set__athlete_set__performance_set') \
-        .order_by('sex', '-minimum_year_of_birth', 'difficulty')
+    context = Tournament.objects.get(id=id).get_evaluation_data()
 
-    clubs = Club.objects.all() \
-        .prefetch_related('athlete_set')
+    clubs = Club.objects.all().prefetch_related('athlete_set')
+    streams = context.get('streams')
+    stream_athletes_dict = context.get('stream_athletes_dict')
+    stream_teams_dict = context.get('stream_teams_dict')
+    team_athletes_dict = context.get('team_athletes_dict')
     
-    athlete_disciplines_rank_dict = {}
-    athlete_disciplines_result_dict = {}
-    club_stream_athlete_number_dict = {}
-    stream_athletes_dict = {}
-    stream_disciplines_dict = {}
-    stream_teams_dict = {}
-    team_athletes_dict = {}
-    team_disciplines_rank_dict = {}
-    team_disciplines_result_dict = {}
-    team_format_dict = {}
-
-    stream_athletes_disciplines_rank_dict = {}
-    stream_athletes_disciplines_result_dict = {}
-    stream_teams_disciplines_result_dict = {}
-    stream_teams_disciplines_rank_dict = {}
-    
-    for stream in streams:
-        stream_disciplines_dict[stream.id] = stream.get_ordered_disciplines()
-
-        stream_athletes_dict[stream.id] = stream.athlete_set.all() \
-            .select_related('club').select_related('stream').select_related('team__stream').select_related('squad') \
-            .prefetch_related('performance_set')
-
-        stream_athletes_disciplines_result_dict[stream.id] = stream_athletes_dict.get(stream.id).get_athletes_disciplines_result_dict()
-        stream_athletes_disciplines_rank_dict[stream.id] = stream.get_athletes_disciplines_rank_dict(stream_athletes_disciplines_result_dict.get(stream.id, {}))
-
-        stream_teams_dict[stream.id] = stream.team_set.all() \
-            .select_related('stream').select_related('club') \
-            .prefetch_related('athlete_set')
-
-        stream_teams_disciplines_result_dict[stream.id] = stream.get_teams_disciplines_result_dict()
-        stream_teams_disciplines_rank_dict[stream.id] = stream.get_teams_disciplines_rank_dict(stream_teams_disciplines_result_dict.get(stream.id, {}))
-
-        stream_athletes_dict[stream.id] = [athlete for athlete in stream_athletes_dict[stream.id] if stream_athletes_disciplines_result_dict.get(stream.id).get(athlete.id).get('total', 0.0) > 0.0]
-        stream_teams_dict[stream.id] = [team for team in stream_teams_dict[stream.id] if stream_teams_disciplines_result_dict.get(stream.id).get(team.id).get('total', 0.0) > 0.0]
-
-        stream_athletes_dict[stream.id] = sorted(stream_athletes_dict.get(stream.id), key=lambda athlete: stream_athletes_disciplines_rank_dict.get(stream.id).get(athlete.id).get('total'))
-        stream_teams_dict[stream.id] = sorted(stream_teams_dict.get(stream.id), key=lambda team: stream_teams_disciplines_rank_dict.get(stream.id).get(team.id).get('total'))
-
-        athlete_disciplines_rank_dict.update(stream_athletes_disciplines_rank_dict[stream.id])
-        athlete_disciplines_result_dict.update(stream_athletes_disciplines_result_dict[stream.id])
-        team_disciplines_rank_dict.update(stream_teams_disciplines_rank_dict[stream.id])
-        team_disciplines_result_dict.update(stream_teams_disciplines_result_dict[stream.id])
-
-        team_athletes_dict.update({team.id: [athlete for athlete in team.athlete_set.all() if stream_athletes_disciplines_result_dict.get(stream.id).get(athlete.id).get('total') > 0.0] for team in stream_teams_dict[stream.id]})
-        team_format_dict.update({team.id: -(len(team_athletes_dict[team.id])+1) for team in stream_teams_dict[stream.id]})
-
-    streams = [stream for stream in streams if len(stream_athletes_dict.get(stream.id, [])) > 0]
+    teams = sum(stream_teams_dict.values(), [])
+    team_format_dict = {team.id: -(len(team_athletes_dict[team.id])+1) for team in teams}
 
     club_stream_athlete_number_dict = { 
         club.id: 
@@ -110,6 +106,7 @@ def create_evaluation_pdf(request, id, slug):
                 for stream in streams}
         for club in clubs}
 
+    # make pythonic
     for club in clubs:
         club_stream_athlete_number_dict[club.id]['total'] = sum(club_stream_athlete_number_dict.get(club.id, {}).values())
 
@@ -122,24 +119,13 @@ def create_evaluation_pdf(request, id, slug):
         'male_number': len([stream for stream in streams if stream.sex == 'm'])
     }
 
-    context = {
-        'athlete_disciplines_rank_dict': athlete_disciplines_rank_dict,
-        'athlete_disciplines_result_dict': athlete_disciplines_result_dict,
-        'club_stream_athlete_number_dict': club_stream_athlete_number_dict,
-        'clubs': clubs,
-        'statistics_format_dict': statistics_format_dict,
-        'streams': streams,
-        'stream_athletes_dict': stream_athletes_dict,
-        'stream_disciplines_dict': stream_disciplines_dict,
-        'stream_teams_dict': stream_teams_dict,
-        'team_athletes_dict': team_athletes_dict,
-        'team_disciplines_rank_dict': team_disciplines_rank_dict,
-        'team_disciplines_result_dict': team_disciplines_result_dict,
-        'team_format_dict': team_format_dict,
-        'total_athletes': sum([len(athlete_list) for athlete_list in stream_athletes_dict.values()]),
-        'tournament': Tournament.objects.get(id=id)
-    }
-    template_location = 'gymnastics/pdfs/evaluation.tex'
+    context['club_stream_athlete_number_dict'] = club_stream_athlete_number_dict
+    context['clubs'] = clubs
+    context['statistics_format_dict'] = statistics_format_dict
+    context['team_format_dict'] = team_format_dict
+    context['total_athletes'] = sum([len(athlete_list) for athlete_list in stream_athletes_dict.values()])
+
+    template_location = 'gymnastics/documents/evaluation.tex'
     file_name = '{0}.pdf'.format(ugettext_lazy('Evaluation'))
 
     return pdf.create(template_location, context, file_name)

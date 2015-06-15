@@ -87,6 +87,8 @@
       <div role="tabpanel" class="tab-pane" id="evaluation">
       <p><a href="{% url 'tournaments.create_certificates_pdf' %}">{% trans 'Generate certificates pdf' %}</a></p>
       <p><a href="{{ tournament.get_evaluation_url }}">{% trans 'Generate evaluation pdf' %}</a></p>
+      <p><a href="{{ tournament.get_solo_data_url }}">{% trans 'Generate solo data txt' %}</a></p>
+      <p><a href="{{ tournament.get_team_data_url }}">{% trans 'Generate team data txt' %}</a></p>
       </div>
     </div>
   </div>

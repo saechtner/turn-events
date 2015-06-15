@@ -1,0 +1,26 @@
+{% autoescape on %}
+
+    {% load i18n %}
+    {% load custom_template_tags %}
+
+
+    \documentclass[a4paper,14pt]{scrartcl}
+    \usepackage[utf8]{inputenc}
+    \usepackage{geometry}
+    \geometry{
+      left=0cm,
+      right=0cm,
+      top=0cm,
+      bottom=0cm
+    }
+
+    \setlength{\parindent}{0pt}
+    \pagestyle{empty}
+
+    \begin{document}
+        \vspace*{10cm}
+        \begin{center}Much to do here\end{center}
+        \vfill
+        \hspace*{5cm}We might put some text here as well.
+    \end{document}
+{% endautoescape %}

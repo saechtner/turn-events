@@ -1093,4 +1093,4 @@ msgid "and after"
 msgstr "und jünger"
 
 msgid "Participant statistics"
-msgstr "Teilnehmerstatisik"
+msgstr "Teilnehmerstatistik"

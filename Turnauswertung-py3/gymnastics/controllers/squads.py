@@ -109,7 +109,7 @@ def create_judge_pdf(request):
         'squad_disciplines_dict': squad_disciplines_dict,
         'squad_athletes_dict': squad_athletes_dict,
     }
-    template_location = 'gymnastics/pdfs/squads_judges.tex'
+    template_location = 'gymnastics/documents/squads_judges.tex'
     file_name = '{0}_{1}_{2}.pdf'.format(ugettext_lazy('Squads'), ugettext_lazy('Judge'), ugettext_lazy('Lists'))
 
     return pdf.create(template_location, context, file_name)
@@ -123,7 +123,7 @@ def create_overview_pdf(request):
     context = {
         'squads': squads,
     }
-    template_location = 'gymnastics/pdfs/squads_athletes.tex'
+    template_location = 'gymnastics/documents/squads_athletes.tex'
     file_name = '{0}_{1}.pdf'.format(ugettext_lazy('Squads'), ugettext_lazy('Overview'))
 
     return pdf.create(template_location, context, file_name)
