@@ -1,5 +1,5 @@
 /* Delete confirm popup */
-$(document).ready(function() { 
+jQuery(document).ready(function($) { 
     $(".btn-confirm-delete").confirm({
         confirm: function(button) {
             var href = button.attr('href');
@@ -8,16 +8,14 @@ $(document).ready(function() {
             ajaxDelete(href, id);
         },
     });
-});
 
-/* Delete confirm popup and ajax post delete handling */
-$(document).ready(function() {
+    /* Delete confirm popup and ajax post delete handling */
     function getCookie(name) {
         var cookieValue = null;
         if (document.cookie && document.cookie != '') {
             var cookies = document.cookie.split(';');
             for (var i = 0; i < cookies.length; i++) {
-                var cookie = jQuery.trim(cookies[i]);
+                var cookie = $.trim(cookies[i]);
                 // Does this cookie string begin with the name we want?
                 if (cookie.substring(0, name.length + 1) == (name + '=')) {
                     cookieValue = decodeURIComponent(cookie.substring(name.length + 1));

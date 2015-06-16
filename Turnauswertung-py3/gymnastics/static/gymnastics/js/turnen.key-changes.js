@@ -1,19 +1,13 @@
-function ModifyEnterKeyPressAsTab(event)
-{
+function ModifyEnterKeyPressAsTab(event) {
     var caller;
     var key;
-    if (window.event)
-    {
+    if (window.event) {
         caller = window.event.srcElement; //Get the event caller in IE.
         key = window.event.keyCode; //Get the keycode in IE.
-    }
-    else
-    {
+    } else {
         caller = event.target; //Get the event caller in Firefox.
         key = event.which; //Get the keycode in Firefox.
-    }
-    if (key == 13) //Enter key was pressed.
-    {
+    } if (key == 13) { //Enter key was pressed.
         event.preventDefault();
         cTab = caller.tabIndex; //caller tabIndex.
         maxTab = 0; //highest tabIndex (start at 0 to change)
@@ -22,8 +16,7 @@ function ModifyEnterKeyPressAsTab(event)
         allByIndex = []; //Storage for elements by index.
         c = 0; //index of the caller in allByIndex (start at 0 to change)
         i = 0; //generic indexer for allByIndex;
-        for (id in allById) //Loop through all the input elements by id.
-        {
+        for (id in allById) { //Loop through all the input elements by id.
             allByIndex[i] = allById[id]; //Set allByIndex.
             tab = allByIndex[i].tabIndex;
             if (caller == allByIndex[i])
@@ -35,22 +28,17 @@ function ModifyEnterKeyPressAsTab(event)
             i++;
         }
         //Loop through tab indexes from caller to highest.
-        for (tab = cTab; tab <= maxTab; tab++)
-        {
+        for (tab = cTab; tab <= maxTab; tab++) {
             //Look for this tabIndex from the caller to the end of page.
-            for (i = c + 1; i < allByIndex.length; i++)
-            {
-                if (allByIndex[i].tabIndex == tab)
-                {
+            for (i = c + 1; i < allByIndex.length; i++) {
+                if (allByIndex[i].tabIndex == tab) {
                     allByIndex[i].focus(); //Move to that element and stop.
                     return;
                 }
             }
             //Look for the next tabIndex from the start of page to the caller.
-            for (i = 0; i < c; i++)
-            {
-                if (allByIndex[i].tabIndex == tab + 1)
-                {
+            for (i = 0; i < c; i++) {
+                if (allByIndex[i].tabIndex == tab + 1) {
                     allByIndex[i].focus(); //Move to that element and stop.
                     return;
                 }
@@ -60,10 +48,8 @@ function ModifyEnterKeyPressAsTab(event)
 
         //The caller was the last element with the highest tabIndex,
         //so find the first element with the lowest tabIndex.
-        for (i = 0; i < allByIndex.length; i++)
-        {
-            if (allByIndex[i].tabIndex == minTab)
-            {
+        for (i = 0; i < allByIndex.length; i++) {
+            if (allByIndex[i].tabIndex == minTab) {
                 allByIndex[i].focus(); //Move to that element and stop.
                 return;
             }

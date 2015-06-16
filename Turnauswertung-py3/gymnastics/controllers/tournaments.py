@@ -98,7 +98,7 @@ def create_evaluation_pdf(request, id, slug):
     team_athletes_dict = context.get('team_athletes_dict')
     
     teams = sum(stream_teams_dict.values(), [])
-    team_format_dict = {team.id: -(len(team_athletes_dict[team.id])+1) for team in teams}
+    team_format_dict = {team.id: -(len(team_athletes_dict[team.id]) + 1) for team in teams}
 
     club_stream_athlete_number_dict = { 
         club.id: 
@@ -114,7 +114,7 @@ def create_evaluation_pdf(request, id, slug):
 
     statistics_format_dict = {
         'start': len(streams),
-        'end': len(streams)+1,
+        'end': len(streams) + 1,
         'female_number': len([stream for stream in streams if stream.sex == 'f']),
         'male_number': len([stream for stream in streams if stream.sex == 'm'])
     }

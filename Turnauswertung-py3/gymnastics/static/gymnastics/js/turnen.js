@@ -1,8 +1,9 @@
-/* Initiate LightTable filter */
-$(document).ready(LightTableFilter.init());
-
 /* Initiate jQuery table sorter */
-$(document).ready(function() { 
+jQuery(document).ready(function($) {
+
+    /* Initiate LightTable filter */
+    LightTableFilter.init()
+
     /* Add jQuery table sorter parser */
     $.tablesorter.addParser({ 
         // set a unique id 
@@ -49,13 +50,9 @@ $(document).ready(function() {
         // sort on the first column and third column, order asc 
         sortList: [[last_column_index,0],[0,0]],
         headers: headers 
-    }); 
-}); 
+    });  
 
-/* Initiate jquery.dragsort */
-$(document).ready(function() { 
-    // $("#available-list").dragsort();   
-
+    /* Initiate jquery.dragsort */
     function saveOrder() {
         var data = $("#chosen-list li").map(function() { 
             return $(this).data('itemidx'); 
@@ -69,6 +66,7 @@ $(document).ready(function() {
         dragEnd: saveOrder, 
         placeHolderTemplate: "<li class='label label-default'><div class='placeholder'></div></li>"
     });
+    
     /* Add jquery.dragsort extending click handlers */
     $('#available-list').on('click', 'li', function() {
         $('#chosen-list').append($(this));
@@ -79,10 +77,8 @@ $(document).ready(function() {
         $('#available-list').append($(this));
         saveOrder();
     });
-});
 
-/* Vertical scroll handling */
-$(document).ready(function() {
+    /* Vertical scroll handling */
     function scrollResponse(element, transform_value) {
         if (transform_value) {
             element.css("transform", "translate3d(0px, " + transform_value + "px, 0px)");
