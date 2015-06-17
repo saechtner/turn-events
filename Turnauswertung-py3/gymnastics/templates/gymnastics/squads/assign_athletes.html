@@ -1,0 +1,75 @@
+{% extends "gymnastics/squads/base.html" %}
+
+{% load i18n %}
+{% load custom_template_tags %}
+
+{% block headline %}{% trans 'Assign Athletes' %}{% endblock headline %}
+{% block nav_main %}{% trans 'Squads' %}{% endblock nav_main %}
+{% block nav_main_url %}
+  {% url 'squads.index' %}
+{% endblock nav_main_url %}
+{% block nav_links %}{% endblock nav_links %}
+{% block nav_regular_buttons %}{% endblock nav_regular_buttons %}
+
+{% block content %}
+  <div class="panel panel-default">
+    <div class="panel-body">
+      
+      <form action="{% url 'squads.assign_athletes' squad.slug squad.id %}" method="post">
+        {% csrf_token %}
+
+        <div class="row">
+          <div class="form-group col-md-4 col-md-offset-1">
+            <ul class="list-group text-left">
+              <li class="list-group-item">
+                <h4 class="text-center">{% trans 'Athletes' %}: {{ squad.name}}</h4>
+                <ul id="chosen-list" class="list-group list-unstyled list-dragsort">
+                  {% for athlete in squad_athletes %}
+                    <li 
+                      name="athlete_{{ athlete.id }}" 
+                      data-itemidx="{{ athlete.id }}" 
+                      class="list-group-item list-group-item-success">
+                        <h4 class="list-group-item-heading">{{ athlete }} <small>{{ athlete.stream }}</small></h4>
+                        <p class="list-group-item-text">
+                          {% if athlete.club %}{{ athlete.club }}{% endif %}
+                        </p>
+                    </li>
+                  {% endfor %}
+                </ul>
+              </li>
+            </ul>
+          </div>
+
+          <div class="form-group col-md-4">
+            <ul class="list-group text-left">
+              <li class="list-group-item">
+                <h4 class="text-center">{% trans 'Athletes without Squad' %}</h4>
+                <ul id="available-list" class="list-group list-unstyled list-dragsort">
+                  {% for athlete in non_squad_athletes %}
+                    <li 
+                      name="athlete_{{ athlete.id }}" 
+                      data-itemidx="{{ athlete.id }}" 
+                      class="list-group-item list-group-item-default">
+                        <h4 class="list-group-item-heading">{{ athlete }} <small>{{ athlete.stream }}</small></h4>
+                        <p class="list-group-item-text">
+                          {% if athlete.club %}{{ athlete.club }}{% endif %}
+                        </p>
+                    </li>
+                  {% endfor %}
+                </ul>
+              </li>
+            </ul>
+          </div>
+
+          <div class="col-md-2 btn-group-vertical vertical-align-center">
+            <input class="btn btn-primary" type="submit" value="{% trans 'Save' %}"/>
+            <button class="btn btn-default" type="button" onClick="javascript:history.go(-1);">{% trans 'Cancel' %}</button>
+          </div>
+        </div>
+        
+        <input name="chosen_list_order" hidden="hidden">
+      </form>
+
+    </div>
+  </div>
+{% endblock content %}

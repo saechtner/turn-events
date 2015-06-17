@@ -2,6 +2,7 @@ import re
 
 from django.db.models import Sum
 from django.core.urlresolvers import reverse, reverse_lazy
+from django.http import HttpResponseNotAllowed
 from django.shortcuts import redirect, render
 from django.utils.translation import ugettext_lazy
 from django.views import generic
@@ -38,6 +39,40 @@ def detail(request, id, slug):
         'performances_completed': completed_performances(athletes_disciplines_result_dict),
     }
     return render(request, 'gymnastics/squads/detail.html', context)
+
+def assign_athletes(request, id, slug):
+    squad = Squad.objects.get(id=id)
+
+    if request.method == 'GET':
+        squad_athletes = squad.athlete_set.order_by('squad_position') \
+            .select_related('club').select_related('stream')
+        non_squad_athletes = Athlete.objects.filter(squad=None) \
+            .select_related('club').select_related('stream').select_related('team__stream').select_related('squad')
+
+        context = { 
+            'squad': squad,
+            'squad_athletes': squad_athletes,
+            'non_squad_athletes': non_squad_athletes,
+        }
+        return render(request, 'gymnastics/squads/assign_athletes.html', context)
+
+    elif request.method == 'POST':
+        old_squad_athletes = squad.athlete_set.all() \
+            .select_related('squad')
+        for athlete in old_squad_athletes:
+            athlete.squad = None
+            athlete.squad_position = Athlete._meta.get_field('squad_position').default
+            athlete.save()
+
+        new_squad_athletes = [Athlete.objects.get(id=athlete_id) for athlete_id in request.POST['chosen_list_order'].split()]
+        for position, athlete in enumerate(new_squad_athletes):
+            athlete.squad = squad
+            athlete.squad_position = position
+            athlete.save()
+
+        return redirect(reverse('squads.index'))
+
+    return HttpResponseNotAllowed(['GET', 'POST'])
 
 def enter_performances(request, id, slug):        
     squad = Squad.objects.get(id=id)

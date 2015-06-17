@@ -94,7 +94,7 @@
         <div class="col-md-4 text-left">
           <ul id="chosen-list" class="list-inline list-dragsort">
             {% for discipline in stream_disciplines %}
-              <li data-itemidx="{{ discipline.id }}" class="label label-default">
+              <li data-itemidx="{{ discipline.id }}" class="list-group-item list-group-item-info">
                 <div name="discipline_{{ discipline.id }}">{{ discipline }}</div>
               </li>
             {% endfor %}

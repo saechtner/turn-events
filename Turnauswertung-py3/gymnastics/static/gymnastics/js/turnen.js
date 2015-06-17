@@ -1,4 +1,3 @@
-/* Initiate jQuery table sorter */
 jQuery(document).ready(function($) {
 
     /* Initiate LightTable filter */
@@ -24,7 +23,7 @@ jQuery(document).ready(function($) {
         type: 'numeric' 
     }); 
 
-    // intialize the table sorter of table-results-athletes
+    // Intialize the table sorter of table-results-athletes
     var column_count = $("#table-results-athletes").find("tr:first th").length;
     var last_column_index = column_count - 1;
     var headers = {} 
@@ -34,7 +33,7 @@ jQuery(document).ready(function($) {
 
     $("#table-results-athletes").tablesorter({
         // sort on the first column and third column, order asc 
-        sortList: [[last_column_index,0],[0,0]],
+        sortList: [[last_column_index, 0], [0, 0]],
         headers: headers 
     }); 
 
@@ -64,9 +63,9 @@ jQuery(document).ready(function($) {
         dragSelector: "li", 
         dragBetween: true, 
         dragEnd: saveOrder, 
-        placeHolderTemplate: "<li class='label label-default'><div class='placeholder'></div></li>"
+        placeHolderTemplate: "<li class='list-group-item'></li>"
     });
-    
+
     /* Add jquery.dragsort extending click handlers */
     $('#available-list').on('click', 'li', function() {
         $('#chosen-list').append($(this));
@@ -77,6 +76,9 @@ jQuery(document).ready(function($) {
         $('#available-list').append($(this));
         saveOrder();
     });
+
+    // Initial saving of the saveOrder.
+    saveOrder();
 
     /* Vertical scroll handling */
     function scrollResponse(element, transform_value) {

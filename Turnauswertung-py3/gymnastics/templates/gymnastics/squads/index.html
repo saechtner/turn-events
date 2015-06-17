@@ -9,6 +9,7 @@
 {% block nav_links %}{% endblock nav_links %}
 {% block nav_regular_buttons %}
   <a type="button" class="btn btn-default navbar-btn" href="{% url 'squads.new' %}">{% trans "New squad" %}</a>
+
 {% endblock nav_regular_buttons %}
 
 {% block content %}
@@ -29,6 +30,9 @@
               <td>{{ squad.athlete_set.all.count }}</td>
               <td class="text-right">
                 <div class="btn-group" role="group">
+                  <a type="button" class="btn btn-xs btn-default" href="{% url 'squads.assign_athletes' squad.slug squad.id %}">
+                    {% trans "Assign athletes" %}
+                  </a>
                   <a type="button" class="btn btn-xs btn-primary" href="{% url 'squads.enter_performances' squad.slug squad.id %}">
                     {% trans "Enter performances" %}
                   </a>

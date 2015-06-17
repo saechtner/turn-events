@@ -30,12 +30,12 @@ class Athlete(models.Model):
     last_name = models.CharField(ugettext_lazy('Last name'), max_length=50)
     sex = models.CharField(ugettext_lazy('Sex'), max_length=1, choices=(('m', 'male'), ('f', 'female')), default='f')
     date_of_birth = models.DateField(ugettext_lazy('Date of birth'), default='1900-01-01')
-    squad_position = models.IntegerField(default=0, null=True, blank=True)
 
     club = models.ForeignKey('Club', null=True, blank=True, verbose_name=ugettext_lazy('Club'))
     stream = models.ForeignKey('Stream', verbose_name=ugettext_lazy('Stream'))
     team = models.ForeignKey('Team', null=True, blank=True, on_delete=models.SET_NULL, verbose_name=ugettext_lazy('Team'))
     squad = models.ForeignKey('Squad', null=True, blank=True, on_delete=models.SET_NULL, verbose_name=ugettext_lazy('Squad'))
+    squad_position = models.IntegerField(default=-1, null=True, blank=True)
 
     athletes_import = models.ForeignKey('AthletesImport', null=True, blank=True)
 
