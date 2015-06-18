@@ -177,7 +177,13 @@
                           </div>
                           {% block nav_search %}
                             <form class="navbar-form" role="search">
-                              <input type="search" placeholder="{% trans 'Search' %}" class="light-table-filter form-control" data-table="tablefilter" name="table_filter">
+                              <input 
+                                type="search" 
+                                placeholder="{% trans 'Search' %}" 
+                                class="light-filter form-control" 
+                                data-table="tablefilter" 
+                                data-list="list-filter"
+                                name="table_filter">
                             </form>
                           {% endblock nav_search %}
                         </div>

@@ -21,6 +21,9 @@
   </li>
 {% endblock nav_links %}
 {% block nav_regular_buttons %}
+  <a type="button" class="btn btn-default navbar-btn" href="{% url 'squads.assign_athletes' squad.slug squad.id %}">
+    {% trans "Assign athletes" %}
+  </a>
   <a type="button" class="btn btn-primary navbar-btn" href="{% url 'squads.enter_performances' squad.slug squad.id %}">
     {% trans "Enter performances" %}
   </a>

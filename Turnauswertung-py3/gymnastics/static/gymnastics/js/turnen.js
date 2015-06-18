@@ -1,7 +1,7 @@
 jQuery(document).ready(function($) {
 
-    /* Initiate LightTable filter */
-    LightTableFilter.init()
+    /* Initiate Light filters */
+    LightFilter.init()
 
     /* Add jQuery table sorter parser */
     $.tablesorter.addParser({ 

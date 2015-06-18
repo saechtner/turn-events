@@ -16,7 +16,7 @@
   <div class="panel panel-default">
     <div class="panel-body">
       {% if athletes %}
-        <table id="athletes-table" class="table table-condensed table-hover athletes-table">
+        <table id="athletes-table" class="table table-condensed table-hover athletes-table tablefilter">
           {% include "gymnastics/includes/athletes_list.html" with athletes_set=athletes only %}
         </table>
       {% else %}

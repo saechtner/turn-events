@@ -44,7 +44,7 @@
             <ul class="list-group text-left">
               <li class="list-group-item">
                 <h4 class="text-center">{% trans 'Athletes without Squad' %}</h4>
-                <ul id="available-list" class="list-group list-unstyled list-dragsort">
+                <ul id="available-list" class="list-group list-unstyled list-dragsort list-filter">
                   {% for athlete in non_squad_athletes %}
                     <li 
                       name="athlete_{{ athlete.id }}" 
