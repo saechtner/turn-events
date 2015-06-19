@@ -68,27 +68,56 @@
             {% endif %}
           {% endif %}
 
-          <dt>{% trans "Management" %}</dt>
-          <dd>{{ tournament.management }}</dd>
+          {% if tournament.management %}
+            <dt>{% trans "Management" %}</dt>
+            <dd>{{ tournament.management }}</dd>
+          {% endif %}
 
-          <dt>{% trans "Organisation" %}</dt>
-          <dd>{{ tournament.organisation }}</dd>
+          {% if tournament.organisation %}
+            <dt>{% trans "Organisation" %}</dt>
+            <dd>{{ tournament.organisation }}</dd>
+          {% endif %}
 
-          <dt>{% trans "Calculation" %}</dt>
-          <dd>{{ tournament.calculation }}</dd>
+          {% if tournament.calculation %}
+            <dt>{% trans "Calculation" %}</dt>
+            <dd>{{ tournament.calculation }}</dd>
+          {% endif %}
 
-          <dt>{% trans "Technology" %}</dt>
-          <dd>{{ tournament.technology }}</dd>
+          {% if tournament.technology %}
+            <dt>{% trans "Technology" %}</dt>
+            <dd>{{ tournament.technology }}</dd>
+          {% endif %}
 
         </dl>
 
       </div>
 
       <div role="tabpanel" class="tab-pane" id="evaluation">
-      <p><a href="{% url 'tournaments.create_certificates_pdf' %}">{% trans 'Generate certificates pdf' %}</a></p>
-      <p><a href="{{ tournament.get_evaluation_url }}">{% trans 'Generate evaluation pdf' %}</a></p>
-      <p><a href="{{ tournament.get_solo_data_url }}">{% trans 'Generate solo data txt' %}</a></p>
-      <p><a href="{{ tournament.get_team_data_url }}">{% trans 'Generate team data txt' %}</a></p>
+        <div class="col-md-3 col-md-offset-1">
+          <div class="list-group">
+            <a class="list-group-item disabled">{% trans 'Tournament preparation' %}</a>
+                <a class="list-group-item" href="{% url 'squads.create_overview_pdf' %}" target="_blank">
+                  {% trans "Generate squad overview" %}
+                </a>
+                <a class="list-group-item" href="{% url 'squads.create_judge_pdf' %}" target="_blank">
+                  {% trans "Generate judge lists" %}
+                </a>
+            <a class="list-group-item disabled">{% trans 'Tournament evaluation' %}</a>
+            <a class="list-group-item" href="{{ tournament.get_evaluation_url }}" target="_blank">
+              {% trans 'Generate evaluation' %}
+            </a>
+            {% comment %}
+              <a class="list-group-item" href="{% url 'tournaments.create_certificates_pdf' %}" target="_blank">{% trans 'Generate solo certificates' %}</a>
+              <a class="list-group-item" href="{% url 'tournaments.create_certificates_pdf' %}" target="_blank">{% trans 'Generate team certificates' %}</a>
+            {% endcomment %}
+            <a class="list-group-item" href="{{ tournament.get_solo_data_url }}" target="_blank">
+              {% trans 'Generate raw solo data' %}
+            </a>
+            <a class="list-group-item" href="{{ tournament.get_team_data_url }}" target="_blank">
+              {% trans 'Generate raw team data' %}
+            </a>
+          </div>
+        </div>
       </div>
     </div>
   </div>

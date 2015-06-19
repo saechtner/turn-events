@@ -79,7 +79,7 @@ def create_team_data_txt(request, id, slug):
             stream = str(stream)
             total = str(data.get('team_disciplines_result_dict').get(team.id).get('total'))
             rank = str(data.get('team_disciplines_rank_dict').get(team.id).get('total'))
-            athletes = ','.join([str(athlete) for athlete in data.get('team_athletes_dict').get(team.id)])
+            athletes = ', '.join([str(athlete) for athlete in data.get('team_athletes_dict').get(team.id)])
 
             team_line = "\t".join([str(team), total, rank, stream, athletes])
             context = "\n".join([context, team_line])
