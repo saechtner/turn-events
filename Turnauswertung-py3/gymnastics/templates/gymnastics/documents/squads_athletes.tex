@@ -5,8 +5,10 @@
 
 
     \documentclass[a4paper,16pt]{scrartcl}
+    \usepackage[margin=1.25cm]{geometry}
     \usepackage[utf8]{inputenc}
     \usepackage[table]{xcolor}
+    \renewcommand{\familydefault}{\sfdefault}
     \pagestyle{empty}
 
     \definecolor{grey}{rgb}{0.90,0.90,0.90}
@@ -17,8 +19,8 @@
             \begin{tabular}{|l|l|}
                 \multicolumn{2}{c}{\large\bfseries{ {{ squad }}}}\\
                 \hline\rowcolor{grey}\multicolumn{1}{|c|}{\bfseries{ {% trans 'Name' %}}}&\multicolumn{1}{c|}{\bfseries{ {% trans 'Club' %}}}\\\hline
-                {% for athlete in squad.athlete_set.all %}
-                     {{ athlete }}&{{ athlete.club }}\\
+                {% for athlete in squad_athletes_dict|get_item:squad.id %}
+                     {{ athlete }}&{% if athlete.team %}{{ athlete.team }}{% else %}{{ athlete.club }} (E){% endif %}\\
                 {% endfor %}
                 \hline
             \end{tabular}

@@ -136,13 +136,29 @@ def create_judge_pdf(request):
         .prefetch_related('athlete_set') \
         .select_related('athlete_set__stream')
 
-    squad_athletes_dict = { squad.id: squad.athlete_set.order_by('squad_position') for squad in squads }
+    squad_athletes_dict = { 
+        squad.id: squad.athlete_set.order_by('squad_position').select_related('stream') for squad in squads
+    }
+
+    squad_difficulty_indices = { squad.id: {} for squad in squads }
+    for squad in squads:
+        previous_athlete = None
+        athletes_in_stream = 0
+        for athlete in squad_athletes_dict[squad.id]:
+            if previous_athlete and athlete.stream != previous_athlete.stream:
+                squad_difficulty_indices[squad.id][previous_athlete.id] = athletes_in_stream
+                athletes_in_stream = 0
+            athletes_in_stream += 1
+            previous_athlete = athlete
+        squad_difficulty_indices[squad.id][previous_athlete.id] = athletes_in_stream
+
     squad_disciplines_dict = { squad.id: squad.get_disciplines(squad.athlete_set.all()) for squad in squads }
 
     context = {
         'squads': squads,
         'squad_disciplines_dict': squad_disciplines_dict,
         'squad_athletes_dict': squad_athletes_dict,
+        'squad_difficulty_indices': squad_difficulty_indices,
     }
     template_location = 'gymnastics/documents/squads_judges.tex'
     file_name = '{0}_{1}_{2}.pdf'.format(ugettext_lazy('Squads'), ugettext_lazy('Judge'), ugettext_lazy('Lists'))
@@ -151,12 +167,18 @@ def create_judge_pdf(request):
 
 def create_overview_pdf(request):
     squads = Squad.objects.all() \
-        .prefetch_related(Prefetch('athlete_set', queryset=Athlete.objects.order_by('squad_position'))) \
+        .prefetch_related('athlete_set') \
         .select_related('athlete_set__club') \
         .select_related('athlete_set__team')
 
+    squad_athletes_dict = { 
+        squad.id: squad.athlete_set.order_by('squad_position') \
+            .select_related('club').select_related('team__stream')
+        for squad in squads }
+
     context = {
         'squads': squads,
+        'squad_athletes_dict': squad_athletes_dict,
     }
     template_location = 'gymnastics/documents/squads_athletes.tex'
     file_name = '{0}_{1}.pdf'.format(ugettext_lazy('Squads'), ugettext_lazy('Overview'))

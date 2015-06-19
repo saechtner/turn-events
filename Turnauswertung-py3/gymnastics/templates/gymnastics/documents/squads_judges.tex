@@ -8,43 +8,44 @@
     {% load custom_template_tags %}
 
 
-    \documentclass[a4paper,13pt]{scrartcl}
-    \usepackage[a5paper,margin=0.5cm]{geometry}
+    \documentclass[a4paper,16pt]{scrartcl}
+    \usepackage[margin=0.5cm]{geometry}
     \usepackage[utf8]{inputenc}
     \usepackage[none]{hyphenat}
     \usepackage[table]{xcolor}
     \usepackage{hhline}
-    \usepackage{multirow}
+    \usepackage{multirow,graphicx}
+    \renewcommand{\familydefault}{\sfdefault}
     \pagestyle{empty}
 
     \newcommand{\lineheight}{15pt}
-
-
 
     \begin{document}
         \setlength\extrarowheight{3pt}
         \begin{center}
             {% for squad in squads %}
-                {% for discipline in squad_disciplines_dict|get_item:squad.id %}
-                    \begin{tabular}[t]{|p{4.6cm}|*{3}{|p{1.5cm}}||p{1.5cm}|}
-                        \hline\multicolumn{5}{|c|}{\large\bfseries{ {{ squad }}: {{ discipline }}}}\\
-                        \hline&\multicolumn{3}{|c||}{\bfseries{ {% trans 'Judge' %} }}&\\
-                        \hhline{~*{3}{-}~}\multirow{-2}{*}{\bfseries{ {% trans 'Name' %}}}&\multicolumn{1}{|c}{\bfseries{1}}&\multicolumn{1}{|c}{\bfseries{2}}&\multicolumn{1}{|c||}{\bfseries{3}}&\multicolumn{1}{c|}{\multirow{-2}{*}{\bfseries{ {% trans 'Overall' %}}}}\\
-                        \hline
-                        {% for athlete in squad_athletes_dict|get_item:squad.id %}
-                            \hline {{ athlete }}&&&&\\
-                        {% endfor %}
-                            \hline &&&&\\
-                            \hline &&&&\\
-                            \hline &&&&\\
-                        \hline\hline \multicolumn{5}{|c|}{\bfseries{ {% trans "Signature" %}}}\\
-                        \hline\bfseries{ {% trans "Judge" %} 1}&\multicolumn{4}{|c|}{ }\\
-                        \hline\bfseries{ {% trans "Judge" %} 2}&\multicolumn{4}{|c|}{ }\\
-                        \hline\bfseries{ {% trans "Judge" %} 3}&\multicolumn{4}{|c|}{ }\\
-                        \hline
-                    \end{tabular}
-                    \newpage
-                {% endfor %}
+                {% with athletes=squad_athletes_dict|get_item:squad.id difficulty_indices=squad_difficulty_indices|get_item:squad.id %}
+                    {% for discipline in squad_disciplines_dict|get_item:squad.id %}
+                        \begin{tabular}[t]{p{0.5cm}|p{5.6cm}|*{3}{|p{1.75cm}}||p{1.75cm}|}
+                            \hhline{~*{5}{-}}&\multicolumn{5}{|c|}{\large\bfseries{ {{ squad }}: {{ discipline }}}}\\
+                            \hhline{~*{5}{-}}&&\multicolumn{3}{|c||}{\bfseries{ {% trans 'Judge' %} }}&\\
+                            \hhline{~~*{3}{-}~}&\multirow{-2}{*}{\bfseries{ {% trans 'Name' %}}}&\multicolumn{1}{|c}{\bfseries{1}}&\multicolumn{1}{|c}{\bfseries{2}}&\multicolumn{1}{|c||}{\bfseries{3}}&\multicolumn{1}{c|}{\multirow{-2}{*}{\bfseries{ {% trans 'Overall' %}}}}\\
+                            \hhline{*{6}{-}}
+                            {% for athlete in athletes %}
+                                    \multicolumn{1}{|c|}{ {% if difficulty_indices|get_item:athlete.id %}\multirow{-{{ difficulty_indices|get_item:athlete.id }}}{*}{\rotatebox[origin=c]{90}{ {{ athlete.stream.difficulty }}}}{% endif %}}&{{ athlete }}&&&&\\{% if difficulty_indices|get_item:athlete.id %}\hhline{*{6}{-}}{% else %}\hhline{~*{5}{-}}{% endif %}
+                            {% endfor %}
+                                &&&&&\\
+                                \hhline{~*{5}{-}}&&&&&\\
+                                \hhline{~*{5}{-}}&&&&&\\
+                            \hhline{~*{5}{-}}&\multicolumn{5}{|c|}{\bfseries{ {% trans "Signature" %}}}\\
+                            \hhline{~*{5}{-}}&\bfseries{ {% trans "Judge" %} 1}&\multicolumn{4}{|c|}{ }\\
+                            \hhline{~*{5}{-}}&\bfseries{ {% trans "Judge" %} 2}&\multicolumn{4}{|c|}{ }\\
+                            \hhline{~*{5}{-}}&\bfseries{ {% trans "Judge" %} 3}&\multicolumn{4}{|c|}{ }\\
+                            \hhline{~*{5}{-}}
+                        \end{tabular}
+                        \newpage
+                    {% endfor %}
+                {% endwith %}
             {% endfor %}
         \end{center}
     \end{document}
