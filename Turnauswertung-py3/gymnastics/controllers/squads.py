@@ -1,6 +1,6 @@
 import re
 
-from django.db.models import Sum
+from django.db.models import Prefetch, Sum
 from django.core.urlresolvers import reverse, reverse_lazy
 from django.http import HttpResponseNotAllowed
 from django.shortcuts import redirect, render
@@ -19,9 +19,9 @@ def index(request):
 def detail(request, id, slug):
     squad = Squad.objects.get(id=id)
 
-    athletes = squad.athlete_set.all() \
+    athletes = squad.athlete_set.order_by('squad_position') \
         .select_related('club').select_related('stream').select_related('team__stream').select_related('squad') \
-        .prefetch_related('performance_set')
+        .prefetch_related('performance_set')        
     athletes_disciplines_result_dict = athletes.get_athletes_disciplines_result_dict()
 
     streams_distinct = athletes.get_distinct_stream_set()
@@ -78,7 +78,7 @@ def enter_performances(request, id, slug):
     squad = Squad.objects.get(id=id)
 
     #### Athletes ###
-    athletes = squad.athlete_set.all() \
+    athletes = squad.athlete_set.order_by('squad_position') \
         .select_related('club').select_related('stream').select_related('team__stream').select_related('squad') \
         .prefetch_related('performance_set')
 
@@ -136,7 +136,7 @@ def create_judge_pdf(request):
         .prefetch_related('athlete_set') \
         .select_related('athlete_set__stream')
 
-    squad_athletes_dict = { squad.id: squad.athlete_set.all() for squad in squads }
+    squad_athletes_dict = { squad.id: squad.athlete_set.order_by('squad_position') for squad in squads }
     squad_disciplines_dict = { squad.id: squad.get_disciplines(squad.athlete_set.all()) for squad in squads }
 
     context = {
@@ -151,7 +151,7 @@ def create_judge_pdf(request):
 
 def create_overview_pdf(request):
     squads = Squad.objects.all() \
-        .prefetch_related('athlete_set') \
+        .prefetch_related(Prefetch('athlete_set', queryset=Athlete.objects.order_by('squad_position'))) \
         .select_related('athlete_set__club') \
         .select_related('athlete_set__team')
 

@@ -51,7 +51,7 @@ class Stream(models.Model):
         return reverse('streams.delete', kwargs={ 'pk': self.id, 'slug': self.slug })
 
     def get_ordered_disciplines(self):
-        return self.discipline_set.select_related('discipline').order_by('streamdisciplinejoin__position').all()
+        return self.discipline_set.select_related('discipline').order_by('streamdisciplinejoin__position')
 
     def get_athletes_disciplines_result_dict(self, athletes=None):
         if not athletes:

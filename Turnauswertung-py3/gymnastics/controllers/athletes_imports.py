@@ -55,7 +55,7 @@ def _parse_athlete_line(line, club, athletes_import):
     else:
         return None
 
-    stream_name = ''.join(elements[3].split()).upper() # remove all whitespace
+    stream_name = elements[3]
     try:
         stream = Stream.objects.get(difficulty=stream_name, sex=sex)
         if date_of_birth.year < stream.minimum_year_of_birth:

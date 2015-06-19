@@ -22,6 +22,7 @@
           <th>{% trans "Squad" %}</th>
           <th>#{% trans 'Athletes' %}</th>
           <th></th>
+          <th></th>
         </thead>
         <tbody>
           {% for squad in squads %}
@@ -36,6 +37,10 @@
                   <a type="button" class="btn btn-xs btn-primary" href="{% url 'squads.enter_performances' squad.slug squad.id %}">
                     {% trans "Enter performances" %}
                   </a>
+                </div>
+              </td>
+              <td class="text-right">
+                <div class="btn-group" role="group">
                   <a type="button" class="btn btn-xs btn-success" href="{{ squad.get_absolute_url }}">
                     <span class="glyphicon glyphicon-search"></span> {% trans "Detail" %}
                   </a>
