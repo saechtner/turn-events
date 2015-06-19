@@ -4,22 +4,22 @@
     {% load custom_template_tags %}
 
 
-    \documentclass[a4paper,14pt]{scrartcl}
+    \documentclass[a4paper,16pt]{scrartcl}
     \usepackage[utf8]{inputenc}
+    \usepackage[table]{xcolor}
     \pagestyle{empty}
 
+    \definecolor{grey}{rgb}{0.90,0.90,0.90}
+
     \begin{document}
+        \setlength\extrarowheight{2pt}
         {% for squad in squads %}
             \begin{tabular}{|l|l|}
-                \hline\multicolumn{2}{|c|}{ {{ squad }} }\\
-                \hline\multicolumn{1}{|c|}{ {% trans 'Name' %} }&\multicolumn{1}{c|}{ {% trans 'Club' %} }\\
-                \hline
+                \multicolumn{2}{c}{\large\bfseries{ {{ squad }}}}\\
+                \hline\rowcolor{grey}\multicolumn{1}{|c|}{\bfseries{ {% trans 'Name' %}}}&\multicolumn{1}{c|}{\bfseries{ {% trans 'Club' %}}}\\\hline
                 {% for athlete in squad.athlete_set.all %}
-                    \hline {{ athlete }}&{{ athlete.club }}\\
+                     {{ athlete }}&{{ athlete.club }}\\
                 {% endfor %}
-                \hline&\\
-                \hline&\\
-                \hline&\\
                 \hline
             \end{tabular}
             \newpage

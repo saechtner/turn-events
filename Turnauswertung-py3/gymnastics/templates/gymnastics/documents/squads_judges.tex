@@ -8,35 +8,39 @@
     {% load custom_template_tags %}
 
 
-    \documentclass[13pt]{article}
+    \documentclass[a4paper,13pt]{scrartcl}
     \usepackage[a5paper,margin=0.5cm]{geometry}
     \usepackage[utf8]{inputenc}
     \usepackage[none]{hyphenat}
+    \usepackage[table]{xcolor}
+    \usepackage{hhline}
+    \usepackage{multirow}
     \pagestyle{empty}
 
-    \newcommand{\lineheight}{18pt}
+    \newcommand{\lineheight}{15pt}
 
 
 
     \begin{document}
+        \setlength\extrarowheight{3pt}
         \begin{center}
             {% for squad in squads %}
                 {% for discipline in squad_disciplines_dict|get_item:squad.id %}
                     \begin{tabular}[t]{|p{4.6cm}|*{3}{|p{1.5cm}}||p{1.5cm}|}
-                        \hline\multicolumn{5}{|c|}{ {{ squad }}: {{ discipline }} }\\
+                        \hline\multicolumn{5}{|c|}{\large\bfseries{ {{ squad }}: {{ discipline }}}}\\
                         \hline&\multicolumn{3}{|c||}{\bfseries{ {% trans 'Judge' %} }}&\\
-                        \hline\bfseries{ {% trans 'Name' %} }&\multicolumn{1}{|c}{\bfseries{1}}&\multicolumn{1}{|c}{\bfseries{2}}&\multicolumn{1}{|c||}{\bfseries{3}}&\multicolumn{1}{c|}{\bfseries{ {% trans 'Overall' %} }}\\
+                        \hhline{~*{3}{-}~}\multirow{-2}{*}{\bfseries{ {% trans 'Name' %}}}&\multicolumn{1}{|c}{\bfseries{1}}&\multicolumn{1}{|c}{\bfseries{2}}&\multicolumn{1}{|c||}{\bfseries{3}}&\multicolumn{1}{c|}{\multirow{-2}{*}{\bfseries{ {% trans 'Overall' %}}}}\\
                         \hline
                         {% for athlete in squad_athletes_dict|get_item:squad.id %}
-                            \hline \rule{0pt}{\lineheight}{{ athlete }} &&&&\\
+                            \hline {{ athlete }}&&&&\\
                         {% endfor %}
-                            \hline \rule{0pt}{\lineheight}&&&&\\
-                            \hline \rule{0pt}{\lineheight}&&&&\\
-                            \hline \rule{0pt}{\lineheight}&&&&\\
-                        \hline\hline \multicolumn{5}{|c|}{\bfseries{ {% trans "Signature" %} }}\\
-                        \hline\rule{0pt}{\lineheight}\bfseries{ {% trans "Judge" %} 1}&\multicolumn{4}{|c|}{ }\\
-                        \hline\rule{0pt}{\lineheight}\bfseries{ {% trans "Judge" %} 2}&\multicolumn{4}{|c|}{ }\\
-                        \hline\rule{0pt}{\lineheight}\bfseries{ {% trans "Judge" %} 3}&\multicolumn{4}{|c|}{ }\\
+                            \hline &&&&\\
+                            \hline &&&&\\
+                            \hline &&&&\\
+                        \hline\hline \multicolumn{5}{|c|}{\bfseries{ {% trans "Signature" %}}}\\
+                        \hline\bfseries{ {% trans "Judge" %} 1}&\multicolumn{4}{|c|}{ }\\
+                        \hline\bfseries{ {% trans "Judge" %} 2}&\multicolumn{4}{|c|}{ }\\
+                        \hline\bfseries{ {% trans "Judge" %} 3}&\multicolumn{4}{|c|}{ }\\
                         \hline
                     \end{tabular}
                     \newpage
