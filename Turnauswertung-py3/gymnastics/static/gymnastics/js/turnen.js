@@ -81,7 +81,34 @@ jQuery(document).ready(function($) {
     saveOrder();
 
     /* Vertical scroll handling */
-    function scrollResponse(element, transform_value) {
+
+    $(window).scroll(function() {
+        var scroll_limit = 150;
+        var scroll_top = $(this).scrollTop();
+
+        scrollResponsePageHeader(scroll_top, scroll_limit);
+        scrollResponseHorizontalFormButtons(scroll_top, scroll_limit);
+    });
+
+    function scrollResponsePageHeader(scroll_top, scroll_limit) {
+        var page_header_div = $(".page-header:first");
+        var is_locked = page_header_div.hasClass("fixed");
+        var page_header_bg_img = page_header_div.find(".page-header-bg-img:first");
+
+        if (scroll_top == 0) {
+            scrollResponseTransform(page_header_bg_img, null);
+        } else if (scroll_top < scroll_limit) {
+            if (is_locked) {
+                page_header_div.removeClass("fixed");
+            }
+            scrollResponseTransform(page_header_bg_img, scroll_top / 5);
+        } else if (scroll_top >= scroll_limit && !is_locked) {
+            page_header_div.addClass("fixed");
+            scrollResponseTransform(page_header_bg_img, scroll_limit / 5);
+        }
+    }
+    
+    function scrollResponseTransform(element, transform_value) {
         if (transform_value) {
             element.css("transform", "translate3d(0px, " + transform_value + "px, 0px)");
         } else {
@@ -89,25 +116,17 @@ jQuery(document).ready(function($) {
         }
     }
 
-    $(window).scroll(function() {
-        var scroll_limit = 150;
+    function scrollResponseHorizontalFormButtons(scroll_top, scroll_limit) {
+        var default_margin_top = 100
+        var button_group = $('.btn-group-vertical.vertical-align-center')
+        var is_locked = button_group.hasClass("fixed");
 
-        var scroll_top = $(window).scrollTop();
-
-        var page_header_div = $(".page-header:first");
-        var is_locked = page_header_div.hasClass("is-locked");
-        var page_header_bg_img = page_header_div.find(".page-header-bg-img:first");
-
-        if (scroll_top == 0) {
-            scrollResponse(page_header_bg_img, null);
-        } else if (scroll_top < scroll_limit) {
-            if (is_locked) {
-                page_header_div.removeClass("is-locked");
+        if (button_group) {
+            if (!is_locked && scroll_top > scroll_limit) {
+                button_group.addClass("fixed");
+            } else if (is_locked && scroll_top <= scroll_limit) {
+                button_group.removeClass("fixed");
             }
-            scrollResponse(page_header_bg_img, scroll_top/5);
-        } else if (scroll_top >= scroll_limit && !is_locked) {
-            page_header_div.addClass("is-locked");
-            scrollResponse(page_header_bg_img, scroll_limit/5);
         }
-    });
+    }
 });
