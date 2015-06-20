@@ -37,8 +37,8 @@
     \renewcommand\thesection{\arabic{section}.}
     \renewcommand\thesubsection{\thesection\arabic{subsection}.}
     
-    \definecolor{grey}{rgb}{0.60,0.60,0.60}
-    \definecolor{lightgrey}{rgb}{0.90,0.90,0.90}
+    \definecolor{grey}{rgb}{0.70,0.70,0.70}
+    \definecolor{lightgrey}{rgb}{0.95,0.95,0.95}
     \definecolor{yellow}{rgb}{1.0,1.0,0.80}
     \definecolor{white}{rgb}{1.0,1.0,1.0}
 
@@ -126,7 +126,7 @@
             \end{center}
         }
 
-        \newpage\tableofcontents
+        % \newpage\tableofcontents
         \newpage\section{ {% trans 'All around individual' %} }
         {% for stream in streams %}
             {% if stream_athletes_dict|get_item:stream.id %}
@@ -203,7 +203,7 @@
                                 {% endwith %}
                             {% endfor %}
                             {% with team_performances=team_disciplines_result_dict|get_item:team.id team_ranks=team_disciplines_rank_dict|get_item:team.id %}
-                                \rowcolor{yellow}\textbf{ {{ team }}}&
+                                \rowcolor{yellow}\textbf{ {{ team.name }}}&
                                 {% for discipline in disciplines %}\textbf{ {{ team_performances|get_item:discipline.id }}}&{% endfor %}
                                 \multirow{ {{ team_format_dict|get_item:team.id }}}{*}{\textbf{ {{ team_performances|get_item:'total' }}}}&
                                 \multirow{ {{ team_format_dict|get_item:team.id }}}{*}{\textbf{ {{ team_ranks|get_item:'total' }}}}\\

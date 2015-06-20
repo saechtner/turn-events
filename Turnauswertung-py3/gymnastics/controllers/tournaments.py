@@ -53,7 +53,7 @@ def create_solo_data_txt(request, id, slug):
 
     context = "{0}\t{1}\t{2}\t{3}\t{4}\t{5}".format(ugettext_lazy('Club'), ugettext_lazy('Total'), ugettext_lazy('Rank'), ugettext_lazy('Stream'), ugettext_lazy('Last Name'), ugettext_lazy('First Name'))
     for stream in data.get('streams'):
-        for athlete in data.get('stream_athletes_dict').get(stream.id)[:3]:
+        for athlete in [athlete for athlete in data.get('stream_athletes_dict').get(stream.id) if data.get('athlete_disciplines_rank_dict').get(athlete.id).get('total') < 4]:
             first_name = athlete.first_name
             last_name = athlete.last_name
             club = str(athlete.club)
@@ -75,13 +75,13 @@ def create_team_data_txt(request, id, slug):
 
     context = "{0}\t{1}\t{2}\t{3}\t{4}".format(ugettext_lazy('Team'), ugettext_lazy('Total'), ugettext_lazy('Rank'), ugettext_lazy('Stream'), ugettext_lazy('Athletes'))
     for stream in data.get('streams'):
-        for team in data.get('stream_teams_dict').get(stream.id)[:2]:
+        for team in [team for team in data.get('stream_teams_dict').get(stream.id) if data.get('team_disciplines_rank_dict').get(team.id).get('total') < 4]:
             stream = str(stream)
             total = str(data.get('team_disciplines_result_dict').get(team.id).get('total'))
             rank = str(data.get('team_disciplines_rank_dict').get(team.id).get('total'))
             athletes = ', '.join([str(athlete) for athlete in data.get('team_athletes_dict').get(team.id)])
 
-            team_line = "\t".join([str(team), total, rank, stream, athletes])
+            team_line = "\t".join([str(team.name), total, rank, stream, athletes])
             context = "\n".join([context, team_line])
 
     response.write(context)

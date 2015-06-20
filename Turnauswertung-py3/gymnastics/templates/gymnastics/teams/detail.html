@@ -4,7 +4,7 @@
 {% load custom_template_tags %}
 
 {% block nav_level_2 %}
-  {% render_nav_item name=team active=True %}
+  {% render_nav_item name=team.name active=True %}
 {% endblock nav_level_2 %}
 
 {% block content %}
@@ -12,7 +12,7 @@
   <div class="row row-relative">
     <div class="col-md-8">
       <h1>
-        {{ team }} <small>{{ team.athlete_set.all.count }} {% trans "Athletes" %}</small>
+        {{ team.name }} <small>{{ team.athlete_set.all.count }} {% trans "Athletes" %}</small>
       </h1>
     </div>
     <div class="col-md-4 div-pos-bottom-right text-right">

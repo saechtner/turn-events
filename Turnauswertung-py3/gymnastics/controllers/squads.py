@@ -169,7 +169,7 @@ def create_overview_pdf(request):
     squads = Squad.objects.all() \
         .prefetch_related('athlete_set') \
         .select_related('athlete_set__club') \
-        .select_related('athlete_set__team')
+        .select_related('athlete_set__team__stream')
 
     squad_athletes_dict = { 
         squad.id: squad.athlete_set.order_by('squad_position') \

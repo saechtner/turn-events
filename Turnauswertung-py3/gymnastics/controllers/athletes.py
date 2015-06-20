@@ -19,7 +19,7 @@ def index(request):
 
 def detail(request, id, slug):
     athlete = Athlete.objects \
-        .select_related('stream').select_related('team').select_related('club').select_related('squad') \
+        .select_related('stream').select_related('team__stream').select_related('club').select_related('squad') \
         .get(id=id)
 
     disciplines = athlete.stream.get_ordered_disciplines()

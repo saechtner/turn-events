@@ -14,7 +14,7 @@ class Team(models.Model):
         db_table = 'gymnastics_teams'    
 
     def __str__(self):
-        return self.name
+        return '{0} ({1})'.format(self.name, self.stream)
 
     def get_absolute_url(self):
         return reverse('teams.detail', kwargs={ 'id': self.id })

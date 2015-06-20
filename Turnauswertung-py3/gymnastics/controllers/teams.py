@@ -34,7 +34,7 @@ class TeamUpdateView(generic.UpdateView):
 
     def get_success_url(self):
         some_kwargs = self.kwargs
-        return reverse('teams.detail', kwargs = { 'pk' : self.kwargs['pk'] })
+        return reverse('teams.detail', kwargs = { 'id' : self.kwargs['pk'] })
 
 
 class TeamDeleteView(generic.DeleteView):

@@ -4,7 +4,7 @@
 {% load custom_template_tags %}
                   
 {% block nav_level_2 %}
-  {% render_nav_item name=team url_name='teams.detail' url_id=team.id %}
+  {% render_nav_item name=team.name url_name='teams.detail' url_id=team.id %}
 {% endblock nav_level_2 %}
 {% block nav_level_3 %}
   {% render_nav_item name='edit' active=True %}

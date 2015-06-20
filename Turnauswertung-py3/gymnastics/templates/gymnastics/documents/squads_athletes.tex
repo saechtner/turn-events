@@ -20,7 +20,7 @@
                 \multicolumn{2}{c}{\large\bfseries{ {{ squad }}}}\\
                 \hline\rowcolor{grey}\multicolumn{1}{|c|}{\bfseries{ {% trans 'Name' %}}}&\multicolumn{1}{c|}{\bfseries{ {% trans 'Club' %}}}\\\hline
                 {% for athlete in squad_athletes_dict|get_item:squad.id %}
-                     {{ athlete }}&{% if athlete.team %}{{ athlete.team }}{% else %}{{ athlete.club }} (E){% endif %}\\
+                     {{ athlete }}&{% if athlete.team %}{{ athlete.team.name }}{% else %}{{ athlete.club }} (E){% endif %}\\
                 {% endfor %}
                 \hline
             \end{tabular}
