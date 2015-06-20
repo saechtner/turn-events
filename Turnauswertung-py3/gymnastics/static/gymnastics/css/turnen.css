@@ -301,20 +301,28 @@ th.headerSortDown {
   font-size: 100%;
 }
 
-.vertical-align-center {
-  margin-top: 100px;
-}
-
-.vertical-align-center.fixed {
-  text-align: center;
-  margin-top: 0px;
-}
-
-@media (min-width: 1000px) {
-  .vertical-align-center.fixed {
+@media (min-width: 992px) {
+  #btn-group-vertical-align.fixed {
     position: fixed;
     top: 160px;
     width: 156px;
+  }
+}
+
+@media (min-width: 1200px) {
+  #btn-group-vertical-align.fixed {
+    width: 190px;
+
+  }
+}
+
+#btn-group-vertical-align > .btn {
+  width: 50%;
+}
+
+@media (min-width: 992px) {
+  #btn-group-vertical-align > .btn {
+    width: 100%;
   }
 }
 
@@ -392,14 +400,6 @@ th.headerSortDown {
 
 .panel-list-group-item {
   height: 50px;
-}
-
-
-/* RESPONSIVE CSS
--------------------------------------------------- */
-
-@media (min-width: 768px) {
-  
 }
 
 

@@ -129,4 +129,41 @@ jQuery(document).ready(function($) {
             }
         }
     }
+
+    // media query handling with enquire.js
+
+    var vertically_centered_buttons = $("#btn-group-vertical-align")
+
+    enquire.register("screen and (min-width: 992px)", {
+
+        // OPTIONAL
+        // If supplied, triggered when a media query matches.
+        match : function() {
+            vertically_centered_buttons.removeClass('btn-group btn-group-justified')
+            vertically_centered_buttons.addClass('btn-group-vertical')
+        },      
+                                    
+        // OPTIONAL
+        // If supplied, triggered when the media query transitions 
+        // *from a matched state to an unmatched state*.
+        unmatch : function() {
+            vertically_centered_buttons.removeClass('btn-group-vertical')
+            vertically_centered_buttons.addClass('btn-group btn-group-justified')
+        },    
+        
+        // OPTIONAL
+        // If supplied, triggered once, when the handler is registered.
+        setup : function() {},    
+                                    
+        // OPTIONAL, defaults to false
+        // If set to true, defers execution of the setup function 
+        // until the first time the media query is matched
+        deferSetup : true,
+                                    
+        // OPTIONAL
+        // If supplied, triggered when handler is unregistered. 
+        // Place cleanup code here
+        destroy : function() {}
+          
+    });
 });
