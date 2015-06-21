@@ -9,7 +9,7 @@ from django.utils.translation import ugettext_lazy
 from django.views import generic
 
 from gymnastics.models import Club, Tournament, Stream
-from gymnastics.utils import pdf
+from gymnastics.utils import pdf, txt
 
 
 def index(request):
@@ -45,47 +45,60 @@ def create_certificates_pdf(request):
 
     return pdf.create(template_location, context, file_name)
 
-def create_solo_data_txt(request, id, slug):
-    response = HttpResponse(content_type='text')
-    response['Content-Disposition'] = 'attachment; filename="{0}.txt"'.format(ugettext_lazy('solo_data'))
-
+def create_solo_certificate_data_txt(request, id, slug):
     data = Tournament.objects.get(id=id).get_evaluation_data()
 
-    context = "{0}\t{1}\t{2}\t{3}\t{4}\t{5}".format(ugettext_lazy('Club'), ugettext_lazy('Total'), ugettext_lazy('Rank'), ugettext_lazy('Stream'), ugettext_lazy('Last Name'), ugettext_lazy('First Name'))
-    for stream in data.get('streams'):
-        for athlete in [athlete for athlete in data.get('stream_athletes_dict').get(stream.id) if data.get('athlete_disciplines_rank_dict').get(athlete.id).get('total') < 4]:
-            first_name = athlete.first_name
-            last_name = athlete.last_name
-            club = str(athlete.club)
-            stream = str(stream)
-            total = str(data.get('athlete_disciplines_result_dict').get(athlete.id).get('total'))
-            rank = str(data.get('athlete_disciplines_rank_dict').get(athlete.id).get('total'))
+    athletes = [athlete for athlete in sum(data.get('stream_athletes_dict').values(), [])
+                if data.get('athlete_disciplines_rank_dict').get(athlete.id).get('total') < 4]
 
-            athlete_line = "\t".join([club, total, rank, stream, last_name, first_name])
-            context = "\n".join([context, athlete_line])
+    athlete_result_dict = {
+        athlete.id: data.get('athlete_disciplines_result_dict').get(athlete.id).get('total')
+            for athlete in athletes}
 
-    response.write(context)
-    return response
+    athlete_rank_dict = {
+        athlete.id: data.get('athlete_disciplines_rank_dict').get(athlete.id).get('total')
+            for athlete in athletes}
 
-def create_team_data_txt(request, id, slug):
-    response = HttpResponse(content_type='text')
-    response['Content-Disposition'] = 'attachment; filename="{0}.txt"'.format(ugettext_lazy('team_data'))
+    context = {
+        'athletes': athletes,
+        'athlete_result_dict': athlete_result_dict,
+        'athlete_rank_dict': athlete_rank_dict,
+    }
 
+    template_location = 'gymnastics/documents/certificate_data_solo.txt'
+    file_name = '{}.txt'.format(ugettext_lazy('solo_certificate_data'))
+
+    return txt.create(template_location, context, file_name)
+
+def create_team_certificate_data_txt(request, id, slug):
     data = Tournament.objects.get(id=id).get_evaluation_data()
 
-    context = "{0}\t{1}\t{2}\t{3}\t{4}".format(ugettext_lazy('Team'), ugettext_lazy('Total'), ugettext_lazy('Rank'), ugettext_lazy('Stream'), ugettext_lazy('Athletes'))
-    for stream in data.get('streams'):
-        for team in [team for team in data.get('stream_teams_dict').get(stream.id) if data.get('team_disciplines_rank_dict').get(team.id).get('total') < 4]:
-            stream = str(stream)
-            total = str(data.get('team_disciplines_result_dict').get(team.id).get('total'))
-            rank = str(data.get('team_disciplines_rank_dict').get(team.id).get('total'))
-            athletes = ', '.join([str(athlete) for athlete in data.get('team_athletes_dict').get(team.id)])
+    teams = [team for team in sum(data.get('stream_teams_dict').values(), [])
+                if data.get('team_disciplines_rank_dict').get(team.id).get('total') < 4]
 
-            team_line = "\t".join([str(team.name), total, rank, stream, athletes])
-            context = "\n".join([context, team_line])
+    team_result_dict = {
+        team.id: data.get('team_disciplines_result_dict').get(team.id).get('total')
+            for team in teams}
 
-    response.write(context)
-    return response
+    team_rank_dict = {
+        team.id: data.get('team_disciplines_rank_dict').get(team.id).get('total')
+            for team in teams}
+
+    team_athletes_dict = {
+        team.id: (', '.join([str(athlete) for athlete in data.get('team_athletes_dict').get(team.id)]))
+            for team in teams}
+
+    context = {
+        'teams': teams,
+        'team_result_dict': team_result_dict,
+        'team_rank_dict': team_rank_dict,
+        'team_athletes_dict': {},
+    }
+
+    template_location = 'gymnastics/documents/certificate_data_team.txt'
+    file_name = '{}.txt'.format(ugettext_lazy('team_certificate_data'))
+
+    return txt.create(template_location, context, file_name)
 
 def create_evaluation_pdf(request, id, slug):
 
@@ -126,7 +139,7 @@ def create_evaluation_pdf(request, id, slug):
     context['total_athletes'] = sum([len(athlete_list) for athlete_list in stream_athletes_dict.values()])
 
     template_location = 'gymnastics/documents/evaluation.tex'
-    file_name = '{0}.pdf'.format(ugettext_lazy('Evaluation'))
+    file_name = '{}.pdf'.format(ugettext_lazy('Evaluation'))
 
     return pdf.create(template_location, context, file_name)
 

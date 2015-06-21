@@ -110,10 +110,10 @@
               <a class="list-group-item" href="{% url 'tournaments.create_certificates_pdf' %}" target="_blank">{% trans 'Generate solo certificates' %}</a>
               <a class="list-group-item" href="{% url 'tournaments.create_certificates_pdf' %}" target="_blank">{% trans 'Generate team certificates' %}</a>
             {% endcomment %}
-            <a class="list-group-item" href="{{ tournament.get_solo_data_url }}" target="_blank">
+            <a class="list-group-item" href="{{ tournament.get_solo_certificate_data_url }}" target="_blank">
               {% trans 'Generate raw solo data' %}
             </a>
-            <a class="list-group-item" href="{{ tournament.get_team_data_url }}" target="_blank">
+            <a class="list-group-item" href="{{ tournament.get_team_certificate_data_url }}" target="_blank">
               {% trans 'Generate raw team data' %}
             </a>
           </div>
