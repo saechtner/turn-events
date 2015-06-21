@@ -1,0 +1,2 @@
+{% load i18n %}{% load custom_template_tags %}{% trans 'First Name' %}	{% trans 'Last Name' %}	{% trans 'Overall' %}	{% trans 'Rank' %}	{% trans 'Stream' %}	{% trans 'Club' %}{% for athlete in athletes %}
+{{ athlete.first_name }}	{{ athlete.last_name }}    {{ athlete_result_dict|get_item:athlete.id }}	{{ athlete_rank_dict|get_item:athlete.id}}	{{ athlete.stream }}	{{ athlete.club }}{% endfor %}

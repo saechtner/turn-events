@@ -1,0 +1,2 @@
+{% load i18n %}{% load custom_template_tags %}{% trans 'Team' %}	{% trans 'Overall' %} {% trans 'Rank' %}	{% trans 'Stream' %}	{% trans 'Athletes' %}{% for team in teams %}
+{{ team.name }}	{{ team_result_dict|get_item:team.id }}	{{ team_rank_dict|get_item:team.id}}	{{ team.stream }}	{{ team_athletes_dict|get_item:team.id }}{% endfor %}
