@@ -24,12 +24,9 @@ __pycache__
 *.synctex.gz
 *.fdb_latexmk
 *.out
-exercise2/aufg25_linux.tar.gz
-exercise2/aufg25_windows.zip
-exercise2/aufgabenblatt2.pdf
-exercise2/Blatt2.pdf
-exercise2/demo-uebung2.zip
-exercise2/task3.tex.orig
+
+# private folders
+hidden/
 
 # out
 out/

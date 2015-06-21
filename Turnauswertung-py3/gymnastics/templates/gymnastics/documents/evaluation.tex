@@ -45,6 +45,7 @@
     \pagestyle{fancy}
         \fancyhf{} %eigener Seitenstil
         \fancyhead[L]{ {{ tournament.name_full }} \\ {% if tournament.region %} {{ tournament.region }} \\ {% endif %} {% if tournament.address %} {{ tournament.address }},\ {% endif %} {{ tournament.date }} }
+        \fancyhead[R]{ {% trans "Created" %} {% now "SHORT_DATETIME_FORMAT" %}}
         \fancyfoot[C]{- \thepage\ -}
         \renewcommand{\headrulewidth}{0.5pt}
         \renewcommand{\footrulewidth}{0.5pt}
@@ -118,6 +119,7 @@
                 \ \\ \ \\
                 \rowcolors{1}{}{}
                 \begin{tabular}{rl}
+                    {% if host %} {% trans 'Host' %}: & {{ host }}\\ \\{% endif %}
                     {% if tournament.management %} {% trans 'Management' %}: & {{ tournament.management }}\\{% endif %}
                     {% if tournament.organisation %} {% trans 'Organisation' %}: & {{ tournament.organisation }}\\{% endif %}
                     {% if tournament.calculation %} {% trans 'Calculation' %}: & {{ tournament.calculation }}\\{% endif %}
@@ -156,11 +158,11 @@
                         \endlastfoot
                         {% for athlete in stream_athletes_dict|get_item:stream.id %}
                             {% with athlete_performances=athlete_disciplines_result_dict|get_item:athlete.id athlete_ranks=athlete_disciplines_rank_dict|get_item:athlete.id %}
-                                {{ athlete }}&
+                                {% if athlete_ranks|get_item:'total' <= 3%}\textbf{ {{ athlete }}}{% else %}{{ athlete }}{% endif %}&
                                 {{ athlete.club }}&
                                 {% for discipline in disciplines %} {{ athlete_performances|get_item:discipline.id }}&{% endfor %}
                                 {{ athlete_performances|get_item:'total' }}&
-                                {{ athlete_ranks|get_item:'total' }}\\
+                                {% if athlete_ranks|get_item:'total' <= 3%}\textbf{ {{ athlete_ranks|get_item:'total' }}}{% else %}{{ athlete_ranks|get_item:'total' }}{% endif %}\\
                             {% endwith %}
                         {% endfor %}
                     \end{longtable}
