@@ -10,6 +10,9 @@ https://docs.djangoproject.com/en/1.7/ref/settings/
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
+from django.contrib.messages import constants as messages
+from django.utils.translation import ugettext_lazy as _
+
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
 
@@ -54,6 +57,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
 )
 
 ROOT_URLCONF = 'Turnauswertung.urls'
@@ -66,7 +70,7 @@ WSGI_APPLICATION = 'Turnauswertung.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'mysql.connector.django',
+        'ENGINE': 'django.db.backends.mysql',
         'NAME': 'TURNAUSWERTUNG',
         'USER': 'root',
         'PASSWORD': 'root',
@@ -113,11 +117,10 @@ STATIC_URL = '/static/'
 STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
-#    'django.contrib.staticfiles.finders.DefaultStorageFinder',
+    'django.contrib.staticfiles.finders.DefaultStorageFinder',
 )
 
 
-from django.contrib.messages import constants as messages
 MESSAGE_TAGS = {
     messages.ERROR: 'danger'
 }
@@ -128,14 +131,21 @@ LOCALE_PATHS = (
     os.path.join(BASE_DIR, 'gymnastics/locale/'),
 )
 
-from django.utils.translation import ugettext_lazy as _
 LANGUAGES = (
     ('en', _('English')),
     ('de', _('German')),
 )
 
-TEMPLATE_CONTEXT_PROCESSORS = (
-    'django.contrib.auth.context_processors.auth',
-    'django.core.context_processors.i18n',
-    "django.core.context_processors.request",
-)
+TEMPLATES = [
+    {
+        'BACKEND': 'django.template.backends.django.DjangoTemplates',
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
+        'APP_DIRS': True,
+        'OPTIONS': {
+            'context_processors': [
+                'django.contrib.auth.context_processors.auth',
+                'django.template.context_processors.i18n',
+            ],
+        },
+    },
+]
