@@ -1,11 +1,11 @@
-from django.conf.urls import patterns, include, url
+from django.conf.urls import include, url
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
 from gymnastics.controllers import views, athletes, clubs, disciplines, performances, squads, streams, teams, tournaments
 from gymnastics.controllers import athletes_imports
 
-urlpatterns = patterns('',
-    url(r'^$', views.index, name='home'), 
+urlpatterns = [
+    url(r'^$', views.index, name='home'),
 
     url(r'^athletes/?$', athletes.index, name='athletes.index'),
     url(r'^athletes/new$', athletes.AthleteCreateView.as_view(), name='athletes.new'),
@@ -70,4 +70,4 @@ urlpatterns = patterns('',
     url(r'^athletes_imports/new$', athletes_imports.new, name='athletes_imports.new'),
     url(r'^athletes_imports/(?P<id>\d+)$', athletes_imports.detail, name='athletes_imports.detail'),
     url(r'^athletes_imports/(?P<pk>\d+)/delete$', athletes_imports.DeleteView.as_view(), name='athletes_imports.delete'),
-)
+]

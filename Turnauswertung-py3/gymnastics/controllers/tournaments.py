@@ -13,14 +13,15 @@ from gymnastics.utils import pdf, txt
 
 
 def index(request):
-    context = { 'tournaments': Tournament.objects.all().select_related('club')}
+    context = {'tournaments': Tournament.objects.all().select_related('club')}
+    print(request)
     return render(request, 'gymnastics/tournaments/index.html', context)
 
 def main(request):
 
     # TODO: find better solution to handle static constants such as this one
     main_tournament_name = 'KJSS 2015'
-    
+
     try:
         tournament = Tournament.objects.filter(name=main_tournament_name)[0]
         return redirect(tournament.get_absolute_url())
@@ -109,12 +110,12 @@ def create_evaluation_pdf(request, id, slug):
     stream_athletes_dict = context.get('stream_athletes_dict')
     stream_teams_dict = context.get('stream_teams_dict')
     team_athletes_dict = context.get('team_athletes_dict')
-    
+
     teams = sum(stream_teams_dict.values(), [])
     team_format_dict = {team.id: -(len(team_athletes_dict[team.id]) + 1) for team in teams}
 
-    club_stream_athlete_number_dict = { 
-        club.id: 
+    club_stream_athlete_number_dict = {
+        club.id:
             {stream.id: len(set(stream_athletes_dict.get(stream.id, [])) & set(club.athlete_set.all()))
                 for stream in streams}
         for club in clubs}
