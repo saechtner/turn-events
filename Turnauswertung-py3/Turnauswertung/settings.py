@@ -63,6 +63,8 @@ ROOT_URLCONF = 'Turnauswertung.urls'
 
 WSGI_APPLICATION = 'Turnauswertung.wsgi.application'
 
+MEDIA_ROOT = 'static/'
+
 
 # Database
 # https://docs.djangoproject.com/en/1.7/ref/settings/#databases
@@ -127,7 +129,7 @@ MESSAGE_TAGS = {
 
 # Multi-language support
 LOCALE_PATHS = (
-    os.path.join(BASE_DIR, 'gymnastics/locale/'),
+    os.path.join(BASE_DIR, 'locale/'),
 )
 
 LANGUAGES = (
