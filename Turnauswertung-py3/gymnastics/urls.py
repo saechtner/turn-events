@@ -1,8 +1,8 @@
 from django.conf.urls import include, url
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
-from gymnastics.controllers import views, athletes, clubs, disciplines, performances, squads, streams, teams, tournaments
-from gymnastics.controllers import athletes_imports
+from gymnastics.views import views, athletes, clubs, disciplines, performances, squads, streams, teams, tournaments
+from gymnastics.views import athletes_imports
 
 urlpatterns = [
     url(r'^$', views.index, name='home'),
