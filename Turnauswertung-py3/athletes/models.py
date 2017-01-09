@@ -38,7 +38,7 @@ class Athlete(models.Model):
     stream = models.ForeignKey(
         'streams.Stream', verbose_name=ugettext_lazy('Stream'))
     team = models.ForeignKey(
-        'gymnastics.Team', null=True, blank=True, on_delete=models.SET_NULL,
+        'teams.Team', null=True, blank=True, on_delete=models.SET_NULL,
         verbose_name=ugettext_lazy('Team')
     )
     squad = models.ForeignKey(

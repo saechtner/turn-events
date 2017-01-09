@@ -8,7 +8,10 @@ class Club(models.Model):
   
     name = models.CharField(ugettext_lazy('Name'), max_length=50)
 
-    address = models.ForeignKey('gymnastics.Address', null=True, blank=True, verbose_name=ugettext_lazy('Address'))
+    address = models.ForeignKey(
+        'common.Address', null=True, blank=True,
+        verbose_name=ugettext_lazy('Address')
+    )
 
     slug = models.SlugField(max_length=128, blank=True)
 
@@ -24,10 +27,12 @@ class Club(models.Model):
         return super(Club, self).save(*args, **kwargs)
 
     def get_absolute_url(self):
-        return reverse('clubs.detail', kwargs={ 'id': self.id, 'slug': self.slug })
+        return reverse(
+            'clubs.detail', kwargs={'id': self.id, 'slug': self.slug})
 
     def get_edit_url(self):
-        return reverse('clubs.edit', kwargs={ 'pk': self.id, 'slug': self.slug })
+        return reverse('clubs.edit', kwargs={'pk': self.id, 'slug': self.slug})
 
     def get_delete_url(self):
-        return reverse('clubs.delete', kwargs={ 'pk': self.id, 'slug': self.slug })
+        return reverse(
+            'clubs.delete', kwargs={'pk': self.id, 'slug': self.slug})

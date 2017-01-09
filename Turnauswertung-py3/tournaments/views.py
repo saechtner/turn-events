@@ -8,7 +8,7 @@ from django.views import generic
 
 from utils import pdf, txt
 from clubs.models import Club
-from gymnastics.models import Tournament
+from tournaments.models import Tournament
 
 
 def index(request):

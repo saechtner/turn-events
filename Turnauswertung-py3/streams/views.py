@@ -6,7 +6,7 @@ from django.utils.translation import ugettext_lazy
 from django.views import generic
 
 from streams.models import Stream
-from gymnastics.models import Discipline, StreamDisciplineJoin
+from common.models import Discipline, StreamDisciplineJoin
 from utils.dict_operations import completed_performances
 
 

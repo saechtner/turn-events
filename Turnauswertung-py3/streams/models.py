@@ -34,7 +34,7 @@ class Stream(models.Model):
         blank=True, default=True)
 
     discipline_set = models.ManyToManyField(
-        'gymnastics.Discipline', through='gymnastics.StreamDisciplineJoin')
+        'common.Discipline', through='common.StreamDisciplineJoin')
 
     slug = models.SlugField(max_length=127, blank=True)
 
