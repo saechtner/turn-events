@@ -10,4 +10,5 @@ urlpatterns = [
 urlpatterns += i18n_patterns(
     url(r'^$', lambda r: HttpResponseRedirect('gymnastics/')),
     url(r'^gymnastics/', include('gymnastics.urls')),
+    url(r'^athletes/', include('athletes.urls')),
 )

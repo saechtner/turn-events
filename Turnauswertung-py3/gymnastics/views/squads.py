@@ -7,7 +7,8 @@ from django.shortcuts import redirect, render
 from django.utils.translation import ugettext_lazy
 from django.views import generic
 
-from gymnastics.models import Athlete, Discipline, Performance, Squad, Stream
+from athletes.models import Athlete
+from gymnastics.models import Discipline, Performance, Squad, Stream
 from gymnastics.utils import pdf
 from gymnastics.utils.dict_operations import completed_performances
 

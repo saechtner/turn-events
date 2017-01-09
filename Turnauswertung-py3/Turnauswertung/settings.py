@@ -42,6 +42,7 @@ INSTALLED_APPS = (
     'widget_tweaks',
 
     'gymnastics',
+    'athletes',
 
     'debug_toolbar',
 )
