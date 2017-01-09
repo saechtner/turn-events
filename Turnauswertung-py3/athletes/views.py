@@ -12,7 +12,7 @@ from django.views import generic
 from athletes.models import Athlete, AthletesImport
 from clubs.models import Club
 from streams.models import Stream
-from gymnastics.models import Team
+from teams.models import Team
 
 
 def index_athletes(request):

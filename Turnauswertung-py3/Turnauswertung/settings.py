@@ -43,11 +43,14 @@ INSTALLED_APPS = (
 
     'gymnastics',
 
+    'common',
     'athletes',
     'clubs',
     'utils',
     'squads',
     'streams',
+    'teams',
+    'tournaments',
 
     'debug_toolbar',
 )

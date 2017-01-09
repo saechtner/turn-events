@@ -10,7 +10,7 @@ from django.views import generic
 from utils import pdf
 from athletes.models import Athlete
 from squads.models import Squad
-from gymnastics.models import Performance
+from common.models import Performance
 from utils.dict_operations import completed_performances
 
 
