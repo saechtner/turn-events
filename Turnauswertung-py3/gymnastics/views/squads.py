@@ -6,8 +6,8 @@ from django.http import HttpResponseNotAllowed
 from django.shortcuts import redirect, render
 from django.utils.translation import ugettext_lazy
 from django.views import generic
-from gymnastics.utils import pdf
 
+from utils import pdf
 from athletes.models import Athlete
 from gymnastics.models import Performance, Squad
 from utils.dict_operations import completed_performances
@@ -16,6 +16,7 @@ from utils.dict_operations import completed_performances
 def index(request):
     context = { 'squads': Squad.objects.all() }
     return render(request, 'gymnastics/squads/index.html', context)
+
 
 def detail(request, id, slug):
     squad = Squad.objects.get(id=id)
@@ -40,6 +41,7 @@ def detail(request, id, slug):
         'performances_completed': completed_performances(athletes_disciplines_result_dict),
     }
     return render(request, 'gymnastics/squads/detail.html', context)
+
 
 def assign_athletes(request, id, slug):
     squad = Squad.objects.get(id=id)
@@ -75,7 +77,8 @@ def assign_athletes(request, id, slug):
 
     return HttpResponseNotAllowed(['GET', 'POST'])
 
-def enter_performances(request, id, slug):        
+
+def enter_performances(request, id, slug):
     squad = Squad.objects.get(id=id)
 
     #### Athletes ###
@@ -114,6 +117,7 @@ def enter_performances(request, id, slug):
 
     return render(request, 'gymnastics/squads/enter_performances.html', context)
 
+
 def handle_entered_performances(request):
     performances = Performance.objects.all()
 
@@ -131,6 +135,7 @@ def handle_entered_performances(request):
             performance.save()
 
     return redirect(reverse('squads.index'))
+
 
 def create_judge_pdf(request):
     squads = Squad.objects.all() \
@@ -165,6 +170,7 @@ def create_judge_pdf(request):
     file_name = '{0}_{1}_{2}.pdf'.format(ugettext_lazy('Squads'), ugettext_lazy('Judge'), ugettext_lazy('Lists'))
 
     return pdf.create(template_location, context, file_name)
+
 
 def create_overview_pdf(request):
     squads = Squad.objects.all() \
