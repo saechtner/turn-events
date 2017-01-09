@@ -30,3 +30,6 @@ hidden/
 
 # out
 out/
+
+# project files
+.idea/
