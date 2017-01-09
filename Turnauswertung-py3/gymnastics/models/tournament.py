@@ -24,7 +24,7 @@ class Tournament(models.Model):
     technology = models.CharField(ugettext_lazy('Technology'), max_length=128, null=True, blank=True)
     
     address = models.ForeignKey('Address',  null=True, blank=True, verbose_name=ugettext_lazy('Address'))
-    hosting_club = models.ForeignKey('Club', null=True, blank=True, verbose_name=ugettext_lazy('Hosting club'))
+    hosting_club = models.ForeignKey('clubs.Club', null=True, blank=True, verbose_name=ugettext_lazy('Hosting club'))
 
     slug = models.SlugField(max_length=128, blank=True)
 

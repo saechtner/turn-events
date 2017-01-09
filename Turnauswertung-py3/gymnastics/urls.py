@@ -1,15 +1,9 @@
 from django.conf.urls import url
 
-from gymnastics.views import views, clubs, disciplines, performances, squads, streams, teams, tournaments
+from gymnastics.views import views, disciplines, performances, squads, streams, teams, tournaments
 
 urlpatterns = [
     url(r'^$', views.index, name='home'),
-
-    url(r'^clubs/?$', clubs.index, name='clubs.index'),
-    url(r'^clubs/new$', clubs.ClubCreateView.as_view(), name='clubs.new'),
-    url(r'^clubs/(?P<slug>[-\w\d]*)-(?P<id>\d+)$', clubs.detail, name='clubs.detail'),
-    url(r'^clubs/(?P<slug>[-\w\d]*)-(?P<pk>\d+)/edit$', clubs.ClubUpdateView.as_view(), name='clubs.edit'),
-    url(r'^clubs/(?P<slug>[-\w\d]*)-(?P<pk>\d+)/delete$', clubs.ClubDeleteView.as_view(), name='clubs.delete'),
 
     url(r'^disciplines/?$', disciplines.index, name='disciplines.index'),
     url(r'^disciplines/new$', disciplines.DisciplineCreateView.as_view(), name='disciplines.new'),

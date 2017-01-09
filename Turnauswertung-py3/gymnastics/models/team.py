@@ -5,9 +5,11 @@ from django.utils.translation import ugettext_lazy
 
 class Team(models.Model):
   
-    name = models.CharField(ugettext_lazy('Name') ,max_length=128, null=False)
+    name = models.CharField(ugettext_lazy('Name'), max_length=128, null=False)
 
-    club = models.ForeignKey('Club', null=True, blank=True, verbose_name=ugettext_lazy('Club'))
+    club = models.ForeignKey(
+        'clubs.Club', null=True, blank=True, verbose_name=ugettext_lazy('Club')
+    )
     stream = models.ForeignKey('Stream', verbose_name=ugettext_lazy('Stream'))
 
     class Meta:

@@ -10,7 +10,8 @@ from django.shortcuts import redirect, render
 from django.views import generic
 
 from athletes.models import Athlete, AthletesImport
-from gymnastics.models import Club, Stream, Team
+from clubs.models import Club
+from gymnastics.models import Stream, Team
 
 
 def index_athletes(request):
