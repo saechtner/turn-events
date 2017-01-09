@@ -1,12 +1,12 @@
 from django.contrib import messages
-from django.core.urlresolvers import reverse, reverse_lazy
+from django.core.urlresolvers import reverse_lazy
 from django.http import HttpResponseNotAllowed
 from django.shortcuts import redirect, render
 from django.utils.translation import ugettext_lazy
 from django.views import generic
 
 from gymnastics.models import Stream, Discipline, StreamDisciplineJoin
-from gymnastics.utils.dict_operations import completed_performances
+from utils.dict_operations import completed_performances
 
 
 def index(request):

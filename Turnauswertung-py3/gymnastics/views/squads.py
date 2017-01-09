@@ -1,16 +1,16 @@
 import re
 
-from django.db.models import Prefetch, Sum
 from django.core.urlresolvers import reverse, reverse_lazy
+from django.db.models import Sum
 from django.http import HttpResponseNotAllowed
 from django.shortcuts import redirect, render
 from django.utils.translation import ugettext_lazy
 from django.views import generic
+from gymnastics.utils import pdf
 
 from athletes.models import Athlete
-from gymnastics.models import Discipline, Performance, Squad, Stream
-from gymnastics.utils import pdf
-from gymnastics.utils.dict_operations import completed_performances
+from gymnastics.models import Performance, Squad
+from utils.dict_operations import completed_performances
 
 
 def index(request):
