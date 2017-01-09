@@ -5,8 +5,6 @@ from django.db import models
 from django.utils.text import slugify
 from django.utils.translation import ugettext_lazy
 
-from gymnastics.models.discipline import Discipline
-
 
 class Stream(models.Model):
   
@@ -29,8 +27,7 @@ class Stream(models.Model):
 
     slug = models.SlugField(max_length=127, blank=True)
 
-
-    class Meta:
+    class Meta(object):
         db_table = 'gymnastics_streams'
         
     def __str__(self):
@@ -51,12 +48,13 @@ class Stream(models.Model):
         return reverse('streams.delete', kwargs={ 'pk': self.id, 'slug': self.slug })
 
     def get_ordered_disciplines(self):
-        return self.discipline_set.select_related('discipline').order_by('streamdisciplinejoin__position')
+        return self.discipline_set.order_by('streamdisciplinejoin__position')
 
     def get_athletes_disciplines_result_dict(self, athletes=None):
         if not athletes:
-            athletes = self.athlete_set.all() \
-                .prefetch_related('performance_set')
+            athletes = self.athlete_set.prefetch_related(
+                'performance_set'
+            ).all()
         return athletes.get_athletes_disciplines_result_dict()
 
     def get_athletes_disciplines_rank_dict(self, athletes_disciplines_result_dict=None):
