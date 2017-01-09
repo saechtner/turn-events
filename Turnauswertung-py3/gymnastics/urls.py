@@ -1,18 +1,9 @@
-from django.conf.urls import include, url
-from django.contrib.staticfiles.urls import staticfiles_urlpatterns
+from django.conf.urls import url
 
-from gymnastics.views import views, athletes, clubs, disciplines, performances, squads, streams, teams, tournaments
-from gymnastics.views import athletes_imports
+from gymnastics.views import views, clubs, disciplines, performances, squads, streams, teams, tournaments
 
 urlpatterns = [
     url(r'^$', views.index, name='home'),
-
-    url(r'^athletes/?$', athletes.index, name='athletes.index'),
-    url(r'^athletes/new$', athletes.AthleteCreateView.as_view(), name='athletes.new'),
-    url(r'^athletes/results$', athletes.results, name='athletes.results'),
-    url(r'^athletes/(?P<slug>[-\w\d]*)-(?P<id>\d+)$', athletes.detail, name='athletes.detail'),
-    url(r'^athletes/(?P<slug>[-\w\d]*)-(?P<pk>\d+)/edit$', athletes.AthleteUpdateView.as_view(), name='athletes.edit'),
-    url(r'^athletes/(?P<slug>[-\w\d]*)-(?P<pk>\d+)/delete$', athletes.AthleteDeleteView.as_view(), name='athletes.delete'),
 
     url(r'^clubs/?$', clubs.index, name='clubs.index'),
     url(r'^clubs/new$', clubs.ClubCreateView.as_view(), name='clubs.new'),
@@ -65,9 +56,4 @@ urlpatterns = [
     url(r'^tournaments/(?P<slug>[-\w\d]*)-(?P<id>\d+)$', tournaments.detail, name='tournaments.detail'),
     url(r'^tournaments/(?P<slug>[-\w\d]*)-(?P<pk>\d+)/edit$', tournaments.TournamentUpdateView.as_view(), name='tournaments.edit'),
     url(r'^tournaments/(?P<slug>[-\w\d]*)-(?P<pk>\d+)/delete$', tournaments.TournamentDeleteView.as_view(), name='tournaments.delete'),
-
-    url(r'^athletes_imports/?$', athletes_imports.index, name='athletes_imports.index'),
-    url(r'^athletes_imports/new$', athletes_imports.new, name='athletes_imports.new'),
-    url(r'^athletes_imports/(?P<id>\d+)$', athletes_imports.detail, name='athletes_imports.detail'),
-    url(r'^athletes_imports/(?P<pk>\d+)/delete$', athletes_imports.DeleteView.as_view(), name='athletes_imports.delete'),
 ]

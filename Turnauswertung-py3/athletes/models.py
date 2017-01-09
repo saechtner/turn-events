@@ -11,7 +11,7 @@ class AthleteQuerySet(models.QuerySet):
 
     def get_athletes_disciplines_result_dict(self):
         athletes_disciplines_result_dict = { athlete.id: athlete.get_disciplines_result_dict() for athlete in self }
-        
+
         for athlete in self:
             athletes_disciplines_result_dict[athlete.id]['total'] = athlete.get_all_around_result()
 
@@ -25,16 +25,16 @@ class AthleteManager(models.Manager):
 
 
 class Athlete(models.Model):
-  
+
     first_name = models.CharField(ugettext_lazy('First name'), max_length=50)
     last_name = models.CharField(ugettext_lazy('Last name'), max_length=50)
     sex = models.CharField(ugettext_lazy('Sex'), max_length=1, choices=(('m', 'male'), ('f', 'female')), default='f')
     date_of_birth = models.DateField(ugettext_lazy('Date of birth'), default='1900-01-01')
 
-    club = models.ForeignKey('Club', null=True, blank=True, verbose_name=ugettext_lazy('Club'))
-    stream = models.ForeignKey('Stream', verbose_name=ugettext_lazy('Stream'))
-    team = models.ForeignKey('Team', null=True, blank=True, on_delete=models.SET_NULL, verbose_name=ugettext_lazy('Team'))
-    squad = models.ForeignKey('Squad', null=True, blank=True, on_delete=models.SET_NULL, verbose_name=ugettext_lazy('Squad'))
+    club = models.ForeignKey('gymnastics.Club', null=True, blank=True, verbose_name=ugettext_lazy('Club'))
+    stream = models.ForeignKey('gymnastics.Stream', verbose_name=ugettext_lazy('Stream'))
+    team = models.ForeignKey('gymnastics.Team', null=True, blank=True, on_delete=models.SET_NULL, verbose_name=ugettext_lazy('Team'))
+    squad = models.ForeignKey('gymnastics.Squad', null=True, blank=True, on_delete=models.SET_NULL, verbose_name=ugettext_lazy('Squad'))
     squad_position = models.IntegerField(default=-1, null=True, blank=True)
 
     athletes_import = models.ForeignKey('AthletesImport', null=True, blank=True)
@@ -83,3 +83,18 @@ class Athlete(models.Model):
         if x != None:
             total += x
         return total
+
+
+class AthletesImport(models.Model):
+
+    # TODO:: add field created_at(datetime) as attribute to describe an import
+
+    # name = models.CharField(max_length=50, null=False)
+
+    club = models.OneToOneField('gymnastics.Club', null=True, blank=True, on_delete=models.SET_NULL, verbose_name=ugettext_lazy('Club'))
+
+    class Meta:
+        db_table = 'gymnastics_athletes_imports'
+
+    def __str__(self):
+        return '{0} #{1}'.format(ugettext_lazy('Athletes Import'), self.id)
