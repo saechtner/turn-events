@@ -1,12 +1,10 @@
-import operator
-
 from django.db import models
-from django.utils.translation import ugettext_lazy
+
 
 class StreamDisciplineJoin(models.Model):
     position = models.IntegerField(null=True)
     
-    stream = models.ForeignKey('Stream')
+    stream = models.ForeignKey('streams.Stream')
     discipline = models.ForeignKey('Discipline')
 
     class Meta:

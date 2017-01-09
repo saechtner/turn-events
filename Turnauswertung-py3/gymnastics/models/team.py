@@ -10,7 +10,8 @@ class Team(models.Model):
     club = models.ForeignKey(
         'clubs.Club', null=True, blank=True, verbose_name=ugettext_lazy('Club')
     )
-    stream = models.ForeignKey('Stream', verbose_name=ugettext_lazy('Stream'))
+    stream = models.ForeignKey(
+        'streams.Stream', verbose_name=ugettext_lazy('Stream'))
 
     class Meta:
         db_table = 'gymnastics_teams'    
