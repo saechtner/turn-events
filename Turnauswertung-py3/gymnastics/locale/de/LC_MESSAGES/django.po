@@ -25,7 +25,7 @@ msgstr "Englisch"
 msgid "German"
 msgstr "Deutsch"
 
-#: gymnastics/controllers/squads.py:164 gymnastics/controllers/squads.py:184
+#: gymnastics/views/squads.py:164 gymnastics/views/squads.py:184
 #: gymnastics/templates/gymnastics/base.html:51
 #: gymnastics/templates/gymnastics/base.html:65
 #: gymnastics/templates/gymnastics/process.html:139
@@ -36,47 +36,47 @@ msgstr "Deutsch"
 msgid "Squads"
 msgstr "Riegen"
 
-#: gymnastics/controllers/squads.py:164
+#: gymnastics/views/squads.py:164
 msgid "Judge"
 msgstr "Kampfrichter"
 
-#: gymnastics/controllers/squads.py:164
+#: gymnastics/views/squads.py:164
 msgid "Lists"
 msgstr "Listen"
 
-#: gymnastics/controllers/squads.py:184
+#: gymnastics/views/squads.py:184
 msgid "Overview"
 msgstr "Übersicht"
 
-#: gymnastics/controllers/streams.py:73
+#: gymnastics/views/streams.py:73
 msgid "Error: At least one discipline was not found."
 msgstr "Fehler: Wenigstens ein Gerät wurde nicht gefunden."
 
-#: gymnastics/controllers/streams.py:79
+#: gymnastics/views/streams.py:79
 msgid "Error: There is no difficulty given."
 msgstr "Fehler: Es wurde keine Schwierigkeit eingegeben."
 
-#: gymnastics/controllers/streams.py:118
+#: gymnastics/views/streams.py:118
 msgid "Error: Unknown method."
 msgstr "Fehler: Unbekannte Funktion"
 
-#: gymnastics/controllers/tournaments.py:44
+#: gymnastics/views/tournaments.py:44
 msgid "Certificates"
 msgstr "Urkunden"
 
-#: gymnastics/controllers/tournaments.py:69
+#: gymnastics/views/tournaments.py:69
 #, fuzzy
 #| msgid "Certificates"
 msgid "solo_certificate_data"
 msgstr "Urkunden"
 
-#: gymnastics/controllers/tournaments.py:99
+#: gymnastics/views/tournaments.py:99
 #, fuzzy
 #| msgid "Certificates"
 msgid "team_certificate_data"
 msgstr "Urkunden"
 
-#: gymnastics/controllers/tournaments.py:142
+#: gymnastics/views/tournaments.py:142
 #: gymnastics/templates/gymnastics/base.html:99
 #: gymnastics/templates/gymnastics/process.html:147
 #: gymnastics/templates/gymnastics/tournaments/detail.html:16
