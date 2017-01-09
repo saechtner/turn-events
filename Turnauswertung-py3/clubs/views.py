@@ -1,9 +1,9 @@
 from django.contrib.messages.views import SuccessMessageMixin
-from django.core.urlresolvers import reverse, reverse_lazy
+from django.core.urlresolvers import reverse_lazy
 from django.shortcuts import render
 from django.views import generic
 
-from gymnastics.models.club import Club
+from clubs.models import Club
 
 
 def index(request):
@@ -12,6 +12,7 @@ def index(request):
             .prefetch_related('athlete_set')
     }
     return render(request, 'gymnastics/clubs/index.html', context)
+
 
 def detail(request, id, slug):
     # Club

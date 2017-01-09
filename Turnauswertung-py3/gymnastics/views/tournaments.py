@@ -7,7 +7,8 @@ from django.utils.translation import ugettext_lazy
 from django.views import generic
 
 from utils import pdf, txt
-from gymnastics.models import Club, Tournament
+from clubs.models import Club
+from gymnastics.models import Tournament
 
 
 def index(request):
@@ -15,8 +16,8 @@ def index(request):
     print(request)
     return render(request, 'gymnastics/tournaments/index.html', context)
 
-def main(request):
 
+def main(request):
     # TODO: find better solution to handle static constants such as this one
     main_tournament_name = 'KJSS 2015'
 
@@ -28,10 +29,12 @@ def main(request):
 
     return redirect(reverse('tournaments.index'))
 
+
 def detail(request, id, slug):
     tournament = Tournament.objects.get(id=id)
     context = { 'tournament': tournament }
     return render(request, 'gymnastics/tournaments/detail.html', context)
+
 
 def create_certificates_pdf(request):
     # squads = Squad.objects.all().prefetch_related('athlete_set').select_related('athlete_set__club')
@@ -43,6 +46,7 @@ def create_certificates_pdf(request):
     file_name = 'filename={0}.pdf'.format(ugettext_lazy('Certificates'))
 
     return pdf.create(template_location, context, file_name)
+
 
 def create_solo_certificate_data_txt(request, id, slug):
     data = Tournament.objects.get(id=id).get_evaluation_data()
@@ -68,6 +72,7 @@ def create_solo_certificate_data_txt(request, id, slug):
     file_name = '{}.txt'.format(ugettext_lazy('solo_certificate_data'))
 
     return txt.create(template_location, context, file_name)
+
 
 def create_team_certificate_data_txt(request, id, slug):
     data = Tournament.objects.get(id=id).get_evaluation_data()
@@ -98,6 +103,7 @@ def create_team_certificate_data_txt(request, id, slug):
     file_name = '{}.txt'.format(ugettext_lazy('team_certificate_data'))
 
     return txt.create(template_location, context, file_name)
+
 
 def create_evaluation_pdf(request, id, slug):
 
@@ -141,7 +147,6 @@ def create_evaluation_pdf(request, id, slug):
     file_name = '{}.pdf'.format(ugettext_lazy('Evaluation'))
 
     return pdf.create(template_location, context, file_name)
-
 
 
 class TournamentCreateView(generic.CreateView):

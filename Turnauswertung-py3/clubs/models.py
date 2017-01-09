@@ -8,7 +8,7 @@ class Club(models.Model):
   
     name = models.CharField(ugettext_lazy('Name'), max_length=50)
 
-    address = models.ForeignKey('Address', null=True, blank=True, verbose_name=ugettext_lazy('Address'))
+    address = models.ForeignKey('gymnastics.Address', null=True, blank=True, verbose_name=ugettext_lazy('Address'))
 
     slug = models.SlugField(max_length=128, blank=True)
 

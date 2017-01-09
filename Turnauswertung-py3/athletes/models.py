@@ -29,12 +29,22 @@ class Athlete(models.Model):
     first_name = models.CharField(ugettext_lazy('First name'), max_length=50)
     last_name = models.CharField(ugettext_lazy('Last name'), max_length=50)
     sex = models.CharField(ugettext_lazy('Sex'), max_length=1, choices=(('m', 'male'), ('f', 'female')), default='f')
-    date_of_birth = models.DateField(ugettext_lazy('Date of birth'), default='1900-01-01')
+    date_of_birth = models.DateField(
+        ugettext_lazy('Date of birth'), default='1900-01-01')
 
-    club = models.ForeignKey('gymnastics.Club', null=True, blank=True, verbose_name=ugettext_lazy('Club'))
-    stream = models.ForeignKey('gymnastics.Stream', verbose_name=ugettext_lazy('Stream'))
-    team = models.ForeignKey('gymnastics.Team', null=True, blank=True, on_delete=models.SET_NULL, verbose_name=ugettext_lazy('Team'))
-    squad = models.ForeignKey('gymnastics.Squad', null=True, blank=True, on_delete=models.SET_NULL, verbose_name=ugettext_lazy('Squad'))
+    club = models.ForeignKey(
+        'clubs.Club', null=True, blank=True, verbose_name=ugettext_lazy('Club')
+    )
+    stream = models.ForeignKey(
+        'gymnastics.Stream', verbose_name=ugettext_lazy('Stream'))
+    team = models.ForeignKey(
+        'gymnastics.Team', null=True, blank=True, on_delete=models.SET_NULL,
+        verbose_name=ugettext_lazy('Team')
+    )
+    squad = models.ForeignKey(
+        'gymnastics.Squad', null=True, blank=True, on_delete=models.SET_NULL,
+        verbose_name=ugettext_lazy('Squad')
+    )
     squad_position = models.IntegerField(default=-1, null=True, blank=True)
 
     athletes_import = models.ForeignKey('AthletesImport', null=True, blank=True)
@@ -73,7 +83,6 @@ class Athlete(models.Model):
         results_sorted = sorted((perf.value for perf in self.performance_set.all()), reverse=True)
         return sum(results_sorted[:self.stream.all_around_individual_counting_events])
 
-
     # TODO:: rework!
     def final_total(self, discipline):
         total = 0
@@ -91,7 +100,7 @@ class AthletesImport(models.Model):
 
     # name = models.CharField(max_length=50, null=False)
 
-    club = models.OneToOneField('gymnastics.Club', null=True, blank=True, on_delete=models.SET_NULL, verbose_name=ugettext_lazy('Club'))
+    club = models.OneToOneField('clubs.Club', null=True, blank=True, on_delete=models.SET_NULL, verbose_name=ugettext_lazy('Club'))
 
     class Meta:
         db_table = 'gymnastics_athletes_imports'

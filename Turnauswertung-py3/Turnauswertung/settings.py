@@ -41,9 +41,11 @@ INSTALLED_APPS = (
     'bootstrap3',
     'widget_tweaks',
 
-    'utils',
     'gymnastics',
+
     'athletes',
+    'clubs',
+    'utils',
 
     'debug_toolbar',
 )
