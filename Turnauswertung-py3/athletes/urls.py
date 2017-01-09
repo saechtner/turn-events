@@ -3,7 +3,7 @@ from django.conf.urls import url
 from athletes import views
 
 urlpatterns = [
-    url(r'^/?$', views.index_athletes, name='athletes.index'),
+    url(r'^$', views.index_athletes, name='athletes.index'),
     url(r'^new$', views.AthleteCreateView.as_view(), name='athletes.new'),
     url(r'^results$', views.results, name='athletes.results'),
     url(r'^(?P<slug>[-\w\d]*)-(?P<id>\d+)$',
