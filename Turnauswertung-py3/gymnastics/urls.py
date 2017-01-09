@@ -1,6 +1,6 @@
 from django.conf.urls import url
 
-from gymnastics.views import views, disciplines, performances, squads, streams, teams, tournaments
+from gymnastics.views import views, disciplines, performances, streams, teams, tournaments
 
 urlpatterns = [
     url(r'^$', views.index, name='home'),
@@ -16,17 +16,6 @@ urlpatterns = [
     url(r'^performances/(?P<pk>\d+)$', performances.PerformanceDetailView.as_view(), name='performances.detail'),
     url(r'^performances/(?P<pk>\d+)/edit$', performances.PerformanceUpdateView.as_view(), name='performances.edit'),
     url(r'^performances/(?P<pk>\d+)/delete$', performances.PerformanceDeleteView.as_view(), name='performances.delete'),
-
-    url(r'^squads/?$', squads.index, name='squads.index'),
-    url(r'^squads/judge\.pdf$', squads.create_judge_pdf, name='squads.create_judge_pdf'),
-    url(r'^squads/overview\.pdf$', squads.create_overview_pdf, name='squads.create_overview_pdf'),
-    url(r'^squads/handle_entered_performances$', squads.handle_entered_performances, name='squads.handle_entered_performances'),
-    url(r'^squads/new$', squads.SquadCreateView.as_view(), name='squads.new'),
-    url(r'^squads/(?P<slug>[-\w\d]*)-(?P<id>\d+)$', squads.detail, name='squads.detail'),
-    url(r'^squads/(?P<slug>[-\w\d]*)-(?P<pk>\d+)/edit$', squads.SquadUpdateView.as_view(), name='squads.edit'),
-    url(r'^squads/(?P<slug>[-\w\d]*)-(?P<id>\d+)/assign_athletes$', squads.assign_athletes, name='squads.assign_athletes'),
-    url(r'^squads/(?P<slug>[-\w\d]*)-(?P<id>\d+)/enter_performances$', squads.enter_performances, name='squads.enter_performances'),
-    url(r'^squads/(?P<slug>[-\w\d]*)-(?P<pk>\d+)/delete$', squads.SquadDeleteView.as_view(), name='squads.delete'),
 
     url(r'^streams/?$', streams.index, name='streams.index'),
     url(r'^streams/new$', streams.new, name='streams.new'),

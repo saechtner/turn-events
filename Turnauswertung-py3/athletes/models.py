@@ -42,7 +42,7 @@ class Athlete(models.Model):
         verbose_name=ugettext_lazy('Team')
     )
     squad = models.ForeignKey(
-        'gymnastics.Squad', null=True, blank=True, on_delete=models.SET_NULL,
+        'squads.Squad', null=True, blank=True, on_delete=models.SET_NULL,
         verbose_name=ugettext_lazy('Squad')
     )
     squad_position = models.IntegerField(default=-1, null=True, blank=True)

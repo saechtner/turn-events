@@ -14,4 +14,5 @@ urlpatterns += i18n_patterns(
 
     url(r'^athletes/', include('athletes.urls')),
     url(r'^clubs/', include('clubs.urls')),
+    url(r'^squads/', include('squads.urls')),
 )
