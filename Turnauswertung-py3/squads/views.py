@@ -9,12 +9,13 @@ from django.views import generic
 
 from utils import pdf
 from athletes.models import Athlete
-from gymnastics.models import Performance, Squad
+from squads.models import Squad
+from gymnastics.models import Performance
 from utils.dict_operations import completed_performances
 
 
 def index(request):
-    context = { 'squads': Squad.objects.all() }
+    context = {'squads': Squad.objects.all()}
     return render(request, 'gymnastics/squads/index.html', context)
 
 
