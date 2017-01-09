@@ -13,9 +13,6 @@ class Team(models.Model):
     stream = models.ForeignKey(
         'streams.Stream', verbose_name=ugettext_lazy('Stream'))
 
-    class Meta:
-        db_table = 'gymnastics_teams'    
-
     def __str__(self):
         return '{0} ({1})'.format(self.name, self.stream)
 

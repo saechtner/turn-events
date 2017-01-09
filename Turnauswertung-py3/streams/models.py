@@ -38,9 +38,6 @@ class Stream(models.Model):
 
     slug = models.SlugField(max_length=127, blank=True)
 
-    class Meta(object):
-        db_table = 'gymnastics_streams'
-        
     def __str__(self):
         return "{0} {1}".format(self.difficulty, self.get_sex_display())
 
@@ -50,13 +47,16 @@ class Stream(models.Model):
         return super(Stream, self).save(*args, **kwargs)
 
     def get_absolute_url(self):
-        return reverse('streams.detail', kwargs={ 'id': self.id, 'slug': self.slug })
+        return reverse(
+            'streams.detail', kwargs={'id': self.id, 'slug': self.slug})
 
     def get_edit_url(self):
-        return reverse('streams.edit', kwargs={ 'id': self.id, 'slug': self.slug })
+        return reverse(
+            'streams.edit', kwargs={'id': self.id, 'slug': self.slug})
 
     def get_delete_url(self):
-        return reverse('streams.delete', kwargs={ 'pk': self.id, 'slug': self.slug })
+        return reverse(
+            'streams.delete', kwargs={'pk': self.id, 'slug': self.slug})
 
     def get_ordered_disciplines(self):
         return self.discipline_set.order_by('streamdisciplinejoin__position')

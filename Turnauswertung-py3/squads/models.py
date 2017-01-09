@@ -12,9 +12,6 @@ class Squad(models.Model):
 
     slug = models.SlugField(max_length=128, blank=True)
 
-    class Meta:
-        db_table = 'gymnastics_squads'
-
     def __str__(self):
         return self.name
 
