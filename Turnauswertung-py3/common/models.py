@@ -20,8 +20,7 @@ class Performance(models.Model):
     discipline = models.ForeignKey(
         'Discipline', verbose_name=ugettext_lazy('Discipline'))
 
-    class Meta(object):
-        db_table = 'gymnastics_performances'
+    class Meta:
         unique_together = (("athlete", "discipline"), )
 
     def __str__(self):
@@ -34,9 +33,6 @@ class Discipline(models.Model):
     name = models.CharField(ugettext_lazy('Name'), max_length=50, null=False)
 
     slug = models.SlugField(max_length=128, blank=True)
-
-    class Meta:
-        db_table = 'gymnastics_disciplines'
 
     def __str__(self):
         return self.name
@@ -66,9 +62,6 @@ class Address(models.Model):
     province = models.CharField(ugettext_lazy('Province'), max_length=128)
     zip_code = models.CharField(ugettext_lazy('Zip code'), max_length=10)
 
-    class Meta:
-        db_table = 'gymnastics_addresses'
-
     @property
     def address_formatted(self):
         return '{0}\n{1} {2}\n{3}'.format(self.street, self.zip_code, self.city, self.province)
@@ -81,7 +74,6 @@ class StreamDisciplineJoin(models.Model):
     discipline = models.ForeignKey('Discipline')
 
     class Meta:
-        db_table = 'gymnastics_stream_discipline_joins'
         ordering = ['position']
 
     def __str__(self):
