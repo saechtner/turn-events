@@ -1,6 +1,6 @@
 from django.conf.urls import url
 
-from gymnastics.views import views, disciplines, performances, streams, teams, tournaments
+from gymnastics.views import views, disciplines, performances, teams, tournaments
 
 urlpatterns = [
     url(r'^$', views.index, name='home'),
@@ -16,12 +16,6 @@ urlpatterns = [
     url(r'^performances/(?P<pk>\d+)$', performances.PerformanceDetailView.as_view(), name='performances.detail'),
     url(r'^performances/(?P<pk>\d+)/edit$', performances.PerformanceUpdateView.as_view(), name='performances.edit'),
     url(r'^performances/(?P<pk>\d+)/delete$', performances.PerformanceDeleteView.as_view(), name='performances.delete'),
-
-    url(r'^streams/?$', streams.index, name='streams.index'),
-    url(r'^streams/new$', streams.new, name='streams.new'),
-    url(r'^streams/(?P<slug>[-\w\d]*)-(?P<id>\d+)$', streams.detail, name='streams.detail'),
-    url(r'^streams/(?P<slug>[-\w\d]*)-(?P<id>\d+)/edit$', streams.edit, name='streams.edit'),
-    url(r'^streams/(?P<slug>[-\w\d]*)-(?P<pk>\d+)/delete$', streams.StreamDeleteView.as_view(), name='streams.delete'),
 
     url(r'^teams/?$', teams.index, name='teams.index'),
     url(r'^teams/new$', teams.TeamCreateView.as_view(), name='teams.new'),

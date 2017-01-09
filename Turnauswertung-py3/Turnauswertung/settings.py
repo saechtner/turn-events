@@ -47,6 +47,7 @@ INSTALLED_APPS = (
     'clubs',
     'utils',
     'squads',
+    'streams',
 
     'debug_toolbar',
 )

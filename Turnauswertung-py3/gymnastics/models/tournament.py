@@ -8,7 +8,7 @@ from django.db import models
 from django.utils.text import slugify
 from django.utils.translation import ugettext_lazy
 
-from gymnastics.models import Stream
+from streams.models import Stream
 
 
 class Tournament(models.Model):

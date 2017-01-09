@@ -5,13 +5,15 @@ from django.shortcuts import redirect, render
 from django.utils.translation import ugettext_lazy
 from django.views import generic
 
-from gymnastics.models import Stream, Discipline, StreamDisciplineJoin
+from streams.models import Stream
+from gymnastics.models import Discipline, StreamDisciplineJoin
 from utils.dict_operations import completed_performances
 
 
 def index(request):
     context = { 'streams': Stream.objects.prefetch_related('athlete_set').all() }
     return render(request, 'gymnastics/streams/index.html', context)
+
 
 def detail(request, id, slug):
     stream = Stream.objects \
@@ -52,6 +54,7 @@ def detail(request, id, slug):
     }
     return render(request, 'gymnastics/streams/detail.html', context)
 
+
 def new(request):
     if request.method == 'GET':
         context = { 'disciplines': Discipline.objects.all() }
@@ -62,6 +65,7 @@ def new(request):
         return redirect(stream.get_absolute_url())
 
     return HttpResponseNotAllowed(['GET', 'POST'])
+
 
 def _build_stream_from_post(stream=None, post_dict={}, method='create'):
     disciplines = Discipline.objects.all()
@@ -119,12 +123,14 @@ def _build_stream_from_post(stream=None, post_dict={}, method='create'):
 
     return stream
 
+
 def _abort_stream_creation(request, error_message):
     if error_message:
         messages.error(request, error_message)
 
     context = { 'disciplines': Discipline.objects.all() }
     return render(request, 'gymnastics/streams/new.html', context)
+
 
 def edit(request, id, slug):
     if request.method == 'GET':
