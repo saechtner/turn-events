@@ -76,11 +76,15 @@ MEDIA_ROOT = 'static/'
 # https://docs.djangoproject.com/en/1.7/ref/settings/#databases
 
 DATABASES = {
+    # 'default': {
+    #     'ENGINE': 'django.db.backends.mysql',
+    #     'NAME': 'TURNAUSWERTUNG',
+    #     'USER': 'root',
+    #     'PASSWORD': 'root',
+    # },
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'TURNAUSWERTUNG',
-        'USER': 'root',
-        'PASSWORD': 'root',
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     },
     'sqlite_fallback': {
         'ENGINE': 'django.db.backends.sqlite3',
