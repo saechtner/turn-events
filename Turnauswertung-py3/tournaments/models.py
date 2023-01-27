@@ -1,7 +1,7 @@
 import datetime
 
 # from django import forms
-# from django.contrib.admin.widgets import AdminDateWidget 
+# from django.contrib.admin.widgets import AdminDateWidget
 
 from django.core.urlresolvers import reverse
 from django.db import models
@@ -12,7 +12,7 @@ from streams.models import Stream
 
 
 class Tournament(models.Model):
-  
+
     name = models.CharField(
         ugettext_lazy('Name'), max_length=50, default='KJSS 2015')
     name_full = models.CharField(ugettext_lazy('Full Name'), max_length=255)
@@ -28,7 +28,7 @@ class Tournament(models.Model):
         ugettext_lazy('Calculation'), max_length=128, null=True, blank=True)
     technology = models.CharField(
         ugettext_lazy('Technology'), max_length=128, null=True, blank=True)
-    
+
     address = models.ForeignKey(
         'common.Address', null=True, blank=True,
         verbose_name=ugettext_lazy('Address')
@@ -70,20 +70,20 @@ class Tournament(models.Model):
         streams = Stream.objects.all() \
             .prefetch_related('discipline_set') \
             .prefetch_related('athlete_set') \
-                .select_related('athlete_set__club') \
-                .select_related('athlete_set__stream') \
-                .select_related('athlete_set__squad') \
-                .select_related('athlete_set__team__stream') \
+                .prefetch_related('athlete_set__club') \
+                .prefetch_related('athlete_set__stream') \
+                .prefetch_related('athlete_set__squad') \
+                .prefetch_related('athlete_set__team__stream') \
                 .prefetch_related('athlete_set__performance_set') \
-                .select_related('athlete_set__performance__discipline') \
+                .prefetch_related('athlete_set__performance_set__discipline') \
             .prefetch_related('team_set') \
-                .select_related('team_set__stream') \
-                .select_related('team_set__club') \
-                .select_related('team_set__stream') \
+                .prefetch_related('team_set__stream') \
+                .prefetch_related('team_set__club') \
+                .prefetch_related('team_set__stream') \
                 .prefetch_related('team_set__athlete_set') \
                 .prefetch_related('team_set__athlete_set__performance_set') \
             .order_by('sex', '-minimum_year_of_birth', 'difficulty')
-        
+
         athlete_disciplines_rank_dict = {}
         athlete_disciplines_result_dict = {}
         stream_athletes_dict = {}
@@ -92,7 +92,7 @@ class Tournament(models.Model):
         team_athletes_dict = {}
         team_disciplines_rank_dict = {}
         team_disciplines_result_dict = {}
-        
+
         for stream in streams:
             stream_disciplines_dict[stream.id] = stream.get_ordered_disciplines()
 
@@ -115,7 +115,7 @@ class Tournament(models.Model):
                     key=lambda athlete: stream_athletes_disciplines_rank_dict.get(athlete.id).get('total')
                 )
             stream_teams_dict[stream.id] = [team for team in stream_teams_dict[stream.id] if stream_teams_disciplines_result_dict.get(team.id).get('total', 0.0) > 0.0]
-            
+
             team_athletes_dict.update({team.id: [athlete for athlete in team.athlete_set.all() if stream_athletes_disciplines_result_dict.get(athlete.id).get('total') > 0.0] for team in stream_teams_dict[stream.id]})
             stream_teams_dict[stream.id] = sorted(
                     [team for team in stream_teams_dict[stream.id] if stream.all_around_team_counting_athletes <= len(team_athletes_dict[team.id])],
@@ -145,7 +145,7 @@ class Tournament(models.Model):
         }
 
         return context
-        
+
 # TODO: add datepicker
 # class MyForm(forms.Form):
 #     date = forms.DateField(widget=AdminDateWidget)

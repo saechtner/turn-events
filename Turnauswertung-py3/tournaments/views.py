@@ -12,7 +12,7 @@ from tournaments.models import Tournament
 
 
 def index(request):
-    context = {'tournaments': Tournament.objects.all().select_related('club')}
+    context = {'tournaments': Tournament.objects.all().select_related('hosting_club')}
     print(request)
     return render(request, 'gymnastics/tournaments/index.html', context)
 

@@ -13,7 +13,7 @@
     "sex": "f"
   },
   "pk": 1,
-  "model": "gymnastics.athlete"
+  "model": "athletes.athlete"
 },
 {
   "fields": {
@@ -29,7 +29,7 @@
     "sex": "f"
   },
   "pk": 2,
-  "model": "gymnastics.athlete"
+  "model": "athletes.athlete"
 },
 {
   "fields": {
@@ -45,7 +45,7 @@
     "sex": "f"
   },
   "pk": 3,
-  "model": "gymnastics.athlete"
+  "model": "athletes.athlete"
 },
 {
   "fields": {
@@ -61,7 +61,7 @@
     "sex": "f"
   },
   "pk": 4,
-  "model": "gymnastics.athlete"
+  "model": "athletes.athlete"
 },
 {
   "fields": {
@@ -77,7 +77,7 @@
     "sex": "f"
   },
   "pk": 5,
-  "model": "gymnastics.athlete"
+  "model": "athletes.athlete"
 },
 {
   "fields": {
@@ -93,7 +93,7 @@
     "sex": "f"
   },
   "pk": 6,
-  "model": "gymnastics.athlete"
+  "model": "athletes.athlete"
 },
 {
   "fields": {
@@ -109,7 +109,7 @@
     "sex": "m"
   },
   "pk": 7,
-  "model": "gymnastics.athlete"
+  "model": "athletes.athlete"
 },
 {
   "fields": {
@@ -125,7 +125,7 @@
     "sex": "m"
   },
   "pk": 8,
-  "model": "gymnastics.athlete"
+  "model": "athletes.athlete"
 },
 {
   "fields": {
@@ -141,7 +141,7 @@
     "sex": "m"
   },
   "pk": 9,
-  "model": "gymnastics.athlete"
+  "model": "athletes.athlete"
 },
 {
   "fields": {
@@ -157,7 +157,7 @@
     "sex": "m"
   },
   "pk": 10,
-  "model": "gymnastics.athlete"
+  "model": "athletes.athlete"
 },
 {
   "fields": {
@@ -173,7 +173,7 @@
     "sex": "m"
   },
   "pk": 11,
-  "model": "gymnastics.athlete"
+  "model": "athletes.athlete"
 },
 {
   "fields": {
@@ -189,7 +189,7 @@
     "sex": "m"
   },
   "pk": 12,
-  "model": "gymnastics.athlete"
+  "model": "athletes.athlete"
 },
 {
   "fields": {
@@ -205,7 +205,7 @@
     "sex": "m"
   },
   "pk": 13,
-  "model": "gymnastics.athlete"
+  "model": "athletes.athlete"
 },
 {
   "fields": {
@@ -221,7 +221,7 @@
     "sex": "m"
   },
   "pk": 14,
-  "model": "gymnastics.athlete"
+  "model": "athletes.athlete"
 },
 {
   "fields": {
@@ -237,7 +237,7 @@
     "sex": "m"
   },
   "pk": 15,
-  "model": "gymnastics.athlete"
+  "model": "athletes.athlete"
 },
 {
   "fields": {
@@ -246,7 +246,7 @@
     "address": null
   },
   "pk": 1,
-  "model": "gymnastics.club"
+  "model": "clubs.club"
 },
 {
   "fields": {
@@ -255,7 +255,7 @@
     "address": null
   },
   "pk": 2,
-  "model": "gymnastics.club"
+  "model": "clubs.club"
 },
 {
   "fields": {
@@ -264,7 +264,7 @@
     "address": null
   },
   "pk": 3,
-  "model": "gymnastics.club"
+  "model": "clubs.club"
 },
 {
   "fields": {
@@ -273,7 +273,7 @@
     "address": null
   },
   "pk": 4,
-  "model": "gymnastics.club"
+  "model": "clubs.club"
 },
 {
   "fields": {
@@ -281,7 +281,7 @@
     "name": "Balken"
   },
   "pk": 1,
-  "model": "gymnastics.discipline"
+  "model": "common.discipline"
 },
 {
   "fields": {
@@ -289,7 +289,7 @@
     "name": "Boden"
   },
   "pk": 2,
-  "model": "gymnastics.discipline"
+  "model": "common.discipline"
 },
 {
   "fields": {
@@ -297,7 +297,7 @@
     "name": "Parallelbarren"
   },
   "pk": 3,
-  "model": "gymnastics.discipline"
+  "model": "common.discipline"
 },
 {
   "fields": {
@@ -305,7 +305,7 @@
     "name": "Reck"
   },
   "pk": 4,
-  "model": "gymnastics.discipline"
+  "model": "common.discipline"
 },
 {
   "fields": {
@@ -313,7 +313,7 @@
     "name": "Sprung"
   },
   "pk": 5,
-  "model": "gymnastics.discipline"
+  "model": "common.discipline"
 },
 {
   "fields": {
@@ -321,7 +321,7 @@
     "name": "Stufenbarren"
   },
   "pk": 6,
-  "model": "gymnastics.discipline"
+  "model": "common.discipline"
 },
 {
   "fields": {
@@ -331,7 +331,7 @@
     "value_final": null
   },
   "pk": 1,
-  "model": "gymnastics.performance"
+  "model": "common.performance"
 },
 {
   "fields": {
@@ -341,7 +341,7 @@
     "value_final": null
   },
   "pk": 2,
-  "model": "gymnastics.performance"
+  "model": "common.performance"
 },
 {
   "fields": {
@@ -351,7 +351,7 @@
     "value_final": null
   },
   "pk": 3,
-  "model": "gymnastics.performance"
+  "model": "common.performance"
 },
 {
   "fields": {
@@ -361,7 +361,7 @@
     "value_final": null
   },
   "pk": 4,
-  "model": "gymnastics.performance"
+  "model": "common.performance"
 },
 {
   "fields": {
@@ -371,7 +371,7 @@
     "value_final": null
   },
   "pk": 5,
-  "model": "gymnastics.performance"
+  "model": "common.performance"
 },
 {
   "fields": {
@@ -381,7 +381,7 @@
     "value_final": null
   },
   "pk": 6,
-  "model": "gymnastics.performance"
+  "model": "common.performance"
 },
 {
   "fields": {
@@ -391,7 +391,7 @@
     "value_final": null
   },
   "pk": 7,
-  "model": "gymnastics.performance"
+  "model": "common.performance"
 },
 {
   "fields": {
@@ -401,7 +401,7 @@
     "value_final": null
   },
   "pk": 8,
-  "model": "gymnastics.performance"
+  "model": "common.performance"
 },
 {
   "fields": {
@@ -411,7 +411,7 @@
     "value_final": null
   },
   "pk": 9,
-  "model": "gymnastics.performance"
+  "model": "common.performance"
 },
 {
   "fields": {
@@ -421,7 +421,7 @@
     "value_final": null
   },
   "pk": 10,
-  "model": "gymnastics.performance"
+  "model": "common.performance"
 },
 {
   "fields": {
@@ -431,7 +431,7 @@
     "value_final": null
   },
   "pk": 11,
-  "model": "gymnastics.performance"
+  "model": "common.performance"
 },
 {
   "fields": {
@@ -441,7 +441,7 @@
     "value_final": null
   },
   "pk": 12,
-  "model": "gymnastics.performance"
+  "model": "common.performance"
 },
 {
   "fields": {
@@ -451,7 +451,7 @@
     "value_final": null
   },
   "pk": 13,
-  "model": "gymnastics.performance"
+  "model": "common.performance"
 },
 {
   "fields": {
@@ -461,7 +461,7 @@
     "value_final": null
   },
   "pk": 14,
-  "model": "gymnastics.performance"
+  "model": "common.performance"
 },
 {
   "fields": {
@@ -471,7 +471,7 @@
     "value_final": null
   },
   "pk": 15,
-  "model": "gymnastics.performance"
+  "model": "common.performance"
 },
 {
   "fields": {
@@ -481,7 +481,7 @@
     "value_final": null
   },
   "pk": 16,
-  "model": "gymnastics.performance"
+  "model": "common.performance"
 },
 {
   "fields": {
@@ -491,7 +491,7 @@
     "value_final": null
   },
   "pk": 17,
-  "model": "gymnastics.performance"
+  "model": "common.performance"
 },
 {
   "fields": {
@@ -501,7 +501,7 @@
     "value_final": null
   },
   "pk": 18,
-  "model": "gymnastics.performance"
+  "model": "common.performance"
 },
 {
   "fields": {
@@ -511,7 +511,7 @@
     "value_final": null
   },
   "pk": 19,
-  "model": "gymnastics.performance"
+  "model": "common.performance"
 },
 {
   "fields": {
@@ -521,7 +521,7 @@
     "value_final": null
   },
   "pk": 20,
-  "model": "gymnastics.performance"
+  "model": "common.performance"
 },
 {
   "fields": {
@@ -531,7 +531,7 @@
     "value_final": null
   },
   "pk": 21,
-  "model": "gymnastics.performance"
+  "model": "common.performance"
 },
 {
   "fields": {
@@ -541,7 +541,7 @@
     "value_final": null
   },
   "pk": 22,
-  "model": "gymnastics.performance"
+  "model": "common.performance"
 },
 {
   "fields": {
@@ -551,7 +551,7 @@
     "value_final": null
   },
   "pk": 23,
-  "model": "gymnastics.performance"
+  "model": "common.performance"
 },
 {
   "fields": {
@@ -561,7 +561,7 @@
     "value_final": null
   },
   "pk": 24,
-  "model": "gymnastics.performance"
+  "model": "common.performance"
 },
 {
   "fields": {
@@ -571,7 +571,7 @@
     "value_final": null
   },
   "pk": 25,
-  "model": "gymnastics.performance"
+  "model": "common.performance"
 },
 {
   "fields": {
@@ -581,7 +581,7 @@
     "value_final": null
   },
   "pk": 26,
-  "model": "gymnastics.performance"
+  "model": "common.performance"
 },
 {
   "fields": {
@@ -591,7 +591,7 @@
     "value_final": null
   },
   "pk": 27,
-  "model": "gymnastics.performance"
+  "model": "common.performance"
 },
 {
   "fields": {
@@ -601,7 +601,7 @@
     "value_final": null
   },
   "pk": 28,
-  "model": "gymnastics.performance"
+  "model": "common.performance"
 },
 {
   "fields": {
@@ -611,7 +611,7 @@
     "value_final": null
   },
   "pk": 29,
-  "model": "gymnastics.performance"
+  "model": "common.performance"
 },
 {
   "fields": {
@@ -621,7 +621,7 @@
     "value_final": null
   },
   "pk": 30,
-  "model": "gymnastics.performance"
+  "model": "common.performance"
 },
 {
   "fields": {
@@ -631,7 +631,7 @@
     "value_final": null
   },
   "pk": 31,
-  "model": "gymnastics.performance"
+  "model": "common.performance"
 },
 {
   "fields": {
@@ -641,7 +641,7 @@
     "value_final": null
   },
   "pk": 32,
-  "model": "gymnastics.performance"
+  "model": "common.performance"
 },
 {
   "fields": {
@@ -651,7 +651,7 @@
     "value_final": null
   },
   "pk": 33,
-  "model": "gymnastics.performance"
+  "model": "common.performance"
 },
 {
   "fields": {
@@ -661,7 +661,7 @@
     "value_final": null
   },
   "pk": 34,
-  "model": "gymnastics.performance"
+  "model": "common.performance"
 },
 {
   "fields": {
@@ -671,7 +671,7 @@
     "value_final": null
   },
   "pk": 35,
-  "model": "gymnastics.performance"
+  "model": "common.performance"
 },
 {
   "fields": {
@@ -681,7 +681,7 @@
     "value_final": null
   },
   "pk": 36,
-  "model": "gymnastics.performance"
+  "model": "common.performance"
 },
 {
   "fields": {
@@ -691,7 +691,7 @@
     "value_final": null
   },
   "pk": 37,
-  "model": "gymnastics.performance"
+  "model": "common.performance"
 },
 {
   "fields": {
@@ -701,7 +701,7 @@
     "value_final": null
   },
   "pk": 38,
-  "model": "gymnastics.performance"
+  "model": "common.performance"
 },
 {
   "fields": {
@@ -711,7 +711,7 @@
     "value_final": null
   },
   "pk": 39,
-  "model": "gymnastics.performance"
+  "model": "common.performance"
 },
 {
   "fields": {
@@ -721,7 +721,7 @@
     "value_final": null
   },
   "pk": 40,
-  "model": "gymnastics.performance"
+  "model": "common.performance"
 },
 {
   "fields": {
@@ -731,7 +731,7 @@
     "value_final": null
   },
   "pk": 41,
-  "model": "gymnastics.performance"
+  "model": "common.performance"
 },
 {
   "fields": {
@@ -741,7 +741,7 @@
     "value_final": null
   },
   "pk": 42,
-  "model": "gymnastics.performance"
+  "model": "common.performance"
 },
 {
   "fields": {
@@ -751,7 +751,7 @@
     "value_final": null
   },
   "pk": 43,
-  "model": "gymnastics.performance"
+  "model": "common.performance"
 },
 {
   "fields": {
@@ -761,7 +761,7 @@
     "value_final": null
   },
   "pk": 44,
-  "model": "gymnastics.performance"
+  "model": "common.performance"
 },
 {
   "fields": {
@@ -771,7 +771,7 @@
     "value_final": null
   },
   "pk": 45,
-  "model": "gymnastics.performance"
+  "model": "common.performance"
 },
 {
   "fields": {
@@ -781,7 +781,7 @@
     "value_final": null
   },
   "pk": 46,
-  "model": "gymnastics.performance"
+  "model": "common.performance"
 },
 {
   "fields": {
@@ -791,7 +791,7 @@
     "value_final": null
   },
   "pk": 47,
-  "model": "gymnastics.performance"
+  "model": "common.performance"
 },
 {
   "fields": {
@@ -801,7 +801,7 @@
     "value_final": null
   },
   "pk": 48,
-  "model": "gymnastics.performance"
+  "model": "common.performance"
 },
 {
   "fields": {
@@ -811,7 +811,7 @@
     "value_final": null
   },
   "pk": 49,
-  "model": "gymnastics.performance"
+  "model": "common.performance"
 },
 {
   "fields": {
@@ -821,7 +821,7 @@
     "value_final": null
   },
   "pk": 50,
-  "model": "gymnastics.performance"
+  "model": "common.performance"
 },
 {
   "fields": {
@@ -831,7 +831,7 @@
     "value_final": null
   },
   "pk": 51,
-  "model": "gymnastics.performance"
+  "model": "common.performance"
 },
 {
   "fields": {
@@ -841,7 +841,7 @@
     "value_final": null
   },
   "pk": 52,
-  "model": "gymnastics.performance"
+  "model": "common.performance"
 },
 {
   "fields": {
@@ -849,7 +849,7 @@
     "name": "Riege 8"
   },
   "pk": 1,
-  "model": "gymnastics.squad"
+  "model": "squads.squad"
 },
 {
   "fields": {
@@ -857,7 +857,7 @@
     "name": "Riege 9"
   },
   "pk": 2,
-  "model": "gymnastics.squad"
+  "model": "squads.squad"
 },
 {
   "fields": {
@@ -875,7 +875,7 @@
     "discipline_finals_max_participants": 0
   },
   "pk": 1,
-  "model": "gymnastics.stream"
+  "model": "streams.stream"
 },
 {
   "fields": {
@@ -893,7 +893,7 @@
     "discipline_finals_max_participants": 0
   },
   "pk": 2,
-  "model": "gymnastics.stream"
+  "model": "streams.stream"
 },
 {
   "fields": {
@@ -902,7 +902,7 @@
     "name": "Stuttgart 1"
   },
   "pk": 5,
-  "model": "gymnastics.team"
+  "model": "teams.team"
 },
 {
   "fields": {
@@ -911,7 +911,7 @@
     "name": "Stuttgart 1"
   },
   "pk": 6,
-  "model": "gymnastics.team"
+  "model": "teams.team"
 },
 {
   "fields": {
@@ -920,7 +920,7 @@
     "name": "Hamburg 1"
   },
   "pk": 7,
-  "model": "gymnastics.team"
+  "model": "teams.team"
 },
 {
   "fields": {
@@ -929,7 +929,7 @@
     "name": "Hamburg 1"
   },
   "pk": 8,
-  "model": "gymnastics.team"
+  "model": "teams.team"
 },
 {
   "fields": {
@@ -938,7 +938,7 @@
     "name": "Dresden 1"
   },
   "pk": 9,
-  "model": "gymnastics.team"
+  "model": "teams.team"
 },
 {
   "fields": {
@@ -947,7 +947,7 @@
     "name": "Berlin 1"
   },
   "pk": 10,
-  "model": "gymnastics.team"
+  "model": "teams.team"
 },
 {
   "fields": {
@@ -956,7 +956,7 @@
     "discipline": 4
   },
   "pk": 1,
-  "model": "gymnastics.streamdisciplinejoin"
+  "model": "common.streamdisciplinejoin"
 },
 {
   "fields": {
@@ -965,7 +965,7 @@
     "discipline": 1
   },
   "pk": 2,
-  "model": "gymnastics.streamdisciplinejoin"
+  "model": "common.streamdisciplinejoin"
 },
 {
   "fields": {
@@ -974,7 +974,7 @@
     "discipline": 2
   },
   "pk": 3,
-  "model": "gymnastics.streamdisciplinejoin"
+  "model": "common.streamdisciplinejoin"
 },
 {
   "fields": {
@@ -983,7 +983,7 @@
     "discipline": 5
   },
   "pk": 4,
-  "model": "gymnastics.streamdisciplinejoin"
+  "model": "common.streamdisciplinejoin"
 },
 {
   "fields": {
@@ -992,7 +992,7 @@
     "discipline": 2
   },
   "pk": 5,
-  "model": "gymnastics.streamdisciplinejoin"
+  "model": "common.streamdisciplinejoin"
 },
 {
   "fields": {
@@ -1001,7 +1001,7 @@
     "discipline": 3
   },
   "pk": 6,
-  "model": "gymnastics.streamdisciplinejoin"
+  "model": "common.streamdisciplinejoin"
 },
 {
   "fields": {
@@ -1010,7 +1010,7 @@
     "discipline": 4
   },
   "pk": 7,
-  "model": "gymnastics.streamdisciplinejoin"
+  "model": "common.streamdisciplinejoin"
 },
 {
   "fields": {
@@ -1019,7 +1019,7 @@
     "discipline": 5
   },
   "pk": 8,
-  "model": "gymnastics.streamdisciplinejoin"
+  "model": "common.streamdisciplinejoin"
 },
 {
   "fields": {
@@ -1031,6 +1031,6 @@
     "name_full": "Kinder- und Jugendsportspiele 2015"
   },
   "pk": 1,
-  "model": "gymnastics.tournament"
+  "model": "tournaments.tournament"
 }
 ]

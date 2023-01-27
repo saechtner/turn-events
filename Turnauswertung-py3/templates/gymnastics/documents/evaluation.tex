@@ -23,20 +23,20 @@
     \hypersetup{
         pdftitle={ {% trans "Evaluation" %} },
         % pdfkeywords={keyword1, keyword2},
-        % colorlinks=true,            
+        % colorlinks=true,
         pdfpagemode=UseOutlines,    % this is the option you were lookin for
         pdfpagelayout=TwoPageRight
     }
 
     % set language here
     {% get_current_language as LANGUAGE_CODE %}
-    {% if LANGUAGE_CODE = 'de' %}
+    {% if LANGUAGE_CODE == 'de' %}
         \usepackage[ngerman]{babel}
     {% endif %}
 
     \renewcommand\thesection{\arabic{section}.}
     \renewcommand\thesubsection{\thesection\arabic{subsection}.}
-    
+
     \definecolor{grey}{rgb}{0.70,0.70,0.70}
     \definecolor{lightgrey}{rgb}{0.95,0.95,0.95}
     \definecolor{yellow}{rgb}{1.0,1.0,0.80}
@@ -61,7 +61,7 @@
         \paperwidth=\pdfpagewidth
         \paperheight=\pdfpageheight
 
-        \begingroup 
+        \begingroup
             \vsize=.80\pdfpageheight % do what you like
             \hsize=.87\pdfpagewidth  % do what you like
             \textwidth=\hsize
@@ -129,7 +129,8 @@
         }
 
         % \newpage\tableofcontents
-        \newpage\section{ {% trans 'All around individual' %} }
+        \newpage
+        \section{ {% trans 'All around individual' %} }
         {% for stream in streams %}
             {% if stream_athletes_dict|get_item:stream.id %}
                 {% with disciplines=stream_disciplines_dict|get_item:stream.id %}
