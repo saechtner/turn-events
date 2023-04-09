@@ -8,7 +8,7 @@ urlpatterns = [
 ]
 
 urlpatterns += i18n_patterns(
-    url(r'^$', lambda r: HttpResponseRedirect('gymnastics/')),  # TODO
+    url(r'^$', lambda r: HttpResponseRedirect('common/')),
 
     url(r'^common/', include('common.urls')),
 
