@@ -18,6 +18,9 @@ target/
 *.pyc
 __pycache__
 
+# .python-version
+.python-version
+
 # tex to pdf files
 *.aux
 *.log
