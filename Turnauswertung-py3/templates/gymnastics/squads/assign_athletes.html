@@ -4,7 +4,7 @@
 {% load custom_template_tags%}
 
 {% block headline %}{% trans 'Assign Athletes' %}{% endblock headline %}
-{% block nav_main %}{% trans 'Squads' %}{% endblock nav_main %}
+{% block nav_main %}{{ squad }}{% endblock nav_main %}
 {% block nav_main_url %}
   {% url 'squads.index' %}
 {% endblock nav_main_url %}
