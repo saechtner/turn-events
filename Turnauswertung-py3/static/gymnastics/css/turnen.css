@@ -14,9 +14,9 @@ body {
 
 .page-header {
   margin: 0;
-  position: relative;
+  /* position: relative;
   padding-bottom: 50px;
-  height: 250px;
+  height: 250px; */
   border: none;
 }
 
@@ -25,13 +25,13 @@ body {
   z-index: 4;
 }
 
-.page-header.fixed .page-header-inner {
+/* .page-header.fixed .page-header-inner {
   position: fixed;
   top: 0;
   -webkit-transform: translateZ(0);
   transform: translateZ(0);
   width: 100%;
-}
+} */
 
 .page-header-headline {
   position: relative; 
@@ -53,9 +53,9 @@ body {
 }
 
 /* put here negative value of scroll_limit - static-navbar height as margin-top  */
-.page-header.fixed .page-header-inner .page-header-bg {
+/* .page-header.fixed .page-header-inner .page-header-bg {
   margin-top: -110px;
-}
+} */
 
 .page-header-bg-img {
   position: absolute;
