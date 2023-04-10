@@ -14,24 +14,8 @@ body {
 
 .page-header {
   margin: 0;
-  /* position: relative;
-  padding-bottom: 50px;
-  height: 250px; */
   border: none;
 }
-
-.page-header-inner {
-  position: relative;
-  z-index: 4;
-}
-
-/* .page-header.fixed .page-header-inner {
-  position: fixed;
-  top: 0;
-  -webkit-transform: translateZ(0);
-  transform: translateZ(0);
-  width: 100%;
-} */
 
 .page-header-headline {
   position: relative; 
@@ -51,11 +35,6 @@ body {
   height: 200px;
   z-index: 3;
 }
-
-/* put here negative value of scroll_limit - static-navbar height as margin-top  */
-/* .page-header.fixed .page-header-inner .page-header-bg {
-  margin-top: -110px;
-} */
 
 .page-header-bg-img {
   position: absolute;
@@ -167,7 +146,7 @@ li.dropdown > ul.dropdown-scrollable {
 }
 
 .dynamic-navbar .nav_main {
-  margin: 0 40px 0 0;
+  margin: 0 20px 0 0;
   color: #ddd;
 }
 
@@ -179,12 +158,13 @@ li.dropdown > ul.dropdown-scrollable {
   text-transform: uppercase;
 
   height: 50px;
-  padding: 9px 15px 7px 15px;
   margin: 0px;
 
   border: none;
-  /*border: 2px solid transparent;*/
-  /*border-radius: 3px;*/
+}
+
+.dynamic-navbar .navbar-nav > li > a.nav-link-with-value {
+  padding: 9px 15px 7px 15px;
 }
 
 .dynamic-navbar .navbar-nav > li > a:hover, 
@@ -212,10 +192,6 @@ li.dropdown > ul.dropdown-scrollable {
   transition: all 0.15s ease-in-out;
 }
 
-/*.dynamic-navbar .nav-link-single {
-  padding: 14px 15px 7px 15px;
-}*/
-
 .dynamic-navbar .nav-link-label {
   font-size: 11px;
   line-height: 11px;
@@ -242,18 +218,6 @@ li.dropdown > ul.dropdown-scrollable {
 .dynamic-navbar .navbar-form > input {
   width: 150px;
 }
-
-/* Flip around the padding for proper display in narrow viewports */
-/*
-.navbar-wrapper > .container {
-  padding-right: 0;
-  padding-left: 0;
-
-.navbar-wrapper .navbar {
-  padding-right: 15px;
-  padding-left: 15px;
-}
-*/
 
 .navbar-wrapper .navbar .container {
   width: auto;

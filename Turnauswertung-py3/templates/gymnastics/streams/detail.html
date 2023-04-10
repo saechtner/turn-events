@@ -13,14 +13,14 @@
     </a>
   </li>
   <li role="presentation">
-    <a href="#athletes" aria-controls="athletes" role="tab" data-toggle="tab">
+    <a href="#athletes" class="nav-link-with-value" aria-controls="athletes" role="tab" data-toggle="tab">
       <span class="nav-link-label">{% trans "Athletes" %}</span>
       <span class="nav-link-value">{{ athletes_count }}</span>
     </a>
   </li>
   {% if stream.all_around_individual %}
     <li role="presentation">
-      <a href="#results-athletes" aria-controls="results-athletes" role="tab" data-toggle="tab">
+      <a href="#results-athletes" class="nav-link-with-value" aria-controls="results-athletes" role="tab" data-toggle="tab">
         <span class="nav-link-label">{% trans "Results Athletes" %}</span>
         <span class="nav-link-value">{{ athlete_performances_completed }}</span>
       </a>
@@ -28,7 +28,7 @@
   {% endif %}
   {% if stream.all_around_team %}
     <li role="presentation">
-      <a href="#results-teams" aria-controls="results-teams" role="tab" data-toggle="tab">
+      <a href="#results-teams" class="nav-link-with-value" aria-controls="results-teams" role="tab" data-toggle="tab">
         <span class="nav-link-label">{% trans "Results Teams" %}</span>
         <span class="nav-link-value">{{ team_performances_completed }}</span>
       </a>
@@ -36,13 +36,13 @@
   {% endif %}
   {% if stream.discipline_finals %}
     <li role="presentation">
-      <a href="#athletes-finals" aria-controls="athletes-finals" role="tab" data-toggle="tab">
+      <a href="#athletes-finals" class="nav-link-with-value" aria-controls="athletes-finals" role="tab" data-toggle="tab">
         <span class="nav-link-label">{% trans "Athletes Finals" %}</span>
         <span class="nav-link-value"></span>
       </a>
     </li>
     <li role="presentation">
-      <a href="#results-finals" aria-controls="results-finals" role="tab" data-toggle="tab">
+      <a href="#results-finals" class="nav-link-with-value" aria-controls="results-finals" role="tab" data-toggle="tab">
         <span class="nav-link-label">{% trans "Results Finals" %}</span>
         <span class="nav-link-value"></span>
       </a>

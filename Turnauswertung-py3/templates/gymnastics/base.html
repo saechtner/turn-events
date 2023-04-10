@@ -136,57 +136,51 @@
         <div class="page-container">
 
           <div class="page-header">
-
-            <!-- TODO cleanup - page-header-inner probably not needed anymore -->
-            <div class="page-header-inner">
-
-              <div class="page-header-navbar">
-                <!-- app navbar -->
-                <div class="navbar navbar-static-top navbar-inverse dynamic-navbar" role="navigation">
-                  <div class="container-fluid">
-                    <div class="navbar-header">
-                      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#dynamic-navbar-collapse">
-                        <span class="sr-only">{% trans "Toggle navigation" %}</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                      </button>
-                    </div>
-
-                    <div class="collapse navbar-collapse" id="dynamic-navbar-collapse">
-                      <div class="container">
-                        <a class="navbar-brand nav_main" href="{% block nav_main_url %}#{% endblock nav_main_url %}">
-                          {% block nav_main %}{% endblock nav_main %}
-                        </a>
-
-                        <ul class="nav navbar-nav nav-tabs">
-                          {% block nav_links %}{% endblock nav_links %}
-                        </ul>
-
-                        <div class="nav navbar-nav navbar-right">
-                          <div class="btn-group">
-                            {% block nav_regular_buttons %}{% endblock nav_regular_buttons %}
-                          </div>
-                          {% block nav_search %}
-                            <form class="navbar-form" role="search">
-                              <input 
-                                type="search" 
-                                placeholder="{% trans 'Search' %}" 
-                                class="light-filter form-control" 
-                                data-table="tablefilter" 
-                                data-list="list-filter"
-                                name="table_filter">
-                            </form>
-                          {% endblock nav_search %}
-                        </div>
-                      </div>
-                      
-                    </div>
+            <div class="page-header-navbar">
+              <!-- app navbar -->
+              <div class="navbar navbar-static-top navbar-inverse dynamic-navbar" role="navigation">
+                <div class="container-fluid">
+                  <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#dynamic-navbar-collapse">
+                      <span class="sr-only">{% trans "Toggle navigation" %}</span>
+                      <span class="icon-bar"></span>
+                      <span class="icon-bar"></span>
+                      <span class="icon-bar"></span>
+                    </button>
                   </div>
-                </div> <!-- app navbar -->
-              </div>
 
-            </div>          
+                  <div class="collapse navbar-collapse" id="dynamic-navbar-collapse">
+                    <div class="container">
+                      <a class="navbar-brand nav_main" href="{% block nav_main_url %}#{% endblock nav_main_url %}">
+                        {% block nav_main %}{% endblock nav_main %}
+                      </a>
+
+                      <ul class="nav navbar-nav nav-tabs">
+                        {% block nav_links %}{% endblock nav_links %}
+                      </ul>
+
+                      <div class="nav navbar-nav navbar-right">
+                        <div class="btn-group">
+                          {% block nav_regular_buttons %}{% endblock nav_regular_buttons %}
+                        </div>
+                        {% block nav_search %}
+                          <form class="navbar-form" role="search">
+                            <input 
+                              type="search" 
+                              placeholder="{% trans 'Search' %}" 
+                              class="light-filter form-control" 
+                              data-table="tablefilter" 
+                              data-list="list-filter"
+                              name="table_filter">
+                          </form>
+                        {% endblock nav_search %}
+                      </div>
+                    </div>
+                    
+                  </div>
+                </div>
+              </div> <!-- app navbar -->
+            </div>
           </div> <!-- page-header -->
 
           <!-- Allows to create messages via messages.error .warning .success and .info. -->
