@@ -16,9 +16,11 @@ def process(request):
 
 def performances_index(request):
     context = {
-        "performances": Performance.objects.all()
-        .select_related("athlete")
-        .select_related("discipline")
+        "performances": (
+            Performance.objects.all()
+            .select_related("athlete")
+            .select_related("discipline")
+        ),
     }
     return render(request, "gymnastics/performances/index.html", context)
 
