@@ -1,4 +1,6 @@
-This is the turn-events web app to manage artistic gymnastics tournaments. Currently runs on Python 3.9+.
+This is the turn-events web app to manage artistic gymnastics tournaments. 
+
+Currently runs on Python 3.9+.
 
 
 ## Set up / Installation / Build
@@ -12,8 +14,8 @@ This is the turn-events web app to manage artistic gymnastics tournaments. Curre
 - (Optional) load test data: `python manage.py loaddata gymnastics/fixtures/full_tournament.json`
 
 ## Latex Support
-7. Install `basictex` (`brew install basictex`)
-8. Install missing latex packages (`tlmgr update --self && tlmgr install titlesec && tlmgr install multirow`)
+- Install `basictex` (`brew install basictex`)
+- Install missing latex packages (`tlmgr update --self && tlmgr install titlesec && tlmgr install multirow`)
 
 ## Test
 todo ;-)
