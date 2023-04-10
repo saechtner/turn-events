@@ -5,9 +5,7 @@
 
 {% block headline %}{% trans 'Assign Athletes' %}{% endblock headline %}
 {% block nav_main %}{{ squad }}{% endblock nav_main %}
-{% block nav_main_url %}
-  {% url 'squads.index' %}
-{% endblock nav_main_url %}
+{% block nav_main_url %}{{ squad.get_absolute_url }}{% endblock nav_main_url %}
 {% block nav_links %}{% endblock nav_links %}
 {% block nav_regular_buttons %}{% endblock nav_regular_buttons %}
 
