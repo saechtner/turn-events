@@ -1,12 +1,11 @@
-import json
 import datetime
+import json
 import re
 
-from django.http import HttpResponse
 from django.contrib import messages
-from django.core.urlresolvers import reverse, reverse_lazy
-from django.http import HttpResponseNotAllowed
+from django.http import HttpResponse, HttpResponseNotAllowed
 from django.shortcuts import redirect, render
+from django.urls import reverse, reverse_lazy
 from django.views import generic
 
 from athletes.models import Athlete, AthletesImport

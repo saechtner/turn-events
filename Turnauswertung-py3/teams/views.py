@@ -1,5 +1,5 @@
-from django.core.urlresolvers import reverse, reverse_lazy
 from django.shortcuts import render
+from django.urls import reverse, reverse_lazy
 from django.views import generic
 
 from teams.models import Team
@@ -13,7 +13,7 @@ def index(request):
 
 def detail(request, id):
     team = Team.objects.get(id=id)
-    context = { 
+    context = {
         'team': team,
         'club': team.club,
         'stream': team.stream }

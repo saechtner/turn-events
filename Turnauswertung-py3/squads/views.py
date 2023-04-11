@@ -1,16 +1,16 @@
 import re
 
-from django.core.urlresolvers import reverse, reverse_lazy
 from django.db.models import Sum
 from django.http import HttpResponseNotAllowed
 from django.shortcuts import redirect, render
+from django.urls import reverse, reverse_lazy
 from django.utils.translation import ugettext_lazy
 from django.views import generic
 
-from utils import pdf
 from athletes.models import Athlete
-from squads.models import Squad
 from common.models import Performance
+from squads.models import Squad
+from utils import pdf
 from utils.dict_operations import completed_performances
 
 

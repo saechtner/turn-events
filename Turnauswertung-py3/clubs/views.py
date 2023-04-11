@@ -1,13 +1,13 @@
 from django.contrib.messages.views import SuccessMessageMixin
-from django.core.urlresolvers import reverse_lazy
 from django.shortcuts import render
+from django.urls import reverse_lazy
 from django.views import generic
 
 from clubs.models import Club
 
 
 def index(request):
-    context = { 
+    context = {
         'clubs': Club.objects.all() \
             .prefetch_related('athlete_set')
     }
@@ -22,8 +22,8 @@ def detail(request, id, slug):
     athletes = club.athlete_set.all() \
         .select_related('club').select_related('stream').select_related('team__stream').select_related('squad')
 
-    context = { 
-        'club': club, 
+    context = {
+        'club': club,
         'athletes': athletes,
     }
     return render(request, 'gymnastics/clubs/detail.html', context)

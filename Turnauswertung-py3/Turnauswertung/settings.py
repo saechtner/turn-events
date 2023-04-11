@@ -30,9 +30,7 @@ ALLOWED_HOSTS = []
 
 
 # Application definition
-
 INSTALLED_APPS = (
-    'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
@@ -50,8 +48,6 @@ INSTALLED_APPS = (
     'streams',
     'teams',
     'tournaments',
-
-    'debug_toolbar',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -143,6 +139,7 @@ LOCALE_PATHS = (
     os.path.join(BASE_DIR, 'locale/'),
 )
 
+# TODO fix language support. Maybe eu-us and de-de?
 LANGUAGES = (
     ('en', _('English')),
     ('de', _('German')),

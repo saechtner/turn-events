@@ -1,19 +1,19 @@
 import operator
 
-from django.core.urlresolvers import reverse
 from django.db import models
+from django.urls import reverse
 from django.utils.text import slugify
 from django.utils.translation import ugettext_lazy
 
 
 class Stream(models.Model):
-  
+
     difficulty = models.CharField(
         ugettext_lazy('Difficulty'), max_length=10, null=False)
     sex = models.CharField(ugettext_lazy('Sex'), max_length=1, null=False, choices=(('m', ugettext_lazy('male')), ('f', ugettext_lazy('female'))), default='f')
     minimum_year_of_birth = models.IntegerField(
         ugettext_lazy('Minimum Year of Birth'), default=2000, null=False)
-    
+
     all_around_individual = models.BooleanField(
         ugettext_lazy('All around individual'), default=True)
     all_around_individual_counting_events = models.IntegerField(
@@ -37,6 +37,9 @@ class Stream(models.Model):
         'common.Discipline', through='common.StreamDisciplineJoin')
 
     slug = models.SlugField(max_length=127, blank=True)
+
+    class Meta:
+        app_label = "streams"
 
     def __str__(self):
         return "{0} {1}".format(self.difficulty, self.get_sex_display())

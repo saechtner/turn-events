@@ -1,7 +1,8 @@
-from common.models import Discipline, Performance
-from django.core.urlresolvers import reverse, reverse_lazy
 from django.shortcuts import redirect, render
+from django.urls import reverse, reverse_lazy
 from django.views import generic
+
+from common.models import Discipline, Performance
 
 
 # renders index / home page

@@ -1,14 +1,14 @@
 import json
 
-from django.core.urlresolvers import reverse, reverse_lazy
 from django.http import HttpResponse
 from django.shortcuts import redirect, render
+from django.urls import reverse, reverse_lazy
 from django.utils.translation import ugettext_lazy
 from django.views import generic
 
-from utils import pdf, txt
 from clubs.models import Club
 from tournaments.models import Tournament
+from utils import pdf, txt
 
 
 def index(request):

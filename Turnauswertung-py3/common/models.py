@@ -1,5 +1,5 @@
-from django.core.urlresolvers import reverse
 from django.db import models
+from django.urls import reverse
 from django.utils.text import slugify
 from django.utils.translation import ugettext_lazy
 
@@ -17,13 +17,14 @@ class Performance(models.Model):
     )
 
     athlete = models.ForeignKey(
-        "athletes.Athlete", verbose_name=ugettext_lazy("Athlete")
+        "athletes.Athlete", on_delete=models.CASCADE, verbose_name=ugettext_lazy("Athlete")
     )
     discipline = models.ForeignKey(
-        "Discipline", verbose_name=ugettext_lazy("Discipline")
+        "Discipline", on_delete=models.CASCADE, verbose_name=ugettext_lazy("Discipline")
     )
 
     class Meta:
+        app_label = "common"
         unique_together = (("athlete", "discipline"),)
 
     def __str__(self):
@@ -35,6 +36,9 @@ class Discipline(models.Model):
     name = models.CharField(ugettext_lazy("Name"), max_length=50, null=False)
 
     slug = models.SlugField(max_length=128, blank=True)
+
+    class Meta:
+        app_label = "common"
 
     def __str__(self):
         return self.name
@@ -65,6 +69,9 @@ class Address(models.Model):
     province = models.CharField(ugettext_lazy("Province"), max_length=128)
     zip_code = models.CharField(ugettext_lazy("Zip code"), max_length=10)
 
+    class Meta:
+        app_label = "common"
+
     @property
     def address_formatted(self):
         return "{}\n{} {}\n{}".format(
@@ -75,10 +82,11 @@ class Address(models.Model):
 class StreamDisciplineJoin(models.Model):
     position = models.IntegerField(null=True)
 
-    stream = models.ForeignKey("streams.Stream")
-    discipline = models.ForeignKey("Discipline")
+    stream = models.ForeignKey("streams.Stream", on_delete=models.CASCADE)
+    discipline = models.ForeignKey("Discipline", on_delete=models.CASCADE)
 
     class Meta:
+        app_label = "common"
         ordering = ["position"]
 
     def __str__(self):

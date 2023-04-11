@@ -1,10 +1,7 @@
 import datetime
 
-# from django import forms
-# from django.contrib.admin.widgets import AdminDateWidget
-
-from django.core.urlresolvers import reverse
 from django.db import models
+from django.urls import reverse
 from django.utils.text import slugify
 from django.utils.translation import ugettext_lazy
 
@@ -30,15 +27,18 @@ class Tournament(models.Model):
         ugettext_lazy('Technology'), max_length=128, null=True, blank=True)
 
     address = models.ForeignKey(
-        'common.Address', null=True, blank=True,
+        'common.Address', null=True, blank=True, on_delete=models.CASCADE,
         verbose_name=ugettext_lazy('Address')
     )
     hosting_club = models.ForeignKey(
-        'clubs.Club', null=True, blank=True,
+        'clubs.Club', null=True, blank=True, on_delete=models.CASCADE,
         verbose_name=ugettext_lazy('Hosting club')
     )
 
     slug = models.SlugField(max_length=128, blank=True)
+
+    class Meta:
+        app_label = "tournaments"
 
     def __str__(self):
         return '{0}'.format(self.name)
@@ -67,22 +67,24 @@ class Tournament(models.Model):
         return reverse('tournaments.create_team_certificate_data_txt', kwargs={ 'id': self.id, 'slug': self.slug })
 
     def get_evaluation_data(self):
-        streams = Stream.objects.all() \
-            .prefetch_related('discipline_set') \
-            .prefetch_related('athlete_set') \
-                .prefetch_related('athlete_set__club') \
-                .prefetch_related('athlete_set__stream') \
-                .prefetch_related('athlete_set__squad') \
-                .prefetch_related('athlete_set__team__stream') \
-                .prefetch_related('athlete_set__performance_set') \
-                .prefetch_related('athlete_set__performance_set__discipline') \
-            .prefetch_related('team_set') \
-                .prefetch_related('team_set__stream') \
-                .prefetch_related('team_set__club') \
-                .prefetch_related('team_set__stream') \
-                .prefetch_related('team_set__athlete_set') \
-                .prefetch_related('team_set__athlete_set__performance_set') \
+        streams = (
+            Stream.objects.all()
+            .prefetch_related('discipline_set')
+            .prefetch_related('athlete_set')
+            .prefetch_related('athlete_set__club')
+            .prefetch_related('athlete_set__stream')
+            .prefetch_related('athlete_set__squad')
+            .prefetch_related('athlete_set__team__stream')
+            .prefetch_related('athlete_set__performance_set')
+            .prefetch_related('athlete_set__performance_set__discipline')
+            .prefetch_related('team_set')
+            .prefetch_related('team_set__stream')
+            .prefetch_related('team_set__club')
+            .prefetch_related('team_set__stream')
+            .prefetch_related('team_set__athlete_set')
+            .prefetch_related('team_set__athlete_set__performance_set')
             .order_by('sex', '-minimum_year_of_birth', 'difficulty')
+        )
 
         athlete_disciplines_rank_dict = {}
         athlete_disciplines_result_dict = {}

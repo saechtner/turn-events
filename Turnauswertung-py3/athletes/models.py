@@ -1,5 +1,5 @@
-from django.core.urlresolvers import reverse
 from django.db import models
+from django.urls import reverse
 from django.utils.text import slugify
 from django.utils.translation import ugettext_lazy
 
@@ -33,10 +33,10 @@ class Athlete(models.Model):
         ugettext_lazy('Date of birth'), default='1900-01-01')
 
     club = models.ForeignKey(
-        'clubs.Club', null=True, blank=True, verbose_name=ugettext_lazy('Club')
+        'clubs.Club', null=True, blank=True, on_delete=models.CASCADE, verbose_name=ugettext_lazy('Club')
     )
     stream = models.ForeignKey(
-        'streams.Stream', verbose_name=ugettext_lazy('Stream'))
+        'streams.Stream', on_delete=models.CASCADE, verbose_name=ugettext_lazy('Stream'))
     team = models.ForeignKey(
         'teams.Team', null=True, blank=True, on_delete=models.SET_NULL,
         verbose_name=ugettext_lazy('Team')
@@ -47,11 +47,14 @@ class Athlete(models.Model):
     )
     squad_position = models.IntegerField(default=-1, null=True, blank=True)
 
-    athletes_import = models.ForeignKey('AthletesImport', null=True, blank=True)
+    athletes_import = models.ForeignKey('AthletesImport', on_delete=models.CASCADE, null=True, blank=True)
 
     slug = models.SlugField(max_length=128, blank=True)
 
     objects = AthleteManager()
+
+    class Meta:
+        app_label = "athletes"
 
     def __str__(self):
         # Dev Output
@@ -98,6 +101,9 @@ class AthletesImport(models.Model):
     # name = models.CharField(max_length=50, null=False)
 
     club = models.OneToOneField('clubs.Club', null=True, blank=True, on_delete=models.SET_NULL, verbose_name=ugettext_lazy('Club'))
+
+    class Meta:
+        app_label = "athletes"
 
     def __str__(self):
         return '{0} #{1}'.format(ugettext_lazy('Athletes Import'), self.id)

@@ -1,17 +1,20 @@
-from django.core.urlresolvers import reverse
 from django.db import models
+from django.urls import reverse
 from django.utils.translation import ugettext_lazy
 
 
 class Team(models.Model):
-  
+
     name = models.CharField(ugettext_lazy('Name'), max_length=128, null=False)
 
     club = models.ForeignKey(
-        'clubs.Club', null=True, blank=True, verbose_name=ugettext_lazy('Club')
+        'clubs.Club', null=True, blank=True, on_delete=models.CASCADE, verbose_name=ugettext_lazy('Club')
     )
     stream = models.ForeignKey(
-        'streams.Stream', verbose_name=ugettext_lazy('Stream'))
+        'streams.Stream', on_delete=models.CASCADE, verbose_name=ugettext_lazy('Stream'))
+
+    class Meta:
+        app_label = "teams"
 
     def __str__(self):
         return '{0} ({1})'.format(self.name, self.stream)
