@@ -1,15 +1,15 @@
 from django.db import models
 from django.urls import reverse
 from django.utils.text import slugify
-from django.utils.translation import ugettext_lazy
+from django.utils.translation import gettext_lazy
 
 
 class Performance(models.Model):
     value = models.DecimalField(
-        ugettext_lazy("Value"), null=False, max_digits=5, decimal_places=3, default=0.0
+        gettext_lazy("Value"), null=False, max_digits=5, decimal_places=3, default=0.0
     )
     value_final = models.DecimalField(
-        ugettext_lazy("Final Value"),
+        gettext_lazy("Final Value"),
         null=True,
         blank=True,
         max_digits=5,
@@ -17,10 +17,10 @@ class Performance(models.Model):
     )
 
     athlete = models.ForeignKey(
-        "athletes.Athlete", on_delete=models.CASCADE, verbose_name=ugettext_lazy("Athlete")
+        "athletes.Athlete", on_delete=models.CASCADE, verbose_name=gettext_lazy("Athlete")
     )
     discipline = models.ForeignKey(
-        "Discipline", on_delete=models.CASCADE, verbose_name=ugettext_lazy("Discipline")
+        "Discipline", on_delete=models.CASCADE, verbose_name=gettext_lazy("Discipline")
     )
 
     class Meta:
@@ -33,7 +33,7 @@ class Performance(models.Model):
 
 
 class Discipline(models.Model):
-    name = models.CharField(ugettext_lazy("Name"), max_length=50, null=False)
+    name = models.CharField(gettext_lazy("Name"), max_length=50, null=False)
 
     slug = models.SlugField(max_length=128, blank=True)
 
@@ -59,15 +59,15 @@ class Discipline(models.Model):
 
 
 class Address(models.Model):
-    contact_name = models.CharField(ugettext_lazy("Contact name"), max_length=64)
+    contact_name = models.CharField(gettext_lazy("Contact name"), max_length=64)
     phone = models.CharField(
-        ugettext_lazy("Contact phone"), max_length=15, null=True, blank=True
+        gettext_lazy("Contact phone"), max_length=15, null=True, blank=True
     )
-    email = models.EmailField(ugettext_lazy("Contact email"), null=True, blank=True)
-    street = models.CharField(ugettext_lazy("Street"), max_length=128)
-    city = models.CharField(ugettext_lazy("City"), max_length=128)
-    province = models.CharField(ugettext_lazy("Province"), max_length=128)
-    zip_code = models.CharField(ugettext_lazy("Zip code"), max_length=10)
+    email = models.EmailField(gettext_lazy("Contact email"), null=True, blank=True)
+    street = models.CharField(gettext_lazy("Street"), max_length=128)
+    city = models.CharField(gettext_lazy("City"), max_length=128)
+    province = models.CharField(gettext_lazy("Province"), max_length=128)
+    zip_code = models.CharField(gettext_lazy("Zip code"), max_length=10)
 
     class Meta:
         app_label = "common"

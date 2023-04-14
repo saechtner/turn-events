@@ -1,7 +1,7 @@
 from django.db import models
 from django.urls import reverse
 from django.utils.text import slugify
-from django.utils.translation import ugettext_lazy
+from django.utils.translation import gettext_lazy
 
 
 class AthleteQuerySet(models.QuerySet):
@@ -26,24 +26,24 @@ class AthleteManager(models.Manager):
 
 class Athlete(models.Model):
 
-    first_name = models.CharField(ugettext_lazy('First name'), max_length=50)
-    last_name = models.CharField(ugettext_lazy('Last name'), max_length=50)
-    sex = models.CharField(ugettext_lazy('Sex'), max_length=1, choices=(('m', 'male'), ('f', 'female')), default='f')
+    first_name = models.CharField(gettext_lazy('First name'), max_length=50)
+    last_name = models.CharField(gettext_lazy('Last name'), max_length=50)
+    sex = models.CharField(gettext_lazy('Sex'), max_length=1, choices=(('m', 'male'), ('f', 'female')), default='f')
     date_of_birth = models.DateField(
-        ugettext_lazy('Date of birth'), default='1900-01-01')
+        gettext_lazy('Date of birth'), default='1900-01-01')
 
     club = models.ForeignKey(
-        'clubs.Club', null=True, blank=True, on_delete=models.CASCADE, verbose_name=ugettext_lazy('Club')
+        'clubs.Club', null=True, blank=True, on_delete=models.CASCADE, verbose_name=gettext_lazy('Club')
     )
     stream = models.ForeignKey(
-        'streams.Stream', on_delete=models.CASCADE, verbose_name=ugettext_lazy('Stream'))
+        'streams.Stream', on_delete=models.CASCADE, verbose_name=gettext_lazy('Stream'))
     team = models.ForeignKey(
         'teams.Team', null=True, blank=True, on_delete=models.SET_NULL,
-        verbose_name=ugettext_lazy('Team')
+        verbose_name=gettext_lazy('Team')
     )
     squad = models.ForeignKey(
         'squads.Squad', null=True, blank=True, on_delete=models.SET_NULL,
-        verbose_name=ugettext_lazy('Squad')
+        verbose_name=gettext_lazy('Squad')
     )
     squad_position = models.IntegerField(default=-1, null=True, blank=True)
 
@@ -100,10 +100,10 @@ class AthletesImport(models.Model):
 
     # name = models.CharField(max_length=50, null=False)
 
-    club = models.OneToOneField('clubs.Club', null=True, blank=True, on_delete=models.SET_NULL, verbose_name=ugettext_lazy('Club'))
+    club = models.OneToOneField('clubs.Club', null=True, blank=True, on_delete=models.SET_NULL, verbose_name=gettext_lazy('Club'))
 
     class Meta:
         app_label = "athletes"
 
     def __str__(self):
-        return '{0} #{1}'.format(ugettext_lazy('Athletes Import'), self.id)
+        return '{0} #{1}'.format(gettext_lazy('Athletes Import'), self.id)

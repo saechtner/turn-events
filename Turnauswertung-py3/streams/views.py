@@ -2,7 +2,7 @@ from django.contrib import messages
 from django.http import HttpResponseNotAllowed
 from django.shortcuts import redirect, render
 from django.urls import reverse_lazy
-from django.utils.translation import ugettext_lazy
+from django.utils.translation import gettext_lazy
 from django.views import generic
 
 from common.models import Discipline, StreamDisciplineJoin
@@ -75,14 +75,14 @@ def _build_stream_from_post(stream=None, post_dict={}, method='create'):
         selected_disciplines = [disciplines.get(id=discipline_id) for discipline_id in post_dict['chosen_list_order'].split()]
     except:
         # TODO fix missing request param
-        return _abort_stream_creation(request, ugettext_lazy('Error: At least one discipline was not found.'))
+        return _abort_stream_creation(request, gettext_lazy('Error: At least one discipline was not found.'))
 
     # check if difficulty was given (necessary)
     try:
         difficulty=post_dict['difficulty']
     except:
         # TODO fix missing request param
-        return _abort_stream_creation(request, ugettext_lazy('Error: There is no difficulty given.'))
+        return _abort_stream_creation(request, gettext_lazy('Error: There is no difficulty given.'))
 
     if not stream:
         stream = Stream()
@@ -122,7 +122,7 @@ def _build_stream_from_post(stream=None, post_dict={}, method='create'):
             stream_discipline_join.save()
     else:
         # TODO fix missing request param
-        return _abort_stream_creation(request, ugettext_lazy('Error: Unknown method.'))
+        return _abort_stream_creation(request, gettext_lazy('Error: Unknown method.'))
 
     return stream
 

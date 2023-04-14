@@ -1,17 +1,17 @@
 from django.db import models
 from django.urls import reverse
-from django.utils.translation import ugettext_lazy
+from django.utils.translation import gettext_lazy
 
 
 class Team(models.Model):
 
-    name = models.CharField(ugettext_lazy('Name'), max_length=128, null=False)
+    name = models.CharField(gettext_lazy('Name'), max_length=128, null=False)
 
     club = models.ForeignKey(
-        'clubs.Club', null=True, blank=True, on_delete=models.CASCADE, verbose_name=ugettext_lazy('Club')
+        'clubs.Club', null=True, blank=True, on_delete=models.CASCADE, verbose_name=gettext_lazy('Club')
     )
     stream = models.ForeignKey(
-        'streams.Stream', on_delete=models.CASCADE, verbose_name=ugettext_lazy('Stream'))
+        'streams.Stream', on_delete=models.CASCADE, verbose_name=gettext_lazy('Stream'))
 
     class Meta:
         app_label = "teams"

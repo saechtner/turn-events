@@ -3,12 +3,12 @@ import itertools
 from django.db import models
 from django.urls import reverse
 from django.utils.text import slugify
-from django.utils.translation import ugettext_lazy
+from django.utils.translation import gettext_lazy
 
 
 class Squad(models.Model):
 
-    name = models.CharField(ugettext_lazy('Squad'), max_length=50, null=False)
+    name = models.CharField(gettext_lazy('Squad'), max_length=50, null=False)
 
     slug = models.SlugField(max_length=128, blank=True)
 

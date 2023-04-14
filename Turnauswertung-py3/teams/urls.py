@@ -1,13 +1,13 @@
-from django.conf.urls import url
+from django.urls import path, re_path
 
 from teams import views
 
 urlpatterns = [
-    url(r'^teams/?$', views.index, name='teams.index'),
-    url(r'^teams/new$', views.TeamCreateView.as_view(), name='teams.new'),
-    url(r'^teams/(?P<id>\d+)$', views.detail, name='teams.detail'),
-    url(r'^teams/(?P<pk>\d+)/edit$',
+    re_path(r'^teams/?$', views.index, name='teams.index'),
+    path('teams/new', views.TeamCreateView.as_view(), name='teams.new'),
+    path('teams/<int:id>', views.detail, name='teams.detail'),
+    path('teams/<int:pk>/edit',
         views.TeamUpdateView.as_view(), name='teams.edit'),
-    url(r'^teams/(?P<pk>\d+)/delete$',
+    path('teams/<int:pk>/delete',
         views.TeamDeleteView.as_view(), name='teams.delete'),
 ]

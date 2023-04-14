@@ -4,7 +4,7 @@ from django.db.models import Sum
 from django.http import HttpResponseNotAllowed
 from django.shortcuts import redirect, render
 from django.urls import reverse, reverse_lazy
-from django.utils.translation import ugettext_lazy
+from django.utils.translation import gettext_lazy
 from django.views import generic
 
 from athletes.models import Athlete
@@ -168,7 +168,7 @@ def create_judge_pdf(request):
         'squad_difficulty_indices': squad_difficulty_indices,
     }
     template_location = 'gymnastics/documents/squads_judges.tex'
-    file_name = '{0}_{1}_{2}.pdf'.format(ugettext_lazy('Squads'), ugettext_lazy('Judge'), ugettext_lazy('Lists'))
+    file_name = '{0}_{1}_{2}.pdf'.format(gettext_lazy('Squads'), gettext_lazy('Judge'), gettext_lazy('Lists'))
 
     return pdf.create(template_location, context, file_name)
 
@@ -189,7 +189,7 @@ def create_overview_pdf(request):
         'squad_athletes_dict': squad_athletes_dict,
     }
     template_location = 'gymnastics/documents/squads_athletes.tex'
-    file_name = f"{ugettext_lazy('Squads')}_{ugettext_lazy('Overview')}.pdf"
+    file_name = f"{gettext_lazy('Squads')}_{gettext_lazy('Overview')}.pdf"
 
     return pdf.create(template_location, context, file_name)
 

@@ -3,7 +3,7 @@ import json
 from django.http import HttpResponse
 from django.shortcuts import redirect, render
 from django.urls import reverse, reverse_lazy
-from django.utils.translation import ugettext_lazy
+from django.utils.translation import gettext_lazy
 from django.views import generic
 
 from clubs.models import Club
@@ -43,7 +43,7 @@ def create_certificates_pdf(request):
         'squads': [],
     }
     template_location = 'gymnastics/documents/certificates.tex'
-    file_name = 'filename={0}.pdf'.format(ugettext_lazy('Certificates'))
+    file_name = 'filename={0}.pdf'.format(gettext_lazy('Certificates'))
 
     return pdf.create(template_location, context, file_name)
 
@@ -69,7 +69,7 @@ def create_solo_certificate_data_txt(request, id, slug):
     }
 
     template_location = 'gymnastics/documents/certificate_data_solo.txt'
-    file_name = '{}.txt'.format(ugettext_lazy('solo_certificate_data'))
+    file_name = '{}.txt'.format(gettext_lazy('solo_certificate_data'))
 
     return txt.create(template_location, context, file_name)
 
@@ -100,7 +100,7 @@ def create_team_certificate_data_txt(request, id, slug):
     }
 
     template_location = 'gymnastics/documents/certificate_data_team.txt'
-    file_name = '{}.txt'.format(ugettext_lazy('team_certificate_data'))
+    file_name = '{}.txt'.format(gettext_lazy('team_certificate_data'))
 
     return txt.create(template_location, context, file_name)
 
@@ -144,7 +144,7 @@ def create_evaluation_pdf(request, id, slug):
     context['total_athletes'] = sum([len(athlete_list) for athlete_list in stream_athletes_dict.values()])
 
     template_location = 'gymnastics/documents/evaluation.tex'
-    file_name = '{}.pdf'.format(ugettext_lazy('Evaluation'))
+    file_name = '{}.pdf'.format(gettext_lazy('Evaluation'))
 
     return pdf.create(template_location, context, file_name)
 
