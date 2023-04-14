@@ -8,13 +8,13 @@
 {% block nav_main_url %}{{ squad.get_absolute_url }}{% endblock nav_main_url %}
 {% block nav_links %}
   <li role="presentation" class="active">
-    <a href="#athletes" aria-controls="athletes" role="tab" data-toggle="tab">
+    <a href="#athletes" class="nav-link-with-value" aria-controls="athletes" role="tab" data-toggle="tab">
       <span class="nav-link-label">{% trans "Athletes" %}</span>
       <span class="nav-link-value">{{ athletes_count }}</span>
     </a>
   </li>
   <li role="presentation">
-    <a href="#performances" aria-controls="performances" role="tab" data-toggle="tab">
+    <a href="#performances" class="nav-link-with-value" aria-controls="performances" role="tab" data-toggle="tab">
       <span class="nav-link-label">{% trans "Performances" %}</span>
       <span class="nav-link-value">{{ performances_completed }}</span>
     </a>
