@@ -1,12 +1,12 @@
 from django.contrib import messages
-from django.core.urlresolvers import reverse_lazy
 from django.http import HttpResponseNotAllowed
 from django.shortcuts import redirect, render
-from django.utils.translation import ugettext_lazy
+from django.urls import reverse_lazy
+from django.utils.translation import gettext_lazy
 from django.views import generic
 
-from streams.models import Stream
 from common.models import Discipline, StreamDisciplineJoin
+from streams.models import Stream
 from utils.dict_operations import completed_performances
 
 
@@ -38,8 +38,8 @@ def detail(request, id, slug):
     teams_disciplines_result_dict = stream.get_teams_disciplines_result_dict()
     teams_disciplines_rank_dict = stream.get_teams_disciplines_rank_dict(teams_disciplines_result_dict)
 
-    context = { 
-        'stream': stream, 
+    context = {
+        'stream': stream,
         'disciplines': disciplines,
         'athletes': athletes,
         'athletes_count': len(athletes),
@@ -61,7 +61,7 @@ def new(request):
         return render(request, 'gymnastics/streams/new.html', context)
 
     elif request.method == 'POST':
-        stream = _build_stream_from_post(post_dict=request.POST);
+        stream = _build_stream_from_post(post_dict=request.POST)
         return redirect(stream.get_absolute_url())
 
     return HttpResponseNotAllowed(['GET', 'POST'])
@@ -74,18 +74,20 @@ def _build_stream_from_post(stream=None, post_dict={}, method='create'):
     try:
         selected_disciplines = [disciplines.get(id=discipline_id) for discipline_id in post_dict['chosen_list_order'].split()]
     except:
-        return _abort_stream_creation(request, ugettext_lazy('Error: At least one discipline was not found.'))
+        # TODO fix missing request param
+        return _abort_stream_creation(request, gettext_lazy('Error: At least one discipline was not found.'))
 
     # check if difficulty was given (necessary)
     try:
         difficulty=post_dict['difficulty']
     except:
-        return _abort_stream_creation(request, ugettext_lazy('Error: There is no difficulty given.'))
+        # TODO fix missing request param
+        return _abort_stream_creation(request, gettext_lazy('Error: There is no difficulty given.'))
 
     if not stream:
         stream = Stream()
 
-    # set values from 
+    # set values from
     stream.difficulty = difficulty
     stream.sex=post_dict.get('sex', 'f')
     stream.minimum_year_of_birth=int(post_dict.get('minimum_year_of_birth', 2000))
@@ -119,7 +121,8 @@ def _build_stream_from_post(stream=None, post_dict={}, method='create'):
             stream_discipline_join.position = position
             stream_discipline_join.save()
     else:
-        return _abort_stream_creation(request, ugettext_lazy('Error: Unknown method.'))
+        # TODO fix missing request param
+        return _abort_stream_creation(request, gettext_lazy('Error: Unknown method.'))
 
     return stream
 
@@ -137,7 +140,7 @@ def edit(request, id, slug):
         stream = Stream.objects.get(id=id)
         disciplines = stream.discipline_set.all()
 
-        context = { 
+        context = {
             'stream': stream,
             'stream_disciplines': stream.get_ordered_disciplines(),
             'disciplines': [discipline for discipline in Discipline.objects.all() if discipline not in disciplines],

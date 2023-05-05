@@ -1,33 +1,33 @@
 import operator
 
-from django.core.urlresolvers import reverse
 from django.db import models
+from django.urls import reverse
 from django.utils.text import slugify
-from django.utils.translation import ugettext_lazy
+from django.utils.translation import gettext_lazy
 
 
 class Stream(models.Model):
-  
+
     difficulty = models.CharField(
-        ugettext_lazy('Difficulty'), max_length=10, null=False)
-    sex = models.CharField(ugettext_lazy('Sex'), max_length=1, null=False, choices=(('m', ugettext_lazy('male')), ('f', ugettext_lazy('female'))), default='f')
+        gettext_lazy('Difficulty'), max_length=10, null=False)
+    sex = models.CharField(gettext_lazy('Sex'), max_length=1, null=False, choices=(('m', gettext_lazy('male')), ('f', gettext_lazy('female'))), default='f')
     minimum_year_of_birth = models.IntegerField(
-        ugettext_lazy('Minimum Year of Birth'), default=2000, null=False)
-    
+        gettext_lazy('Minimum Year of Birth'), default=2000, null=False)
+
     all_around_individual = models.BooleanField(
-        ugettext_lazy('All around individual'), default=True)
+        gettext_lazy('All around individual'), default=True)
     all_around_individual_counting_events = models.IntegerField(
         null=True, blank=True, default=4)
 
     all_around_team = models.BooleanField(
-        ugettext_lazy('All around team'), default=True)
+        gettext_lazy('All around team'), default=True)
     all_around_team_size = models.IntegerField(
         null=True, blank=True, default=4)
     all_around_team_counting_athletes = models.IntegerField(
         null=True, blank=True, default=4)
 
     discipline_finals = models.BooleanField(
-        ugettext_lazy('Discipline finals'), default=False)
+        gettext_lazy('Discipline finals'), default=False)
     discipline_finals_max_participants = models.IntegerField(
         null=True, blank=True)
     discipline_finals_both_values_count = models.BooleanField(
@@ -37,6 +37,9 @@ class Stream(models.Model):
         'common.Discipline', through='common.StreamDisciplineJoin')
 
     slug = models.SlugField(max_length=127, blank=True)
+
+    class Meta:
+        app_label = "streams"
 
     def __str__(self):
         return "{0} {1}".format(self.difficulty, self.get_sex_display())
