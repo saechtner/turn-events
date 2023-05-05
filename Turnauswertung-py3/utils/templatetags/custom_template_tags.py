@@ -4,19 +4,19 @@ from django.utils.translation import gettext_lazy
 register = template.Library()
 
 
-@register.inclusion_tag('templatetags/nav_item.html')
-def render_nav_item(name, url_name='', url_id=None, active=False):
+@register.inclusion_tag("templatetags/nav_item.html")
+def render_nav_item(name, url_name="", url_id=None, active=False):
     return {
-        'name': gettext_lazy(str(name)),
-        'url_name': url_name,
-        'url_id': url_id,
-        'active': active
+        "name": gettext_lazy(str(name)),
+        "url_name": url_name,
+        "url_id": url_id,
+        "active": active,
     }
 
 
 @register.filter
 def get_item(dictionary, key):
-    return dictionary.get(key, '')
+    return dictionary.get(key, "")
 
 
 @register.filter
@@ -32,6 +32,6 @@ def get_final_total(athlete, discipline):
 @register.filter
 def url_contains_domain(url, domain):
     try:
-        return domain == url.split('/')[3]
-    except:
+        return domain == url.split("/")[3]
+    except:  # noqa E722
         return False

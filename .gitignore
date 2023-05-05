@@ -6,7 +6,7 @@ bin/
 target/
 
 # ignore all files ending with ~
-*~ 
+*~
 
 # ignore DS_Store
 .DS_Store
@@ -36,3 +36,7 @@ out/
 
 # project files
 .idea/
+
+# ignore direnv build files
+.direnv/
+.envrc
