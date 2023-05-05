@@ -17,5 +17,12 @@ class AthleteAdmin(CommonAdmin):
             .select_related("club", "stream", "team", "squad", "athletes_import")
         )
 
+    def formfield_for_foreignkey(self, db_field, request, **kwargs):
+        if db_field.name == "team":
+            kwargs["queryset"] = db_field.related_model.objects.all().select_related(
+                "stream"
+            )
+        return super().formfield_for_foreignkey(db_field, request, **kwargs)
+
 
 admin.site.register(AthletesImport)
