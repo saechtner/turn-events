@@ -1,6 +1,6 @@
 import re
 
-from django.db.models import Sum
+from django.db.models import Count, Sum
 from django.http import HttpResponseNotAllowed
 from django.shortcuts import redirect, render
 from django.urls import reverse, reverse_lazy
@@ -15,7 +15,12 @@ from utils.dict_operations import completed_performances
 
 
 def index(request):
-    context = {"squads": Squad.objects.all()}
+    squads = (
+        Squad.objects.all()
+        .annotate(athletes_count=Count("athlete__id", distinct=True))
+        .annotate(performances_count=Count("athlete__performance__id", distinct=True))
+    )
+    context = {"squads": squads}
     return render(request, "gymnastics/squads/index.html", context)
 
 
