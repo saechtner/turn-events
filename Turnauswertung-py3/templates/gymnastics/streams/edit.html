@@ -27,8 +27,8 @@
         <label class="col-md-2 col-md-offset-2 control-label" for="id_{{ field.name }}">{% trans 'Sex' %}</label>
         <div class="col-md-4">
           <select class="form-control" name="sex">
-            <option value="m" {% ifequal stream.sex 'm' %} selected="selected" {% endifequal %}>{% trans 'male' %}</option>
-            <option value="f" {% ifequal stream.sex 'f' %} selected="selected" {% endifequal %}>{% trans 'female' %}</option>
+            <option value="m" {% if stream.sex == 'm' %} selected="selected" {% endif %}>{% trans 'male' %}</option>
+            <option value="f" {% if stream.sex == 'f' %} selected="selected" {% endif %}>{% trans 'female' %}</option>
           </select>
         </div>
       </div>
