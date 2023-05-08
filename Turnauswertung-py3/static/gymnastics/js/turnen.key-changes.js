@@ -1,3 +1,5 @@
+const ENTER_KEY_CODE = 13;
+
 function ModifyEnterKeyPressAsTab(event) {
     var caller;
     var key;
@@ -7,7 +9,7 @@ function ModifyEnterKeyPressAsTab(event) {
     } else {
         caller = event.target; //Get the event caller in Firefox.
         key = event.which; //Get the keycode in Firefox.
-    } if (key == 13) { //Enter key was pressed.
+    } if (key == ENTER_KEY_CODE) { //Enter key was pressed.
         event.preventDefault();
         cTab = caller.tabIndex; //caller tabIndex.
         maxTab = 0; //highest tabIndex (start at 0 to change)

@@ -1,5 +1,13 @@
 jQuery(document).ready(function($) {
 
+    /* Try activating tab based on url hash */
+    $(function(){
+        var hash = window.location.hash;
+        if (hash && $(hash)) {
+            $('a[href="' + hash + '"]').tab('show');
+        }
+    });
+
     /* Initiate Light filters */
     LightFilter.init()
 
