@@ -3,7 +3,7 @@
   <th>{% trans "Name" %}</th>
   <th>{% trans "Stream" %}</th>
   <th>{% trans "Club" %}</th>
-  <th>#{% trans "Athletes" %}</th>
+  <th class="text-right">#{% trans "Athletes" %}</th>
   <th></th>
 </thead>
 <tbody>
@@ -18,7 +18,7 @@
           <a href="{{ team.club.get_absolute_url }}">{{ team.club }}</a>
         {% endif %}
       </td>
-      <td>
+      <td class="text-right">
           {{ team.athlete_set.all.count }}
       </td>
       <td class="text-right">
