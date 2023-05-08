@@ -26,8 +26,8 @@
              / 
              <span class="gend-male"><i class="fa fa-mars fa-fw"></i></span>
           </th>
-          <th>#{% trans "Athletes" %}</th>
-          <th>{% trans "Minimum Year of Birth" %}</th>
+          <th class="text-right">#{% trans "Athletes" %}</th>
+          <th class="text-right">{% trans "Minimum Year of Birth" %}</th>
           <th></th>
         </thead>
         <tbody>
@@ -43,8 +43,8 @@
                 {% endif %}
               </td>
 
-              <td> {{ stream.athlete_set.count }}</td>
-              <td>{{ stream.minimum_year_of_birth }}</td>
+              <td class="text-right">{{ stream.athlete_set.count }}</td>
+              <td class="text-right">{{ stream.minimum_year_of_birth }}</td>
               <td>
                 <div class="btn-group" role="group">
                 <td class="text-right">
