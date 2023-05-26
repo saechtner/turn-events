@@ -1,4 +1,29 @@
+[tool.poetry]
+name = "turn-events"
+version = "0.1.0"
+description = ""
+authors = ["Sten Aechtner <stean.aechtner@gmail.com>", "Nico Aechtner <nico.aechtner@gmail.com>"]
+license = "license.md"
+readme = "README.md"
+packages = [{include = "turn_events"}]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+django = "^4.2.1"
+django-bootstrap3 = "^23.1"
+django-widget-tweaks = "^1.3"
+django-extensions = "^3.1.4"
+
+[tool.poetry.group.dev.dependencies]
+pre-commit = "^3.2.2"
+ipython = "^8.13.2"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
 [tool.black]
+line-length = 88
 include = '\.pyi?$'
 exclude = '''
 /(
@@ -13,3 +38,39 @@ exclude = '''
   | dist
 )/
 '''
+
+[tool.ruff]
+line-length = 88
+exclude = [
+  "migrations",
+  "wsgi.py",
+]
+ignore = [
+  "E203",
+  "E266",
+  "E501" # line too long, enforced by black, comments might be longer
+]
+
+[tool.ruff.mccabe]
+max-complexity = 18
+
+[tool.flake8]
+ignore = ["E203", "E266", "E501", "W503"]
+max-line-length = 88
+max-complexity = 18
+select = ["B", "C", "E", "F", "W", "T4"]
+# ALT: C4,C9 vs C
+# ALSO: S
+
+[tool.isort]
+line_length = 88
+multi_line_output = 3
+include_trailing_comma = true
+profile="black"
+default_section = "THIRDPARTY"
+# name of project
+# TODO fix missing project name in first party imports
+known_first_party = "Turnauswertung-py3"
+known_django = "django"
+sections = ["FUTURE","STDLIB","DJANGO","THIRDPARTY","FIRSTPARTY","LOCALFOLDER"]
+skip = ["migrations"]
