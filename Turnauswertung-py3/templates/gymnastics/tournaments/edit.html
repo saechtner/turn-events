@@ -2,8 +2,7 @@
 
 {% load i18n %}
 
-{% block headline %}<small>{% trans 'Edit' %}</small> {{ tournament }}{% endblock headline %}
-{% block nav_main %}{{ tournament }}{% endblock nav_main %}
+{% block nav_main %}{% trans 'Edit' %} {{ tournament }}{% endblock nav_main %}
 {% block nav_main_url %}
   {{ tournament.get_absolute_url }}
 {% endblock nav_main_url %}

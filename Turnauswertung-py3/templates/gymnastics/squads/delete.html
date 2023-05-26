@@ -2,8 +2,7 @@
 
 {% load i18n %}
 
-{% block headline %}<small>{% trans 'Delete' %}</small> {{ squad }}{% endblock headline %}
-{% block nav_main %}{{ squad }}{% endblock nav_main %}
+{% block nav_main %}{% trans 'Delete' %} {{ squad }}{% endblock nav_main %}
 {% block nav_main_url %}{{ club.get_absolute_url }}{% endblock nav_main_url %}
 {% block nav_links %}{% endblock nav_links %}
 {% block nav_regular_buttons %}{% endblock nav_regular_buttons %}

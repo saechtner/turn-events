@@ -2,8 +2,7 @@
 
 {% load i18n %}
 
-{% block headline %}<small>{% trans 'Delete' %}</small> {{ stream }}{% endblock headline %}
-{% block nav_main %}{{ stream }}{% endblock nav_main %}
+{% block nav_main %}{% trans 'Delete' %} {{ stream }}{% endblock nav_main %}
 {% block nav_main_url %}{{ stream.get_absolute_url }}{% endblock nav_main_url %}
 {% block nav_links %}{% endblock nav_links %}
 {% block nav_regular_buttons %}{% endblock nav_regular_buttons %}

@@ -3,13 +3,7 @@
 {% load i18n %}
 {% load custom_template_tags %}
 
-{% block headline %}
-  {{ athlete }} 
-  {% if athlete.club %}
-    <small>{{ athlete.club }}</small>
-  {% endif %}
-{% endblock headline %}
-{% block nav_main %}{{ athlete }}{% endblock nav_main %}
+{% block nav_main %}{{ athlete }} ({{ athlete.club }}){% endblock nav_main %}
 {% block nav_main_url %}{{ athlete.get_absolute_url }}{% endblock nav_main_url %}
 {% block nav_links %}
   <li role="presentation" class="active">

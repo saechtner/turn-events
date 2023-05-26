@@ -17,19 +17,6 @@ body {
   border: none;
 }
 
-.page-header-headline {
-  position: relative; 
-  left: 330px;;
-  top: 110px;
-  z-index: 4;
-
-  color: #333333;
-}
-
-.page-header-headline > small {
-  color: #a9a9a9;
-}
-
 .page-header-bg {
   position: relative;
   height: 200px;

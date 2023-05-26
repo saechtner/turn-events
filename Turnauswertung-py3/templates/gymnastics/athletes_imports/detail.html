@@ -2,9 +2,6 @@
 
 {% load i18n %}
 
-{% block headline %}
-  {{ athletes_import }} <small>{{ athletes_import.club }}</small>
-{% endblock headline %}
 {% block nav_main %}{{ athletes_import }}{% endblock nav_main %}
 {% block nav_main_url %}{% url 'athletes_imports.detail' athletes_import.id %}{% endblock nav_main_url %}
 {% block nav_links %}

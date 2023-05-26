@@ -3,8 +3,7 @@
 {% load i18n %}
 {% load custom_template_tags %}
 
-{% block headline %}<small>{% trans 'Edit' %}</small> {{ stream }}{% endblock headline %}
-{% block nav_main %}{{ stream }}{% endblock nav_main %}
+{% block nav_main %}{% trans 'Edit' %} {{ stream }}{% endblock nav_main %}
 {% block nav_main_url %}{{ stream.get_absolute_url }}{% endblock nav_main_url %}
 {% block nav_links %}{% endblock nav_links %}
 {% block nav_regular_buttons %}{% endblock nav_regular_buttons %}
