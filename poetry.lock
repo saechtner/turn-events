@@ -145,22 +145,6 @@ files = [
 Django = ">=3.2"
 
 [[package]]
-name = "django-debug-toolbar"
-version = "1.6"
-description = "A configurable set of panels that display various debug information about the current request/response."
-category = "dev"
-optional = false
-python-versions = "*"
-files = [
-    {file = "django-debug-toolbar-1.6.tar.gz", hash = "sha256:4eddb6fa791c4bfc6aa49e4c073663cd3719fe1c8609501aedf25b8586563e7a"},
-    {file = "django_debug_toolbar-1.6-py2.py3-none-any.whl", hash = "sha256:62f95c09c0faa4b2deac7edba69a84d0d8ad794e79ce24d86c7cd004c91053d8"},
-]
-
-[package.dependencies]
-Django = ">=1.8"
-sqlparse = ">=0.2.0"
-
-[[package]]
 name = "django-extensions"
 version = "3.1.4"
 description = "Extensions for Django"
@@ -648,4 +632,4 @@ files = [
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.10"
-content-hash = "bf653ef55e6389aee53c801da1017aba186c63b3322ce2296516ca9bb5cd4d3a"
+content-hash = "2be7333162b029202fc779e289c384c9063c21544c798848f8af123441c01f86"

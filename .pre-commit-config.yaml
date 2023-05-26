@@ -19,11 +19,10 @@ repos:
     hooks:
     -   id: django-upgrade
         args: [--target-version, "4.2"]
-# Replaced by ruff:
-# -   repo: https://github.com/pycqa/isort
-#     rev: 5.12.0
-#     hooks:
-#     -   id: isort
+-   repo: https://github.com/pycqa/isort
+    rev: 5.12.0
+    hooks:
+    -   id: isort
 -   repo: https://github.com/psf/black
     rev: 23.3.0
     hooks:
