@@ -3,8 +3,10 @@
 {% load i18n %}
 {% load custom_template_tags %}
 
-ww{% block nav_main %}{{ club }}{% endblock nav_main %}
+{% block nav_main %}{{ club }}{% endblock nav_main %}
+
 {% block nav_main_url %}{{ club.get_absolute_url }}{% endblock nav_main_url %}
+
 {% block nav_links %}
   <li role="presentation">
     <a href="#general" aria-controls="general" role="tab" data-toggle="tab">
@@ -18,6 +20,7 @@ ww{% block nav_main %}{{ club }}{% endblock nav_main %}
     </a>
   </li>
 {% endblock nav_links %}
+
 {% block nav_regular_buttons %}
   <a type="button" class="btn btn-primary navbar-btn" href="{% url 'athletes_imports.new' %}?club_id={{ club.id }}">
     {% trans "Import Athletes" %}
@@ -25,9 +28,7 @@ ww{% block nav_main %}{{ club }}{% endblock nav_main %}
   <a type="button" class="btn btn-warning navbar-btn" href="{{ club.get_edit_url }}">
     {% trans "Edit" %}
   </a>
-  <a  type="button" 
-      class="btn btn-danger navbar-btn" 
-      href="{{ club.get_delete_url }}" >
+  <a type="button" class="btn btn-danger navbar-btn" href="{{ club.get_delete_url }}">
     {% trans "Delete" %}
   </a>
 {% endblock nav_regular_buttons %}

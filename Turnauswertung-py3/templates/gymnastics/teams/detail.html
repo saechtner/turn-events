@@ -3,41 +3,107 @@
 
 {% load custom_template_tags %}
 
+{% block nav_main %}{% trans 'Team' %} {{ team }}{% endblock nav_main %}
 {% block nav_level_2 %}
   {% render_nav_item name=team.name active=True %}
 {% endblock nav_level_2 %}
 
+{% block nav_links %}
+  <li role="presentation">
+    <a href="#general" aria-controls="general" role="tab" data-toggle="tab">
+      {% trans "General" %}
+    </a>
+  </li>
+  <li role="presentation" class="active">
+    <a href="#athletes" class="nav-link-with-value" aria-controls="athletes" role="tab" data-toggle="tab">
+      <span class="nav-link-label">{% trans "Athletes" %}</span>
+      <span class="nav-link-value">{{ team.athlete_set.all.count }}</span>
+    </a>
+  </li>
+  {% if stream.all_around_individual %}
+    <li role="presentation">
+      <a href="#results-athletes" class="nav-link-with-value" aria-controls="results-athletes" role="tab" data-toggle="tab">
+        <span class="nav-link-label">{% trans "Results Athletes" %}</span>
+        <span class="nav-link-value">{{ athlete_performances_completed }}</span>
+      </a>
+    </li>
+  {% endif %}
+{% endblock nav_links %}
+
+{% block nav_regular_buttons %}
+  <a type="button" class="btn btn-warning navbar-btn" href="{{ team.get_edit_url }}">
+    {% trans "Edit" %}
+  </a>
+  <a type="button" class="btn btn-danger navbar-btn" href="{{ team.get_delete_url }}">
+    {% trans "Delete" %}
+  </a>
+  <button type="button" class="btn btn-default navbar-btn" onClick="javascript:history.go(-1);">
+    {% trans "Previous Page" %}
+  </button>
+{% endblock nav_regular_buttons %}
+
 {% block content %}
-  <div class="row row-relative">
-    <div class="col-md-8">
-      <h1>
-        {{ team.name }} <small>{{ team.athlete_set.all.count }} {% trans "Athletes" %}</small>
-      </h1>
-    </div>
-    <div class="col-md-4 div-pos-bottom-right text-right">
-      <div class="btn-group">
-        <a type="button" class="btn btn-warning" href="{{ team.get_edit_url }}">{% trans "Edit" %}</a>
-        <a type="button" class="btn btn-danger" href="{{ team.get_delete_url }}">{% trans "Delete" %}</a>
-        <button type="button" class="btn btn-default" onClick="javascript:history.go(-1);">{% trans "Previous Page" %}</button>
+    <!-- Tab panes -->
+  <div class="panel panel-default" role="tabpanel">
+    <div class="panel-body tab-content">
+      <div id="general" role="tabpanel" class="tab-pane">
+        <dl class="dl-horizontal dl-detail">
+          <dt>{% trans "Club" %}</dt>
+          <dd><a href="{{ club.get_absolute_url }}">{{ club }}</a></dd>
+
+          <dt>{% trans "Stream" %}</dt>
+          <dd><a href="{{ stream.get_absolute_url }}">{{ stream }}</a></dd>
+        </dl>
       </div>
+
+      <div id="athletes" class="tab-pane active" role="tabpanel">
+        <table id="athletes-table" class="table table-hover table-condensed tablefilter">
+          {% include "gymnastics/includes/athletes_list.html" with athletes_set=team.athlete_set.all only %}
+        </table>
+      </div>
+
+      {% if stream.all_around_individual %}
+        <div role="tabpanel" class="tab-pane" id="results-athletes">
+          <table id="table-results-athletes" class="table table-hover table-condensed tablesorter tablefilter">
+            <thead>
+              <th>{% trans "Athlete" %}</th>
+              <th>{% trans "Club" %}</th>
+              {% for discipline in disciplines %}
+                <th class="text-right">{{ discipline }}</th>
+                <th class="text-center">{% trans "Rank" %}</th>
+              {% endfor %}
+              <th class="text-right">{% trans "All Around" %}</th>
+              <th class="text-center">{% trans "Rank" %}</th>
+            </thead>
+            <tbody>
+              {% for athlete in athletes %}
+                <tr id="athlete_{{ athlete.id }}">
+                  {% with athlete_performances=athletes_disciplines_result_dict|get_item:athlete.id athlete_ranks=athletes_disciplines_rank_dict|get_item:athlete.id %}
+                    <td><a href="{{ athlete.get_absolute_url }}" data-name="{{ athlete }}">{{ athlete }}</a></td>
+                    <td><a href="{{ athlete.club.get_absolute_url }}" data-name="{{ club }}">{{ athlete.club }}</a></td>
+                    {% for discipline in disciplines %}
+                      <td class="text-right">
+                        {{ athlete_performances|get_item:discipline.id }}
+                      </td>
+                      <td class="text-center">
+                        {% if athlete_performances|get_item:discipline.id %}
+                          {{ athlete_ranks|get_item:discipline.id }}
+                        {% endif %}
+                      </td>
+                    {% endfor %}
+                    <td class="text-right">{{ athlete_performances|get_item:'total'|default:'' }}</td>
+                    <td class="text-center">
+                      {% if athlete_performances|get_item:'total' %}
+                        {{ athlete_ranks|get_item:'total' }}
+                      {% endif %}
+                    </td>
+                  {% endwith %}
+                </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      {% endif %}
     </div>
   </div>
-
-  <div role="tabpanel">
-    <!-- Nav tabs -->
-    <ul class="nav nav-tabs" role="tablist">
-      <li role="presentation" class="active"><a href="#base" aria-controls="home" role="tab" data-toggle="tab">{% trans "General" %}</a></li>
-      <li role="presentation"><a href="#performances" aria-controls="messages" role="tab" data-toggle="tab">{% trans "Performance" %}s</a></li>
-    </ul>
-
-    <!-- Tab panes -->
-    <div class="tab-content">
-      <div role="tabpanel" class="tab-pane active" id="base">
-        <p>{% trans "Club" %}: <a href="{{ club.get_absolute_url }}">{{ club }}</a></p>
-        <p>{% trans "Stream" %}: <a href="{{ stream.get_absolute_url }}">{{ stream }}</a></p>
-      </div>
-      <div role="tabpanel" class="tab-pane active" id="performances">
-      </div>
-    </div>
-  </div> 
 {% endblock content %}
