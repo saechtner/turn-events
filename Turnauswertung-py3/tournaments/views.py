@@ -18,17 +18,11 @@ def index(request):
 
 
 def main(request):
-    # TODO: find better solution to handle static constants such as this one
-    main_tournament_name = "KJSS 2015"
-
-    try:
-        tournament = Tournament.objects.get(name=main_tournament_name)
+    tournament = Tournament.objects.last()
+    if tournament:
         return redirect(tournament.get_absolute_url())
-    except Tournament.DoesNotExist:
+    else:
         return redirect(reverse("tournaments.new"))
-
-    return redirect(reverse("tournaments.index"))
-
 
 def detail(request, id, slug):
     tournament = Tournament.objects.get(id=id)

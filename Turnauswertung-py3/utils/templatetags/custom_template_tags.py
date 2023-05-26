@@ -1,6 +1,8 @@
 from django import template
 from django.utils.translation import gettext_lazy
 
+from tournaments.models import Tournament
+
 register = template.Library()
 
 
@@ -35,3 +37,12 @@ def url_contains_domain(url, domain):
         return domain == url.split("/")[3]
     except:  # noqa E722
         return False
+
+
+@register.simple_tag
+def main_tournament_name(*args):
+    tournament = Tournament.objects.last()
+    if tournament:
+        return tournament.name
+    else:
+        return ""
