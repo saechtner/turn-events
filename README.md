@@ -14,7 +14,7 @@ Currently runs on Python 3.9+.
 - Install direnv `brew install direnv`
 - Create a file `.envrc` in the project root with the following content: `use flake`
 - Run `direnv allow` and wait for the environment to build
-- Set up db schemas: `python manage.py migrate`
+- Set up db schemas: `./manage.py migrate`
 
 ## Run
 - Run web server: `python manage.py runserver`
