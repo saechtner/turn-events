@@ -677,7 +677,7 @@ msgstr "Nachname"
 #: templates/gymnastics/documents/certificate_data_solo.txt:1
 #: templates/gymnastics/documents/certificate_data_team.txt:1
 msgid "Overall"
-msgstr "Gesamt"
+msgstr "Total"
 
 #: templates/gymnastics/documents/certificate_data_solo.txt:1
 #: templates/gymnastics/documents/certificate_data_team.txt:1
