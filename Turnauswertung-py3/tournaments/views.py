@@ -103,23 +103,16 @@ def create_team_certificate_data_txt(request, id, slug):
     }
 
     # TODO fix unused variable
-    # team_athletes_dict = {
-    #     team.id: (
-    #         ", ".join(
-    #             [
-    #                 str(athlete)
-    #                 for athlete in data.get("team_athletes_dict").get(team.id)
-    #             ]
-    #         )
-    #     )
-    #     for team in teams
-    # }
+    team_athletes_dict = {
+        team.id: ", ".join(map(str, data.get("team_athletes_dict").get(team.id)))
+        for team in teams
+    }
 
     context = {
         "teams": teams,
         "team_result_dict": team_result_dict,
         "team_rank_dict": team_rank_dict,
-        "team_athletes_dict": {},
+        "team_athletes_dict": team_athletes_dict,
     }
 
     template_location = "gymnastics/documents/certificate_data_team.txt"
