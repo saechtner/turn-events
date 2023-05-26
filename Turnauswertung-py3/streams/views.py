@@ -27,10 +27,7 @@ def detail(request, id, slug):
 
     athletes = (
         stream.athlete_set.all()
-        .select_related("club")
-        .select_related("stream")
-        .select_related("team__stream")
-        .select_related("squad")
+        .select_related("club", "stream", "team__stream", "squad")
         .prefetch_related("performance_set")
     )
 
@@ -41,8 +38,7 @@ def detail(request, id, slug):
 
     teams = (
         stream.team_set.all()
-        .select_related("stream")
-        .select_related("club")
+        .select_related("stream", "club")
         .prefetch_related("athlete_set")
     )
 

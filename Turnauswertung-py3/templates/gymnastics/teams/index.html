@@ -4,7 +4,12 @@
 {% load custom_template_tags %}
 
 {% block nav_main %}{% trans 'Teams' %}{% endblock nav_main %}
+
 {% block nav_main_url %}{% url 'teams.index' %}{% endblock nav_main_url %}
+
+{% block nav_regular_buttons %}
+  <a type="button" class="btn btn-default navbar-btn" href="{% url 'teams.new' %}">{% trans "New team" %}</a>
+{% endblock nav_regular_buttons %}
 
 {% block content %}
 
