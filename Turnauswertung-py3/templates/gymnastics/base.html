@@ -36,7 +36,7 @@
         <div class="collapse navbar-collapse" id="static-navbar-collapse">
           <ul class="nav navbar-nav">
             <li {% if request.path|url_contains_domain:'tournaments' %}class="active"{% endif %}>
-              <a href="{% url 'tournaments.main' %}">KJSS 2015</a>
+              <a href="{% url 'tournaments.main' %}">{% main_tournament_name %}</a>
             </li>
             <li {% if request.path|url_contains_domain:'streams' %}class="active"{% endif %}>
               <a href="{% url 'streams.index' %}">{% trans "Streams" %}</a>
