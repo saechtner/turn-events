@@ -17,7 +17,9 @@ class Performance(models.Model):
     )
 
     athlete = models.ForeignKey(
-        "athletes.Athlete", on_delete=models.CASCADE, verbose_name=gettext_lazy("Athlete")
+        "athletes.Athlete",
+        on_delete=models.CASCADE,
+        verbose_name=gettext_lazy("Athlete"),
     )
     discipline = models.ForeignKey(
         "Discipline", on_delete=models.CASCADE, verbose_name=gettext_lazy("Discipline")
@@ -71,6 +73,7 @@ class Address(models.Model):
 
     class Meta:
         app_label = "common"
+        verbose_name_plural = "addresses"
 
     @property
     def address_formatted(self):
