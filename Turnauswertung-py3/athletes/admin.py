@@ -46,7 +46,7 @@ class HasTeamListFilter(admin.SimpleListFilter):
 
 @admin.register(Athlete)
 class AthleteAdmin(CommonAdmin):
-    list_display = ["__str__", "stream", "club", "team"]
+    list_display = ["__str__", "id", "stream", "club", "team"]
     list_filter = [HasTeamListFilter]
 
     def get_queryset(self, request: HttpRequest) -> QuerySet[Any]:

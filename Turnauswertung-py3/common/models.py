@@ -81,6 +81,9 @@ class Address(models.Model):
             self.street, self.zip_code, self.city, self.province
         )
 
+    def __str__(self) -> str:
+        return self.address_formatted
+
 
 class StreamDisciplineJoin(models.Model):
     position = models.IntegerField(null=True)
