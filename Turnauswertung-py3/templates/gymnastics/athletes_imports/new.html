@@ -11,7 +11,7 @@
 {% endblock nav_regular_buttons %}
 
 {% block content %}
-  <div class="collapse panel panel-info" id="help-panel">
+  <div class="panel panel-info" id="help-panel">
     <div class="panel-heading">
       {% trans 'Import Requirements' %}
     </div>
@@ -22,22 +22,21 @@
           <ul class="list-inline">
             <li>{% trans 'First name' %}</li>
             <li>{% trans 'Last name' %}</li>
-            <li>{% trans 'Date of birth' %}</li>
+            <li>{% trans 'Gender' %}</li>
+            <li>{% trans 'Date/Year of Birth' %}</li>
             <li>{% trans 'Stream' %}</li>
             <li>{% trans 'Team' %}</li>
-            <li>{% trans 'male' %}</li>
-            <li>{% trans 'female' %}</li>
           </ul>
         </dd>
 
-        <dt>{% trans 'Sex' %}</dt>
+        <dt>{% trans 'Gender' %}</dt>
         <dd>
-          {% trans 'Put an <em>x</em> in only one of the columns. (male / female)' %}
+          {% trans 'Male/Female or m/f' %}
         </dd>
 
         <dt>{% trans 'Date of birth' %}</dt>
         <dd>
-          {% trans 'Allowed formats are DD.MM.YYYY and YYYY-MM-DD.' %}
+          {% trans 'Allowed formats: DD.MM.YYYY, YYYY-MM-DD, YYYY' %}
         </dd>
 
         <dt>{% trans 'Team' %}</dt>

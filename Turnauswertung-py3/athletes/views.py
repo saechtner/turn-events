@@ -3,6 +3,7 @@ import json
 import re
 
 from django.contrib import messages
+from django.db import transaction
 from django.http import HttpResponse, HttpResponseNotAllowed
 from django.shortcuts import redirect, render
 from django.urls import reverse, reverse_lazy
@@ -235,26 +236,33 @@ def detail(request, id):
 
 
 def _parse_athlete_line(line, club, athletes_import):
+    """
+    Parse import file with following structure, separated by tabs
+    first_name, last_name, gender, year_of_birth, stream_name, team_name
+    """
     # TODO: idea - remove all return none and catch everything one level below
 
-    elements = re.split(r"\t", line.rstrip())
+    # TODO some random data cleaning. Clean this up.
+    # if len(elements) > 6 and elements[3] == "":
+    #     elements = elements[:3] + elements[4:]
 
-    if len(elements) > 6 and elements[3] == "":
-        elements = elements[:3] + elements[4:]
+    # if len(elements) > 6 and elements[1] == "":
+    #     elements = elements[:1] + elements[2:]
 
-    if len(elements) > 6 and elements[1] == "":
-        elements = elements[:1] + elements[2:]
+    # if len(elements) != 6 and len(elements) != 7:
+    #     return None
 
-    if len(elements) != 6 and len(elements) != 7:
-        return None
+    (
+        first_name,
+        last_name,
+        gender_input,
+        date_of_birth_input,
+        stream_name,
+        team_name,
+    ) = re.split(r"\t", line)
 
-    sex = (
-        "m"
-        if elements[5].lower().startswith("x")
-        else Athlete._meta.get_field("sex").default
-    )
+    gender = "m" if gender_input.lower().startswith(("x", "m")) else "f"
 
-    date_of_birth_input = elements[2]
     if re.match(r"^[0-9]{4}-[0-9]{2}-[0-9]{2}$", date_of_birth_input):  # English
         date_of_birth = datetime.date(
             int(date_of_birth_input[0:4]),
@@ -267,48 +275,52 @@ def _parse_athlete_line(line, club, athletes_import):
             int(date_of_birth_input[3:5]),
             int(date_of_birth_input[0:2]),
         )
+    elif re.match(r"^[0-9]{4}$", date_of_birth_input):
+        date_of_birth = datetime.date(
+            int(date_of_birth_input),
+            1,
+            1,
+        )
     else:
-        return None
+        raise ValueError(f"Invalid date of birth for athlete {first_name} {last_name}")
 
-    stream_name = elements[3]
     try:
-        stream = Stream.objects.get(difficulty=stream_name, sex=sex)
+        stream = Stream.objects.get(difficulty=stream_name, sex=gender)
         if date_of_birth.year < stream.minimum_year_of_birth:
-            return None
+            raise ValueError(
+                f"Date of brith year for athlete {first_name} {last_name} too small for stream {stream}"
+            )
     except Stream.DoesNotExist:
         return None
 
-    athlete = Athlete(
-        first_name=elements[0],
-        last_name=elements[1],
-        sex=sex,
+    team = None
+    if team_name.strip():
+        team_name = f"{club.name} Mannschaft {team_name.strip()}"
+        try:
+            team = Team.objects.get(club=club, stream=stream, name=team_name)
+        except Team.DoesNotExist:
+            team = Team(club=club, stream=stream, name=team_name)
+            team.save()
+        if team and team.athlete_set.count() >= stream.all_around_team_size:
+            raise ValueError(
+                "Too many athletes for team {team}. Tried to add athlete {first_name} {last_name}"
+            )
+
+    # TODO: Don't allow duplicates!!
+    return Athlete.objects.create(
+        first_name=first_name,
+        last_name=last_name,
+        sex=gender,
         date_of_birth=date_of_birth,
         club=club,
         stream=stream,
         athletes_import=athletes_import,
+        team=team,
     )
-
-    team_name = elements[4]
-
-    if team_name:
-        try:
-            team = club.team_set.get(stream=stream, name=team_name)
-        except Team.DoesNotExist:
-            team = Team(club=club, stream=stream, name=team_name)
-            team.save()
-        if team and team.athlete_set.count() < stream.all_around_team_size:
-            athlete.team = team
-    try:
-        athlete.save()
-    except:  # noqa E722
-        return None
-
-    # TODO: Don't allow duplicates!!
-
-    return athlete
 
 
 def _abort_athletes_import(request, athletes_import, error_message):
+    # TODO: figure out if this can be handled by a transaction atomic
     try:
         athletes_import.delete()
     except:  # noqa E722
@@ -321,6 +333,7 @@ def _abort_athletes_import(request, athletes_import, error_message):
     return render(request, "gymnastics/athletes_imports/new.html", context)
 
 
+@transaction.atomic
 def new(request):
     # TODO: clean this up before it's too late
 
