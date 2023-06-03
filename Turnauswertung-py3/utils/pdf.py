@@ -17,7 +17,7 @@ def create(template_location, context, file_name):
         # Finally read the generated pdf.
         for i in range(2):
             process = Popen(
-                ["/Library/TeX/texbin/pdflatex", "-output-directory", tempdir],
+                ["pdflatex", "-output-directory", tempdir],
                 stdin=PIPE,
                 stdout=PIPE,
             )
