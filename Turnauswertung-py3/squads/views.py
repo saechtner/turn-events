@@ -179,11 +179,7 @@ def handle_entered_performances(request, id, slug):
 
 
 def create_judge_pdf(request):
-    squads = (
-        Squad.objects.all()
-        .prefetch_related("athlete_set")
-        .select_related("athlete_set__stream")
-    )
+    squads = Squad.objects.all()
 
     squad_athletes_dict = {
         squad.id: squad.athlete_set.order_by("squad_position").select_related("stream")
@@ -202,7 +198,8 @@ def create_judge_pdf(request):
                 athletes_in_stream = 0
             athletes_in_stream += 1
             previous_athlete = athlete
-        squad_difficulty_indices[squad.id][previous_athlete.id] = athletes_in_stream
+        if previous_athlete:
+            squad_difficulty_indices[squad.id][previous_athlete.id] = athletes_in_stream
 
     squad_disciplines_dict = {
         squad.id: squad.get_disciplines(squad.athlete_set.all()) for squad in squads
