@@ -22,7 +22,7 @@ Currently runs on Python 3.9+.
 
 ## Latex Support
 - Install `basictex` (`brew install basictex`)
-- Install missing latex packages (`tlmgr update --self && tlmgr install titlesec && tlmgr install multirow`)
+- Install missing latex packages (`tlmgr update --self && tlmgr install titlesec multirow hyphenat`)
 
 ## Test
 todo ;-)
