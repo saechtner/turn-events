@@ -5,16 +5,24 @@ Currently runs on Python 3.9+.
 
 ## Set up / Installation / Build
 - Make sure current folder is `Turnauswertung-py3`
-- Set up pyenv: `pyenv install 3.9.16 && pyenv virtualenv 3.9.16 turn-events && pyenv local turn-events`
-- Install requirements: `pip install -r requirements.txt`
-- Set up db schemas: `python manage.py migrate`
+- Set up pyenv: `pyenv install 3.9.16 && pyenv local 3.9.16`
+- Install poetry: `curl -sSL https://install.python-poetry.org | python3 -`
+- Install dependencies: `poetry install`
+- Start poetry shell: `poetry shell`
+- Set up db schemas: `cd Turnauswertung-py3 && ./manage.py migrate`
 
 ## Alternative setup using nix
 - Install nix: `curl -L https://nixos.org/nix/install | sh`
 - Install direnv `brew install direnv`
-- Create a file `.envrc` in the project root with the following content: `use flake`
+- Configure poetry layouting as described in [this github comment](https://github.com/direnv/direnv/issues/592#issuecomment-1277617137)
+- Create a file `.envrc` in the project root with the following content:
+  ```
+  use flake
+  layout poetry
+  ```
 - Run `direnv allow` and wait for the environment to build
-- Set up db schemas: `./manage.py migrate`
+- Set up db schemas: `cd Turnauswertung-py3 && ./manage.py migrate`
+- Note: This setup contains the Latex setup
 
 ## Run
 - Run web server: `python manage.py runserver`
