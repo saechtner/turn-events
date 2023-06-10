@@ -14,6 +14,7 @@
         # see https://github.com/nix-community/poetry2nix/tree/master#api for more functions and examples.
         inherit (poetry2nix.legacyPackages.${system}) mkPoetryApplication;
         pkgs = nixpkgs.legacyPackages.${system};
+        tex = (pkgs.texlive.combine { inherit (pkgs.texlive) scheme-small titlesec multirow hyphenat; });
       in
       {
         packages = {
@@ -29,13 +30,10 @@
         devShells.default = pkgs.mkShell {
             packages = [
               poetry2nix.packages.${system}.poetry
-              pkgs.texlive.combined.scheme-full
+              tex
             ];
         };
         shellHook = ''
-          # tlmgr update --self
-          # tlmgr install titlesec
-          # tlmgr install multirow
           poetry run pre-commit install
         '';
       });

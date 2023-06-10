@@ -24,6 +24,7 @@ def main(request):
     else:
         return redirect(reverse("tournaments.new"))
 
+
 def detail(request, id, slug):
     tournament = Tournament.objects.get(id=id)
     context = {"tournament": tournament}
@@ -52,9 +53,12 @@ def create_solo_certificate_data_txt(request, id, slug):
     ]
 
     athlete_result_dict = {
-        athlete.id: data.get("athlete_disciplines_result_dict")
-        .get(athlete.id)
-        .get("total")
+        athlete.id: round(
+            data.get("athlete_disciplines_result_dict", {})
+            .get(athlete.id, {})
+            .get("total", 0),
+            2,
+        )
         for athlete in athletes
     }
 
@@ -87,7 +91,12 @@ def create_team_certificate_data_txt(request, id, slug):
     ]
 
     team_result_dict = {
-        team.id: data.get("team_disciplines_result_dict").get(team.id).get("total")
+        team.id: round(
+            data.get("team_disciplines_result_dict", {})
+            .get(team.id, {})
+            .get("total", 0),
+            3,
+        )
         for team in teams
     }
 
