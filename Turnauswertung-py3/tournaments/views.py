@@ -95,7 +95,7 @@ def create_team_certificate_data_txt(request, id, slug):
             data.get("team_disciplines_result_dict", {})
             .get(team.id, {})
             .get("total", 0),
-            3,
+            2,
         )
         for team in teams
     }
